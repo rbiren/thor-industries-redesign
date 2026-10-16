@@ -721,6 +721,20 @@
     background: #2e333d;
   }
 
+  .button.subtle {
+    background: #ffffff;
+    color: var(--ink);
+    border-color: var(--line);
+    padding: 9px 16px;
+    min-height: 38px;
+    font-size: 12px;
+  }
+
+  .button.subtle:hover {
+    background: var(--paper);
+    border-color: #8b8e96;
+  }
+
   .text-link {
     display: inline-flex;
     align-items: center;
@@ -1098,6 +1112,22 @@
     gap: 12px;
   }
 
+  .faq-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--line);
+    margin-bottom: 8px;
+  }
+
+  .faq-controls {
+    display: flex;
+    gap: 10px;
+  }
+
   .faq-list {
     display: flex;
     flex-direction: column;
@@ -1117,9 +1147,40 @@
     gap: 24px;
   }
 
+  .faq-item[open] > summary span[aria-hidden='true'] {
+    transform: rotate(45deg);
+  }
+
+  .faq-item > summary span[aria-hidden='true'] {
+    font-size: 22px;
+    font-weight: 400;
+    line-height: 1;
+    transition: transform 0.18s ease;
+    flex-shrink: 0;
+  }
+
   .faq-answer {
     padding: 0 0 24px;
     color: var(--muted);
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .faq-answer p {
+    line-height: 1.7;
+  }
+
+  .faq-answer a {
+    color: var(--ink);
+    font-weight: 700;
+    border-bottom: 1px solid var(--ink);
+    padding-bottom: 1px;
+  }
+
+  .faq-answer a:hover {
+    color: var(--blue);
+    border-color: var(--blue);
   }
 
   .feature-list {
@@ -1130,6 +1191,292 @@
 
   .feature-list li + li {
     margin-top: 10px;
+  }
+
+  /* Story Category Filters & Travel Regions */
+  .story-filter-bar {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 36px;
+    padding: 20px 24px;
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+  }
+
+  .filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px 16px;
+  }
+
+  .filter-label {
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    min-width: 96px;
+  }
+
+  .filter-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .filter-chip {
+    padding: 7px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: var(--paper);
+    color: var(--ink);
+    font-size: 12px;
+    font-weight: 600;
+    transition: background 0.18s ease, color 0.18s ease, border-color 0.18s ease;
+  }
+
+  .filter-chip:hover {
+    border-color: var(--ink);
+  }
+
+  .filter-chip[aria-pressed='true'] {
+    background: var(--ink);
+    color: #ffffff;
+    border-color: var(--ink);
+  }
+
+  .filter-clear {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    border-bottom: 1px solid var(--muted);
+    padding-bottom: 2px;
+    align-self: flex-start;
+  }
+
+  .filter-clear:hover {
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+
+  .filter-status {
+    font-size: 13px;
+    color: var(--muted);
+  }
+
+  .load-more-row {
+    margin-top: 40px;
+    display: flex;
+    justify-content: center;
+  }
+
+  .travel-regions-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .region-card {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    padding: 0;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .region-card:hover,
+  .region-card[aria-pressed='true'] {
+    border-color: var(--ink);
+  }
+
+  .region-card[aria-pressed='true'] {
+    box-shadow: 0 0 0 1px var(--ink);
+  }
+
+  .region-card-image {
+    aspect-ratio: 16 / 10;
+    width: 100%;
+    overflow: hidden;
+    background: #e9eaec;
+  }
+
+  .region-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s ease;
+  }
+
+  .region-card:hover .region-card-image img {
+    transform: scale(1.03);
+  }
+
+  .region-card-copy {
+    padding: 18px 20px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+
+  .region-card-copy h3 {
+    font-size: 18px;
+    font-weight: 600;
+  }
+
+  .region-card-copy p {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.55;
+  }
+
+  .region-card-action {
+    margin-top: auto;
+    padding-top: 8px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  /* RV Types Stack */
+  .rv-type-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 36px;
+  }
+
+  .rv-type-panel {
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    padding: 36px 40px;
+    display: flex;
+    flex-direction: column;
+    gap: 28px;
+    scroll-margin-top: calc(var(--header) + 24px);
+  }
+
+  .rv-type-main {
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 44px;
+    align-items: center;
+  }
+
+  .rv-type-copy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+
+  .rv-type-copy h3 {
+    font-size: clamp(24px, 2.4vw, 32px);
+  }
+
+  .rv-type-copy p:not(.eyebrow) {
+    color: var(--muted);
+    font-size: 16px;
+    line-height: 1.68;
+  }
+
+  .rv-type-cutout {
+    background: var(--paper);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 240px;
+  }
+
+  .rv-type-cutout img {
+    width: 100%;
+    max-height: 220px;
+    object-fit: contain;
+  }
+
+  .rv-type-features {
+    padding-top: 24px;
+    border-top: 1px solid var(--line);
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 32px;
+    list-style: disc;
+    padding-left: 20px;
+    color: var(--muted);
+    font-size: 14px;
+  }
+
+  .rv-type-features li + li {
+    margin-top: 0;
+  }
+
+  /* Financing Section */
+  .financing-considerations-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 28px;
+  }
+
+  .consideration-card {
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    padding: 28px 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .consideration-card h3 {
+    font-size: 20px;
+  }
+
+  .consideration-card p {
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .calculator-handoff {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .handoff-note {
+    font-size: 14px !important;
+    color: var(--muted);
+  }
+
+  .calculator-disclaimer {
+    margin-top: 12px;
+    padding: 24px 28px;
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .calculator-disclaimer p:not(.eyebrow) {
+    font-size: 13px !important;
+    line-height: 1.65 !important;
+    color: var(--muted);
+    max-width: none !important;
   }
 
   /* Dialogs: Search & Mobile Menu */
@@ -1287,8 +1634,17 @@
     }
     .home-brand-grid,
     .card-grid,
-    .card-grid.buying-season-grid {
+    .card-grid.buying-season-grid,
+    .travel-regions-grid,
+    .financing-considerations-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .rv-type-main {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+    .rv-type-panel {
+      padding: 28px;
     }
     .footer-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -1352,9 +1708,18 @@
     .home-brand-grid,
     .card-grid,
     .card-grid.buying-season-grid,
+    .travel-regions-grid,
+    .financing-considerations-grid,
+    .rv-type-features,
     .company-grid,
     .footer-grid {
       grid-template-columns: 1fr;
+    }
+    .rv-type-panel {
+      padding: 22px 20px;
+    }
+    .story-filter-bar {
+      padding: 16px;
     }
     .video-trigger {
       inset: auto 12px 12px 12px;

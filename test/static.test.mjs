@@ -15,8 +15,18 @@ import {
 import { footerGroups, footerLinks, navigation, socialLinks } from '../src/data/navigation.ts';
 import { builtPages, pages } from '../src/data/pages.ts';
 import { companies, companyGroups, homeBrands } from '../src/data/companies.mjs';
-import { homeRvTypes } from '../src/data/rv-types.mjs';
-import { homeBuyingSeason, homeFeaturedStories, homeNewsEvents } from '../src/data/stories.mjs';
+import { homeRvTypes, rvTypes, rvTypesClosingCallouts } from '../src/data/rv-types.mjs';
+import {
+  categories,
+  faqRelatedStories,
+  homeBuyingSeason,
+  homeFeaturedStories,
+  homeNewsEvents,
+  storiesHubCategories,
+  storyCategoryPages,
+  travelRegions,
+} from '../src/data/stories.mjs';
+import { questions } from '../src/data/faq.mjs';
 import { assetUrl, isExternalHref, navItemHref, resolveHref, routeHref, siteUrl } from '../src/lib/urls.ts';
 
 const expectedSlugs = [
@@ -43,6 +53,20 @@ const expectedSlugs = [
   'social-responsibility',
   'governance',
   'supply-management',
+];
+
+const expectedBuiltSlugs = [
+  '',
+  'stories',
+  'stories/category/learn',
+  'stories/category/recipes',
+  'stories/category/on-the-road',
+  'stories/category/travel',
+  'stories/category/video',
+  'rv-types',
+  'financing-your-rv',
+  'towing-guide',
+  'faq',
 ];
 
 async function walkHtmlFiles(dir) {
@@ -74,9 +98,15 @@ test('Astro static config and canonical 23-route catalog match the GitHub Pages 
   }
 });
 
-test('Base-aware URL helpers prefix built routes and hand off unbuilt routes during homepage preview', () => {
-  assert.deepEqual(builtRoutes.map((route) => route.slug), ['']);
-  assert.deepEqual(builtPages.map((page) => page.slug), ['']);
+test('Base-aware URL helpers prefix built routes and hand off unbuilt routes cleanly', () => {
+  assert.deepEqual(
+    builtRoutes.map((route) => route.slug),
+    expectedBuiltSlugs,
+  );
+  assert.deepEqual(
+    builtPages.map((page) => page.slug),
+    expectedBuiltSlugs,
+  );
 
   assert.equal(siteUrl('/'), '/thor-industries-redesign/');
   assert.equal(siteUrl('/stories/'), '/thor-industries-redesign/stories/');
@@ -84,18 +114,25 @@ test('Base-aware URL helpers prefix built routes and hand off unbuilt routes dur
   assert.equal(assetUrl('favicon.svg'), '/thor-industries-redesign/favicon.svg');
 
   assert.equal(routeHref(''), '/thor-industries-redesign/');
-  assert.equal(routeHref('stories'), 'https://www.thorindustries.com/stories');
+  assert.equal(routeHref('stories'), '/thor-industries-redesign/stories/');
+  assert.equal(routeHref('stories/category/learn'), '/thor-industries-redesign/stories/category/learn/');
+  assert.equal(routeHref('rv-types'), '/thor-industries-redesign/rv-types/');
+  assert.equal(routeHref('financing-your-rv'), '/thor-industries-redesign/financing-your-rv/');
+  assert.equal(routeHref('towing-guide'), '/thor-industries-redesign/towing-guide/');
+  assert.equal(routeHref('faq'), '/thor-industries-redesign/faq/');
   assert.equal(routeHref('thor-companies'), 'https://www.thorindustries.com/thor-companies');
   assert.equal(routeHref('sustainability-report'), 'https://www.thorindustries.com/sustainability-report');
   assert.equal(routeHref('supply-management'), 'https://www.thorindustries.com/supply-management');
-  assert.equal(resolveHref('/stories/'), 'https://www.thorindustries.com/stories');
+  assert.equal(resolveHref('/stories/'), '/thor-industries-redesign/stories/');
+  assert.equal(resolveHref('/rv-types/'), '/thor-industries-redesign/rv-types/');
+  assert.equal(resolveHref('/thor-companies/'), 'https://www.thorindustries.com/thor-companies');
   assert.equal(resolveHref('/'), '/thor-industries-redesign/');
   assert.equal(resolveHref(sourceHandoffs.investors), 'https://ir.thorindustries.com/ir-home/default.aspx');
   assert.equal(resolveHref(sourceHandoffs.rvFinder), 'https://www.thorindustries.com/find-my-rv');
   assert.equal(resolveHref(sourceHandoffs.tripCalculator), 'https://www.thorindustries.com/trip-calculator');
 });
 
-test('Navigation model exposes primary THOR destinations and honest source handoffs', () => {
+test('Navigation model exposes primary THOR destinations and routes built Stories/RV Education pages locally', () => {
   const topLabels = navigation.map((group) => group.label);
   assert.deepEqual(topLabels, [
     'RV Finder',
@@ -107,16 +144,24 @@ test('Navigation model exposes primary THOR destinations and honest source hando
     'Investors',
   ]);
 
+  const builtSet = new Set(expectedBuiltSlugs);
   for (const group of [...navigation, ...footerGroups]) {
-    if (group.slug || group.href) {
+    if (group.slug !== undefined || group.href) {
       const resolved = navItemHref(group);
       assert.ok(resolved.startsWith(BASE_PATH) || isExternalHref(resolved));
+      if (group.slug !== undefined && builtSet.has(group.slug)) {
+        assert.equal(resolved, siteUrl(group.slug ? `/${group.slug}/` : '/'));
+      }
     }
     for (const item of group.items ?? []) {
       const resolved = navItemHref(item);
       assert.ok(resolved.startsWith(BASE_PATH) || isExternalHref(resolved));
-      if (item.slug && item.slug !== '') {
-        assert.equal(resolved, `https://www.thorindustries.com/${item.slug}`);
+      if (item.slug !== undefined) {
+        if (builtSet.has(item.slug)) {
+          assert.equal(resolved, siteUrl(item.slug ? `/${item.slug}/` : '/'));
+        } else {
+          assert.equal(resolved, `https://www.thorindustries.com/${item.slug}`);
+        }
       }
     }
   }
@@ -132,9 +177,22 @@ test('Navigation model exposes primary THOR destinations and honest source hando
   assert.equal(homeNewsEvents.length, 9);
 });
 
-test('Homepage preview build outputs only / and /404.html and preserves VAL-HOME-001..005 against source baseline', async () => {
+test('Static build outputs all 11 built routes plus 404.html and preserves VAL-HOME-001..005 against source baseline', async () => {
   const htmlFiles = (await walkHtmlFiles('dist')).map((file) => path.relative('dist', file)).sort();
-  assert.deepEqual(htmlFiles, ['404.html', 'index.html']);
+  assert.deepEqual(htmlFiles, [
+    '404.html',
+    'faq/index.html',
+    'financing-your-rv/index.html',
+    'index.html',
+    'rv-types/index.html',
+    'stories/category/learn/index.html',
+    'stories/category/on-the-road/index.html',
+    'stories/category/recipes/index.html',
+    'stories/category/travel/index.html',
+    'stories/category/video/index.html',
+    'stories/index.html',
+    'towing-guide/index.html',
+  ]);
 
   const baseline = JSON.parse(await readFile('src/data/source-baseline.json', 'utf8'));
   const homeHtml = await readFile('dist/index.html', 'utf8');
@@ -307,7 +365,7 @@ test('Homepage capture-derived regressions verify module/card associations again
 
   const expectedRvTypesSubtitle = 'We’ll help you figure out what kind of RV is right for you.';
   const expectedRvTypesCta = 'View All';
-  const expectedRvTypesHref = 'https://www.thorindustries.com/rv-types';
+  const expectedRvTypesHref = '/thor-industries-redesign/rv-types/';
 
   const rvTypesSection = extractSection(homeHtml, 'explore-rv-types');
   assert.ok(rvTypesSection.includes('<h2>Explore RV Types</h2>'));
@@ -487,6 +545,260 @@ test('All local media derivatives are valid WebP assets with positive dimensions
       assert.equal(image.format, 'webp');
     }
   }
+});
+
+test('Stories hub and five category pages satisfy VAL-STORY-001, VAL-STORY-002, and VAL-STORY-003', async () => {
+  const hubHtml = await readFile('dist/stories/index.html', 'utf8');
+  assert.ok(hubHtml.includes('<h1>STORIES</h1>'));
+
+  // Subnavigation links to all 6 local Stories routes
+  assert.ok(hubHtml.includes(`href="${siteUrl('/stories/')}"`));
+  for (const cat of categories) {
+    const expectedHref = siteUrl(`/stories/category/${cat.slug}/`);
+    assert.ok(
+      hubHtml.includes(`href="${expectedHref}"`),
+      `Stories hub missing category subnav link ${expectedHref}`,
+    );
+  }
+
+  // Top featured stories section on /stories/
+  const topFeaturedSection = extractSection(hubHtml, 'stories-featured');
+  const topCards = parseContentCards(topFeaturedSection);
+  assert.equal(topCards.length, 4);
+  assert.deepEqual(
+    topCards.map((c) => c.href),
+    [
+      'https://www.thorindustries.com/stories/self-care-in-nature',
+      'https://www.thorindustries.com/stories/rv-camping-guide',
+      'https://www.thorindustries.com/stories/camping-way-of-life',
+      'https://www.thorindustries.com/stories/how-to-public-land-camp',
+    ],
+  );
+
+  // Five category preview sections on /stories/
+  assert.equal(storiesHubCategories.length, 5);
+  for (const block of storiesHubCategories) {
+    const section = extractSection(hubHtml, `stories-hub-${block.category}`);
+    assert.ok(section.includes(`<h2>${block.title}</h2>`));
+    assert.ok(section.includes(`href="${siteUrl(`/${block.slug}/`)}"`));
+    const cards = parseContentCards(section);
+    assert.equal(cards.length, 4, `Expected 4 landing stories in ${block.title}`);
+    assert.deepEqual(
+      cards.map((c) => c.title),
+      block.stories.map((s) => s.title),
+    );
+    assert.deepEqual(
+      cards.map((c) => c.href),
+      block.stories.map((s) => s.href),
+    );
+  }
+
+  // Closing CTA on /stories/
+  assert.ok(hubHtml.includes('<h2>FIND YOUR PERFECT RV</h2>'));
+  assert.ok(hubHtml.includes('href="https://www.thorindustries.com/find-my-rv"'));
+
+  // Category routes: distinct story sets, filter controls, and exact source URLs
+  const expectedCounts = {
+    learn: 23,
+    recipes: 19,
+    'on-the-road': 23,
+    travel: 24,
+    video: 23,
+  };
+  const signatureSets = new Map();
+
+  for (const [key, expectedCount] of Object.entries(expectedCounts)) {
+    const catData = storyCategoryPages[key];
+    assert.ok(catData, `Missing storyCategoryPages.${key}`);
+    const catHtml = await readFile(path.join('dist', catData.slug, 'index.html'), 'utf8');
+    assert.ok(catHtml.includes(`<h1>${catData.heading}</h1>`));
+
+    const listingSection = extractSection(catHtml, 'category-stories');
+    const renderedCards = parseContentCards(listingSection);
+    assert.equal(renderedCards.length, expectedCount, `${catData.slug} expected ${expectedCount} story cards`);
+    assert.deepEqual(
+      renderedCards.map((c) => c.title),
+      catData.stories.map((s) => s.title),
+    );
+    assert.deepEqual(
+      renderedCards.map((c) => c.href),
+      catData.stories.map((s) => s.href),
+    );
+
+    assert.deepEqual(
+      renderedCards.map((c) => c.action),
+      catData.stories.map((s) => s.action),
+    );
+
+    for (const card of renderedCards) {
+      assert.ok(
+        card.href.startsWith('https://www.thorindustries.com/stories/'),
+        `Story card ${card.title} must link to original THOR story URL, got ${card.href}`,
+      );
+      assert.ok(
+        ['Read More', 'READ MORE', 'Read Full Story', 'Get Recipe', 'Watch Now', 'WATCH NOW'].includes(
+          card.action,
+        ),
+        `Unexpected story CTA label: ${card.action}`,
+      );
+    }
+
+    const sig = renderedCards.map((c) => c.href).join('|');
+    for (const [otherKey, otherSig] of signatureSets.entries()) {
+      assert.notEqual(sig, otherSig, `Category ${key} must not reuse story list from ${otherKey}`);
+    }
+    signatureSets.set(key, sig);
+
+    // Filter UI assertions
+    if (catData.filterGroups && catData.filterGroups.length > 0) {
+      for (const group of catData.filterGroups) {
+        for (const opt of group.options) {
+          assert.ok(
+            listingSection.includes(`data-tag-filter="${opt}"`),
+            `Missing filter option ${opt} on ${catData.slug}`,
+          );
+        }
+      }
+    }
+    if (catData.hasLoadMore) {
+      assert.ok(listingSection.includes('LOAD MORE STORIES'));
+    }
+  }
+
+  // Travel category region selector and featured guides
+  const travelHtml = await readFile('dist/stories/category/travel/index.html', 'utf8');
+  assert.ok(travelHtml.includes('WHICH REGION WOULD YOU LIKE TO VISIT?'));
+  assert.ok(travelHtml.includes('VIEW ALL TRIP GUIDES'));
+  assert.equal(travelRegions.length, 8);
+  for (const region of travelRegions) {
+    assert.ok(travelHtml.includes(`data-region-filter="${region.name}"`));
+    assert.ok(travelHtml.includes(region.description));
+  }
+  const featuredGuidesSection = extractSection(travelHtml, 'travel-featured-guides');
+  const featuredGuideCards = parseContentCards(featuredGuidesSection);
+  assert.equal(featuredGuideCards.length, 3);
+  assert.deepEqual(
+    featuredGuideCards.map((c) => c.href),
+    [
+      'https://www.thorindustries.com/stories/rving-natures-playground',
+      'https://www.thorindustries.com/stories/first-time-tailgating-rv',
+      'https://www.thorindustries.com/stories/first-rv-national-forest-trip',
+    ],
+  );
+});
+
+test('RV Education routes (/rv-types/, /financing-your-rv/, /towing-guide/, /faq/) satisfy VAL-RV-001..004', async () => {
+  // VAL-RV-001: /rv-types/
+  const rvTypesHtml = await readFile('dist/rv-types/index.html', 'utf8');
+  assert.ok(rvTypesHtml.includes('<h1>RV TYPES</h1>'));
+  assert.ok(rvTypesHtml.includes('<h2>TOWABLE RVS</h2>'));
+  assert.ok(rvTypesHtml.includes('<h2>MOTORIZED RVS</h2>'));
+  assert.equal(rvTypes.length, 7);
+
+  const expectedRvTypeUrls = {
+    'Travel Trailers': 'https://www.thorindustries.com/rv-types/travel-trailer',
+    'Fifth Wheels': 'https://www.thorindustries.com/rv-types/fifth-wheel-shop',
+    'Lightweight RVs': 'https://www.thorindustries.com/rv-types/lightweight-camper',
+    'Toy Haulers': 'https://www.thorindustries.com/rv-types/toy-hauler',
+    'Class A': 'https://www.thorindustries.com/rv-types/motorhome-class-a',
+    'Class B': 'https://www.thorindustries.com/rv-types/motorhome-class-b',
+    'Class C': 'https://www.thorindustries.com/rv-types/class-c-motorhome',
+  };
+
+  for (const item of rvTypes) {
+    assert.ok(rvTypesHtml.includes(`<h3>${item.title}</h3>`), `Missing RV type heading ${item.title}`);
+    assert.ok(rvTypesHtml.includes(item.text), `Missing RV type description for ${item.title}`);
+    assert.equal(item.href, expectedRvTypeUrls[item.title]);
+    assert.ok(rvTypesHtml.includes(`href="${item.href}"`), `Missing RV type detail URL ${item.href}`);
+    for (const bullet of item.features) {
+      assert.ok(rvTypesHtml.includes(`<li>${bullet}</li>`), `Missing RV type feature bullet: ${bullet}`);
+    }
+  }
+  assert.equal(rvTypesClosingCallouts.length, 3);
+  for (const callout of rvTypesClosingCallouts) {
+    assert.ok(rvTypesHtml.includes(callout.title));
+    assert.ok(rvTypesHtml.includes(`href="${callout.href}"`));
+  }
+
+  // VAL-RV-002: /financing-your-rv/
+  const financingHtml = await readFile('dist/financing-your-rv/index.html', 'utf8');
+  assert.ok(financingHtml.includes('<h1>FINANCING YOUR RV</h1>'));
+  assert.ok(
+    financingHtml.includes("It's More Affordable Than You Think") ||
+      financingHtml.includes('It&#39;s More Affordable Than You Think'),
+  );
+  assert.ok(financingHtml.includes('Few things to keep in mind:'));
+  assert.ok(financingHtml.includes('Trade-in Value'));
+  assert.ok(financingHtml.includes('Collateral'));
+  assert.ok(financingHtml.includes('HOW MUCH DOES IT REALLY COST?'));
+  assert.ok(financingHtml.includes('Payment Calculator Disclaimer'));
+  assert.ok(financingHtml.includes('href="https://www.thorindustries.com/financing-your-rv"'));
+  assert.ok(financingHtml.includes('href="https://www.thorindustries.com/find-my-rv"'));
+  const mainFinancing = financingHtml.slice(
+    financingHtml.indexOf('<main'),
+    financingHtml.indexOf('</main>'),
+  );
+  assert.ok(
+    !/<(?:input|select|textarea)\b/i.test(mainFinancing),
+    'Financing page <main> must not contain fake local calculator form inputs',
+  );
+
+  // VAL-RV-003: /towing-guide/
+  const towingHtml = await readFile('dist/towing-guide/index.html', 'utf8');
+  assert.ok(towingHtml.includes('<h1>GUIDE TO TOWING</h1>'));
+  assert.ok(towingHtml.includes('MATCH YOUR TOW VEHICLE TO YOUR RV'));
+  assert.ok(
+    towingHtml.includes('href="https://rvsafety.com/?utm_source=thorindustries.com&amp;utm_medium=referral"') ||
+      towingHtml.includes('href="https://rvsafety.com/?utm_source=thorindustries.com&utm_medium=referral"'),
+  );
+  assert.ok(
+    towingHtml.includes(
+      'href="https://rvacademy.com/my-class/understanding-truck-towing-guides/understanding-truck-towing-guides?utm_source=thorindustries.com&amp;utm_medium=referral"',
+    ) ||
+      towingHtml.includes(
+        'href="https://rvacademy.com/my-class/understanding-truck-towing-guides/understanding-truck-towing-guides?utm_source=thorindustries.com&utm_medium=referral"',
+      ),
+  );
+  assert.ok(towingHtml.includes('TRAILER LIFE TOWING GUIDE'));
+  assert.ok(
+    towingHtml.includes(
+      'href="https://webcontent.goodsam.com/trailerlife.com/digital_editions/TrailerLifeTowGuide2020.pdf"',
+    ),
+  );
+  assert.ok(towingHtml.includes('FIND YOUR PERFECT TOWABLE RV'));
+
+  // VAL-RV-004: /faq/
+  const faqHtml = await readFile('dist/faq/index.html', 'utf8');
+  assert.ok(faqHtml.includes('<h1>FREQUENTLY ASKED QUESTIONS</h1>'));
+  assert.equal(questions.length, 20);
+  const detailsMatches = [...faqHtml.matchAll(/<details\b[^>]*class="faq-item"[^>]*>/g)];
+  assert.equal(detailsMatches.length, 20, 'Expected 20 <details class="faq-item"> disclosures on /faq/');
+  for (const { title: q, text: a } of questions) {
+    assert.ok(
+      faqHtml.includes(`<summary>${q}</summary>`) ||
+        faqHtml.includes(`<summary>${q.replaceAll("'", '&#39;')}</summary>`),
+      `Missing FAQ question: ${q}`,
+    );
+    for (const para of a) {
+      const snippet = para.slice(0, 35);
+      assert.ok(
+        faqHtml.includes(snippet) || faqHtml.includes(snippet.replaceAll("'", '&#39;')),
+        `Missing FAQ answer text starting with: ${snippet}`,
+      );
+    }
+  }
+  assert.ok(faqHtml.includes('href="/thor-industries-redesign/towing-guide/"'));
+  assert.ok(faqHtml.includes('href="/thor-industries-redesign/rv-types/"'));
+  assert.ok(faqHtml.includes('data-faq-expand-all'));
+  assert.ok(faqHtml.includes('data-faq-collapse-all'));
+  assert.ok(faqHtml.includes('LEARN FROM THEIR EXPERIENCES'));
+  const faqRelatedSection = extractSection(faqHtml, 'faq-related-stories');
+  const faqCards = parseContentCards(faqRelatedSection);
+  assert.equal(faqCards.length, 3);
+  assert.deepEqual(
+    faqCards.map((c) => c.href),
+    faqRelatedStories.map((s) => s.href),
+  );
 });
 
 test('404 is real static content and the deploy workflow uploads only built output', async () => {

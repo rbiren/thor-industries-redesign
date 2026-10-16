@@ -198,3 +198,152 @@ searchForm?.addEventListener('submit', (event) => {
   const first = searchResults?.querySelector<HTMLAnchorElement>('a');
   if (first && searchInput?.value.trim()) window.location.href = first.href;
 });
+
+// Story category tag filters
+const filterBars = Array.from(document.querySelectorAll<HTMLElement>('[data-story-filters]'));
+filterBars.forEach((bar) => {
+  const section = bar.closest('.content-section');
+  if (!section) return;
+  const chips = Array.from(bar.querySelectorAll<HTMLButtonElement>('[data-tag-filter]'));
+  const resetBtn = bar.querySelector<HTMLButtonElement>('[data-tag-reset]');
+  const statusEl = bar.querySelector<HTMLElement>('[data-filter-status]');
+  const cards = Array.from(section.querySelectorAll<HTMLElement>('[data-story-card]'));
+
+  const updateFilter = () => {
+    const activeTags = chips
+      .filter((chip) => chip.getAttribute('aria-pressed') === 'true')
+      .map((chip) => chip.getAttribute('data-tag-filter') || '')
+      .filter(Boolean);
+
+    let visibleCount = 0;
+    cards.forEach((card) => {
+      const cardTags = (card.getAttribute('data-story-tags') || '')
+        .split('|')
+        .map((t) => t.trim())
+        .filter(Boolean);
+      const matches =
+        activeTags.length === 0 || activeTags.some((tag) => cardTags.includes(tag));
+      card.hidden = !matches;
+      if (matches) visibleCount += 1;
+    });
+
+    if (resetBtn) {
+      resetBtn.setAttribute('aria-pressed', String(activeTags.length === 0));
+    }
+    if (statusEl) {
+      if (activeTags.length > 0) {
+        statusEl.hidden = false;
+        statusEl.textContent = `Showing ${visibleCount} of ${cards.length} stories matching ${activeTags.join(', ')}`;
+      } else {
+        statusEl.hidden = true;
+        statusEl.textContent = '';
+      }
+    }
+  };
+
+  chips.forEach((chip) => {
+    chip.addEventListener('click', () => {
+      const pressed = chip.getAttribute('aria-pressed') === 'true';
+      chip.setAttribute('aria-pressed', String(!pressed));
+      updateFilter();
+    });
+  });
+
+  resetBtn?.addEventListener('click', () => {
+    chips.forEach((chip) => chip.setAttribute('aria-pressed', 'false'));
+    updateFilter();
+  });
+});
+
+// Travel region filter cards
+const travelRegionsSection = document.querySelector<HTMLElement>('[data-travel-regions]');
+if (travelRegionsSection) {
+  const regionButtons = Array.from(
+    travelRegionsSection.querySelectorAll<HTMLButtonElement>('[data-region-filter]'),
+  );
+  const resetButton = travelRegionsSection.querySelector<HTMLButtonElement>('[data-region-reset]');
+  const regionStatus = travelRegionsSection.querySelector<HTMLElement>('[data-region-status]');
+  const guidesSection = document.querySelector<HTMLElement>('#category-stories, [data-story-listing]');
+  const guideCards = guidesSection
+    ? Array.from(guidesSection.querySelectorAll<HTMLElement>('[data-story-card]'))
+    : [];
+
+  const applyRegion = (region: string | null) => {
+    regionButtons.forEach((btn) => {
+      const isMatch = region !== null && btn.getAttribute('data-region-filter') === region;
+      btn.setAttribute('aria-pressed', String(isMatch));
+    });
+
+    let count = 0;
+    guideCards.forEach((card) => {
+      const cardTags = (card.getAttribute('data-story-tags') || '')
+        .split('|')
+        .map((t) => t.trim());
+      const matches = !region || cardTags.includes(region);
+      card.hidden = !matches;
+      if (matches) count += 1;
+    });
+
+    if (regionStatus) {
+      if (region) {
+        regionStatus.hidden = false;
+        regionStatus.textContent = `Showing ${count} trip guide${count === 1 ? '' : 's'} for ${region}`;
+      } else {
+        regionStatus.hidden = false;
+        regionStatus.textContent = `Showing all ${guideCards.length} trip guides`;
+      }
+    }
+  };
+
+  regionButtons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const region = btn.getAttribute('data-region-filter');
+      const currentlyPressed = btn.getAttribute('aria-pressed') === 'true';
+      applyRegion(currentlyPressed ? null : region);
+      guidesSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  resetButton?.addEventListener('click', () => {
+    applyRegion(null);
+    guidesSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  });
+}
+
+// Load More Stories buttons
+const loadMoreButtons = Array.from(
+  document.querySelectorAll<HTMLButtonElement>('[data-load-more-stories]'),
+);
+loadMoreButtons.forEach((btn) => {
+  btn.addEventListener('click', () => {
+    const section = btn.closest('.content-section');
+    if (section) {
+      section
+        .querySelectorAll<HTMLElement>('[data-story-card]')
+        .forEach((card) => (card.hidden = false));
+    }
+    btn.textContent = 'ALL STORIES LOADED';
+    btn.disabled = true;
+  });
+});
+
+// FAQ Expand All / Collapse All controls
+const faqList = document.querySelector<HTMLElement>('[data-faq-list], .faq-list');
+if (faqList) {
+  const faqItems = Array.from(faqList.querySelectorAll<HTMLDetailsElement>('.faq-item'));
+  const expandAllBtn = document.querySelector<HTMLButtonElement>('[data-faq-expand-all]');
+  const collapseAllBtn = document.querySelector<HTMLButtonElement>('[data-faq-collapse-all]');
+
+  expandAllBtn?.addEventListener('click', () => {
+    faqItems.forEach((item) => {
+      item.open = true;
+    });
+  });
+
+  collapseAllBtn?.addEventListener('click', () => {
+    faqItems.forEach((item) => {
+      item.open = false;
+    });
+  });
+}
+

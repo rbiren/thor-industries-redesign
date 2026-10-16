@@ -3,12 +3,19 @@ import Site from '../layouts/Site.astro';
 import Media from '../components/Media.astro';
 import CardGrid from '../components/CardGrid.astro';
 import { builtPages } from '../data/pages';
-import { categories } from '../data/stories.mjs';
+import {
+  categories,
+  faqRelatedStories,
+  storiesHubCategories,
+  storiesHubFeatured,
+  storyCategoryPages,
+} from '../data/stories.mjs';
+import { rvTypes, rvTypesClosingCallouts } from '../data/rv-types.mjs';
 import { companies, companyGroups, homeBrands } from '../data/companies.mjs';
 import media from '../data/media.json';
 import { resolveHref, routeHref, siteUrl } from '../lib/urls';
 import { sourceHandoffs } from '../data/routes';
-import type { Page } from '../data/types';
+import type { Card, Page } from '../data/types';
 
 export function getStaticPaths() {
   return builtPages.map((page) => ({
@@ -35,6 +42,57 @@ const mobileFinder = media['finder-cta-mobile'];
 const desktopFinderSrc = siteUrl(`media/finder-cta-${desktopFinder.widths.at(-1)}.webp`);
 const desktopFinderSet = desktopFinder.widths.map((w) => `${siteUrl(`media/finder-cta-${w}.webp`)} ${w}w`).join(', ');
 const mobileFinderSet = mobileFinder.widths.map((w) => `${siteUrl(`media/finder-cta-mobile-${w}.webp`)} ${w}w`).join(', ');
+
+interface StoryRegionItem {
+  name: string;
+  description: string;
+  image: string;
+  mediaId?: string;
+  imageAlt: string;
+}
+
+interface StoryCategoryPageData {
+  slug: string;
+  category: string;
+  heading: string;
+  filterGroups?: Array<{ label: string; options: string[] }>;
+  hasLoadMore?: boolean;
+  loadMoreLabel?: string;
+  regionPromptTitle?: string;
+  regionPromptText?: string;
+  viewAllGuidesLabel?: string;
+  featuredGuidesTitle?: string;
+  regions?: StoryRegionItem[];
+  featuredGuides?: Card[];
+  stories: Card[];
+}
+
+const activeCategoryData: StoryCategoryPageData | undefined =
+  page.kind === 'category' && page.categoryKey
+    ? (storyCategoryPages[
+        page.categoryKey as keyof typeof storyCategoryPages
+      ] as unknown as StoryCategoryPageData)
+    : undefined;
+
+const towableRvTypes = rvTypes.filter((item) => item.eyebrow === 'Towable RVs');
+const motorizedRvTypes = rvTypes.filter((item) => item.eyebrow === 'Motorized RVs');
+
+function renderFaqSegments(paragraph: string, links?: Array<{ label: string; href: string }>) {
+  if (!links || links.length === 0) {
+    return [{ type: 'text' as const, value: paragraph }];
+  }
+  for (const link of links) {
+    const idx = paragraph.indexOf(link.label);
+    if (idx !== -1) {
+      return [
+        { type: 'text' as const, value: paragraph.slice(0, idx) },
+        { type: 'link' as const, label: link.label, href: resolveHref(link.href) },
+        { type: 'text' as const, value: paragraph.slice(idx + link.label.length) },
+      ];
+    }
+  }
+  return [{ type: 'text' as const, value: paragraph }];
+}
 ---
 <Site
   title={isHome ? 'THOR Industries | Go Everywhere. Stay Anywhere.' : `${page.title} | THOR Industries`}
@@ -87,7 +145,7 @@ const mobileFinderSet = mobileFinder.widths.map((w) => `${siteUrl(`media/finder-
     </div>
   </section>
 
-  {page.lead && (
+  {page.lead && page.kind !== 'rv-types' && (
     <section class="lead-band">
       <div class="section-inner narrow">
         {page.lead.map((paragraph) => (
@@ -100,13 +158,22 @@ const mobileFinderSet = mobileFinder.widths.map((w) => `${siteUrl(`media/finder-
   {(page.kind === 'stories' || page.kind === 'category') && (
     <nav class="category-bar" aria-label="Story categories">
       <div class="section-inner category-links">
-        <a class:list={[{ active: page.slug === 'stories' }]} href={routeHref('stories')}>
-          All Stories
+        <a
+          class:list={[{ active: page.slug === 'stories' }]}
+          aria-current={page.slug === 'stories' ? 'page' : undefined}
+          href={routeHref('stories')}
+        >
+          ALL STORIES
         </a>
         {categories.map((cat) => {
           const slug = `stories/category/${cat.slug}` as const;
+          const isCurrent = page.slug === slug;
           return (
-            <a class:list={[{ active: page.slug === slug }]} href={routeHref(slug)}>
+            <a
+              class:list={[{ active: isCurrent }]}
+              aria-current={isCurrent ? 'page' : undefined}
+              href={routeHref(slug)}
+            >
               {cat.title}
             </a>
           );
@@ -318,6 +385,500 @@ const mobileFinderSet = mobileFinder.widths.map((w) => `${siteUrl(`media/finder-
     </>
   )}
 
+  {page.kind === 'stories' && (
+    <>
+      <section class="content-section" id="stories-featured">
+        <div class="section-inner">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Featured Stories</p>
+              <h2>FEATURED STORIES</h2>
+            </div>
+          </div>
+          <CardGrid cards={storiesHubFeatured as Card[]} className="stories-featured-grid" />
+        </div>
+      </section>
+
+      {storiesHubCategories.map((cat, idx) => (
+        <section
+          class:list={['content-section', { tinted: idx % 2 === 0 }]}
+          id={`stories-hub-${cat.category}`}
+        >
+          <div class="section-inner">
+            <div class="section-header">
+              <div>
+                <p class="eyebrow">Category</p>
+                <h2>{cat.title}</h2>
+              </div>
+              <a class="button dark" href={routeHref(cat.slug as Page['slug'])}>
+                {cat.viewAllLabel}
+              </a>
+            </div>
+            <CardGrid cards={cat.stories as Card[]} />
+          </div>
+        </section>
+      ))}
+
+      <section class="finder-panel" id="find-your-perfect-rv">
+        <picture>
+          <source media="(max-width: 720px)" srcset={mobileFinderSet} sizes="100vw" type="image/webp" />
+          <source srcset={desktopFinderSet} sizes="100vw" type="image/webp" />
+          <img
+            src={desktopFinderSrc}
+            width={desktopFinder.width}
+            height={desktopFinder.height}
+            alt="A family walking away from a Jayco Jay Flight travel trailer camping in the mountains."
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
+        <div class="finder-scrim" aria-hidden="true"></div>
+        <div class="section-inner finder-copy">
+          <p class="eyebrow">RV Finder</p>
+          <h2>FIND YOUR PERFECT RV</h2>
+          <p>
+            There are so many different types of RVs, there’s definitely something for everyone. But don’t let having so
+            many choices overwhelm you; we’re here to help you sort through it all and figure out what you need and
+            want.
+          </p>
+          <a class="button" href={sourceHandoffs.rvFinder}>
+            FIND YOUR RV
+          </a>
+        </div>
+      </section>
+    </>
+  )}
+
+  {page.kind === 'category' && activeCategoryData && (
+    <>
+      {page.categoryKey === 'travel' && activeCategoryData.regions && (
+        <>
+          <section class="content-section" id="travel-regions" data-travel-regions>
+            <div class="section-inner">
+              <div class="section-header">
+                <div>
+                  <p class="eyebrow">Regional Trip Guides</p>
+                  <h2>{activeCategoryData.regionPromptTitle}</h2>
+                  <p>{activeCategoryData.regionPromptText}</p>
+                </div>
+                <button
+                  class="button dark"
+                  type="button"
+                  data-region-reset
+                  aria-pressed="true"
+                >
+                  {activeCategoryData.viewAllGuidesLabel}
+                </button>
+              </div>
+              <div class="travel-regions-grid" role="group" aria-label="Filter trip guides by region">
+                {activeCategoryData.regions.map((region) => (
+                  <button
+                    class="region-card"
+                    type="button"
+                    data-region-filter={region.name}
+                    aria-pressed="false"
+                  >
+                    <div class="region-card-image">
+                      <Media
+                        id={region.image}
+                        alt={region.imageAlt}
+                        sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 25vw"
+                      />
+                    </div>
+                    <div class="region-card-copy">
+                      <h3>{region.name}</h3>
+                      <p>{region.description}</p>
+                      <span class="region-card-action">Explore Region →</span>
+                    </div>
+                  </button>
+                ))}
+              </div>
+              <p class="filter-status" data-region-status aria-live="polite" hidden></p>
+            </div>
+          </section>
+
+          <section class="content-section tinted" id="travel-featured-guides">
+            <div class="section-inner">
+              <div class="section-header">
+                <div>
+                  <p class="eyebrow">Curated Trips</p>
+                  <h2>{activeCategoryData.featuredGuidesTitle}</h2>
+                </div>
+              </div>
+              <CardGrid cards={activeCategoryData.featuredGuides as Card[]} />
+            </div>
+          </section>
+        </>
+      )}
+
+      <section
+        class="content-section"
+        id="category-stories"
+        data-story-listing
+        data-initial-limit={activeCategoryData.hasLoadMore ? '19' : undefined}
+      >
+        <div class="section-inner">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">THOR Stories</p>
+              <h2>{page.categoryKey === 'travel' ? 'TRIP GUIDES' : activeCategoryData.heading}</h2>
+            </div>
+          </div>
+
+          {activeCategoryData.filterGroups && activeCategoryData.filterGroups.length > 0 && (
+            <div class="story-filter-bar" data-story-filters aria-label="Filter stories by topic">
+              <div class="filter-group">
+                <span class="filter-label">View</span>
+                <div class="filter-chips">
+                  <button class="filter-chip" type="button" data-tag-reset aria-pressed="true">
+                    All
+                  </button>
+                </div>
+              </div>
+              {activeCategoryData.filterGroups.map((group) => (
+                <div class="filter-group">
+                  {group.label && <span class="filter-label">{group.label}</span>}
+                  <div class="filter-chips">
+                    {group.options.map((opt) => (
+                      <button class="filter-chip" type="button" data-tag-filter={opt} aria-pressed="false">
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
+                </div>
+              ))}
+              <p class="filter-status" data-filter-status aria-live="polite" hidden></p>
+            </div>
+          )}
+
+          <CardGrid cards={activeCategoryData.stories as Card[]} />
+
+          {activeCategoryData.hasLoadMore && (
+            <div class="load-more-row" data-load-more-wrap>
+              <button class="button dark" type="button" data-load-more-stories>
+                {activeCategoryData.loadMoreLabel}
+              </button>
+            </div>
+          )}
+        </div>
+      </section>
+
+      <section class="finder-panel" id="find-your-perfect-rv">
+        <picture>
+          <source media="(max-width: 720px)" srcset={mobileFinderSet} sizes="100vw" type="image/webp" />
+          <source srcset={desktopFinderSet} sizes="100vw" type="image/webp" />
+          <img
+            src={desktopFinderSrc}
+            width={desktopFinder.width}
+            height={desktopFinder.height}
+            alt="A family walking away from a Jayco Jay Flight travel trailer camping in the mountains."
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
+        <div class="finder-scrim" aria-hidden="true"></div>
+        <div class="section-inner finder-copy">
+          <p class="eyebrow">RV Finder</p>
+          <h2>FIND YOUR PERFECT RV</h2>
+          <p>
+            There are so many different types of RVs, there’s definitely something for everyone. But don’t let having so
+            many choices overwhelm you; we’re here to help you sort through it all and figure out what you need and
+            want.
+          </p>
+          <a class="button" href={sourceHandoffs.rvFinder}>
+            FIND YOUR RV
+          </a>
+        </div>
+      </section>
+    </>
+  )}
+
+  {page.kind === 'rv-types' && (
+    <>
+      <nav class="category-bar" aria-label="RV types navigation">
+        <div class="section-inner category-links">
+          {rvTypes.map((item) => (
+            <a href={`#${item.id}`}>{item.title}</a>
+          ))}
+        </div>
+      </nav>
+
+      <section class="content-section" id="towable-rvs">
+        <div class="section-inner">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Towable RVs</p>
+              <h2>TOWABLE RVS</h2>
+              {page.lead?.[0] && <p>{page.lead[0]}</p>}
+            </div>
+          </div>
+          <div class="rv-type-stack">
+            {towableRvTypes.map((item) => (
+              <article class="rv-type-panel split-grid" id={item.id}>
+                <div class="section-copy">
+                  <p class="eyebrow">{item.eyebrow}</p>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                  <ul class="feature-list">
+                    {item.features.map((bullet) => (
+                      <li>{bullet}</li>
+                    ))}
+                  </ul>
+                  <div class="action-row">
+                    <a class="button dark" href={item.href}>
+                      {item.action || 'Learn More'}
+                    </a>
+                  </div>
+                </div>
+                <div class="split-media rv-type-cutout">
+                  <Media id={item.image} alt={item.imageAlt} sizes="(max-width: 900px) 100vw, 48vw" />
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section tinted" id="motorized-rvs">
+        <div class="section-inner">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Motorized RVs</p>
+              <h2>MOTORIZED RVS</h2>
+              {page.lead?.[1] && <p>{page.lead[1]}</p>}
+            </div>
+          </div>
+          <div class="rv-type-stack">
+            {motorizedRvTypes.map((item) => (
+              <article class="rv-type-panel split-grid" id={item.id}>
+                <div class="section-copy">
+                  <p class="eyebrow">{item.eyebrow}</p>
+                  <h3>{item.title}</h3>
+                  <p>{item.text}</p>
+                  <ul class="feature-list">
+                    {item.features.map((bullet) => (
+                      <li>{bullet}</li>
+                    ))}
+                  </ul>
+                  <div class="action-row">
+                    <a class="button dark" href={item.href}>
+                      {item.action || 'Learn More'}
+                    </a>
+                  </div>
+                </div>
+                <div class="split-media rv-type-cutout">
+                  <Media id={item.image} alt={item.imageAlt} sizes="(max-width: 900px) 100vw, 48vw" />
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {rvTypesClosingCallouts.map((callout, idx) => (
+        <section
+          class:list={['content-section', 'split-feature', { tinted: idx % 2 === 1 }]}
+          id={`rv-types-callout-${idx + 1}`}
+        >
+          <div class="section-inner split-grid">
+            <div class="section-copy">
+              {callout.eyebrow && <p class="eyebrow">{callout.eyebrow}</p>}
+              <h2>{callout.title}</h2>
+              <p>{callout.text}</p>
+              <div class="action-row">
+                <a class="button dark" href={callout.href}>
+                  {callout.action}
+                </a>
+              </div>
+            </div>
+            <div class="split-media">
+              <Media id={callout.image} alt={callout.imageAlt} sizes="(max-width: 900px) 100vw, 48vw" />
+            </div>
+          </div>
+        </section>
+      ))}
+    </>
+  )}
+
+  {page.kind === 'financing' && (
+    <>
+      <section class="content-section" id="financing-considerations">
+        <div class="section-inner">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Key Considerations</p>
+              <h2>Few things to keep in mind:</h2>
+            </div>
+          </div>
+          <div class="financing-considerations-grid">
+            <article class="consideration-card">
+              <h3>Trade-in Value</h3>
+              <p>
+                If you’re trading in an existing RV, you can use that value as part of your new/used RV purchase, thus
+                making your loan amount smaller.
+              </p>
+            </article>
+            <article class="consideration-card">
+              <h3>Collateral</h3>
+              <p>
+                Many RVers use their home or other substantial assets as collateral for their RV loan. How much
+                collateral you’ll need depends on how much you need to borrow.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section tinted split-feature" id="financing-calculator">
+        <div class="section-inner split-grid">
+          <div class="section-copy">
+            <p class="eyebrow">Original THOR Financing Tool</p>
+            <h2>HOW MUCH DOES IT REALLY COST?</h2>
+            <p>Use our calculator to figure how affordable owning an RV can be for you.</p>
+            <p class="handoff-note">
+              Interactive loan estimates are calculated on THOR Industries’ original financing calculator page.
+            </p>
+            <div class="action-row">
+              <a class="button dark" href="https://www.thorindustries.com/financing-your-rv">
+                Open THOR’s Original Financing Calculator
+              </a>
+            </div>
+            <div class="calculator-disclaimer">
+              <h3>Payment Calculator Disclaimer</h3>
+              <p>
+                The payment calculator is only a tool to estimate payments. Averages are based on credit history and
+                loan terms. Exact figures will be determined by your financial institution at the time of application.
+              </p>
+            </div>
+          </div>
+          <div class="split-media">
+            <Media
+              id="finance-calc-bg"
+              alt="Motorhome parked beside a mountain lake at sunrise"
+              sizes="(max-width: 900px) 100vw, 48vw"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section split-feature" id="financing-find-rv">
+        <div class="section-inner split-grid">
+          <div class="section-copy">
+            <p class="eyebrow">RV Finder</p>
+            <h2>FIND YOUR RV</h2>
+            <p>Explore our family of industry-leading companies and find your dream RV.</p>
+            <div class="action-row">
+              <a class="button dark" href={sourceHandoffs.rvFinder}>
+                RV FINDER
+              </a>
+            </div>
+          </div>
+          <div class="split-media">
+            <Media
+              id="finance-finder"
+              alt="Campers gathered outside their RV"
+              sizes="(max-width: 900px) 100vw, 48vw"
+            />
+          </div>
+        </div>
+      </section>
+    </>
+  )}
+
+  {page.kind === 'towing' && (
+    <>
+      <section class="content-section split-feature" id="match-tow-vehicle">
+        <div class="section-inner split-grid">
+          <div class="section-copy">
+            <p class="eyebrow">Safe Towing Fundamentals</p>
+            <h2>MATCH YOUR TOW VEHICLE TO YOUR RV</h2>
+            <p>
+              It’s critical to take the time to properly match your tow vehicle to your towable RV to ensure you can
+              safely tow in all conditions. Consult your tow vehicle owner’s manual or your dealer for information on
+              the specific tow and weight ratings of your vehicle. And for more information watch this video from the{' '}
+              <a href="https://rvsafety.com/?utm_source=thorindustries.com&utm_medium=referral">
+                RV Safety &amp; Education Foundation
+              </a>
+              .
+            </p>
+            <div class="action-row">
+              <a
+                class="button dark"
+                href="https://rvacademy.com/my-class/understanding-truck-towing-guides/understanding-truck-towing-guides?utm_source=thorindustries.com&utm_medium=referral"
+              >
+                Watch it Now
+              </a>
+            </div>
+          </div>
+          <div class="split-media">
+            <Media
+              id="towing-match-vehicle"
+              alt="Matching a tow vehicle to a towable RV"
+              sizes="(max-width: 900px) 100vw, 48vw"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section tinted split-feature" id="trailer-life-towing-guide">
+        <div class="section-inner split-grid">
+          <div class="section-copy">
+            <p class="eyebrow">Reference Guide</p>
+            <h2>TRAILER LIFE TOWING GUIDE</h2>
+            <p>
+              Trailer Life Magazine is a top industry resource for all things RV, and their towing guides cover setup,
+              towing capacity, ratings, and more – information that can be key in choosing the right vehicle and RV. You
+              can find a comprehensive list of past Trailer Life Towing Guides here.
+            </p>
+            <div class="action-row">
+              <a
+                class="button dark"
+                href="https://webcontent.goodsam.com/trailerlife.com/digital_editions/TrailerLifeTowGuide2020.pdf"
+              >
+                Download Now
+              </a>
+            </div>
+          </div>
+          <div class="split-media">
+            <Media
+              id="towing-guide-book"
+              alt="Trailer Life Towing Guide digital edition cover"
+              sizes="(max-width: 900px) 100vw, 48vw"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="finder-panel" id="find-towable-rv">
+        <picture>
+          <source media="(max-width: 720px)" srcset={mobileFinderSet} sizes="100vw" type="image/webp" />
+          <source srcset={desktopFinderSet} sizes="100vw" type="image/webp" />
+          <img
+            src={desktopFinderSrc}
+            width={desktopFinder.width}
+            height={desktopFinder.height}
+            alt="A family walking away from a Jayco Jay Flight travel trailer camping in the mountains."
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
+        <div class="finder-scrim" aria-hidden="true"></div>
+        <div class="section-inner finder-copy">
+          <p class="eyebrow">RV Finder</p>
+          <h2>FIND YOUR PERFECT TOWABLE RV</h2>
+          <p>
+            There are so many different types of RVs, there’s definitely something for everyone. But don’t let having so
+            many choices overwhelm you; we’re here to help you sort through it all and figure out what you need and
+            want.
+          </p>
+          <a class="button" href={sourceHandoffs.rvFinder}>
+            EXPLORE THE RV FINDER
+          </a>
+        </div>
+      </section>
+    </>
+  )}
+
   {page.kind === 'companies' && (
     <div class="section-inner">
       <nav class="company-nav" aria-label="Company categories">
@@ -362,68 +923,135 @@ const mobileFinderSet = mobileFinder.widths.map((w) => `${siteUrl(`media/finder-
   )}
 
   {page.kind === 'faq' && (
-    <section class="content-section">
-      <div class="section-inner narrow faq-list">
-        {page.sections.map((section, index) => (
-          <details class="faq-item" open={index === 0}>
-            <summary>{section.title}</summary>
-            <div class="faq-answer">
-              {section.text?.map((paragraph) => (
-                <p>{paragraph}</p>
-              ))}
+    <>
+      <section class="content-section" id="faq-questions">
+        <div class="section-inner narrow faq-list" data-faq-list>
+          <div class="faq-toolbar">
+            <p class="eyebrow">20 Questions &amp; Answers</p>
+            <div class="faq-controls">
+              <button class="filter-chip" type="button" data-faq-expand-all>
+                Expand All
+              </button>
+              <button class="filter-chip" type="button" data-faq-collapse-all>
+                Collapse All
+              </button>
             </div>
-          </details>
-        ))}
-      </div>
-    </section>
+          </div>
+          {page.sections.map((section, index) => (
+            <details class="faq-item" open={index === 0}>
+              <summary>{section.title}</summary>
+              <div class="faq-answer">
+                {section.text?.map((paragraph) => {
+                  const segments = renderFaqSegments(paragraph, section.links);
+                  return (
+                    <p>
+                      {segments.map((seg) =>
+                        seg.type === 'link' ? <a href={seg.href}>{seg.label}</a> : seg.value,
+                      )}
+                    </p>
+                  );
+                })}
+              </div>
+            </details>
+          ))}
+        </div>
+      </section>
+
+      <section class="content-section tinted" id="faq-related-stories">
+        <div class="section-inner">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Related Stories</p>
+              <h2>LEARN FROM THEIR EXPERIENCES</h2>
+            </div>
+          </div>
+          <CardGrid cards={faqRelatedStories as Card[]} />
+        </div>
+      </section>
+
+      <section class="finder-panel" id="find-your-perfect-rv">
+        <picture>
+          <source media="(max-width: 720px)" srcset={mobileFinderSet} sizes="100vw" type="image/webp" />
+          <source srcset={desktopFinderSet} sizes="100vw" type="image/webp" />
+          <img
+            src={desktopFinderSrc}
+            width={desktopFinder.width}
+            height={desktopFinder.height}
+            alt="A family walking away from a Jayco Jay Flight travel trailer camping in the mountains."
+            loading="lazy"
+            decoding="async"
+          />
+        </picture>
+        <div class="finder-scrim" aria-hidden="true"></div>
+        <div class="section-inner finder-copy">
+          <p class="eyebrow">RV Finder</p>
+          <h2>FIND YOUR PERFECT RV</h2>
+          <p>
+            There are so many different types of RVs, there’s definitely something for everyone. But don’t let having so
+            many choices overwhelm you; we’re here to help you sort through it all and figure out what you need and
+            want.
+          </p>
+          <a class="button" href={sourceHandoffs.rvFinder}>
+            EXPLORE THE RV FINDER
+          </a>
+        </div>
+      </section>
+    </>
   )}
 
-  {!isHome && page.kind !== 'companies' && page.kind !== 'faq' && (
-    <div class:list={[{ 'timeline-sections': page.slug === 'history' }]}>
-      {page.sections.map((section, index) => (
-        <section
-          class:list={[
-            'content-section',
-            { tinted: index % 2 === 1, 'split-feature': Boolean(section.image && !section.cards) },
-          ]}
-        >
-          <div class:list={['section-inner', { 'split-grid': Boolean(section.image && !section.cards) }]}>
-            <div class="section-copy">
-              <h2>{section.title}</h2>
-              {section.text?.map((paragraph) => (
-                <p>{paragraph}</p>
-              ))}
-              {section.bullets && (
-                <ul class="feature-list">
-                  {section.bullets.map((bullet) => (
-                    <li>{bullet}</li>
-                  ))}
-                </ul>
+  {!isHome &&
+    page.kind !== 'stories' &&
+    page.kind !== 'category' &&
+    page.kind !== 'rv-types' &&
+    page.kind !== 'financing' &&
+    page.kind !== 'towing' &&
+    page.kind !== 'companies' &&
+    page.kind !== 'faq' && (
+      <div class:list={[{ 'timeline-sections': page.slug === 'history' }]}>
+        {page.sections.map((section, index) => (
+          <section
+            class:list={[
+              'content-section',
+              { tinted: index % 2 === 1, 'split-feature': Boolean(section.image && !section.cards) },
+            ]}
+          >
+            <div class:list={['section-inner', { 'split-grid': Boolean(section.image && !section.cards) }]}>
+              <div class="section-copy">
+                <h2>{section.title}</h2>
+                {section.text?.map((paragraph) => (
+                  <p>{paragraph}</p>
+                ))}
+                {section.bullets && (
+                  <ul class="feature-list">
+                    {section.bullets.map((bullet) => (
+                      <li>{bullet}</li>
+                    ))}
+                  </ul>
+                )}
+                {section.href && !section.cards && (
+                  <div class="action-row">
+                    <a class="button dark" href={resolveHref(section.href)}>
+                      {section.action || 'Learn More'}
+                    </a>
+                  </div>
+                )}
+              </div>
+              {section.image && !section.cards && (
+                <div class="split-media">
+                  <Media id={section.image} alt={section.imageAlt || section.title} sizes="(max-width: 900px) 100vw, 48vw" />
+                </div>
               )}
-              {section.href && !section.cards && (
-                <div class="action-row">
+              {section.cards && <CardGrid cards={section.cards} />}
+              {section.href && section.cards && (
+                <div class="section-footer">
                   <a class="button dark" href={resolveHref(section.href)}>
-                    {section.action || 'Learn More'}
+                    {section.action || 'View All'}
                   </a>
                 </div>
               )}
             </div>
-            {section.image && !section.cards && (
-              <div class="split-media">
-                <Media id={section.image} alt={section.title} sizes="(max-width: 900px) 100vw, 48vw" />
-              </div>
-            )}
-            {section.cards && <CardGrid cards={section.cards} />}
-            {section.href && section.cards && (
-              <div class="section-footer">
-                <a class="button dark" href={resolveHref(section.href)}>
-                  {section.action || 'View All'}
-                </a>
-              </div>
-            )}
-          </div>
-        </section>
-      ))}
-    </div>
-  )}
+          </section>
+        ))}
+      </div>
+    )}
 </Site>

@@ -1164,6 +1164,1053 @@
     ],
     "sha256": "6daee96ef6ec774ef0b4fa52f00641105061c950f210e477891562b8ec2b038c"
   },
+  "rv-types-quiz": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/f16a9a10-c529-4ec2-b0ce-dbf4ef422ba9_50274-0921-R6+THO+Mktg+Dgtl+Home+Page+Banner-1920x1080-FINAL-ArtOnly.jpg?auto=compress,format&rect=566,0,1080,1080&w=1000&h=1000",
+    "format": "webp",
+    "width": 1000,
+    "height": 1000,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "3a1eb37f27f86ff0336e0851052c906653c32b71694422f0605232482d485352"
+  },
+  "rv-types-companies": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/e4024598-8fa9-4ab3-8a87-9ef7e8b11329_Campfire_THOR.jpg?auto=compress,format&rect=750,0,2500,2500&w=1000&h=1000",
+    "format": "webp",
+    "width": 1000,
+    "height": 1000,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "46d53827a72474b4e08b16679ce4f53d62624bae39f636af9e679e100c49abd2"
+  },
+  "rv-types-finder": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/24846e6f-e9c4-4f9b-9dc0-212a7c93ae48_20221020_02710.jpg?auto=compress,format&rect=0,489,5120,2133&w=1920&h=800",
+    "format": "webp",
+    "width": 1920,
+    "height": 800,
+    "widths": [
+      480,
+      960,
+      1600,
+      1920
+    ],
+    "sha256": "0c992c1b7a777d38a94eadf414c572d3ad4e976b355756bc10b3024068ee4c67"
+  },
+  "finance-calc-bg": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/e1c66d71c4603b57c7cbd9bb6c48c447b6399c72_financecalc2.jpg?auto=compress,format",
+    "format": "webp",
+    "width": 1920,
+    "height": 800,
+    "widths": [
+      480,
+      960,
+      1600,
+      1920
+    ],
+    "sha256": "25ee8cbc12aeeb7d898303ea8620c0802f9fd30c4c3133c65431af4326f058ae"
+  },
+  "finance-finder": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/fac6263e-190e-4ea6-9daf-5fb631488774_Untitled+design+%2811%29.png?auto=compress,format&rect=0,276,1080,527&w=860&h=420",
+    "format": "webp",
+    "width": 860,
+    "height": 420,
+    "widths": [
+      480,
+      860
+    ],
+    "sha256": "c7a52cbedb3a8a4500a6e5c097718e641a2c57f76e57f24731abb7775f6cf1d2"
+  },
+  "towing-match-vehicle": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/198a4663-e49a-4865-9aa3-39732fd4f093__MCW6210.jpg?auto=compress,format&rect=0,269,3000,1465&w=860&h=420",
+    "format": "webp",
+    "width": 860,
+    "height": 420,
+    "widths": [
+      480,
+      860
+    ],
+    "sha256": "c1ad5870542b296141f19d927bd1d9ce8f91d9b5182d528df05373b409bdc485"
+  },
+  "towing-guide-book": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/1c0f20c10ba56a88a8372582ce7a76ef3a93b43f_final-edits--02669.jpg?auto=compress,format",
+    "format": "webp",
+    "width": 860,
+    "height": 420,
+    "widths": [
+      480,
+      860
+    ],
+    "sha256": "9cac198baf1699e21b1a55cef79671c006944c9e49df8b743dbfc2a244342d43"
+  },
+  "region-northwest": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/ddf4ff71-b99d-4334-8bc2-5518e549affc_CEM_6055_beach_shore_shoreline_sand_islands_rocks_waves_bluesky_trees_evergreen_forest_woods_clouds_sunny_sunlight_branches_log_pacific_north_west.jpg?auto=compress,format&rect=0,41,800,450&w=360&h=203",
+    "format": "webp",
+    "width": 360,
+    "height": 203,
+    "widths": [
+      360
+    ],
+    "sha256": "b3e1a4d07e255b77fc8a59f8fc3ae0ec0a6772f7517b0a5b6b6aaf718a499404"
+  },
+  "region-west": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/33d61570-6386-4b42-9b26-36714a0ab1ef_DSC_6576.jpg?auto=compress,format&rect=0,158,3000,1688&w=360&h=203",
+    "format": "webp",
+    "width": 360,
+    "height": 203,
+    "widths": [
+      360
+    ],
+    "sha256": "4891f0bccf5f2e8e0d25f8b7f0ea848220fd9181c9f3c14307de690bb6573eb1"
+  },
+  "region-midwest": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/e6545140-0f9f-4aa9-87ff-1e6ca28b671e_20_09_08_Thor_Michigan_MG_2171.jpg?auto=compress,format&rect=0,154,3000,1688&w=360&h=203",
+    "format": "webp",
+    "width": 360,
+    "height": 203,
+    "widths": [
+      360
+    ],
+    "sha256": "3ed0d5c4e5f8bbd87fb99f4ef452b83aa6e2aae1dfc0ff351d5fea7ee8cb5a4c"
+  },
+  "region-southwest": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/33fd2180-9ab2-445d-affc-0e7232d5870d_DSC05583.jpg?auto=compress,format&rect=0,154,3000,1688&w=360&h=203",
+    "format": "webp",
+    "width": 360,
+    "height": 203,
+    "widths": [
+      360
+    ],
+    "sha256": "dc8998a1a591ebe67f9c8de22af07f0d3084320408168d295d1b5b399d91cb72"
+  },
+  "region-northeast": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/f2dd1fe0-6851-4f33-b920-18b4d8c885b9__CEM2769.jpg?auto=compress,format&rect=0,78,1712,963&w=360&h=203",
+    "format": "webp",
+    "width": 360,
+    "height": 203,
+    "widths": [
+      360
+    ],
+    "sha256": "d917544d554d80410fdbad149f00346fa0fe20e5406f5ee104d7ab5a9e00437a"
+  },
+  "region-midatlantic": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/5005c6c1-6ad4-41b6-b45c-b67a2a8a8262_IMG_0487+%281%29.jpg?auto=compress,format&rect=0,43,1729,973&w=360&h=203",
+    "format": "webp",
+    "width": 360,
+    "height": 203,
+    "widths": [
+      360
+    ],
+    "sha256": "65cf7e4969f82fa6f7828bac4191613bcb82d2b8c57e201a8002e77e6c0286ee"
+  },
+  "region-southeast": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/83d8e80f-0f5a-4e2c-a273-64033d83aeb3_DDL_0113.jpg?auto=compress,format&rect=0,154,3000,1688&w=360&h=203",
+    "format": "webp",
+    "width": 360,
+    "height": 203,
+    "widths": [
+      360
+    ],
+    "sha256": "7ed7b7754869aaeb806275f7202424df0c329a339241b47124b3ec5d3a094384"
+  },
+  "story-rver-budget-considerations": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/b64388d7-9b4c-44e6-9303-e95656cf8fac_crater+lake+campground.jpg?auto=compress,format&rect=321,0,3402,2268&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "144f1659899d29b6897b0fc77ead9904332b01d6d984058bfa73178d6641750e"
+  },
+  "story-how-to-plan-camping-trip": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/397601a1-6e67-4285-b549-9c9cd461a19f_2_Family+talking+to+each+other+in+front+of+RV.jpg?auto=compress,format&rect=0,0,4000,2667&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "d54e3ed99ecc2b2c7d71f75bda167e3a4cd7857d721a5d33bb3629875fbdc0a6"
+  },
+  "story-recipe-caesar-salad-asparagus-egg-lox": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/33221820b002705127925631ac6f56b4cd57848e_fl2a6120.jpg?auto=compress,format",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "81338046e17ee08968b048f9e47c5b137941698a1bb5525422b549479e86afeb"
+  },
+  "story-recipe-steamed-saltwater-fish-ginger": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/776d7e3e9b87167ee8b9c7e7b80e786c99cffa11_recipe-food-steamed-saltwater-fish-ginger-final-complete.jpg?auto=compress,format",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "18198ccbb4160f134405d40605a930d0874d6a828e5542a99e10cc17dd6b73da"
+  },
+  "story-recipe-lemon-miso-butterflied-chicken": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/0fa76f9bab522b90b6bdd583a4727c737eff1b23_recipe-food-lemon-miso-butterflied-chicken-final-complete-ocean.jpg?auto=compress,format",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "ad1de9f4b2854729d01fdc72abbfba791a7e1eb925cf4c99962b3eaf18226fad"
+  },
+  "story-wintering-rv-florida": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/ZpaM2B5LeNNTxNM8_July-BeachRVCamping-photonumber9.jpg?auto=format%2Ccompress&rect=0%2C0%2C960%2C640&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "2b19047b6a5f3e60e7bff9fe36567b34b32d5a07f3d2e1110c21ba566c62fbac"
+  },
+  "story-how-to-work-full-time-from-the-road": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/13daa175-7f85-4b17-9bd7-c351d4c799ca_Working+Full+Time+While+RVing+%28Three+Things+To+Consider%29+Thumbnail+Photo.jpg?auto=compress,format&rect=321,0,3402,2268&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "9b8f8f2dd3e73d2410e2acf53cc379e0d8f57bf8208ab2ab092b31105b52e143"
+  },
+  "story-managing-health-on-the-road": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/ba9cf5f9-5dbf-4928-bbcf-908579219de0_Wild+Thornbaileys+Highland+Ridge+395BHS+Open+Range_2.jpg?auto=format%2Ccompress&rect=166%2C0%2C4016%2C2677&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "ce2abd8ccdde3537a5f79e117872155090ff6b2c297a472220220c09c33afb99"
+  },
+  "story-enriching-family-adventures-culture": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/2fbeae43-a884-4ccc-bce3-f1332400ade4_IMG_3355.jpg?auto=format%2Ccompress&rect=0%2C168%2C4032%2C2688&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "f4521d60217d6650b7364c954dd50e6af58237fe79a79584d80a3a1b785bfa06"
+  },
+  "story-campfire-legacy": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Zow5zB5LeNNTw6bx_24_04_30_THOR_KOA_-48.jpg?auto=format%2Ccompress&rect=0%2C433%2C5272%2C3515&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "de82bcd285f0f4c4652081037f2d9b31b0facf7604d90da90a740c0533b40562"
+  },
+  "story-first-camping-trip-kids": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/f4c3cd68d3c74a957b9daccd394448a1e545dee9_amber-thrane-family-airstream-sun-palm-trees-california.jpg?auto=compress,format",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "02a412a2942e41d87b080aa89de4bd928e35b711c3eb4f323d1f9a1489533010"
+  },
+  "story-find-camping-destination": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/974785d6-bf86-495e-a203-ce41d4d8936e_Beach+boondocking+Baja+Mexico.JPG?auto=compress,format&rect=0,20,1369,1826&w=800&h=1067",
+    "format": "webp",
+    "width": 800,
+    "height": 1067,
+    "widths": [
+      480,
+      800
+    ],
+    "sha256": "df10b51770cdd1740ce1855295ac5da864acb2024e09ee144c5699b5521e4331"
+  },
+  "story-rv-living-small-space-work": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/145f7529-35c9-416b-8117-5f0201b433b6_Kitchen.jpg?auto=compress,format&rect=0,168,4032,2688&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "880d15e114d91cbbddf4193738ec0fb8d8a45a1c1815e337f73fcdf9d182a57d"
+  },
+  "story-best-rvs-off-grid": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Z9mAIDiBA97GimYN_20130611_03387_Ccopy.jpg?auto=format%2Ccompress&rect=0%2C435%2C5240%2C3493&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "e6e257b976bc874934a8ed50eead0c91d510aa9e5645cfcacc4741105ec6d997"
+  },
+  "story-best-pet-friendly-campgrounds": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/756e5526-13fd-4d00-8ce0-47d01b7b4975_20_10_28_thor_kalen_IF-6661.jpg?auto=compress,format&rect=0,0,4000,2667&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "b84556155076d271c3ae21a999d5a238da88ae0fb825f7fbe24a3bf8b5c2189a"
+  },
+  "story-cost-of-rving-affordable": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/a30e671e-c2a7-4311-ab19-e8d526166f78_1.jpg?auto=compress,format&rect=1339,0,2632,3511&w=800&h=1067",
+    "format": "webp",
+    "width": 800,
+    "height": 1067,
+    "widths": [
+      480,
+      800
+    ],
+    "sha256": "6d9ef399a83da917aaed1e57be5cbdb1020e26e43fe43e0261413da9b5cf1bbd"
+  },
+  "story-first-time-dry-camping": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/5ff925ea-2720-421b-85b7-abf219c0651c_IMG_1289.JPG?auto=compress,format&rect=0,134,4032,2688&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "13f4ab568ed316df865ad68a947bc57122bf2d06386c0f760ceea82f2c8af186"
+  },
+  "story-best-rvs-work-remote": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Z8oWeRsAHJWomNJE_20241023_01472.jpg?auto=format%2Ccompress&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "76e32be81594aba67f414fd01677fb6fc53000c82bda334f374c42bc6b1c3fda"
+  },
+  "story-rvers-guide-winter-camping": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/629063b9-3f16-42d2-998a-b7238e90a752__D1I4591.jpg?auto=compress,format&rect=0,0,3000,2000&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "eb2e4b04c34b87f1dfd8958540e6cea7e9e0b224a395bf0b9d48d5f81a4acc06"
+  },
+  "story-prep-rv-for-destination": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/766c0ff6-5d7c-48be-bee5-c936decdd64e_PXL_20220210_224446539-01.jpeg?auto=compress,format&rect=0,352,4080,2720&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "2da0acbd6084aa62211c0292d20c8787b23a0c7a7f20cbc5316a878ff1b84caa"
+  },
+  "story-campsite-night": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/afda76a1-7759-417b-b396-099230425f46_T2-2.jpg?auto=compress,format&rect=0,1,5600,3733&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "62fa6bbd200a474d3e4b57e9ad0043886465689f50d1f36c8074a1900a349142"
+  },
+  "story-freedom-motorcylce-trip": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/d6c3550b-1ea5-47db-8358-ec1acdfdd755_IMGL4298.jpg?auto=compress,format&rect=0,0,3000,2000&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "05dad91a620593e1d2bf56ce5f69eccda4d27c314fdb4cfe614533823fb0eeeb"
+  },
+  "story-class-c-features": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/d6c6427c-f3e9-442a-b967-950e308d95b9_Medicine+Bow+Tiffin+%232.jpg?auto=compress,format&rect=0,7,5280,3520&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "d243573ef2c482d116c76cab54cb63b54da5443d9e55c5a688c2144bb5971794"
+  },
+  "story-must-have-items-extending-rv-season": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/372dc81a-1cba-4ffd-90d6-a194bd63e931_20210215_172116+%281%29.jpg?auto=compress,format&rect=0,166,4000,2667&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "096f0780b193931375a7a8ce66e6cc0e246a258f480b8216829ef0feb3bd5b10"
+  },
+  "story-eco-friendly-camping-destinations": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/cd45b09d-e4ea-468f-ac6f-6353cffc1db1__CEM5768_highland_openrange_fifthwheel_michigan_norv_landscape_sky_lake_water_rocks_header.jpg?auto=compress,format&rect=222,0,1416,944&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "602e87eba31a4fd2258a4aa1d85be7d08b6a29d0448e6c091f2c8f3476c5d640"
+  },
+  "story-first-time-we-bought-a-toy-hauler": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/fcdee5a2-f17f-4738-bff2-e5c3d8a3f795_IMG_1563.JPG?auto=compress,format&rect=0,167,4032,2688&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "87cd27cc2de3c3e90eb82eff4e63570d0c13062e105fe0b0a1eab2c43614d13c"
+  },
+  "story-hunting-basecamp": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/58b41e65-147a-42a4-9d49-da0fcd71d29a_image5.jpg?auto=compress,format&rect=0,0,1000,667&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "c98836095c1907678481ecd23e9576457c4e0144a9507b5fc31db4c4ab77e37e"
+  },
+  "story-how-to-every-day-logistics": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/c5535597-f70c-4662-8ad4-b059c6b2b56f_roadtrippers-75.jpg?auto=compress,format&rect=1260,0,2519,3360&w=800&h=1067",
+    "format": "webp",
+    "width": 800,
+    "height": 1067,
+    "widths": [
+      480,
+      800
+    ],
+    "sha256": "064bec6b5326e664c7454413f544a3f93ef20afd0ddae1fa6f51ecc54095c262"
+  },
+  "story-recipe-lamb-tomatillo-mint-sauce": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/0285bf77f58cbe92b5f733af1da556c4271aa415_thor-industries_tow_kp-3466.jpg?auto=compress,format",
+    "format": "webp",
+    "width": 800,
+    "height": 1067,
+    "widths": [
+      480,
+      800
+    ],
+    "sha256": "e0972aa2c8eb02c6d1c8f3673d82f73c433b47a64985b952b9d3931a6d0ab0fc"
+  },
+  "story-recipe-old-bay-fried-scallops-and-salad": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/199629d76d02f1c6a905d01653022ef2b93a188c_recipe-food-old-bay-fried-scallop-salad-stove-burner-jayco-sarah-glover-ocean.jpg?auto=compress,format",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "d5f5de22e5b21a661798bc4cb8e49f062fa5e06c6dea8782c09247e721265ea6"
+  },
+  "story-charcuterie-board-and-oysters": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/d2753158acb2b262f8c51b16812b9c332fcaa991__d1i1466.jpg?auto=compress,format",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "420964a79090b17e7cb59af1b2adbad8f68c838baf6e720c44eec1ed8ee496ea"
+  },
+  "story-recipe-beignets-chicory-coffee": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/7460ae83-ba35-4d71-9a5c-3873287c0915_Beignets-6745.jpg?auto=compress,format&rect=0,0,1600,1067&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "74ed88144c54f31b3ca456cda815e184ef3c6cf323366e79cc18175f22110e5c"
+  },
+  "story-recipe-homemade-pimento-cheese-spread-sazeracs": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/f11e7429-4756-4064-b572-d8e55d175066_FL2A1535.jpg?auto=compress,format&rect=574,0,800,1067&w=800&h=1067",
+    "format": "webp",
+    "width": 800,
+    "height": 1067,
+    "widths": [
+      480,
+      800
+    ],
+    "sha256": "fe2c49182bc215ebde29b9a8a60fd89d13e1a183f9735ad0c5c4e2ae7c326a75"
+  },
+  "story-recipe-granola-blueberries": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/d832b7e7f8c47a2596d64bf1a9c39a4d61224408_thor-industries_tow_kp-3767.jpg?auto=compress,format",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "59b60b74fbbb790f068f49103bfc9bd4cc94acd1ee92fca8796899f4fe020592"
+  },
+  "story-recipe-rockfish-tacos-chimichurri-tortillas": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/318c269a3419b7ca94d141a9c3631d07d75b99d4_fl2a7874.jpg?auto=compress,format",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "2be46ab7198dce5b987cd8ff18fd5dc3d498ba23df995f112fa2c3047814602f"
+  },
+  "story-recipe-creamy-berry-overnight-oats": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/9f1b583ca09d6e05bc11a1fad426bf589d7e96fd_recipe-food-creamy-overnight-oats-roadside-berries-final-complete.jpg?auto=compress,format",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "17911595ddbfe52570a24348afe4583deec099a1e122ae757a3732ba45087b6a"
+  },
+  "story-recipe-shrimp-po-boys": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/75fb997d-9c9a-4b71-997e-f1192bb907ca_FL2A1345.jpg?auto=compress,format&rect=173,177,946,631&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "f4378fe29e749463e3b65b05257ba832c253cdc77d1b09258c43bf31ee0f372c"
+  },
+  "story-recipe-dutch-oven-biscuits-tomato-gravy": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/1e7a2e8a-4a93-4fef-bed3-cc3a74f1925a_FL2A9444-Edit.jpg?auto=compress,format&rect=608,371,522,696&w=800&h=1067",
+    "format": "webp",
+    "width": 800,
+    "height": 1067,
+    "widths": [
+      480,
+      800
+    ],
+    "sha256": "a0bfe0442af7520ad1cab09cd21c58bce5227ddbe1cb0cad00916b54b42e946c"
+  },
+  "story-recipe-dutch-oven-peach-cobbler": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/db77c9f9-db11-4fe7-822a-f0ccf5651c2f_FL2A8626.jpg?auto=compress,format&rect=0,397,1067,711&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "e22130a60e1ba3f10e269735e6ee3145864c32a7e21227554888ea59ef815e69"
+  },
+  "story-recipe-smoked-clam-chowder-3": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/6fd06e9c7fbef527ecb6677595cffa1d4219cf26_thor-industries_tow_kp-4460.jpg?auto=compress,format",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "b5dfd2002173e841099afdcae7ceb591127d13026504504a488368a4eb805cfb"
+  },
+  "story-recipe-mint-snap-pea-salad": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/d34f535974284a0371a6e422e32b24cf1078e2b5_fl2a5241.jpg?auto=compress,format",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "74f177e77fe82061c31feb7d479be48ad947ba2262175ff12d11843c3b449064"
+  },
+  "story-rv-packrafting-trip-tips": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/70a78c06-a97b-4f8b-846d-4c921290e653_tiffin_co_2702.JPG?auto=compress,format&rect=1,0,3998,2665&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "5170f36b09acf64822f412ae57201cb90c8b6b4c8546cb1f32bc4f5693d93a7f"
+  },
+  "story-ambassador-arango": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Z8HQop7c43Q3gYNi_IMG_3907.jpeg?auto=format%2Ccompress&rect=0%2C336%2C4032%2C2688&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "43356226a91af8b9f01702dd6acf173af787851559aaa3b5261f40e969fd719b"
+  },
+  "story-stories-from-the-road-raising-little-women": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/93e80396-d527-4267-819e-812eeb4b618b_DSC00320.jpg?auto=compress,format&rect=232,0,2532,1688&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "256c6cd3ebde60f5b456cb5d4469022da84ab2574a9618ceedd6a418461bd587"
+  },
+  "story-rv-destinations-black-history-month": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/53b65d2d-585c-4644-b475-d9005491a192_Picture+5+Ben+walking+around+the+fort.jpg?auto=compress,format&rect=0,168,4032,2688&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "9c76a6f02729762843f3ce516806e54a53c1683c071e00a77911a258bb808377"
+  },
+  "story-how-to-boondocking": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/e56354c2-8d3c-4d56-8c53-f6f6d21cdb5a_22_01_26_thor_santee_MA_1455.jpg?auto=compress,format&rect=0,0,2247,1498&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "83f62640115bfe0b83e31a6b93ac6224ea91b36b38d1811d10d7079dd71cfc92"
+  },
+  "story-ambassador-king": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Z8B5nJ7c43Q3gUcF_IMG_4333.jpg?auto=format,compress&rect=0,131,1163,775&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "a81e759b33b56cfdd03469808d74e18a0d3f1084f6a288e15111e92bb119640e"
+  },
+  "story-stories-from-the-road-snapshot-of-adventure-testv2": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/eb95b1aeab8d09ac6e96868661e3b8af03359d76_jayco-exterior_retouched_featured-image.jpg?auto=compress,format",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "2a8db4ea311d684894a3af25aaaf473b466025c09c191853c971a93aa22387c4"
+  },
+  "story-ambassador-benedict": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/e68eb127-f0cc-43bf-9972-a26f4bc4da76_FullSizeRender.jpg?auto=compress,format&rect=317,0,3401,2267&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "b30410d5ad91926ab7a9d0a4ef57bf6982fd670edd61484b3b6585a7337a5224"
+  },
+  "story-family-rv-packing-tips": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/aGwg-0MqNJQqHnro_AQ4I9666Venice2020PaddleboardStorage.jpg?auto=format%2Ccompress&rect=5%2C0%2C1305%2C870&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "837660f2ddf7326c8542b8e2654935d33f559b58d75ddad7885771a2577cdf17"
+  },
+  "story-hauling-toys-dirt-bikes": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/e4a6c67c-d567-4494-9279-dd3122828937_TaylorWalsh24.jpg?auto=compress,format&rect=0,0,2592,1728&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "f1f58088cd44edf45af0558bd8827846f933b1ffe15df6b8baaafff23e5e214b"
+  },
+  "story-navy-life-to-road-life": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/e6a391e7-5334-4aa4-9602-9d67e2072ced_119465444_729510624564180_8805374027324546100_n.jpg?auto=compress,format&rect=0,54,1242,828&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "db6030e50e0633ab1fe5fbf8f0869e124ccc2ee5aac819dea05fa7c7c10faf5d"
+  },
+  "story-rv-tour-heartland-cyclone": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/aD8YLrh8WN-LVi7A_THOR-4.jpg?auto=format,compress&rect=0,0,6000,4000&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "a84e860d9fd1d765b591e5c1e0e2d070e6af4a1fe2959f9b3f9b37b547b29ff1"
+  },
+  "story-experiencing-indigenous-culture-while-rving": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Zo2XmB5LeNNTw9qm_July-LearningfromourNF-Photo6.jpg?auto=format%2Ccompress&rect=0%2C0%2C8192%2C5461&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "6a4a6b3093fdd89bf12f4a6c8a1848417bc8df3e8da474e512687fb51463bc52"
+  },
+  "story-hidden-gems-mt-hood-national-forest": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Zy4XTq8jQArT0o3Q_MtHoodNF_MtHood_USFS.jpg?auto=format%2Ccompress&rect=792%2C0%2C5064%2C3376&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "398a1f6767fad58a3cf0328677718a1df9faa2960bbb249e6922c9b18b6778f2"
+  },
+  "story-million-dollar-views": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Zh1GMDjCgu4jz1Aw_Photo4.jpg?auto=compress,format&rect=0,167,4032,2688&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "9b09935ba3151cc7c3a3449bcade268fdc003e0be954bc0d5697ead65ac0d642"
+  },
+  "story-maximizing-rv-park-amenities": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Zr-UL0aF0TcGJAg4_KOA-28-.jpg?auto=format%2Ccompress&rect=0%2C1%2C7952%2C5301&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "a10ec46658f973f122ac001bda2a4f49ff98dcfcc772033af5b010ae8480330a"
+  },
+  "story-first-time-tailgating-rv": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Zy4Q_68jQArT0oyb_TGphoto4.JPG?auto=format%2Ccompress&rect=0%2C121%2C3997%2C2665&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "13f0a0f25a1426c6ea006e0b03a45baaa8fdbcfcf96e0881bf646a49eae52d6f"
+  },
+  "story-ozark-st-francis-national-forest": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Z1irSZbqstJ98R0x_MulberryRiver%2CaboveYale.Ozark-St.FrancisNationalForest%2CArkansas.-ForestServicephotobyTimPalmer-02.jpg?auto=format%2Ccompress&rect=0%2C33%2C3000%2C2000&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "0f3c6e8fa005986bc8b142246bdd48cba0591e15d94b28fdda5bd2180c0d9743"
+  },
+  "story-window-to-the-world-miramar-beach-florida": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/23f2663283d6a46d4d8f0f7dde0749c6885029a7_christina-griffin-window-world-dogs-airstream.jpg?auto=compress,format",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "90ada37f570962ddeae497a0a001befe225767ef0c0c923b2d7add9ffcc63fe6"
+  },
+  "story-window-to-the-world-kelvedon-beach-tasmania-australia": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/03913eeb4e6dacaeed843a8248f12ad8d4160f35_windowtotheworld_kat-parker-copy.jpg?auto=compress,format",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "d63e7f36a9b69b60f8b87c8097fca55c19f94a312d8b21ee44e3aea5bddb5e22"
+  },
+  "story-first-descents-joshua-tree": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/fed3c372b54b41a502f1f4a689eb5021c4e4442a_dsc_6766.jpg?auto=compress,format",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "9ec1a24d8c9cbf5dc123aec0213b383e550193cfbf3d6c6aef4ae353d9434845"
+  },
+  "story-top-cities-explore-rv": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Zn25LR5LeNNTwm9k_July-TopCitiestoVisitwithanRV-Photo-SD7-.jpg?auto=format%2Ccompress&rect=0%2C8%2C1128%2C752&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "c1eccd75629f732a3a9b8d1b4af00155977ea5acf30eaa96cf64662277738a20"
+  },
+  "story-motorcyle-route-rv-trip-guide": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/0513fb1c-bb57-412f-af07-d131da30cc85_The+Cabot+Trail.jpg?auto=compress,format&rect=0,0,4200,2800&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "6a76642bc11f0a397763f91424fc3b44c581c8c13ae52fb8b1f065e2cff2ff24"
+  },
+  "story-rving-and-dirt-biking-trip-guide": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/b87ad0d1-0455-4b8b-b20c-09a3601df5e9_IMG_1619.jpeg?auto=compress,format&rect=252,855,1777,1185&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "21d4129f315f6ee12dba935337a5ef5b2c443524a6dcee96f883389b4425aa1d"
+  },
+  "story-window-to-the-world-twin-lakes": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/688642790cbbd6aae4785c4f1278f18a28053fc5_beth-johnston-twin-lakes-colorado-window-world.jpg?auto=compress,format",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "e2c3ef435eced4bb031a5ac0c9617cd2259d2a0b4b371f5cfcde1ce05acc9442"
+  },
+  "story-hidden-gems-uinta-wasatch-cache-national-forest": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/5d4ee145-3024-4058-b264-460df0b950c1_UWC+NF_USFS+2.JPG?auto=compress,format&rect=0,0,3648,2432&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "5747f10c1a050c87b355ec3d9769be9721d1966011a5d07ed538dc2996203854"
+  },
+  "story-window-to-the-world-big-sur-highway1": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/5f4cbf5fea95fb29593fb932bc93cbdad14e73eb_windowtotheworld_highway-1-big-sur_anthony-tori_final.jpg?auto=compress,format",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "3db6fa63d631f970000cf6fe5d9f9ee29aece723f5fd33aec33bc2ec7e1a9441"
+  },
+  "story-window-to-the-world-tybee-island-georgia": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/ddfd05b5-8f88-4e6c-95ca-fec3d0383b94_Tybee+Island-8+%281%29.jpg?auto=compress,format&rect=0,0,5951,3967&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "3f9b361bab72837f8f9b8c9fda37c7555446f51c20e9b8c7fdc0703888b05ae0"
+  },
+  "story-rv-storage-organization": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/1aba23f3-023b-4090-8d2d-2aa1ad9351ab_20220610_02243.jpg?auto=compress,format&rect=0,1422,3413,2275&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "2715422d3430272581ccb105e503ff0ce15bc5e0327236de73f7f6a96a6467e2"
+  },
+  "story-rv-work-remotely": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/2a7e4ab7-8cff-4c8a-a8a2-8eec773e5c8e_22_01_26_thor_santee_DL8768.jpg?auto=compress,format&rect=2,0,5117,3411&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "d69454e1cd70d14717a525cc2d5bfae9699689cc1f276ed47da5ae5b9c21686d"
+  },
+  "story-hungry-inspiration": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/56ca3465-3c07-4cd1-950e-b0f3cbbaf265_20211109_03299.jpg?auto=compress,format&rect=1279,0,2559,3413&w=800&h=1067",
+    "format": "webp",
+    "width": 800,
+    "height": 1067,
+    "widths": [
+      480,
+      800
+    ],
+    "sha256": "ed6e2255cca12321b2907b1593cfdd2f0d9b35d7dc66bcaeee63f7da0fd58de6"
+  },
+  "story-rv-pest-control": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/aDXN2idWJ-7kSlnP_SprinklediatomaceouseartharoundtheRV.jpg?auto=format,compress&rect=107,0,1076,717&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "5658f178597803645d326f9c4fab2c3aa2035edb0096707be0b80286845cf419"
+  },
+  "story-in-perfect-harmony": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/08af2dda-7e7a-4736-86c1-3530bada7b90_DSC_4600.jpg?auto=compress,format&rect=0,0,4000,2667&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "283bf06082a5fe22f8213d3eaa6bb8e18aa83e04da82e86e73af024c5ccebc0b"
+  },
+  "story-stories-from-the-road-how-camping-brought-us-together": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/7081b580f65b50d68cc900771a921a85fa2a8487_e49a2308blf_4.jpg?auto=compress,format",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "abe53b4b1d6b6159bc0be2620bfe5f5b8601e288c0ef43ce2885bd82d4261084"
+  },
+  "story-our-rv-community": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/ef9c6470-b837-4a5f-a8db-ec9bdb9c4953_22_03_08_Thor_Keywest_DL+1519.jpg?auto=compress,format&rect=0,0,2458,1639&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "bdd48d90da11ca7a977e5de918c2557f47e81d2de81c3bb34c670bd405320077"
+  },
+  "story-small-rv-big-adventures": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/1a27e17c-78c2-4d59-a85b-ecbffe4c796d_tiffin_co_0599-Edit.JPG?auto=compress,format&rect=0,0,4000,2667&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "109d5727aae00317bb9f834d5110fc2278e652957ee28224a76ba5f3b34005f5"
+  },
+  "story-why-i-rv-off-the-grid": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/5a63b78b-ccab-4194-b305-0d0916fb337d_0000_20_10_28_thor_kalen_DL_15417.jpg?auto=compress,format&rect=0,0,6199,4133&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "5a982525e5ef225e33b6140c51146920f0f7217a74a81da41ba0f0b6601d4073"
+  },
+  "story-first-frigid-night": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/3f8cc9cd478bea3c5618ac9dfd9e7a46618980c7_anthonytori-firsts-6.jpg?auto=compress,format",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "1ee90931de6ac8c91de33c396827d709f3fad9eb04c0d187125886fef9e02be1"
+  },
+  "story-our-first-road-trip": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/2863766d16cf2f91b9f7b9e84c4fd5ceabbdf8dd_rainy-day-road_jeff-shipley.jpg?auto=compress,format",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "4d2c2bfc2c54cffd2bae6e04bd173dc7c541920119ddf5343234a4c8144d3739"
+  },
+  "story-first-black-water-mistake": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/9f37f1cb2a14eef4289642da6daec5a4aaeb0385_thor-industries-imagery_-story-hose-support.jpg?auto=compress,format",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "fe4b51bedcd80225fb115b814e7a056dfbc2cc1d5e60507f57c9d915de073fce"
+  },
   "logo-airstream": {
     "source": "https://thorindustries-prod.zaneray.com/cms/images/aJpXnaTt2nPbaL14_airstream-color-square.png?auto=compress,format&w=536",
     "format": "webp",

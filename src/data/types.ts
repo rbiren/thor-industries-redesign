@@ -23,6 +23,12 @@ export interface Card {
   imageAlt?: string;
   eyebrow?: string;
   action?: string;
+  tags?: string[];
+}
+
+export interface InlineLink {
+  label: string;
+  href: string;
 }
 
 export interface Section {
@@ -36,6 +42,7 @@ export interface Section {
   action?: string;
   cards?: Card[];
   accordion?: boolean;
+  links?: InlineLink[];
 }
 
 export interface Page {
@@ -47,5 +54,6 @@ export interface Page {
   label: string;
   lead?: string[];
   sections: Section[];
-  kind?: 'home' | 'stories' | 'category' | 'companies' | 'faq';
+  kind?: 'home' | 'stories' | 'category' | 'rv-types' | 'financing' | 'towing' | 'companies' | 'faq';
+  categoryKey?: 'learn' | 'recipes' | 'on-the-road' | 'travel' | 'video';
 }

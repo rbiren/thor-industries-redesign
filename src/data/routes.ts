@@ -49,16 +49,16 @@ export interface CanonicalRoute {
 
 const routeDefinitions: Array<Omit<CanonicalRoute, 'path' | 'sourceUrl'>> = [
   { slug: '', label: 'Home', group: 'home', built: true },
-  { slug: 'stories', label: 'Stories', group: 'stories', built: false },
-  { slug: 'stories/category/learn', label: 'Learn', group: 'stories', built: false },
-  { slug: 'stories/category/recipes', label: 'Recipes', group: 'stories', built: false },
-  { slug: 'stories/category/on-the-road', label: 'On the Road', group: 'stories', built: false },
-  { slug: 'stories/category/travel', label: 'Travel', group: 'stories', built: false },
-  { slug: 'stories/category/video', label: 'Video', group: 'stories', built: false },
-  { slug: 'rv-types', label: 'RV Types', group: 'rv-basics', built: false },
-  { slug: 'financing-your-rv', label: 'Financing Your RV', group: 'rv-basics', built: false },
-  { slug: 'towing-guide', label: 'Towing Guide', group: 'rv-basics', built: false },
-  { slug: 'faq', label: 'FAQ', group: 'rv-basics', built: false },
+  { slug: 'stories', label: 'Stories', group: 'stories', built: true },
+  { slug: 'stories/category/learn', label: 'Learn', group: 'stories', built: true },
+  { slug: 'stories/category/recipes', label: 'Recipes', group: 'stories', built: true },
+  { slug: 'stories/category/on-the-road', label: 'On the Road', group: 'stories', built: true },
+  { slug: 'stories/category/travel', label: 'Travel', group: 'stories', built: true },
+  { slug: 'stories/category/video', label: 'Video', group: 'stories', built: true },
+  { slug: 'rv-types', label: 'RV Types', group: 'rv-basics', built: true },
+  { slug: 'financing-your-rv', label: 'Financing Your RV', group: 'rv-basics', built: true },
+  { slug: 'towing-guide', label: 'Towing Guide', group: 'rv-basics', built: true },
+  { slug: 'faq', label: 'FAQ', group: 'rv-basics', built: true },
   { slug: 'innovation', label: 'Innovation', group: 'about', built: false },
   { slug: 'history', label: 'History', group: 'about', built: false },
   { slug: 'community', label: 'Community', group: 'about', built: false },
@@ -84,7 +84,10 @@ export const canonicalRouteMap = new Map<CanonicalSlug, CanonicalRoute>(
 );
 
 export function getCanonicalRoute(slugOrPath: string): CanonicalRoute | undefined {
-  const clean = slugOrPath.replace(/^\/+|\/+$/g, '') as CanonicalSlug;
+  const withoutBase = slugOrPath.startsWith(BASE_PATH)
+    ? slugOrPath.slice(BASE_PATH.length)
+    : slugOrPath;
+  const clean = withoutBase.replace(/^\/+|\/+$/g, '') as CanonicalSlug;
   return canonicalRouteMap.get(clean);
 }
 

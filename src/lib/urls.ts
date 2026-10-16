@@ -10,6 +10,8 @@ export const base = (metaEnv?.BASE_URL || BASE_PATH).replace(/\/?$/, '/');
 
 export function siteUrl(target = '/') {
   if (/^(https?:|mailto:|tel:|#)/.test(target)) return target;
+  if (target === BASE_PATH) return base;
+  if (target.startsWith(base)) return target;
   return `${base}${target.replace(/^\/+/, '')}`;
 }
 

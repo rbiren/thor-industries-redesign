@@ -1,5 +1,13 @@
 import type { Card, Page, Section } from './types.ts';
-import { categories, homeBuyingSeason, homeFeaturedStories, homeNewsEvents, stories, storyById } from './stories.mjs';
+import {
+  categories,
+  homeBuyingSeason,
+  homeFeaturedStories,
+  homeNewsEvents,
+  storiesHubCategories,
+  storiesHubFeatured,
+  storyCategoryPages,
+} from './stories.mjs';
 import { homeRvTypes, rvTypes } from './rv-types.mjs';
 import { questions } from './faq.mjs';
 import { SOURCE_ORIGIN, sourceHandoffs } from './routes.ts';
@@ -47,21 +55,25 @@ const section = (
 
 const newsCards: Card[] = homeNewsEvents;
 
-const storyPages: Page[] = categories.map((category) => ({
-  slug: `stories/category/${category.slug}` as Page['slug'],
-  title: category.title,
-  label: 'THOR Stories',
-  description: `Explore ${category.title.toLowerCase()} stories, guides, and videos from THOR Industries and the RV community.`,
-  hero: category.hero,
-  heroAlt: `THOR ${category.title} stories.`,
-  kind: 'category',
-  sections: [
-    {
-      title: `More ${category.title} Stories`,
-      cards: category.ids.map((id) => storyById[id]).filter(Boolean),
-    },
-  ],
-}));
+const storyPages: Page[] = categories.map((category) => {
+  const catData = storyCategoryPages[category.slug as keyof typeof storyCategoryPages];
+  return {
+    slug: `stories/category/${category.slug}` as Page['slug'],
+    title: category.title,
+    label: 'STORIES',
+    description: category.intro,
+    hero: category.hero,
+    heroAlt: `THOR ${category.label} stories.`,
+    kind: 'category',
+    categoryKey: category.slug as Page['categoryKey'],
+    sections: [
+      {
+        title: category.title,
+        cards: catData.stories as Card[],
+      },
+    ],
+  };
+});
 
 export const pages: Page[] = [
   {
@@ -138,42 +150,58 @@ export const pages: Page[] = [
   },
   {
     slug: 'stories',
-    title: 'Welcome to THOR Stories.',
-    label: 'Stories',
+    title: 'STORIES',
+    label: 'THOR Stories',
     description: 'Real travelers, practical RV guides, campfire recipes, road trips, and videos from across the THOR family.',
     hero: 'story-care',
-    heroAlt: 'An RVer relaxing outside beside a scenic mountain valley.',
+    heroAlt: 'Finding Solace and Self-Care in Nature',
     kind: 'stories',
-    sections: [{ title: 'Recent Stories', cards: stories }],
+    sections: [
+      {
+        title: 'Featured Stories',
+        cards: storiesHubFeatured as Card[],
+      },
+      ...storiesHubCategories.map((cat) => ({
+        title: cat.title,
+        href: `/${cat.slug}/`,
+        action: cat.viewAllLabel,
+        cards: cat.stories as Card[],
+      })),
+    ],
   },
   ...storyPages,
   {
     slug: 'rv-types',
-    title: 'Get to Know the Different Types of RVs',
+    title: 'RV TYPES',
     label: 'RV Basics',
-    description: 'Towable RVs and motorized RVs built for every travel style, crew size, and destination.',
+    description:
+      'There are two main categories of RV: towables and motorhomes. Within those two categories are several different types of RVs. Get to know the different types of RVs to figure out which is best for you.',
     hero: 'rv-types',
     heroAlt: 'A family enjoying camp beside their RV.',
+    kind: 'rv-types',
     lead: [
       'Towable RVs are hitched to a vehicle — like an SUV, pickup truck, or van — and towed. They don’t have an engine or require any maintenance on motorized parts, and they leave your tow vehicle free to drive around when you get to your destination.',
       'Motorized RVs have a drivetrain so you can drive them from destination to destination without needing a tow vehicle. Passengers can move about the cabin while you’re on the road, and setting up camp is fast when you arrive.',
     ],
     sections: rvTypes.map((item) => ({
       title: item.title,
+      subtitle: item.eyebrow,
       text: [item.text],
       bullets: item.features,
       image: item.image,
+      imageAlt: item.imageAlt,
       href: item.href,
       action: 'Learn More',
     })),
   },
   {
     slug: 'financing-your-rv',
-    title: 'Financing Your RV',
+    title: 'FINANCING YOUR RV',
     label: 'RV Basics',
-    description: 'It’s More Affordable Than You Think',
+    description: "It's More Affordable Than You Think",
     hero: 'finance',
     heroAlt: 'An Airstream travel trailer at a scenic campsite.',
+    kind: 'financing',
     lead: [
       'With the number of people RVing on the rise, loans specific to RVs are more and more popular. But like a home, purchasing an RV is a big financial decision you shouldn’t take lightly. Take the time to get to know your budget and your options first.',
     ],
@@ -187,45 +215,65 @@ export const pages: Page[] = [
         ['Many RVers use their home or other substantial assets as collateral for their RV loan. How much collateral you’ll need depends on how much you need to borrow.'],
       ),
       section(
-        'How Much Does it really Cost?',
+        'HOW MUCH DOES IT REALLY COST?',
         ['Use our calculator to figure how affordable owning an RV can be for you.'],
         tools.finance,
-        'Open THOR’s Finance Calculator',
+        'Open THOR’s Original Financing Calculator',
+        'finance-calc-bg',
+      ),
+      section(
+        'FIND YOUR RV',
+        ['Explore our family of industry-leading companies and find your dream RV.'],
+        tools.finder,
+        'RV FINDER',
+        'finance-finder',
       ),
     ],
   },
   {
     slug: 'towing-guide',
-    title: 'Guide to Towing',
+    title: 'GUIDE TO TOWING',
     label: 'RV Basics',
-    description: 'Get familiar with how to hook up and safely hit the road.',
+    description: 'Just like RV life is different from everyday life, towing an RV is different from your average road trip. Get familiar with how to hook up and safely hit the road.',
     hero: 'towing',
     heroAlt: 'A travel trailer and tow vehicle on the road.',
+    kind: 'towing',
     lead: [
       'Just like RV life is different from everyday life, towing an RV is different from your average road trip. Get familiar with how to hook up and safely hit the road.',
     ],
     sections: [
       section(
-        'Match Your Tow Vehicle to Your RV',
+        'MATCH YOUR TOW VEHICLE TO YOUR RV',
         [
           'It’s critical to take the time to properly match your tow vehicle to your towable RV to ensure you can safely tow in all conditions. Consult your tow vehicle owner’s manual or your dealer for information on the specific tow and weight ratings of your vehicle. And for more information watch this video from the RV Safety & Education Foundation.',
         ],
         'https://rvacademy.com/my-class/understanding-truck-towing-guides/understanding-truck-towing-guides?utm_source=thorindustries.com&utm_medium=referral',
         'Watch it Now',
+        'towing-match-vehicle',
       ),
       section(
-        'Trailer Life Towing Guide',
+        'TRAILER LIFE TOWING GUIDE',
         [
           'Trailer Life Magazine is a top industry resource for all things RV, and their towing guides cover setup, towing capacity, ratings, and more – information that can be key in choosing the right vehicle and RV. You can find a comprehensive list of past Trailer Life Towing Guides here.',
         ],
         'https://webcontent.goodsam.com/trailerlife.com/digital_editions/TrailerLifeTowGuide2020.pdf',
-        'Download Towing Guide (PDF)',
+        'Download Now',
+        'towing-guide-book',
+      ),
+      section(
+        'FIND YOUR PERFECT TOWABLE RV',
+        [
+          'There are so many different types of RVs, there’s definitely something for everyone. But don’t let having so many choices overwhelm you; we’re here to help you sort through it all and figure out what you need and want.',
+        ],
+        tools.finder,
+        'EXPLORE THE RV FINDER',
+        'finder-cta',
       ),
     ],
   },
   {
     slug: 'faq',
-    title: 'Questions & Answers',
+    title: 'FREQUENTLY ASKED QUESTIONS',
     label: 'RV Basics',
     description: 'Straight answers for first-time buyers, seasoned travelers, and everyone planning the next stretch of road.',
     hero: 'faq',

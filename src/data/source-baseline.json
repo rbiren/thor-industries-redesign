@@ -44,7 +44,8 @@
     "heading": "Explore RV Types",
     "copy": "We’ll help you figure out what kind of RV is right for you.",
     "actionLabel": "View All",
-    "actionHref": "https://www.thorindustries.com/rv-types",
+    "actionHref": "/thor-industries-redesign/rv-types/",
+    "sourceActionHref": "https://www.thorindustries.com/rv-types",
     "cards": [
       { "title": "Travel Trailer", "href": "https://www.thorindustries.com/rv-types/travel-trailer", "action": "Learn More" },
       { "title": "Toy Hauler", "href": "https://www.thorindustries.com/rv-types/toy-hauler", "action": "Learn More" },
@@ -74,7 +75,8 @@
   "featuredStories": {
     "heading": "Featured Stories",
     "actionLabel": "View All",
-    "actionHref": "https://www.thorindustries.com/stories",
+    "actionHref": "/thor-industries-redesign/stories/",
+    "sourceActionHref": "https://www.thorindustries.com/stories",
     "cards": [
       { "title": "Three Checklists To Help You Find Your Perfect RV", "href": "https://www.thorindustries.com/stories/checklists-find-rv", "action": "Read Full Story" },
       { "title": "Trackside Service: Why Your Next RV Repair Might Be at the Racetrack", "href": "https://www.thorindustries.com/stories/thor-complimentary-mobile-service", "action": "Read Full Story" },

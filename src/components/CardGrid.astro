@@ -11,7 +11,7 @@ interface Props {
 const { cards, className = '' } = Astro.props;
 ---
 <div class:list={['card-grid', className]}>
-  {cards.map((card) => (
+  {cards.map((card, index) => (
     <article
       class:list={[
         'content-card',
@@ -24,6 +24,9 @@ const { cards, className = '' } = Astro.props;
           'logo-card': card.image?.startsWith('logo-'),
         },
       ]}
+      data-story-card={card.tags ? '' : undefined}
+      data-story-tags={card.tags?.length ? card.tags.join('|') : undefined}
+      data-story-index={card.tags ? String(index) : undefined}
     >
       <a class="card-link" href={resolveHref(card.href)}>
         {card.image && (
