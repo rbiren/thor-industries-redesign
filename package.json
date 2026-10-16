@@ -5,11 +5,11 @@
   "type": "module",
   "engines": { "node": ">=22.22.0" },
   "scripts": {
-    "dev": "astro dev --host 127.0.0.1",
+    "dev": "astro dev --ignore-lock",
     "build": "astro build",
-    "preview": "astro preview --host 127.0.0.1",
+    "preview": "astro preview --ignore-lock",
     "check": "astro check",
-    "test": "node --test",
+    "test": "node --test --test-concurrency=2",
     "media": "node scripts/media.mjs"
   },
   "dependencies": { "astro": "7.4.0", "sharp": "0.35.5" },

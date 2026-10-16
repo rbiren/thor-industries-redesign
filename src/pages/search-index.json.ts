@@ -1,8 +1,8 @@
-import { pages } from '../data/pages';
+import { builtPages } from '../data/pages';
 import { companies } from '../data/companies.mjs';
 import { routeUrl } from '../lib/urls';
 export function GET() {
-  const records = pages.map(page => ({
+  const records = builtPages.map(page => ({
     title: page.title,
     url: routeUrl(page.slug),
     label: page.label,

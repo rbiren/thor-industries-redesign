@@ -6,4 +6,5 @@ export default defineConfig({
   output: 'static',
   trailingSlash: 'always',
   build: { format: 'directory' },
+  server: { host: '127.0.0.1' },
 });

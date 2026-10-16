@@ -1,6 +1,6 @@
 ---
 import type { Card } from '../data/types';
-import { siteUrl } from '../lib/urls';
+import { resolveHref } from '../lib/urls';
 import Media from './Media.astro';
 interface Props { cards: Card[] }
 const { cards } = Astro.props;
@@ -8,7 +8,7 @@ const { cards } = Astro.props;
 <div class="card-grid">
   {cards.map(card => (
     <article class:list={['content-card', { 'product-card': card.image && ['travel-trailer', 'fifth-wheel', 'lightweight', 'toy-hauler', 'class-a', 'class-b', 'class-c'].includes(card.image), 'logo-card': card.image?.startsWith('logo-') }]}>
-      <a class="card-link" href={siteUrl(card.href)}>
+      <a class="card-link" href={resolveHref(card.href)}>
         {card.image && <div class="card-image"><Media id={card.image} alt="" sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw" /></div>}
         <div class="card-copy">
           {card.eyebrow && <p class="eyebrow">{card.eyebrow}</p>}

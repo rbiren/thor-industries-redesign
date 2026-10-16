@@ -1,7 +1,7 @@
 ---
 import Site from '../layouts/Site.astro';
-import { siteUrl } from '../lib/urls';
+import { routeHref, siteUrl } from '../lib/urls';
 ---
 <Site title="Page not found" description="Find your way back to THOR’s RV guides, companies and stories." noindex>
-  <main id="main" tabindex="-1" class="not-found container"><p class="eyebrow">404</p><h1>A different road.</h1><p>We couldn’t find that page. Explore RVs, discover a story, or start again.</p><a class="button button-dark" href={siteUrl('/')}>Back to Home</a><a class="text-link" href={siteUrl('/stories/')}>Explore Stories →</a></main>
+  <main id="main" tabindex="-1" class="not-found container"><p class="eyebrow">404</p><h1>A different road.</h1><p>We couldn’t find that page. Explore RVs, discover a story, or start again.</p><a class="button button-dark" href={siteUrl('/')}>Back to Home</a><a class="text-link" href={routeHref('stories')}>Explore Stories →</a></main>
 </Site>

@@ -1,15 +1,16 @@
 ---
 import { navigation } from '../data/navigation';
-import { siteUrl } from '../lib/urls';
+import { sourceHandoffs } from '../data/routes';
+import { resolveHref, routeHref, siteUrl } from '../lib/urls';
 import Media from './Media.astro';
 ---
 <footer class="site-footer">
   <div class="footer-top"><a class="footer-brand" href={siteUrl('/')} aria-label="THOR Industries home"><Media id="thor-logo" alt="THOR Industries" sizes="160px" /></a><p>Go Everywhere.<br />Stay Anywhere.</p></div>
   <nav class="footer-nav" aria-label="Footer navigation">
     {navigation.filter(item => item.links).map(group => (
-      <div><h2>{group.title}</h2>{group.links!.map(link => <a href={siteUrl(link.href)}>{link.title}</a>)}</div>
+      <div><h2>{group.title}</h2>{group.links!.map(link => <a href={resolveHref(link.href)}>{link.title}</a>)}</div>
     ))}
-    <div><h2>Explore</h2><a href={siteUrl('/thor-companies/')}>THOR Companies</a><a href="https://ir.thorindustries.com/ir-home/default.aspx">Investors ↗</a><a href="https://www.thorindustries.com/contact-us/">Contact THOR ↗</a><a href="https://www.thorindustries.com/terms-and-conditions/">THOR Terms ↗</a><a href="https://www.thorindustries.com/privacy-policy/">THOR Privacy ↗</a></div>
+    <div><h2>Explore</h2><a href={routeHref('global-family-of-companies')}>Global Family of Companies</a><a href={sourceHandoffs.investors}>Investors ↗</a><a href={sourceHandoffs.careers}>Careers ↗</a><a href={sourceHandoffs.contact}>Contact Us ↗</a><a href={sourceHandoffs.terms}>Terms of Use ↗</a><a href={sourceHandoffs.privacy}>Privacy Policy ↗</a><a href={sourceHandoffs.cookies}>Cookie Policy ↗</a></div>
   </nav>
   <div class="footer-bottom">
     <p>Independent redesign. Not the official THOR Industries website. THOR copy, photographs and trademarks are used with the site owner’s confirmed permission. Source content captured October 2026; dated reports and news retain their original dates.</p>
