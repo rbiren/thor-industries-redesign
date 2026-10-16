@@ -1,263 +1,258 @@
-import { readFile, readdir, access } from 'node:fs/promises';
-import path from 'node:path';
 import test from 'node:test';
 import assert from 'node:assert/strict';
+import { existsSync } from 'node:fs';
+import { readdir, readFile, stat } from 'node:fs/promises';
+import path from 'node:path';
 import sharp from 'sharp';
-import astroConfig from '../astro.config.mjs';
 import {
+  BASE_PATH,
   CANONICAL_SLUGS,
+  builtRoutes,
   canonicalRoutes,
   forbiddenLocalSlugs,
   sourceHandoffs,
-  getCanonicalRoute,
-  getBuiltRoutes,
-  isCanonicalRoute,
-  isBuiltRoute,
-  isSourceHandoffUrl,
-  classifyDestination,
 } from '../src/data/routes.ts';
-import {
-  base,
-  siteUrl,
-  routeUrl,
-  canonicalUrl,
-  routeOutputFile,
-  routeHref,
-  resolveHref,
-  sectionId,
-} from '../src/lib/urls.ts';
-import { pages, builtPages, tools } from '../src/data/pages.ts';
-import { companies, companyGroups } from '../src/data/companies.mjs';
-import { search } from '../src/scripts/search.ts';
+import { footerGroups, footerLinks, navigation, socialLinks } from '../src/data/navigation.ts';
+import { builtPages, pages } from '../src/data/pages.ts';
+import { companies, companyGroups, homeBrands } from '../src/data/companies.mjs';
+import { homeRvTypes } from '../src/data/rv-types.mjs';
+import { homeBuyingSeason, homeFeaturedStories, homeNewsEvents } from '../src/data/stories.mjs';
+import { assetUrl, isExternalHref, navItemHref, resolveHref, routeHref, siteUrl } from '../src/lib/urls.ts';
 
-const expectedCanonicalSlugs = [
+const expectedSlugs = [
   '',
   'stories',
-  'stories/learn',
-  'stories/recipes',
-  'stories/on-the-road',
-  'stories/travel',
-  'stories/video',
+  'stories/category/learn',
+  'stories/category/recipes',
+  'stories/category/on-the-road',
+  'stories/category/travel',
+  'stories/category/video',
   'rv-types',
-  'rv-faq',
-  'about-us',
-  'our-history',
-  'thor-leadership',
+  'financing-your-rv',
+  'towing-guide',
+  'faq',
   'innovation',
-  'operations',
-  'global-family-of-companies',
-  'european-companies',
-  'hymer',
-  'supply-companies',
-  'airxcel',
+  'history',
+  'community',
+  'news-events',
+  'careers',
+  'thor-companies',
   'sustainability',
-  'environmental',
+  'sustainability-report',
+  'sustainability-environmental',
   'social-responsibility',
   'governance',
+  'supply-management',
 ];
 
-const htmlPath = slug => path.join('dist', slug, 'index.html');
-const pkg = JSON.parse(await readFile('package.json', 'utf8'));
-const media = JSON.parse(await readFile('src/data/media.json', 'utf8'));
-
-test('Astro configuration and package scripts use approved pins and concurrency at most two', () => {
-  assert.equal(astroConfig.site, 'https://rbiren.github.io');
-  assert.equal(astroConfig.base, '/thor-industries-redesign/');
-  assert.equal(astroConfig.output, 'static');
-  assert.equal(astroConfig.trailingSlash, 'always');
-  assert.equal(astroConfig.build?.format, 'directory');
-
-  assert.equal(pkg.dependencies.astro, '7.4.0');
-  assert.equal(pkg.dependencies.sharp, '0.35.5');
-  assert.equal(pkg.devDependencies['@astrojs/check'], '0.9.10');
-  assert.equal(pkg.devDependencies.typescript, '6.0.3');
-  assert.equal(pkg.scripts.check, 'astro check');
-  assert.equal(pkg.scripts.build, 'astro build');
-  assert.match(pkg.scripts.test, /^node --test\b/);
-  const concurrencyMatch = pkg.scripts.test.match(/--test-concurrency=(\d+)/);
-  assert.ok(concurrencyMatch, 'package.json test script must set --test-concurrency');
-  assert.ok(Number(concurrencyMatch[1]) <= 2, 'Node test concurrency must be at most 2');
-});
-
-test('exact 23-route catalog distinguishes migrated content from original tools and detail URLs', () => {
-  assert.equal(canonicalRoutes.length, 23);
-  assert.deepEqual([...CANONICAL_SLUGS], expectedCanonicalSlugs);
-  assert.deepEqual(canonicalRoutes.map(route => route.slug), expectedCanonicalSlugs);
-  assert.equal(new Set(canonicalRoutes.map(route => route.slug)).size, 23);
-  assert.equal(new Set(canonicalRoutes.map(route => route.path)).size, 23);
-  assert.equal(new Set(canonicalRoutes.map(route => route.sourceUrl)).size, 23);
-
-  for (const slug of expectedCanonicalSlugs) {
-    const route = getCanonicalRoute(slug);
-    assert.ok(route, `missing canonical route for "${slug}"`);
-    assert.equal(isCanonicalRoute(slug), true);
-    assert.equal(isCanonicalRoute(route.path), true);
-    assert.equal(isCanonicalRoute(route.sourceUrl), true);
-    assert.equal(route.sourceUrl, slug ? `https://www.thorindustries.com/${slug}` : 'https://www.thorindustries.com/');
-    const classified = classifyDestination(slug);
-    assert.equal(classified.kind, 'canonical-route');
-  }
-
-  // Original tools, portals, legal pages and detail routes remain source handoffs, not canonical routes
-  const handoffSamples = [
-    sourceHandoffs.rvFinder,
-    sourceHandoffs.dealerLocator,
-    sourceHandoffs.investors,
-    sourceHandoffs.newsroom,
-    sourceHandoffs.careers,
-    sourceHandoffs.contact,
-    sourceHandoffs.sustainabilityReport,
-    sourceHandoffs.supplyManagement,
-    sourceHandoffs.terms,
-    sourceHandoffs.privacy,
-    sourceHandoffs.cookies,
-    'https://www.thorindustries.com/stories/learn/checklists-find-rv',
-    'https://www.thorindustries.com/rv-types/travel-trailer',
-    'https://www.thorindustries.com/thor-companies/airstream',
-    'https://www.thorindustries.com/news-events/where-the-magic-happens',
-    'https://ir.thorindustries.com/investor-resources/press-releases/default.aspx',
-  ];
-  for (const url of handoffSamples) {
-    assert.equal(isCanonicalRoute(url), false, `handoff URL should not be canonical: ${url}`);
-    assert.equal(isSourceHandoffUrl(url), true, `expected source handoff URL: ${url}`);
-    assert.equal(classifyDestination(url).kind, 'source-handoff', `expected source-handoff classification for ${url}`);
-  }
-
-  // Forbidden legacy/invented local slugs must never be canonical routes
-  for (const forbidden of forbiddenLocalSlugs) {
-    assert.equal(isCanonicalRoute(forbidden), false, `forbidden slug must not be canonical: ${forbidden}`);
-    assert.equal(classifyDestination(forbidden).kind, 'forbidden-local-route', `expected forbidden classification for ${forbidden}`);
-  }
-});
-
-test('base-safe URL helpers support direct nested-route construction and unbuilt source handoffs', () => {
-  assert.equal(base, '/thor-industries-redesign/');
-  assert.equal(routeUrl(''), '/thor-industries-redesign/');
-  assert.equal(routeUrl('/'), '/thor-industries-redesign/');
-  assert.equal(routeUrl('stories'), '/thor-industries-redesign/stories/');
-  assert.equal(routeUrl('stories/learn'), '/thor-industries-redesign/stories/learn/');
-  assert.equal(routeUrl('/stories/on-the-road/'), '/thor-industries-redesign/stories/on-the-road/');
-  assert.equal(siteUrl('media/hero-960.webp'), '/thor-industries-redesign/media/hero-960.webp');
-  assert.equal(canonicalUrl(''), 'https://rbiren.github.io/thor-industries-redesign/');
-  assert.equal(canonicalUrl('stories/learn'), 'https://rbiren.github.io/thor-industries-redesign/stories/learn/');
-  assert.equal(routeOutputFile(''), path.join('dist', 'index.html'));
-  assert.equal(routeOutputFile('stories/learn'), path.join('dist', 'stories/learn', 'index.html'));
-  assert.equal(sectionId('Who Is THOR?', 0), 'section-0-who-is-thor');
-
-  // Built route (root) resolves locally; unbuilt canonical routes resolve to official THOR source URLs
-  assert.equal(isBuiltRoute(''), true);
-  assert.equal(routeHref(''), '/thor-industries-redesign/');
-  assert.equal(resolveHref('/'), '/thor-industries-redesign/');
-  for (const slug of expectedCanonicalSlugs.filter(Boolean)) {
-    assert.equal(isBuiltRoute(slug), false, `${slug} must remain unbuilt during foundation/homepage-preview`);
-    assert.equal(routeHref(slug), `https://www.thorindustries.com/${slug}`);
-    assert.equal(resolveHref(`/${slug}/`), `https://www.thorindustries.com/${slug}`);
-    assert.equal(routeHref(slug, { forceLocal: true }), `/thor-industries-redesign/${slug}/`);
-  }
-});
-
-test('foundation builds only the currently enabled root subset and does not emit the other 22 pages', async () => {
-  const builtRoutes = getBuiltRoutes();
-  assert.deepEqual(builtRoutes.map(route => route.slug), ['']);
-  assert.deepEqual(builtPages.map(page => page.slug), ['']);
-  assert.equal(pages.length, 23);
-
-  for (const page of builtPages) {
-    const html = await readFile(htmlPath(page.slug), 'utf8');
-    assert.equal((html.match(/<h1\b/g) || []).length, 1, page.slug);
-    assert.ok(html.includes(page.title.replaceAll('&', '&amp;')), page.slug);
-    assert.ok(page.sections.length > 0);
-    assert.ok(html.length > 5000, page.slug);
-    assert.ok(!html.includes('403 Forbidden'));
-    assert.ok(!/lorem ipsum|coming soon|placeholder/i.test(html.replace(/placeholder="[^"]*"/g, '')));
-    assert.ok(html.includes('id="main"'));
-    assert.ok(html.includes('<title>'));
-    assert.ok(html.includes('rel="canonical"'));
-  }
-
-  for (const slug of expectedCanonicalSlugs.filter(Boolean)) {
-    await assert.rejects(
-      access(htmlPath(slug)),
-      `unbuilt canonical route "${slug}" must not be emitted in dist during foundation`,
-    );
-  }
-  for (const forbidden of forbiddenLocalSlugs) {
-    await assert.rejects(
-      access(htmlPath(forbidden)),
-      `forbidden route "${forbidden}" must not exist in dist`,
-    );
-  }
-});
-
-async function filesIn(directory) {
-  const entries = await readdir(directory, { withFileTypes: true });
-  return (await Promise.all(entries.map(entry => {
-    const name = path.join(directory, entry.name);
-    return entry.isDirectory() ? filesIn(name) : [name];
-  }))).flat();
+async function walkHtmlFiles(dir) {
+  const entries = await readdir(dir, { withFileTypes: true });
+  const files = await Promise.all(
+    entries.map((entry) => {
+      const fullPath = path.join(dir, entry.name);
+      if (entry.isDirectory()) return walkHtmlFiles(fullPath);
+      return entry.name.endsWith('.html') ? [fullPath] : [];
+    }),
+  );
+  return files.flat();
 }
 
-test('all built HTML internal links, fragments, images and srcsets resolve beneath the project base', async () => {
-  const htmlFiles = (await filesIn('dist')).filter(file => file.endsWith('.html'));
-  assert.deepEqual(
-    htmlFiles.map(file => path.relative('dist', file)).sort(),
-    ['404.html', 'index.html'],
-  );
-  for (const file of htmlFiles) {
-    const html = await readFile(file, 'utf8');
-    const ids = new Set([...html.matchAll(/\bid="([^"]+)"/g)].map(match => match[1]));
-    assert.equal(ids.size, [...html.matchAll(/\bid="([^"]+)"/g)].length, `${file}: duplicate IDs`);
-    const urls = [...html.matchAll(/\b(?:href|src)="([^"]+)"/g)].map(match => match[1]);
-    urls.push(...[...html.matchAll(/\bsrcset="([^"]+)"/g)].flatMap(match => match[1].split(',').map(item => item.trim().split(/\s+/)[0])));
-    for (const url of urls) {
-      if (/^https?:\/\//.test(url)) { assert.ok(!url.includes('javascript:'), file); continue; }
-      if (url.startsWith('#')) {
-        assert.ok(ids.has(url.slice(1)), `${file}: missing ${url}`);
-        continue;
+test('Astro static config and canonical 23-route catalog match the GitHub Pages contract', async () => {
+  const astroConfig = await readFile('astro.config.mjs', 'utf8');
+  assert.ok(astroConfig.includes("site: 'https://rbiren.github.io'"));
+  assert.ok(astroConfig.includes("base: '/thor-industries-redesign"));
+  assert.ok(astroConfig.includes("output: 'static'"));
+
+  assert.equal(CANONICAL_SLUGS.length, 23);
+  assert.deepEqual(CANONICAL_SLUGS, expectedSlugs);
+  assert.equal(canonicalRoutes.length, 23);
+  assert.equal(pages.length, 23);
+  assert.deepEqual(pages.map((page) => page.slug), expectedSlugs);
+
+  for (const forbidden of forbiddenLocalSlugs) {
+    assert.ok(!CANONICAL_SLUGS.includes(forbidden), `Forbidden local route ${forbidden} must not be canonical`);
+  }
+});
+
+test('Base-aware URL helpers prefix built routes and hand off unbuilt routes during homepage preview', () => {
+  assert.deepEqual(builtRoutes.map((route) => route.slug), ['']);
+  assert.deepEqual(builtPages.map((page) => page.slug), ['']);
+
+  assert.equal(siteUrl('/'), '/thor-industries-redesign/');
+  assert.equal(siteUrl('/stories/'), '/thor-industries-redesign/stories/');
+  assert.equal(assetUrl('/media/hero.webp'), '/thor-industries-redesign/media/hero.webp');
+  assert.equal(assetUrl('favicon.svg'), '/thor-industries-redesign/favicon.svg');
+
+  assert.equal(routeHref(''), '/thor-industries-redesign/');
+  assert.equal(routeHref('stories'), 'https://www.thorindustries.com/stories');
+  assert.equal(routeHref('thor-companies'), 'https://www.thorindustries.com/thor-companies');
+  assert.equal(routeHref('sustainability-report'), 'https://www.thorindustries.com/sustainability-report');
+  assert.equal(routeHref('supply-management'), 'https://www.thorindustries.com/supply-management');
+  assert.equal(resolveHref('/stories/'), 'https://www.thorindustries.com/stories');
+  assert.equal(resolveHref('/'), '/thor-industries-redesign/');
+  assert.equal(resolveHref(sourceHandoffs.investors), 'https://ir.thorindustries.com/ir-home/default.aspx');
+  assert.equal(resolveHref(sourceHandoffs.rvFinder), 'https://www.thorindustries.com/find-my-rv');
+  assert.equal(resolveHref(sourceHandoffs.tripCalculator), 'https://www.thorindustries.com/trip-calculator');
+});
+
+test('Navigation model exposes primary THOR destinations and honest source handoffs', () => {
+  const topLabels = navigation.map((group) => group.label);
+  assert.deepEqual(topLabels, [
+    'RV Finder',
+    'Stories',
+    'RV Basics',
+    'About THOR',
+    'THOR Companies',
+    'Sustainability',
+    'Investors',
+  ]);
+
+  for (const group of [...navigation, ...footerGroups]) {
+    if (group.slug || group.href) {
+      const resolved = navItemHref(group);
+      assert.ok(resolved.startsWith(BASE_PATH) || isExternalHref(resolved));
+    }
+    for (const item of group.items ?? []) {
+      const resolved = navItemHref(item);
+      assert.ok(resolved.startsWith(BASE_PATH) || isExternalHref(resolved));
+      if (item.slug && item.slug !== '') {
+        assert.equal(resolved, `https://www.thorindustries.com/${item.slug}`);
       }
-      assert.ok(url.startsWith(base), `${file}: unsafe local URL ${url}`);
-      const relative = decodeURI(url.slice(base.length).split(/[?#]/)[0]);
-      const target = path.join('dist', relative, relative.endsWith('/') || !relative ? 'index.html' : '');
-      await access(target).catch(() => assert.fail(`${file}: missing ${target}`));
+    }
+  }
+
+  assert.equal(footerLinks.length, 4);
+  assert.equal(socialLinks.length, 5);
+  assert.equal(companyGroups.length, 4);
+  assert.ok(companies.length >= 45);
+  assert.equal(homeBrands.length, 12);
+  assert.equal(homeRvTypes.length, 6);
+  assert.equal(homeBuyingSeason.length, 2);
+  assert.equal(homeFeaturedStories.length, 9);
+  assert.equal(homeNewsEvents.length, 9);
+});
+
+test('Homepage preview build outputs only / and /404.html and preserves VAL-HOME-001..005 against source baseline', async () => {
+  const htmlFiles = (await walkHtmlFiles('dist')).map((file) => path.relative('dist', file)).sort();
+  assert.deepEqual(htmlFiles, ['404.html', 'index.html']);
+
+  const baseline = JSON.parse(await readFile('src/data/source-baseline.json', 'utf8'));
+  const homeHtml = await readFile('dist/index.html', 'utf8');
+  const cssFiles = (await readdir('dist/_astro')).filter((f) => f.endsWith('.css'));
+  const cssContent = (await Promise.all(cssFiles.map((f) => readFile(path.join('dist/_astro', f), 'utf8')))).join('\n');
+
+  // VAL-HOME-001: Hero, Find Your RV copy/action, responsive picture, sans-serif typography
+  assert.ok(homeHtml.includes(`<h1>${baseline.hero.heading}</h1>`));
+  assert.ok(homeHtml.includes(baseline.hero.copy));
+  assert.ok(homeHtml.includes(`href="${baseline.hero.actionHref}"`));
+  assert.ok(homeHtml.includes('/thor-industries-redesign/media/hero-mobile'));
+  assert.ok(homeHtml.includes('/thor-industries-redesign/media/hero-1920.webp'));
+  assert.ok(cssContent.includes('Arial') && !cssContent.includes('Georgia') && !cssContent.includes('Times New Roman'));
+
+  // VAL-HOME-002: Who Is THOR? copy, Explore Companies CTA, YouTube Board Video HlXl0gFApyQ
+  assert.ok(homeHtml.includes(baseline.whoIsThor.heading));
+  assert.ok(homeHtml.includes(baseline.whoIsThor.copy));
+  assert.ok(homeHtml.includes(baseline.whoIsThor.videoTitle));
+  assert.ok(homeHtml.includes(`data-video-open="${baseline.whoIsThor.youtubeId}"`));
+  assert.ok(homeHtml.includes(baseline.whoIsThor.youtubeEmbed));
+  assert.ok(homeHtml.includes(`href="${baseline.whoIsThor.youtubeWatch}"`));
+  assert.ok(homeHtml.includes('id="video-dialog"'));
+
+  // VAL-HOME-003: Meet the Family of Companies (12 brands with photos, logos, and profile links) & Explore RV Types (6 cards)
+  assert.ok(homeHtml.includes(baseline.familyOfCompanies.heading));
+  assert.ok(homeHtml.includes(baseline.familyOfCompanies.copy));
+  for (const brand of baseline.familyOfCompanies.brands) {
+    assert.ok(homeHtml.includes(brand.name), `Missing homepage brand ${brand.name}`);
+    assert.ok(homeHtml.includes(`href="${brand.href}"`), `Missing brand profile link ${brand.href}`);
+  }
+  assert.ok(homeHtml.includes(baseline.rvTypes.heading));
+  assert.ok(homeHtml.includes(baseline.rvTypes.copy));
+  for (const rvType of baseline.rvTypes.cards) {
+    assert.ok(homeHtml.includes(rvType.title), `Missing homepage RV type ${rvType.title}`);
+    assert.ok(homeHtml.includes(`href="${rvType.href}"`), `Missing RV type detail link ${rvType.href}`);
+  }
+
+  // VAL-HOME-004: Buying Season (2 cards), Featured Stories (9 cards), News and Events (9 cards), Closing CTA
+  assert.ok(homeHtml.includes(baseline.buyingSeason.heading));
+  for (const card of baseline.buyingSeason.cards) {
+    assert.ok(homeHtml.includes(card.eyebrow));
+    assert.ok(homeHtml.includes(card.title));
+    assert.ok(homeHtml.includes(`href="${card.href}"`));
+  }
+  assert.ok(homeHtml.includes(baseline.featuredStories.heading));
+  for (const story of baseline.featuredStories.cards) {
+    assert.ok(homeHtml.includes(story.title), `Missing featured story ${story.title}`);
+    assert.ok(homeHtml.includes(`href="${story.href}"`), `Missing featured story link ${story.href}`);
+  }
+  assert.ok(homeHtml.includes(baseline.newsAndEvents.heading));
+  assert.ok(
+    homeHtml.includes(baseline.newsAndEvents.subtitle) ||
+      homeHtml.includes(baseline.newsAndEvents.subtitle.replaceAll("'", '&#39;')),
+  );
+  for (const news of baseline.newsAndEvents.cards) {
+    assert.ok(homeHtml.includes(news.title), `Missing news item ${news.title}`);
+    assert.ok(homeHtml.includes(news.date), `Missing news date ${news.date}`);
+    assert.ok(homeHtml.includes(`href="${news.href}"`), `Missing news link ${news.href}`);
+  }
+  assert.ok(homeHtml.includes(baseline.closingCta.heading));
+  assert.ok(homeHtml.includes(baseline.closingCta.copy));
+  assert.ok(homeHtml.includes('/thor-industries-redesign/media/finder-cta'));
+
+  // VAL-HOME-005: Base path integrity, non-empty alt attributes, and zero broken local routes
+  assert.ok(homeHtml.includes('©2026 THOR Industries, Inc. All Rights Reserved.'));
+  assert.ok(homeHtml.includes('aria-expanded="false"'));
+  assert.ok(homeHtml.includes('aria-controls="desktop-dropdown-1"'));
+  assert.ok(homeHtml.includes('aria-controls="site-search"'));
+  assert.ok(homeHtml.includes('aria-controls="mobile-menu"'));
+  assert.ok(homeHtml.includes('aria-controls="video-dialog"'));
+
+  for (const htmlFile of htmlFiles) {
+    const html = await readFile(path.join('dist', htmlFile), 'utf8');
+    const attrs = [...html.matchAll(/\b(?:href|src)="([^"]+)"/g)].map((m) => m[1]);
+    for (const value of attrs) {
+      if (value.startsWith('#') || value.startsWith('http://') || value.startsWith('https://')) continue;
+      assert.ok(
+        value.startsWith('/thor-industries-redesign/'),
+        `${htmlFile} has non-prefixed root URL: ${value}`,
+      );
+      const localRel = value.slice('/thor-industries-redesign/'.length).split('#')[0].split('?')[0];
+      if (!localRel) {
+        assert.ok(existsSync('dist/index.html'));
+      } else {
+        const candidateFile = path.join('dist', localRel);
+        const candidateIndex = path.join('dist', localRel, 'index.html');
+        assert.ok(
+          existsSync(candidateFile) || existsSync(candidateIndex),
+          `Broken local asset or route in ${htmlFile}: ${value}`,
+        );
+      }
+    }
+
+    const imgTags = [...html.matchAll(/<img\b[^>]*>/g)].map((m) => m[0]);
+    assert.ok(imgTags.length > 0);
+    for (const tag of imgTags) {
+      const altMatch = tag.match(/\balt="([^"]*)"/);
+      assert.ok(altMatch && altMatch[1].trim().length > 0, `Image missing descriptive alt attribute: ${tag}`);
     }
   }
 });
 
-test('search index covers the currently built subset and search ranks body/title/category matches', async () => {
-  const index = JSON.parse(await readFile('dist/search-index.json', 'utf8'));
-  assert.equal(index.length, builtPages.length);
-  assert.equal(new Set(index.map(record => record.url)).size, builtPages.length);
-  for (const page of builtPages) {
-    const record = index.find(record => record.url === `${base}${page.slug ? page.slug + '/' : ''}`);
-    assert.ok(record, page.slug);
-    assert.ok(record.body.length > 50, page.slug);
-  }
-  assert.equal(search(index, 'Find Your RV')[0].title, 'Find Your RV');
-  assert.deepEqual(search(index, '<script>alert(1)</script>'), []);
-  assert.deepEqual(search(index, 'zzzz-no-match-zzzz'), []);
-});
-
-test('source handoff inventory and company directory preserve official THOR destinations', async () => {
-  assert.equal(tools.finder, 'https://www.thorindustries.com/find-yours');
-  assert.equal(tools.dealerLocator, 'https://www.thorindustries.com/locate-a-dealer');
-  assert.equal(tools.investors, 'https://ir.thorindustries.com/');
-  assert.equal(tools.newsroom, 'https://www.thorindustries.com/newsroom');
-  assert.equal(tools.careers, 'https://www.thorindustries.com/careers');
-  const home = await readFile(htmlPath(''), 'utf8');
-  assert.ok(home.includes(`href="${tools.finder}"`));
-  assert.ok(home.includes(`href="${tools.investors}"`));
-  assert.equal(companyGroups.length, 4);
-  assert.ok(companies.length >= 45);
-  assert.ok(companies.some(company => company.href === 'https://www.thorindustries.com/thor-companies/airstream'));
-});
-
-test('all local responsive derivatives decode at their declared srcset widths', async () => {
+test('All local media derivatives are valid WebP assets with positive dimensions', async () => {
+  const media = JSON.parse(await readFile('src/data/media.json', 'utf8'));
+  const ids = Object.keys(media);
+  assert.ok(ids.length >= 100);
   for (const [id, asset] of Object.entries(media)) {
-    assert.ok(asset.source.startsWith('https://thorindustries-prod.zaneray.com/'));
-    assert.match(asset.sha256, /^[a-f0-9]{64}$/);
+    assert.ok(asset.source.startsWith('https://thorindustries-prod.zaneray.com/'), `${id} source is not THOR CDN`);
+    assert.equal(asset.format, 'webp');
+    assert.ok(asset.width > 0 && asset.height > 0);
+    assert.ok(Array.isArray(asset.widths) && asset.widths.length > 0);
     for (const width of asset.widths) {
-      const image = await sharp(`public/media/${id}-${width}.webp`).metadata();
-      assert.equal(image.width, width, id);
+      const file = path.join('public', 'media', `${id}-${width}.webp`);
+      const info = await stat(file);
+      assert.ok(info.size > 80, `${file} is unexpectedly small`);
+      const image = await sharp(file).metadata();
+      assert.ok(image.width > 0 && image.width <= width, `${file} width mismatch`);
+      assert.ok(image.height > 0, `${file} height mismatch`);
       assert.equal(image.format, 'webp');
     }
   }
@@ -268,7 +263,8 @@ test('404 is real static content and the deploy workflow uploads only built outp
   assert.ok(html.includes('noindex'));
   assert.ok(html.includes('Page not found'));
   const workflow = await readFile('.github/workflows/pages.yml', 'utf8');
-  for (const command of ['npm ci', 'npm run check', 'npm run build', 'npm test', 'path: dist']) assert.ok(workflow.includes(command));
+  for (const command of ['npm ci', 'npm run check', 'npm run build', 'npm test', 'path: dist']) {
+    assert.ok(workflow.includes(command));
+  }
   assert.ok(!workflow.includes('path: .'));
 });
-

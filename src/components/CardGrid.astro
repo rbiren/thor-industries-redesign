@@ -2,19 +2,47 @@
 import type { Card } from '../data/types';
 import { resolveHref } from '../lib/urls';
 import Media from './Media.astro';
-interface Props { cards: Card[] }
-const { cards } = Astro.props;
+
+interface Props {
+  cards: Card[];
+  className?: string;
+}
+
+const { cards, className = '' } = Astro.props;
 ---
-<div class="card-grid">
-  {cards.map(card => (
-    <article class:list={['content-card', { 'product-card': card.image && ['travel-trailer', 'fifth-wheel', 'lightweight', 'toy-hauler', 'class-a', 'class-b', 'class-c'].includes(card.image), 'logo-card': card.image?.startsWith('logo-') }]}>
+<div class:list={['card-grid', className]}>
+  {cards.map((card) => (
+    <article
+      class:list={[
+        'content-card',
+        {
+          'product-card':
+            card.image &&
+            ['travel-trailer', 'fifth-wheel', 'lightweight', 'toy-hauler', 'class-a', 'class-b', 'class-c'].includes(
+              card.image,
+            ),
+          'logo-card': card.image?.startsWith('logo-'),
+        },
+      ]}
+    >
       <a class="card-link" href={resolveHref(card.href)}>
-        {card.image && <div class="card-image"><Media id={card.image} alt="" sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw" /></div>}
+        {card.image && (
+          <div class="card-image">
+            <Media
+              id={card.image}
+              alt={card.imageAlt || card.title}
+              sizes="(max-width: 700px) 100vw, (max-width: 1100px) 50vw, 33vw"
+            />
+          </div>
+        )}
         <div class="card-copy">
           {card.eyebrow && <p class="eyebrow">{card.eyebrow}</p>}
           <h3>{card.title}</h3>
           {card.text && <p>{card.text}</p>}
-          <span class="text-link">{card.action || 'Learn More'}<span aria-hidden="true">↗</span></span>
+          <span class="text-link">
+            {card.action || 'Learn More'}
+            <span aria-hidden="true">↗</span>
+          </span>
         </div>
       </a>
     </article>

@@ -754,6 +754,406 @@
     ],
     "sha256": "cd2578561a7ec49eb81c22607aaab64f7e27b169dc81ecd4ff77f00abee40cce"
   },
+  "logo-crossroads": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/28ef225710c3134cd74998468386071bda7c9b5d_crossroads-logo-dark.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 253,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "b608712075f9d71531e9a10bcdce441130f4737347463c7d62595036755a8f76"
+  },
+  "logo-dutchmen": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/66d1bbdbe084e74d192b622d9c834f7fd600e050_dutchmen-logo-dark.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 106,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "3fcf7572b8b5275352c0691f6db91de619b6789d893fa0aa545f2c4569cb5527"
+  },
+  "brand-crossroads": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/c9ac6bb9-43b0-4dfa-8eb6-83dcb367618b_DDL_9573+%281%29.jpg?auto=format,compress&w=1200",
+    "format": "webp",
+    "width": 1200,
+    "height": 800,
+    "widths": [
+      480,
+      960,
+      1200
+    ],
+    "sha256": "859ad91d9793203e8921ed7d7a81f86d4abc090353c98bffa0e5b7aa4cc104ff"
+  },
+  "brand-dutchmen": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/b3b80fcc-9e1e-448f-bbec-eea24bca0d82__MCW6754_dutchmen_kodiak_ultimate_fifthwheel_lake_lakeside_evergreen_trees_water_waterfront_mountian_rocks_wood_firewood_jumping_swimming_leaping_family_fun_bonding_swimsuits_forest_woods_pacific_north_west.jpg?auto=format,compress&w=1200",
+    "format": "webp",
+    "width": 1200,
+    "height": 800,
+    "widths": [
+      480,
+      960,
+      1200
+    ],
+    "sha256": "613bc742d2a095737e4de808b354f6778afa1a07b65b0a63d41297148170abc9"
+  },
+  "brand-entegra": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/23cfd0f0-2e99-4497-b1b3-93c30be15f10_EntegraCoach_Louisiana.jpg?auto=format,compress&w=1200",
+    "format": "webp",
+    "width": 1200,
+    "height": 800,
+    "widths": [
+      480,
+      960,
+      1200
+    ],
+    "sha256": "bca5534b3f06ce2856d248197400579d402d51d8fad3fed241a422a7cf689ea4"
+  },
+  "brand-heartland": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/aRJIGbpReVYa4URy_20240413_04881.jpg?auto=format,compress&w=1200",
+    "format": "webp",
+    "width": 1200,
+    "height": 800,
+    "widths": [
+      480,
+      960,
+      1200
+    ],
+    "sha256": "9246d3ad2d14d1da63521dba0bbf8c488c16e44dd9be7dfde099899eaef18f9a"
+  },
+  "brand-jayco": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/edce3cb8-fb95-4aac-9132-48a74d4df325_Jayco_Eagle.jpg?auto=format,compress&w=1200",
+    "format": "webp",
+    "width": 1200,
+    "height": 800,
+    "widths": [
+      480,
+      960,
+      1200
+    ],
+    "sha256": "9435e8a43006610a88022e1a4169ea787427e8c02aba41f2b4ed422c6482ee00"
+  },
+  "brand-keystone": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/92b7e2b3-ff52-4dc4-a0b4-96bd4d8fcfb8_Keystone+Passport.jpg?auto=format,compress&w=1200",
+    "format": "webp",
+    "width": 1200,
+    "height": 800,
+    "widths": [
+      480,
+      960,
+      1200
+    ],
+    "sha256": "8031f905787c630eb9bc4956357c25fd20e556274eb26865cd0afc5e43d9ba74"
+  },
+  "brand-kz": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/cb90d5b4-dcdb-47c7-8b79-9d44a6eeea11_20220608_06731_americanflag_exterior_mountains_bikes_lake_wide.jpg?auto=format,compress&w=1200",
+    "format": "webp",
+    "width": 1200,
+    "height": 800,
+    "widths": [
+      480,
+      960,
+      1200
+    ],
+    "sha256": "c8f384060dde588f44822084ddb40d264d2243a31d83a3404a5dbed5d3634ff2"
+  },
+  "brand-open-range": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/aRI987pReVYa4UOi_20230604_02938.jpg?auto=format,compress&w=1200",
+    "format": "webp",
+    "width": 1200,
+    "height": 800,
+    "widths": [
+      480,
+      960,
+      1200
+    ],
+    "sha256": "f0c4ea7fcac9a313e413a9503034b582017be56a4d628e9bd04a06f8666dcb9a"
+  },
+  "brand-tmc": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/5d03dfa1-d9d3-49e0-af51-6e363f3d1a0e_20230607_02278.jpg?auto=format,compress&w=1200",
+    "format": "webp",
+    "width": 1200,
+    "height": 800,
+    "widths": [
+      480,
+      960,
+      1200
+    ],
+    "sha256": "dbbd0357383c0280ddd5e2aeb8d1c237cb5cdf600ade0457b8f48031892e9ff7"
+  },
+  "brand-tiffin": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/aNBjUp5xUNkB07xS_20250617-3178.jpg?auto=format,compress&w=1200",
+    "format": "webp",
+    "width": 1200,
+    "height": 800,
+    "widths": [
+      480,
+      960,
+      1200
+    ],
+    "sha256": "01d1ec7eac5881027012d5b3f351f8049c2c2920b032b3b16b94dd113b0a4f88"
+  },
+  "brand-venture": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/0844dbff-b00e-43c4-84d6-60764141b9a6_venture_hero_top_banner.jpg?auto=format,compress&w=1200",
+    "format": "webp",
+    "width": 1200,
+    "height": 800,
+    "widths": [
+      480,
+      960,
+      1200
+    ],
+    "sha256": "4d57fc2bf7d8b893e5129d69d8cde652e55e6cf5725ee0119c7b04808be94fbf"
+  },
+  "home-type-travel-trailer": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Zk4_FSol0Zci9XdE_20230605_04296.jpg?auto=compress,format&rect=0,593,3413,3944&w=960&h=1110",
+    "format": "webp",
+    "width": 960,
+    "height": 1109,
+    "widths": [
+      480,
+      960
+    ],
+    "sha256": "7058ee0f69a6bb7623858dddf7d114728a4d3061b67630397b2b81dcd3f159b5"
+  },
+  "home-type-toy-hauler": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/7676ee61-6563-493e-a571-e88fa2b010d5_20220602_02494+%281%29.jpg?auto=compress,format&rect=1045,0,2953,3413&w=960&h=1110",
+    "format": "webp",
+    "width": 960,
+    "height": 1110,
+    "widths": [
+      480,
+      960
+    ],
+    "sha256": "bc69ac34246f154445712faad50e75c2193d24025eb32547a966c7306251be70"
+  },
+  "home-type-fifth-wheel": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Zk4_ECol0Zci9XdC_20230610_00172.jpg?auto=compress,format&rect=0,753,3413,3944&w=960&h=1110",
+    "format": "webp",
+    "width": 960,
+    "height": 1109,
+    "widths": [
+      480,
+      960
+    ],
+    "sha256": "b5aeb6aa465662ea12c0f9ddba617e772a942079dd12c061a46c236ec156cde6"
+  },
+  "home-type-class-a": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/6733cd09-5d20-4a07-98c0-557c36c7ed7f_Screenshot+2024-01-19+at+12.15.31%E2%80%AFPM.png?auto=compress,format&rect=186,0,1076,1244&w=960&h=1110",
+    "format": "webp",
+    "width": 960,
+    "height": 1110,
+    "widths": [
+      480,
+      960
+    ],
+    "sha256": "4e8f7f1bb88c2653787787dc616f19aec2aa012162ff31761697b041cda0adbe"
+  },
+  "home-type-class-b": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Zk4_-yol0Zci9XdT_20230611_01387-1-.jpg?auto=compress,format&rect=806,0,2953,3413&w=960&h=1110",
+    "format": "webp",
+    "width": 960,
+    "height": 1110,
+    "widths": [
+      480,
+      960
+    ],
+    "sha256": "2d452a78ec07ed42cf05b5ff3864551c8378d857eea00d33a322020857c5e4e9"
+  },
+  "home-type-class-c": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Zk49Yyol0Zci9XcR_20230607_01801.jpg?auto=compress,format&rect=44,1227,3363,3886&w=960&h=1110",
+    "format": "webp",
+    "width": 960,
+    "height": 1109,
+    "widths": [
+      480,
+      960
+    ],
+    "sha256": "a1cc4e01c7632bbd8ab2cf32f2e4e025940a014928bbe8c60b633f4fd10b5205"
+  },
+  "buying-best-time": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Z3aTT5bqstJ98-dm_Photo4BuyingSeasonContent.jpg?auto=format%2Ccompress&rect=123%2C0%2C955%2C955&w=1000&h=1000",
+    "format": "webp",
+    "width": 1000,
+    "height": 1000,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "9a0ab1f49eb33585a9aff98b5c1166b46f8680a8b82e081389a29c28111a12d0"
+  },
+  "buying-next-rv": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Z32IkZbqstJ99Ja2_8.jpg?auto=format%2Ccompress&rect=542%2C0%2C2427%2C2427&w=1000&h=1000",
+    "format": "webp",
+    "width": 1000,
+    "height": 1000,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "afc1ebfc99d8648e812370131c5a327693a75e8be201102e1d4c6b702d4c3a32"
+  },
+  "story-trackside": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/aBtkXCdWJ-7kRtaY_PHOTO10-THORMOBILESERVICE.jpg?auto=format%2Ccompress&rect=0%2C0%2C4521%2C3014&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "10e977242a4fffc242719a249ed2bbbe1711338d5a94d4ce79a2794282eba1aa"
+  },
+  "story-ready-to-buy": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/660423f8-d30e-4844-bcb5-f219b4058c79_DSC07360.jpg?auto=compress,format&rect=0,20,1225,817&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "dccf3fae2eccf415d4c3856a18d781a548c1aaa4657d2a1a11443ee739cce576"
+  },
+  "story-damberg-tour": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Z_P_EndAxsiBwaiI_Photo12OurRVandTruck.JPG?auto=format%2Ccompress&rect=0%2C77%2C3233%2C2155&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "f0181379d1b9723336571f24c8340192b5effe31c1cfbc4435cfef9fac34af12"
+  },
+  "story-balloon-fiesta": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/97cf41b6-6682-44ea-b64f-b35ab93072db_23_10_06_THOR_Balloons_IF_4E6A4553.jpeg?auto=compress,format&rect=2,0,7965,5310&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "147d129b3d98f2ba506f2c65896b9368f5bf66fc843ec1f26ac9956c4da98b15"
+  },
+  "story-van-life": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/599d5124-6937-45b3-927d-59054a80505b_20_10_28_thor_kalen_ma_6353+%281%29.jpg?auto=compress,format&rect=0,0,4000,2667&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "ab6e7fc5f81a5db4c609d414c5e8b4817097d38c4ac6cd811318aeb2dababc33"
+  },
+  "story-must-have": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/a7146787-529f-4fde-b4ae-ce2aecddc182_thor22.jpg?auto=compress,format&rect=0,153,7185,4790&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "b6f53f5a01c5fde22aed220764e99d8f42e6a6adc50390f5d483c5b2cb3d56ae"
+  },
+  "news-hybrid-chassis": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/ZvB3NbVsGrYSvp5Y__N2A2392COBCOBG.jpg?auto=format,compress&rect=1392,0,6349,4762&w=1000&h=750",
+    "format": "webp",
+    "width": 1000,
+    "height": 750,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "f836737cdbc73b904935b4c3e440d74747585cdd9f1c83e8eb0b60a152f9bae2"
+  },
+  "news-estream": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/d48b19b9-f841-436c-9af8-06a94b1da217_image.jpeg?auto=compress,format&rect=0,0,1800,1200&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "341b4a7752fc36c66fd2551bedbd4ebbb258b13cddab3128dcb2f0fa9e3a4e3d"
+  },
+  "news-carplay": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/bf603bd3-93b1-4398-b80a-a1f0dd1b9235_20220608_01388_driving_exterior_river_bridge_forrest.jpg?auto=compress,format&rect=0,0,5120,3413&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "f7fe462cf415fc074d7475f63805dcceb39a14cdd28e260b0d91e97b5cea8a7d"
+  },
+  "news-ev-charging": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/79262fae-d37f-4e4b-91bc-7cae43cc77fd_Image+1_+Charging+Station.jpg?auto=compress,format&rect=605,0,6480,4320&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "d5afff078f96794b9bef84b314f0857e3d3cff01cc0bef23eb1236196fe0902c"
+  },
+  "news-tunnel": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/49fb5249-882e-4b5c-b3a4-48a0d4a79442_20220612_00126.jpg?auto=compress,format&rect=0,0,5120,3413&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "3cf3fd611eda841f899d7cb11bfab33c74782843c3860fd825e365faeeb50f64"
+  },
+  "finder-cta": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Zli-76WtHYXtT8a__20230614_01889.jpg?auto=format%2Ccompress&rect=0%2C991%2C5120%2C2133&w=1920&h=800",
+    "format": "webp",
+    "width": 1920,
+    "height": 800,
+    "widths": [
+      480,
+      960,
+      1600,
+      1920
+    ],
+    "sha256": "66a3292ed96f4299e9300ed14bd890ed3f0196a610cfea51cef938c73e74b8c6"
+  },
+  "finder-cta-mobile": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Zli-76WtHYXtT8a__20230614_01889.jpg?auto=format%2Ccompress&rect=392%2C403%2C3309%2C2421&w=820&h=600",
+    "format": "webp",
+    "width": 820,
+    "height": 600,
+    "widths": [
+      480,
+      820
+    ],
+    "sha256": "6daee96ef6ec774ef0b4fa52f00641105061c950f210e477891562b8ec2b038c"
+  },
   "logo-airstream": {
     "source": "https://thorindustries-prod.zaneray.com/cms/images/aJpXnaTt2nPbaL14_airstream-color-square.png?auto=compress,format&w=536",
     "format": "webp",

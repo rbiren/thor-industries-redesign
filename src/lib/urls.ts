@@ -3,13 +3,18 @@ import {
   SITE_ORIGIN,
   getCanonicalRoute,
 } from '../data/routes.ts';
+import type { NavGroup, NavItem } from '../data/types.ts';
 
 const metaEnv = (import.meta as ImportMeta & { env?: { BASE_URL?: string } }).env;
-export const base = metaEnv?.BASE_URL || BASE_PATH;
+export const base = (metaEnv?.BASE_URL || BASE_PATH).replace(/\/?$/, '/');
 
 export function siteUrl(target = '/') {
   if (/^(https?:|mailto:|tel:|#)/.test(target)) return target;
   return `${base}${target.replace(/^\/+/, '')}`;
+}
+
+export function assetUrl(target = '') {
+  return siteUrl(target);
 }
 
 export function routeUrl(slug: string) {
@@ -26,6 +31,15 @@ export function routeOutputFile(slug: string, outDir = 'dist') {
   const cleanOutDir = outDir.replace(/\/+$/, '');
   const clean = slug.replace(/^\/+|\/+$/g, '');
   return clean ? `${cleanOutDir}/${clean}/index.html` : `${cleanOutDir}/index.html`;
+}
+
+export function isBuiltRoute(slugOrPath: string): boolean {
+  const route = getCanonicalRoute(slugOrPath);
+  return Boolean(route?.built);
+}
+
+export function isExternalHref(href: string): boolean {
+  return /^https?:\/\//i.test(href);
 }
 
 export function routeHref(slug: string, options: { forceLocal?: boolean } = {}) {
@@ -47,7 +61,12 @@ export function resolveHref(target: string, options: { forceLocal?: boolean } = 
   return siteUrl(target);
 }
 
+export function navItemHref(item: NavItem | NavGroup): string {
+  if (item.href) return resolveHref(item.href);
+  if (item.slug !== undefined) return routeHref(item.slug);
+  return siteUrl('/');
+}
+
 export function sectionId(title: string, index: number) {
   return `section-${index}-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '')}`;
 }
-

@@ -7,13 +7,25 @@ interface Props {
   class?: string;
   sizes?: string;
   eager?: boolean;
+  loading?: 'eager' | 'lazy';
+  fetchpriority?: 'high' | 'low' | 'auto';
 }
-const { id, alt, class: className, sizes = '(max-width: 700px) 100vw, 50vw', eager = false } = Astro.props;
+const {
+  id,
+  alt,
+  class: className,
+  sizes = '(max-width: 700px) 100vw, 50vw',
+  eager = false,
+  loading,
+  fetchpriority,
+} = Astro.props;
 const media = metadata[id as keyof typeof metadata];
 if (!media) throw new Error(`Unknown local media: ${id}`);
 const src = siteUrl(`media/${id}-${media.widths.at(-1)}.webp`);
 const srcset = media.widths.map(width => `${siteUrl(`media/${id}-${width}.webp`)} ${width}w`).join(', ');
+const resolvedLoading = loading ?? 'eager';
+const resolvedPriority = fetchpriority ?? (eager ? 'high' : 'auto');
 ---
 <img src={src} srcset={srcset} sizes={sizes} alt={alt} class={className}
-  width={media.width} height={media.height} loading={eager ? 'eager' : 'lazy'}
-  fetchpriority={eager ? 'high' : 'auto'} decoding="async" />
+  width={media.width} height={media.height} loading={resolvedLoading}
+  fetchpriority={resolvedPriority} decoding="async" />

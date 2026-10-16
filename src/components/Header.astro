@@ -1,61 +1,215 @@
 ---
-import { navigation } from '../data/navigation';
-import { resolveHref, siteUrl } from '../lib/urls';
 import Media from './Media.astro';
-const current = Astro.url.pathname;
+import { navigation } from '../data/navigation';
+import { pages } from '../data/pages';
+import { companies } from '../data/companies.mjs';
+import { homeFeaturedStories, homeNewsEvents, stories } from '../data/stories.mjs';
+import { isBuiltRoute, isExternalHref, navItemHref, routeHref } from '../lib/urls';
+import type { NavGroup, NavItem } from '../data/types';
+
+interface Props {
+  currentPath?: string;
+}
+
+const { currentPath = '/' } = Astro.props;
+const norm = (path: string) => (path === '/' ? '/' : path.replace(/\/?$/, '/'));
+const active = norm(currentPath);
+const itemHref = (item: NavItem | NavGroup) => navItemHref(item);
+const isItemActive = (item: NavItem | NavGroup) =>
+  Boolean(item.slug && isBuiltRoute(item.slug) && norm(`/${item.slug}/`) === active);
+const isGroupActive = (group: NavGroup) =>
+  isItemActive(group) || Boolean(group.items?.some((item) => isItemActive(item)));
+
+const rawSearchEntries = [
+  ...pages.map((page) => ({
+    title: page.title,
+    category: page.label,
+    text: [
+      page.description,
+      ...(page.lead ?? []),
+      ...page.sections.flatMap((s) => [s.title, ...(s.text ?? [])]),
+    ].join(' '),
+    href: routeHref(page.slug),
+    external: !isBuiltRoute(page.slug),
+  })),
+  ...companies.map((company) => ({
+    title: company.name,
+    category: company.group,
+    text: `${company.name} ${company.group} THOR family company`,
+    href: company.href,
+    external: true,
+  })),
+  ...[...homeFeaturedStories, ...stories, ...homeNewsEvents].map((item) => ({
+    title: item.title,
+    category: item.eyebrow || 'Stories & News',
+    text: `${item.title} ${item.text || ''} ${item.eyebrow || ''}`,
+    href: item.href,
+    external: true,
+  })),
+];
+
+const seenHrefs = new Set<string>();
+const searchEntries = rawSearchEntries.filter((entry) => {
+  if (seenHrefs.has(entry.href)) return false;
+  seenHrefs.add(entry.href);
+  return true;
+});
 ---
-<a class="skip-link" href="#main">Skip to main content</a>
-<header class="site-header">
-  <a class="brand" href={siteUrl('/')} aria-label="THOR Industries home">
-    <Media id="thor-logo" alt="THOR Industries" sizes="132px" eager />
-  </a>
-  <nav class="desktop-nav" aria-label="Main navigation">
-    {navigation.map(item => item.links ? (
-      <details class="nav-group">
-        <summary>{item.title}<span class="chevron" aria-hidden="true"></span></summary>
-        <div class="nav-panel">
-          <div class="nav-panel-inner">
-            <p class="nav-panel-title">{item.title}</p>
-            <div class="nav-panel-links">
-              {item.links.map(link => {
-                const href = resolveHref(link.href);
-                return <a href={href} aria-current={current === href ? 'page' : undefined}>{link.title}<span aria-hidden="true">↗</span></a>;
+<header class="site-header" data-header>
+  <div class="header-inner">
+    <a class="brand-link" href={routeHref('')} aria-label="THOR Industries home">
+      <Media id="thor-logo" alt="THOR Industries" sizes="150px" loading="eager" />
+    </a>
+
+    <nav class="desktop-nav" aria-label="Primary navigation">
+      {navigation.map((group, idx) =>
+        group.items ? (
+          <details class="nav-dropdown" data-nav-dropdown>
+            <summary
+              class:list={['nav-link', { active: isGroupActive(group) }]}
+              aria-expanded="false"
+              aria-controls={`desktop-dropdown-${idx}`}
+            >
+              <span>{group.label}</span>
+              <svg viewBox="0 0 12 8" aria-hidden="true">
+                <path d="M1 1.5 6 6.5 11 1.5" />
+              </svg>
+            </summary>
+            <div class="dropdown-panel" id={`desktop-dropdown-${idx}`}>
+              {group.items.map((item) => {
+                const href = itemHref(item);
+                const external = isExternalHref(href);
+                return (
+                  <a
+                    href={href}
+                    class:list={[{ active: isItemActive(item) }]}
+                    aria-current={isItemActive(item) ? 'page' : undefined}
+                  >
+                    <span>{item.label}</span>
+                    {external && <span aria-hidden="true">↗</span>}
+                  </a>
+                );
               })}
             </div>
-          </div>
-        </div>
-      </details>
-    ) : <a href={resolveHref(item.href!)} aria-current={current === resolveHref(item.href!) ? 'page' : undefined}>{item.title}</a>)}
-  </nav>
-  <div class="header-actions">
-    <button class="icon-button" data-search-open aria-label="Search this site" hidden>
-      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.6"/><path d="m16 16 5 5" stroke="currentColor" stroke-width="1.6"/></svg>
-    </button>
-    <button class="menu-button" data-menu-open hidden>Menu <span aria-hidden="true">☰</span></button>
+          </details>
+        ) : (
+          <a
+            class:list={['nav-link', { active: isGroupActive(group) }]}
+            href={itemHref(group)}
+            aria-current={isGroupActive(group) ? 'page' : undefined}
+          >
+            <span>{group.label}</span>
+          </a>
+        ),
+      )}
+    </nav>
+
+    <div class="header-actions">
+      <button
+        class="icon-button"
+        type="button"
+        data-search-open
+        aria-label="Open site search"
+        aria-expanded="false"
+        aria-controls="site-search"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <circle cx="10.5" cy="10.5" r="6.5" />
+          <path d="m15.5 15.5 5 5" />
+        </svg>
+        <span>Search</span>
+      </button>
+      <button
+        class="icon-button menu-button"
+        type="button"
+        data-menu-open
+        aria-label="Open navigation menu"
+        aria-expanded="false"
+        aria-controls="mobile-menu"
+      >
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path d="M3 6h18M3 12h18M3 18h18" />
+        </svg>
+        <span>Menu</span>
+      </button>
+    </div>
   </div>
+
+  <dialog class="search-dialog" id="site-search" aria-label="Search THOR Industries">
+    <div class="dialog-shell">
+      <div class="dialog-bar">
+        <p class="eyebrow">Site Search</p>
+        <button class="icon-button" type="button" data-search-close aria-label="Close search">
+          Close
+        </button>
+      </div>
+      <form class="search-form" role="search" data-search-form>
+        <label class="sr-only" for="thor-search-input">Search THOR pages, companies, and stories</label>
+        <div class="search-field">
+          <input
+            id="thor-search-input"
+            type="search"
+            name="q"
+            placeholder="Search RV types, Airstream, towing, sustainability, stories..."
+            autocomplete="off"
+            data-search-input
+          />
+          <button class="button" type="submit">Search</button>
+        </div>
+      </form>
+      <p class="search-status" data-search-status aria-live="polite">
+        Search across all 23 THOR sections, family companies, and featured stories.
+      </p>
+      <div class="search-results" data-search-results></div>
+    </div>
+    <script type="application/json" is:inline data-search-index set:html={JSON.stringify(searchEntries)} />
+  </dialog>
+
+  <dialog class="menu-dialog" id="mobile-menu" aria-label="Site navigation">
+    <div class="dialog-shell">
+      <div class="dialog-bar">
+        <a class="brand-link" href={routeHref('')} aria-label="THOR Industries home">
+          <Media id="thor-logo" alt="THOR Industries" sizes="140px" loading="eager" />
+        </a>
+        <button class="icon-button" type="button" data-menu-close aria-label="Close navigation menu">
+          Close
+        </button>
+      </div>
+      <nav class="mobile-nav" aria-label="Mobile navigation">
+        {navigation.map((group, idx) =>
+          group.items ? (
+            <details class="mobile-group" data-mobile-group>
+              <summary aria-expanded="false" aria-controls={`mobile-group-panel-${idx}`}>
+                {group.label}
+              </summary>
+              <div id={`mobile-group-panel-${idx}`}>
+                {group.items.map((item) => {
+                  const href = itemHref(item);
+                  const external = isExternalHref(href);
+                  return (
+                    <a
+                      href={href}
+                      class:list={[{ active: isItemActive(item) }]}
+                      aria-current={isItemActive(item) ? 'page' : undefined}
+                    >
+                      <span>{item.label}</span>
+                      {external && <span aria-hidden="true">↗</span>}
+                    </a>
+                  );
+                })}
+              </div>
+            </details>
+          ) : (
+            <a
+              class:list={['mobile-direct', { active: isGroupActive(group) }]}
+              href={itemHref(group)}
+              aria-current={isGroupActive(group) ? 'page' : undefined}
+            >
+              <span>{group.label}</span>
+            </a>
+          ),
+        )}
+      </nav>
+    </div>
+  </dialog>
 </header>
-<dialog id="mobile-menu" class="menu-dialog" aria-labelledby="menu-title">
-  <div class="dialog-bar"><h2 id="menu-title">Explore THOR</h2><button class="icon-button" data-menu-close aria-label="Close menu">✕</button></div>
-  <nav aria-label="Mobile navigation">
-    {navigation.map(item => item.links ? (
-      <details class="mobile-group">
-        <summary>{item.title}<span aria-hidden="true">+</span></summary>
-        {item.links.map(link => {
-          const href = resolveHref(link.href);
-          return <a href={href} aria-current={current === href ? 'page' : undefined}>{link.title}</a>;
-        })}
-      </details>
-    ) : <a class="mobile-direct" href={resolveHref(item.href!)} aria-current={current === resolveHref(item.href!) ? 'page' : undefined}>{item.title}<span aria-hidden="true">↗</span></a>)}
-  </nav>
-  <button class="button button-dark" data-search-open>Search this site</button>
-</dialog>
-<dialog id="site-search" class="search-dialog" aria-labelledby="search-title" data-index-url={siteUrl('search-index.json')}>
-  <div class="dialog-bar"><h2 id="search-title">What are you looking for?</h2><button class="icon-button" data-search-close aria-label="Close search">✕</button></div>
-  <form role="search" id="search-form">
-    <label for="search-query">Search this site</label>
-    <div class="search-field"><input id="search-query" name="q" type="search" placeholder="Try RV types, stories, sustainability…" autocomplete="off" maxlength="160" /><button type="submit" class="button button-dark">Search</button></div>
-  </form>
-  <p id="search-status" role="status" aria-live="polite">Search stays in your browser.</p>
-  <ul id="search-results" class="search-results"></ul>
-</dialog>
-<noscript><nav class="no-js-nav" aria-label="All pages">{navigation.flatMap(item => item.links ?? [item]).map(link => <a href={resolveHref(link.href!)}>{link.title}</a>)}</nav></noscript>

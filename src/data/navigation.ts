@@ -1,78 +1,129 @@
-import { categories } from './stories.mjs';
+import type { NavGroup } from './types.ts';
 import { sourceHandoffs } from './routes.ts';
-import { routeHref } from '../lib/urls.ts';
 
-export interface NavLink {
-  title: string;
-  href: string;
-  slug?: string;
-}
-
-export interface NavItem {
-  title: string;
-  href?: string;
-  slug?: string;
-  links?: NavLink[];
-}
-
-const routeLink = (title: string, slug: string): NavLink => ({
-  title,
-  slug,
-  href: routeHref(slug),
-});
-
-export const navigation: NavItem[] = [
-  { title: 'RV Finder', href: sourceHandoffs.rvFinder },
+export const navigation: NavGroup[] = [
   {
-    title: 'About THOR',
-    links: [
-      routeLink('About Us', 'about-us'),
-      routeLink('Our History', 'our-history'),
-      routeLink('THOR Leadership', 'thor-leadership'),
-      routeLink('Innovation', 'innovation'),
-      routeLink('Operations', 'operations'),
-      { title: 'Investors', href: sourceHandoffs.investors },
-      { title: 'Newsroom', href: sourceHandoffs.newsroom },
+    label: 'RV Finder',
+    href: sourceHandoffs.rvFinder,
+    external: true,
+  },
+  {
+    label: 'Stories',
+    slug: 'stories',
+    items: [
+      { label: 'View All', slug: 'stories' },
+      { label: 'Learn', slug: 'stories/category/learn' },
+      { label: 'Recipes', slug: 'stories/category/recipes' },
+      { label: 'On the Road', slug: 'stories/category/on-the-road' },
+      { label: 'Travel', slug: 'stories/category/travel' },
+      { label: 'Video', slug: 'stories/category/video' },
     ],
   },
   {
-    title: 'Our Companies',
-    links: [
-      routeLink('Global Family of Companies', 'global-family-of-companies'),
-      routeLink('European Companies', 'european-companies'),
-      routeLink('Hymer', 'hymer'),
-      routeLink('Supply Companies', 'supply-companies'),
-      routeLink('Airxcel', 'airxcel'),
+    label: 'RV Basics',
+    slug: 'rv-types',
+    items: [
+      { label: 'Find Your RV', href: sourceHandoffs.rvFinder, external: true },
+      { label: 'RV Types', slug: 'rv-types' },
+      { label: 'Trip Calculator', href: sourceHandoffs.tripCalculator, external: true },
+      { label: 'Financing Your RV', slug: 'financing-your-rv' },
+      { label: 'Towing Guide', slug: 'towing-guide' },
+      { label: 'FAQ', slug: 'faq' },
     ],
   },
   {
-    title: 'RV Basics',
-    links: [
-      { title: 'RV Finder', href: sourceHandoffs.rvFinder },
-      routeLink('RV Types', 'rv-types'),
-      routeLink('RV FAQ', 'rv-faq'),
-      { title: 'Dealer Locator', href: sourceHandoffs.dealerLocator },
+    label: 'About THOR',
+    slug: 'innovation',
+    items: [
+      { label: 'Innovation', slug: 'innovation' },
+      { label: 'History', slug: 'history' },
+      { label: 'Community', slug: 'community' },
+      { label: 'News & Events', slug: 'news-events' },
+      { label: 'Careers', slug: 'careers' },
     ],
   },
   {
-    title: 'Stories',
-    links: [
-      routeLink('View All', 'stories'),
-      ...categories.map(category => routeLink(category.title, `stories/${category.slug}`)),
+    label: 'THOR Companies',
+    slug: 'thor-companies',
+  },
+  {
+    label: 'Sustainability',
+    slug: 'sustainability',
+    items: [
+      { label: 'Home', slug: 'sustainability' },
+      { label: 'Report', slug: 'sustainability-report' },
+      { label: 'Innovation', slug: 'innovation' },
+      { label: 'Environmental', slug: 'sustainability-environmental' },
+      { label: 'Social Responsibility', slug: 'social-responsibility' },
+      { label: 'Governance', slug: 'governance' },
+      { label: 'Supply Management', slug: 'supply-management' },
     ],
   },
   {
-    title: 'Sustainability',
-    links: [
-      routeLink('Home', 'sustainability'),
-      { title: 'Report', href: sourceHandoffs.sustainabilityReport },
-      routeLink('Innovation', 'innovation'),
-      routeLink('Environmental', 'environmental'),
-      routeLink('Social Responsibility', 'social-responsibility'),
-      routeLink('Governance', 'governance'),
-      { title: 'Supply Management', href: sourceHandoffs.supplyManagement },
-    ],
+    label: 'Investors',
+    href: sourceHandoffs.investors,
+    external: true,
   },
-  { title: 'Investors', href: sourceHandoffs.investors },
 ];
 
+export const footerGroups: NavGroup[] = [
+  {
+    label: 'Explore',
+    items: [
+      { label: 'THOR Companies', slug: 'thor-companies' },
+      { label: 'RV Finder', href: sourceHandoffs.rvFinder, external: true },
+      { label: 'Stories', slug: 'stories' },
+      { label: 'Investors', href: sourceHandoffs.investors, external: true },
+      { label: 'Sustainability', slug: 'sustainability' },
+      { label: 'Contact Us', href: sourceHandoffs.contact, external: true },
+    ],
+  },
+  {
+    label: 'RV Basics',
+    items: [
+      { label: 'Find Your RV', href: sourceHandoffs.rvFinder, external: true },
+      { label: 'RV Types', slug: 'rv-types' },
+      { label: 'Trip Calculator', href: sourceHandoffs.tripCalculator, external: true },
+      { label: 'Financing Your RV', slug: 'financing-your-rv' },
+      { label: 'Towing Guide', slug: 'towing-guide' },
+      { label: 'FAQ', slug: 'faq' },
+    ],
+  },
+  {
+    label: 'About THOR',
+    items: [
+      { label: 'Innovation', slug: 'innovation' },
+      { label: 'History', slug: 'history' },
+      { label: 'Community', slug: 'community' },
+      { label: 'News & Events', slug: 'news-events' },
+      { label: 'Careers', slug: 'careers' },
+    ],
+  },
+  {
+    label: 'Sustainability',
+    items: [
+      { label: 'Home', slug: 'sustainability' },
+      { label: 'Report', slug: 'sustainability-report' },
+      { label: 'Innovation', slug: 'innovation' },
+      { label: 'Environmental', slug: 'sustainability-environmental' },
+      { label: 'Social Responsibility', slug: 'social-responsibility' },
+      { label: 'Governance', slug: 'governance' },
+      { label: 'Supply Management', slug: 'supply-management' },
+    ],
+  },
+];
+
+export const footerLinks = [
+  { label: 'Contact Us', href: sourceHandoffs.contact },
+  { label: 'Terms & Conditions', href: sourceHandoffs.terms },
+  { label: 'Privacy Policy', href: sourceHandoffs.privacy },
+  { label: 'Cookie Policy', href: sourceHandoffs.cookies },
+];
+
+export const socialLinks = [
+  { label: 'Instagram', href: sourceHandoffs.instagram },
+  { label: 'Facebook', href: sourceHandoffs.facebook },
+  { label: 'YouTube', href: sourceHandoffs.youtube },
+  { label: 'TikTok', href: sourceHandoffs.tiktok },
+  { label: 'Pinterest', href: sourceHandoffs.pinterest },
+];

@@ -1,0 +1,148 @@
+{
+  "capturedFrom": "https://www.thorindustries.com/",
+  "capturedAt": "2026-04-17",
+  "hero": {
+    "heading": "FIND YOUR RV",
+    "copy": "Explore hundreds of RV models, narrow down your options, and find the perfect RV.",
+    "actionLabel": "Find Your RV",
+    "actionHref": "https://www.thorindustries.com/find-my-rv",
+    "desktopImage": "https://thorindustries-prod.zaneray.com/cms/images/aTnRtXNYClf9oCGX_06102025-3330.jpg?auto=format%2Ccompress&rect=0%2C30%2C4000%2C2250&w=1920&h=1080",
+    "mobileImage": "https://thorindustries-prod.zaneray.com/cms/images/aTnRtXNYClf9oCGX_06102025-3330.jpg?auto=format%2Ccompress&rect=1711%2C0%2C1379%2C2664&w=828&h=1600"
+  },
+  "whoIsThor": {
+    "heading": "Who Is THOR?",
+    "copy": "In 1980, we embarked on a journey to connect people with nature, and families with each other. Today, we continue that journey by leading a global family of companies that make it easier and more enjoyable for families of all types to create lasting outdoor memories. Together we can Go Everywhere; Stay Anywhere.",
+    "actionLabel": "Explore Companies",
+    "actionHref": "https://www.thorindustries.com/thor-companies",
+    "videoTitle": "2025 THOR Industries Board Video",
+    "youtubeId": "HlXl0gFApyQ",
+    "youtubeEmbed": "https://www.youtube.com/embed/HlXl0gFApyQ",
+    "youtubeWatch": "https://www.youtube.com/watch?v=HlXl0gFApyQ"
+  },
+  "familyOfCompanies": {
+    "heading": "Meet the Family of Companies",
+    "copy": "What started with the acquisition of Airstream in 1980 has grown into a global family of companies, trusted by hundreds of thousands of people across the globe to get them where they want to go safely and in style.",
+    "actionLabel": "View All",
+    "actionHref": "https://www.thorindustries.com/thor-companies",
+    "brands": [
+      { "name": "Airstream", "href": "https://www.thorindustries.com/thor-companies/airstream" },
+      { "name": "CrossRoads", "href": "https://www.thorindustries.com/thor-companies/crossroads-rv" },
+      { "name": "Dutchmen", "href": "https://www.thorindustries.com/thor-companies/dutchmen" },
+      { "name": "Entegra Coach", "href": "https://www.thorindustries.com/thor-companies/entegra-coach" },
+      { "name": "Heartland RV", "href": "https://www.thorindustries.com/thor-companies/heartland-rv" },
+      { "name": "Jayco RV", "href": "https://www.thorindustries.com/thor-companies/jayco" },
+      { "name": "Keystone RV Company", "href": "https://www.thorindustries.com/thor-companies/keystone-rv" },
+      { "name": "KZ", "href": "https://www.thorindustries.com/thor-companies/kz-rv" },
+      { "name": "Open Range", "href": "https://www.thorindustries.com/thor-companies/open-range" },
+      { "name": "Thor Motor Coach", "href": "https://www.thorindustries.com/thor-companies/thor-motor-coach" },
+      { "name": "Tiffin Motorhomes", "href": "https://www.thorindustries.com/thor-companies/tiffin-motorhomes" },
+      { "name": "Venture RV", "href": "https://www.thorindustries.com/thor-companies/venture-rv" }
+    ]
+  },
+  "rvTypes": {
+    "heading": "Explore RV Types",
+    "copy": "Searching for your dream RV? Get to know the different types of RVs so you can choose the best option for your needs, wants, and travel style.",
+    "actionLabel": "Learn More",
+    "actionHref": "https://www.thorindustries.com/rv-types",
+    "cards": [
+      { "title": "Travel Trailer", "href": "https://www.thorindustries.com/rv-types/travel-trailer", "action": "Learn More" },
+      { "title": "Toy Hauler", "href": "https://www.thorindustries.com/rv-types/toy-hauler", "action": "Learn More" },
+      { "title": "Fifth Wheel", "href": "https://www.thorindustries.com/rv-types/fifth-wheel-shop", "action": "Learn More" },
+      { "title": "Class A Motorhome", "href": "https://www.thorindustries.com/rv-types/motorhome-class-a", "action": "Learn More" },
+      { "title": "Class B Camper Van", "href": "https://www.thorindustries.com/rv-types/motorhome-class-b", "action": "Learn More" },
+      { "title": "Class C Motorhome", "href": "https://www.thorindustries.com/rv-types/class-c-motorhome", "action": "Learn More" }
+    ]
+  },
+  "buyingSeason": {
+    "heading": "Gear up for RV Buying Season",
+    "cards": [
+      {
+        "eyebrow": "Winter and Spring Shopping",
+        "title": "The Best Time to Buy",
+        "href": "https://www.thorindustries.com/stories/best-time-to-shop-rvs",
+        "action": "Read More"
+      },
+      {
+        "eyebrow": "Shopping Tips",
+        "title": "Finding and Purchasing Our Next RV",
+        "href": "https://www.thorindustries.com/stories/search-for-our-next-rv",
+        "action": "Read More"
+      }
+    ]
+  },
+  "featuredStories": {
+    "heading": "Featured Stories",
+    "actionLabel": "View All",
+    "actionHref": "https://www.thorindustries.com/stories",
+    "cards": [
+      { "title": "Three Checklists To Help You Find Your Perfect RV", "href": "https://www.thorindustries.com/stories/checklists-find-rv", "action": "Read More" },
+      { "title": "Trackside Service: Why Your Next RV Repair Might Be at the Racetrack", "href": "https://www.thorindustries.com/stories/thor-complimentary-mobile-service", "action": "Read More" },
+      { "title": "Ready to buy an RV?", "href": "https://www.thorindustries.com/stories/rv-dealer-conversation", "action": "Read More" },
+      { "title": "12 Hidden Gems of the National Forest System", "href": "https://www.thorindustries.com/stories/national-forest-hidden-gems", "action": "Read More" },
+      { "title": "A Tour of Bailey & Nicole Damberg’s KZ Durango Gold Fifth Wheel RV", "href": "https://www.thorindustries.com/stories/welcome-to-my-rv-damberg", "action": "Read More" },
+      { "title": "Your Guide to Alternative RV Campsites", "href": "https://www.thorindustries.com/stories/alternative-campsites-guide", "action": "Watch Now" },
+      { "title": "The Magic of the International Balloon Fiesta", "href": "https://www.thorindustries.com/stories/rv-tips-international-balloon-fiesta", "action": "Read More" },
+      { "title": "My Van Life", "href": "https://www.thorindustries.com/stories/van-life-kalen-thorien", "action": "Watch Now" },
+      { "title": "Must-Have Items for RVing Families", "href": "https://www.thorindustries.com/stories/must-have-items-for-rv-families", "action": "Read More" }
+    ]
+  },
+  "newsAndEvents": {
+    "heading": "News and Events",
+    "subtitle": "What's New and Upcoming",
+    "actionLabel": "View All News and Events",
+    "actionHref": "https://www.thorindustries.com/news-events",
+    "cards": [
+      {
+        "title": "THOR Industries Introduces World's First Range Extended Electric Class A Motorhome",
+        "date": "September 22, 2025",
+        "href": "https://ir.thorindustries.com/investor-resources/press-releases/press-release-details/2025/THOR-Industries-Introduces-Worlds-First-Range-Extended-Electric-Class-A-Motorhome/default.aspx"
+      },
+      {
+        "title": "THOR & Harbinger Win 2025 Fast Company Award for Hybrid RV",
+        "date": "July 16, 2025",
+        "href": "https://www.thorindustries.com/news-events/thor-industries-harbinger-world-changing-ideas-award"
+      },
+      {
+        "title": "World’s First Hybrid Class A Motorhome",
+        "date": "Hybrid",
+        "href": "https://www.thorindustries.com/worlds-first-hybrid-class-a-motorhome"
+      },
+      {
+        "title": "These New Electric RVs Could Change How We Road Trip",
+        "date": "January 20, 2022",
+        "href": "https://www.travelandleisure.com/trip-ideas/road-trips/thor-industries-electric-rv-concepts"
+      },
+      {
+        "title": "Where the Magic Happens",
+        "date": "February 27, 2025",
+        "href": "https://www.thorindustries.com/news-events/where-the-magic-happens"
+      },
+      {
+        "title": "THOR’s Global Connected Vehicle Platform Expands to North America",
+        "date": "February 14, 2025",
+        "href": "https://www.thorindustries.com/news-events/blog-global-connected-vehicle-platform"
+      },
+      {
+        "title": "Airstream’s Smart Control App Comes to Apple’s CarPlay®",
+        "date": "October 30, 2023",
+        "href": "https://www.thorindustries.com/news-events/blog-airstream-carplay"
+      },
+      {
+        "title": "Next Level EV Charging",
+        "date": "November 21, 2023",
+        "href": "https://www.thorindustries.com/news-events/blog-ev-charging"
+      },
+      {
+        "title": "Blog: Lessons from the Tunnel",
+        "date": "July 6, 2023",
+        "href": "https://www.thorindustries.com/news-events/blog-lessons-from-the-tunnel"
+      }
+    ]
+  },
+  "closingCta": {
+    "heading": "Find Your Perfect RV",
+    "copy": "There are so many different types of RVs, there’s definitely something for everyone. But don’t let having so many choices overwhelm you; we’re here to help you sort through it all and figure out what you need and want.",
+    "actionLabel": "Find Your RV",
+    "actionHref": "https://www.thorindustries.com/find-my-rv"
+  }
+}

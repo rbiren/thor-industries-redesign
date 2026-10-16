@@ -42,3 +42,54 @@ export const rvTypes = [
     features: ['Multiple slide outs extend space and offer a variety of layouts.', 'The raised area extending over the cab of the RV is unique to Class C RVs and can be used for extra sleeping or storage space.', 'Frequently shorter in length and height, making them more maneuverable for getting in and out of tight places.', 'Features like stabilizing jacks, tire pressure monitoring systems, built in safety systems and an onboard generator can make setting up camp a breeze.'],
   },
 ];
+
+export const homeRvTypes = [
+  {
+    title: 'Travel Trailer',
+    text: 'Travel trailers are the most popular type of non-motorized RV. They can be towed by a variety of vehicles and are made for a variety of uses, from hauling to vacationing to full-time RVing.',
+    href: 'https://www.thorindustries.com/rv-types/travel-trailer',
+    image: 'home-type-travel-trailer',
+    imageAlt: 'A Venture Stratus parked next to a river with a sunset.',
+    action: 'Learn More',
+  },
+  {
+    title: 'Toy Hauler',
+    text: 'Many people think of toy haulers as the wild-child of the RV world, but these RVs have multi-purpose utlitity for every adventurer. The open "garage" can serve as storage for toys, an extra bedroom or even an on-the-go office.',
+    href: 'https://www.thorindustries.com/rv-types/toy-hauler',
+    image: 'home-type-toy-hauler',
+    imageAlt: 'A group of friends with a fifth wheel RV boondocking in a field.',
+    action: 'Learn More',
+  },
+  {
+    title: 'Fifth Wheel',
+    text: 'Easy to hitch, easy to tow, and stable, fifth wheels offer plenty of comfort for the whole family. Versatility and space are the reasons why RVers choose fifth wheels for their trips — or for their full-time homes.',
+    href: 'https://www.thorindustries.com/rv-types/fifth-wheel-shop',
+    image: 'home-type-fifth-wheel',
+    imageAlt: 'A Keystone Sprinter fifth wheel in a field in front of mountains.',
+    action: 'Learn More',
+  },
+  {
+    title: 'Class A Motorhome',
+    text: 'Built with the same framing and construction as commercial trucks and buses, Class A motorhomes are some of the largest vehicles on the road. AKA lots of room to stretch out and get comfortable.',
+    href: 'https://www.thorindustries.com/rv-types/motorhome-class-a',
+    image: 'home-type-class-a',
+    imageAlt: 'A Tiffin Allegro Red Class A motorhome parked in a field next to a rocky cliffside.',
+    action: 'Learn More',
+  },
+  {
+    title: 'Class B Camper Van',
+    text: 'Small, streamlined and ready to roll. Class B motorhomes (also known as camper vans) offer luxurious living space best suited for small groups.',
+    href: 'https://www.thorindustries.com/rv-types/motorhome-class-b',
+    image: 'home-type-class-b',
+    imageAlt: 'A woman laying in the bed of an Airstream Rangeline camper van with the doors open reading a book.',
+    action: 'Learn More',
+  },
+  {
+    title: 'Class C Motorhome',
+    text: 'Recognizable by their raised sleeping or storage areas which extend over the cab of the RV, Class C Motorhomes offer more living space than Class B Motorhomes but are smaller in size and can offer better gas mileage than Class A Motorcoaches.',
+    href: 'https://www.thorindustries.com/rv-types/class-c-motorhome',
+    image: 'home-type-class-c',
+    imageAlt: 'A group of young people singing around a campfire in front of a Thor Motor Coach Magnitude.',
+    action: 'Learn More',
+  },
+];
