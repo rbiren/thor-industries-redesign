@@ -29,6 +29,15 @@ import {
   newsEventsData,
   thorCompaniesData,
 } from '../src/data/corporate.mjs';
+import {
+  governanceData,
+  socialResponsibilityData,
+  supplyManagementData,
+  sustainabilityEnvironmentalData,
+  sustainabilityHubData,
+  sustainabilityNav,
+  sustainabilityReportData,
+} from '../src/data/sustainability.mjs';
 import { homeRvTypes, rvTypes, rvTypesClosingCallouts } from '../src/data/rv-types.mjs';
 import {
   categories,
@@ -87,6 +96,12 @@ const expectedBuiltSlugs = [
   'news-events',
   'careers',
   'thor-companies',
+  'sustainability',
+  'sustainability-report',
+  'sustainability-environmental',
+  'social-responsibility',
+  'governance',
+  'supply-management',
 ];
 
 async function walkHtmlFiles(dir) {
@@ -146,8 +161,12 @@ test('Base-aware URL helpers prefix built routes and hand off unbuilt routes cle
   assert.equal(routeHref('news-events'), '/thor-industries-redesign/news-events/');
   assert.equal(routeHref('careers'), '/thor-industries-redesign/careers/');
   assert.equal(routeHref('thor-companies'), '/thor-industries-redesign/thor-companies/');
-  assert.equal(routeHref('sustainability-report'), 'https://www.thorindustries.com/sustainability-report');
-  assert.equal(routeHref('supply-management'), 'https://www.thorindustries.com/supply-management');
+  assert.equal(routeHref('sustainability'), '/thor-industries-redesign/sustainability/');
+  assert.equal(routeHref('sustainability-report'), '/thor-industries-redesign/sustainability-report/');
+  assert.equal(routeHref('sustainability-environmental'), '/thor-industries-redesign/sustainability-environmental/');
+  assert.equal(routeHref('social-responsibility'), '/thor-industries-redesign/social-responsibility/');
+  assert.equal(routeHref('governance'), '/thor-industries-redesign/governance/');
+  assert.equal(routeHref('supply-management'), '/thor-industries-redesign/supply-management/');
   assert.equal(resolveHref('/stories/'), '/thor-industries-redesign/stories/');
   assert.equal(resolveHref('/rv-types/'), '/thor-industries-redesign/rv-types/');
   assert.equal(resolveHref('/thor-companies/'), '/thor-industries-redesign/thor-companies/');
@@ -203,7 +222,7 @@ test('Navigation model exposes primary THOR destinations and routes built Storie
   assert.equal(homeNewsEvents.length, 9);
 });
 
-test('Static build outputs all 17 built routes plus 404.html and preserves VAL-HOME-001..005 against source baseline', async () => {
+test('Static build outputs all 23 built routes plus 404.html and preserves VAL-HOME-001..005 against source baseline', async () => {
   const htmlFiles = (await walkHtmlFiles('dist')).map((file) => path.relative('dist', file)).sort();
   assert.deepEqual(htmlFiles, [
     '404.html',
@@ -211,17 +230,23 @@ test('Static build outputs all 17 built routes plus 404.html and preserves VAL-H
     'community/index.html',
     'faq/index.html',
     'financing-your-rv/index.html',
+    'governance/index.html',
     'history/index.html',
     'index.html',
     'innovation/index.html',
     'news-events/index.html',
     'rv-types/index.html',
+    'social-responsibility/index.html',
     'stories/category/learn/index.html',
     'stories/category/on-the-road/index.html',
     'stories/category/recipes/index.html',
     'stories/category/travel/index.html',
     'stories/category/video/index.html',
     'stories/index.html',
+    'supply-management/index.html',
+    'sustainability-environmental/index.html',
+    'sustainability-report/index.html',
+    'sustainability/index.html',
     'thor-companies/index.html',
     'towing-guide/index.html',
   ]);
@@ -985,6 +1010,131 @@ test('Corporate routes (/innovation/, /history/, /community/, /news-events/, /ca
     assert.ok(companiesHtml.includes(`<dt>${stat.label}</dt>`));
   }
   assert.ok(companiesHtml.includes(companyGlobalOverview.title));
+});
+
+test('Sustainability routes (/sustainability/, /sustainability-report/, /sustainability-environmental/, /social-responsibility/, /governance/, /supply-management/) satisfy VAL-SUST-001 and VAL-SUST-002', async () => {
+  const sustainabilitySlugs = [
+    'sustainability',
+    'sustainability-report',
+    'sustainability-environmental',
+    'social-responsibility',
+    'governance',
+    'supply-management',
+  ];
+
+  // Shared sustainability subnavigation across all 6 sustainability routes, including single shared /innovation/ route
+  assert.equal(sustainabilityNav.length, 7);
+  for (const slug of sustainabilitySlugs) {
+    const html = await readFile(path.join('dist', slug, 'index.html'), 'utf8');
+    assert.ok(html.includes('aria-label="Sustainability navigation"'), `Missing sustainability subnav on /${slug}/`);
+    for (const item of sustainabilityNav) {
+      const expectedHref = siteUrl(`/${item.slug}/`);
+      assert.ok(
+        html.includes(`href="${expectedHref}"`),
+        `/${slug}/ missing sustainability subnav link to ${expectedHref}`,
+      );
+    }
+  }
+
+  // VAL-SUST-001: /sustainability/ hub
+  const hubHtml = await readFile('dist/sustainability/index.html', 'utf8');
+  assert.ok(hubHtml.includes(`<h1>${sustainabilityHubData.hero.title}</h1>`));
+  assert.ok(hubHtml.includes(`<h2>${sustainabilityHubData.approach.title}</h2>`));
+  for (const para of sustainabilityHubData.approach.intro) {
+    assert.ok(hubHtml.includes(para));
+  }
+  for (const pillar of sustainabilityHubData.approach.pillars) {
+    assert.ok(hubHtml.includes(`<h3>${pillar.name}</h3>`));
+    for (const para of pillar.paragraphs) {
+      assert.ok(hubHtml.includes(para.slice(0, 50)));
+    }
+  }
+  for (const callout of sustainabilityHubData.callouts) {
+    assert.ok(hubHtml.includes(`<h2>${callout.title}</h2>`));
+    assert.ok(hubHtml.includes(`href="${siteUrl(`/${callout.slug}/`)}"`));
+  }
+  assert.ok(hubHtml.includes(`<h2>${sustainabilityHubData.committeeCollage.title}</h2>`));
+  assert.ok(hubHtml.includes(`href="${sustainabilityHubData.committeeCollage.href}"`));
+  assert.ok(hubHtml.includes(`<h2>${sustainabilityHubData.reportBanner.title}</h2>`));
+  assert.ok(hubHtml.includes(`href="${sustainabilityHubData.reportBanner.href}"`));
+  assert.ok(hubHtml.includes(`href="${siteUrl('/sustainability-report/')}"`));
+
+  // VAL-SUST-002: /sustainability-report/ current & archived PDFs
+  const reportHtml = await readFile('dist/sustainability-report/index.html', 'utf8');
+  assert.ok(reportHtml.includes(`<h1>${sustainabilityReportData.hero.title}</h1>`));
+  assert.ok(reportHtml.includes(sustainabilityReportData.currentReport.eyebrow));
+  assert.ok(reportHtml.includes(`href="${sustainabilityReportData.currentReport.href}"`));
+  assert.ok(reportHtml.includes(sustainabilityReportData.currentReport.action));
+  assert.ok(reportHtml.includes(`<h2>${sustainabilityReportData.archiveSection.title}</h2>`));
+
+  assert.equal(sustainabilityReportData.archiveSection.reports.length, 8);
+  const archiveCardMatches = [...reportHtml.matchAll(/<article\b[^>]*class="report-archive-card"[^>]*>/g)];
+  assert.equal(archiveCardMatches.length, 8, 'Expected all 8 archived sustainability report cards on /sustainability-report/');
+  for (const r of sustainabilityReportData.archiveSection.reports) {
+    assert.ok(reportHtml.includes(`<span class="eyebrow">${r.year}</span>`), `Missing archive report year ${r.year}`);
+    assert.ok(reportHtml.includes(r.label), `Missing archive report label ${r.label}`);
+    assert.ok(reportHtml.includes(`href="${r.href}"`), `Missing archive report PDF href ${r.href}`);
+    assert.ok(
+      reportHtml.includes(`/thor-industries-redesign/media/${r.image}-`),
+      `Missing local WebP cover graphic ${r.image} for ${r.label}`,
+    );
+  }
+
+  // VAL-SUST-001: /sustainability-environmental/
+  const envHtml = await readFile('dist/sustainability-environmental/index.html', 'utf8');
+  assert.ok(envHtml.includes(`<h1>${sustainabilityEnvironmentalData.hero.title}</h1>`));
+  for (const sec of sustainabilityEnvironmentalData.sections) {
+    const escapedTitle = sec.title.replaceAll('&', '&amp;');
+    assert.ok(
+      envHtml.includes(`<h2>${sec.title}</h2>`) || envHtml.includes(`<h2>${escapedTitle}</h2>`),
+      `Missing environmental section heading ${sec.title}`,
+    );
+    if (sec.href) {
+      assert.ok(envHtml.includes(`href="${sec.href}"`), `Missing environmental link ${sec.href}`);
+    }
+  }
+  assert.ok(envHtml.includes('August 1, 2018 through July 31, 2019'));
+  assert.ok(envHtml.includes('67,000 tons of scrap waste'));
+  for (const partner of sustainabilityEnvironmentalData.partnerCallouts) {
+    assert.ok(envHtml.includes(`<h2>${partner.title}</h2>`));
+    assert.ok(envHtml.includes(`href="${partner.href}"`));
+    assert.ok(envHtml.includes(`/thor-industries-redesign/media/${partner.image}-`));
+  }
+
+  // VAL-SUST-001: /social-responsibility/
+  const socialHtml = await readFile('dist/social-responsibility/index.html', 'utf8');
+  assert.ok(socialHtml.includes(`<h1>${socialResponsibilityData.hero.title}</h1>`));
+  assert.equal(socialResponsibilityData.callouts.length, 4);
+  for (const callout of socialResponsibilityData.callouts) {
+    assert.ok(socialHtml.includes(`<h2>${callout.title}</h2>`));
+    assert.ok(socialHtml.includes(`href="${callout.href}"`));
+    assert.ok(socialHtml.includes(`/thor-industries-redesign/media/${callout.image}-`));
+  }
+  assert.ok(socialHtml.includes(`href="${siteUrl('/community/')}"`));
+
+  // VAL-SUST-001: /governance/
+  const govHtml = await readFile('dist/governance/index.html', 'utf8');
+  assert.ok(govHtml.includes(`<h1>${governanceData.hero.title}</h1>`));
+  assert.ok(govHtml.includes(governanceData.boardSection.committeeLead));
+  assert.equal(governanceData.boardSection.committees.length, 4);
+  for (const committee of governanceData.boardSection.committees) {
+    assert.ok(govHtml.includes(committee.slice(0, 35)));
+  }
+  assert.ok(govHtml.includes(`<h2>${governanceData.stakeholderSection.title}</h2>`));
+  for (const callout of governanceData.callouts) {
+    assert.ok(govHtml.includes(`<h2>${callout.title}</h2>`));
+    assert.ok(govHtml.includes(`href="${callout.href}"`));
+  }
+
+  // VAL-SUST-001: /supply-management/
+  const supplyHtml = await readFile('dist/supply-management/index.html', 'utf8');
+  assert.ok(supplyHtml.includes(`<h1>${supplyManagementData.hero.title}</h1>`));
+  assert.equal(supplyManagementData.callouts.length, 6);
+  for (const callout of supplyManagementData.callouts) {
+    assert.ok(supplyHtml.includes(`<h2>${callout.title}</h2>`));
+    assert.ok(supplyHtml.includes(`href="${callout.href}"`));
+    assert.ok(supplyHtml.includes(`/thor-industries-redesign/media/${callout.image}-`));
+  }
 });
 
 test('404 is real static content and the deploy workflow uploads only built output', async () => {

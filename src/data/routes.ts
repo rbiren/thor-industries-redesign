@@ -65,12 +65,12 @@ const routeDefinitions: Array<Omit<CanonicalRoute, 'path' | 'sourceUrl'>> = [
   { slug: 'news-events', label: 'News & Events', group: 'about', built: true },
   { slug: 'careers', label: 'Careers', group: 'about', built: true },
   { slug: 'thor-companies', label: 'THOR Companies', group: 'companies', built: true },
-  { slug: 'sustainability', label: 'Sustainability', group: 'sustainability', built: false },
-  { slug: 'sustainability-report', label: 'Sustainability Report', group: 'sustainability', built: false },
-  { slug: 'sustainability-environmental', label: 'Environmental', group: 'sustainability', built: false },
-  { slug: 'social-responsibility', label: 'Social Responsibility', group: 'sustainability', built: false },
-  { slug: 'governance', label: 'Governance', group: 'sustainability', built: false },
-  { slug: 'supply-management', label: 'Supply Management', group: 'sustainability', built: false },
+  { slug: 'sustainability', label: 'Sustainability', group: 'sustainability', built: true },
+  { slug: 'sustainability-report', label: 'Sustainability Report', group: 'sustainability', built: true },
+  { slug: 'sustainability-environmental', label: 'Environmental', group: 'sustainability', built: true },
+  { slug: 'social-responsibility', label: 'Social Responsibility', group: 'sustainability', built: true },
+  { slug: 'governance', label: 'Governance', group: 'sustainability', built: true },
+  { slug: 'supply-management', label: 'Supply Management', group: 'sustainability', built: true },
 ];
 
 export const canonicalRoutes: CanonicalRoute[] = routeDefinitions.map((route) => ({

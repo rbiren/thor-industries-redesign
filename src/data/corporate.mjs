@@ -93,6 +93,7 @@ export const innovationData = {
       image: 'innovation-sustainability',
       imageAlt: 'Electric vehicle charging station sign',
       action: ["LEARN ABOUT THOR'S GLOBAL SUSTAINABILITY EFFORTS", 'https://www.thorindustries.com/innovation-and-sustainability'],
+      localAction: ['Explore Sustainability', 'sustainability'],
     },
   ],
   spotlightCallout: {

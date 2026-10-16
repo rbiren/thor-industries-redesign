@@ -339,6 +339,10 @@
     object-position: center 54%;
   }
 
+  .page-hero[data-hero='sustainability'] .hero-media img {
+    object-position: 78% center;
+  }
+
   .hero-scrim {
     position: absolute;
     inset: 0;
@@ -439,6 +443,11 @@
   .category-links a.active {
     color: var(--ink);
     border-color: var(--ink);
+  }
+
+  .sustainability-subnav .category-links {
+    flex-wrap: wrap;
+    row-gap: 8px;
   }
 
   .content-section {
@@ -2305,12 +2314,193 @@
     line-height: 1;
   }
 
+  /* Sustainability & Report Pages */
+  .sustainability-approach-intro {
+    max-width: 78ch;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    color: var(--muted);
+    line-height: 1.75;
+    margin-bottom: 36px;
+  }
+
+  .sustainability-pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .sustainability-pillar-card {
+    padding: 28px;
+    background: var(--sand);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .sustainability-pillar-card h3 {
+    font-size: 20px;
+  }
+
+  .sustainability-pillar-card p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.7;
+  }
+
+  .sustainability-collage {
+    display: grid;
+    grid-template-columns: minmax(280px, 1fr) minmax(0, 1.35fr);
+    gap: 44px;
+    align-items: center;
+  }
+
+  .sustainability-collage-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .sustainability-collage-copy p:not(.eyebrow) {
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  .sustainability-collage-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .sustainability-collage-item {
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: var(--sand);
+    aspect-ratio: 4 / 3;
+  }
+
+  .sustainability-collage-item picture,
+  .sustainability-collage-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .report-archive-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .report-archive-card {
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .report-archive-card:hover {
+    border-color: var(--forest);
+    transform: translateY(-2px);
+  }
+
+  .report-archive-cover {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: var(--sand);
+    border-bottom: 1px solid var(--line);
+    aspect-ratio: 4 / 4.4;
+  }
+
+  .report-archive-cover picture,
+  .report-archive-cover img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .report-archive-body {
+    padding: 20px 22px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    flex: 1;
+  }
+
+  .report-archive-body h3 {
+    font-size: 17px;
+    line-height: 1.35;
+    flex: 1;
+  }
+
+  .report-archive-body h3 a:hover {
+    color: var(--forest);
+  }
+
+  .report-archive-body .card-action {
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px solid var(--line);
+  }
+
+  .sustainability-text-stack {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-top: 16px;
+    color: var(--muted);
+    line-height: 1.75;
+  }
+
+  .committee-lead {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  .governance-committee-list {
+    margin-block: 4px 8px;
+  }
+
+  .partner-logo-frame {
+    min-height: 220px;
+    padding: 36px;
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .partner-logo-frame picture,
+  .partner-logo-frame img {
+    max-width: 260px;
+    max-height: 130px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
   @media (max-width: 960px) {
     .pillars-grid,
     .news-archive-grid,
     .company-directory-grid,
-    .company-stats-grid {
+    .company-stats-grid,
+    .report-archive-grid {
       grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .sustainability-pillars-grid,
+    .sustainability-collage {
+      grid-template-columns: 1fr;
     }
     .history-milestone {
       grid-template-columns: 1fr;
@@ -2326,7 +2516,9 @@
     .pillars-grid,
     .news-archive-grid,
     .company-directory-grid,
-    .company-stats-grid {
+    .company-stats-grid,
+    .report-archive-grid,
+    .sustainability-collage-grid {
       grid-template-columns: 1fr;
     }
     .milestone-card,
@@ -2334,7 +2526,9 @@
       grid-template-columns: 1fr;
       padding: 20px;
     }
-    .signup-callout {
+    .signup-callout,
+    .sustainability-pillar-card,
+    .partner-logo-frame {
       padding: 24px 20px;
     }
     .news-dialog {

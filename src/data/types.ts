@@ -67,6 +67,12 @@ export interface Page {
     | 'history'
     | 'community'
     | 'news-events'
-    | 'careers';
+    | 'careers'
+    | 'sustainability'
+    | 'sustainability-report'
+    | 'sustainability-environmental'
+    | 'social-responsibility'
+    | 'governance'
+    | 'supply-management';
   categoryKey?: 'learn' | 'recipes' | 'on-the-road' | 'travel' | 'video';
 }

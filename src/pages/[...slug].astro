@@ -25,6 +25,15 @@ import {
   innovationData,
   newsEventsData,
 } from '../data/corporate.mjs';
+import {
+  governanceData,
+  socialResponsibilityData,
+  supplyManagementData,
+  sustainabilityEnvironmentalData,
+  sustainabilityHubData,
+  sustainabilityNav,
+  sustainabilityReportData,
+} from '../data/sustainability.mjs';
 import media from '../data/media.json';
 import { resolveHref, routeHref, siteUrl } from '../lib/urls';
 import { sourceHandoffs } from '../data/routes';
@@ -132,7 +141,7 @@ function renderFaqSegments(
   description={page.description}
   currentPath={currentPath}
 >
-  <section class:list={['page-hero', { 'home-hero': isHome }]}>
+  <section class:list={['page-hero', { 'home-hero': isHome }]} data-hero={page.hero}>
     <div class="hero-media">
       {isHome ? (
         <picture>
@@ -178,6 +187,30 @@ function renderFaqSegments(
     </div>
   </section>
 
+  {(page.kind === 'sustainability' ||
+    page.kind === 'sustainability-report' ||
+    page.kind === 'sustainability-environmental' ||
+    page.kind === 'social-responsibility' ||
+    page.kind === 'governance' ||
+    page.kind === 'supply-management') && (
+    <nav class="category-bar sustainability-subnav" aria-label="Sustainability navigation">
+      <div class="section-inner category-links">
+        {sustainabilityNav.map((item) => {
+          const isCurrent = page.slug === item.slug;
+          return (
+            <a
+              class:list={[{ active: isCurrent }]}
+              aria-current={isCurrent ? 'page' : undefined}
+              href={routeHref(item.slug as Page['slug'])}
+            >
+              {item.label}
+            </a>
+          );
+        })}
+      </div>
+    </nav>
+  )}
+
   {page.lead &&
     page.lead.length > 0 &&
     page.kind !== 'rv-types' &&
@@ -186,7 +219,8 @@ function renderFaqSegments(
     page.kind !== 'community' &&
     page.kind !== 'news-events' &&
     page.kind !== 'careers' &&
-    page.kind !== 'companies' && (
+    page.kind !== 'companies' &&
+    page.kind !== 'sustainability' && (
     <section class="lead-band">
       <div class="section-inner narrow">
         {page.lead.map((paragraph) => (
@@ -1033,6 +1067,11 @@ function renderFaqSegments(
                   <a class="button dark" href={callout.action[1]}>
                     {callout.action[0]}
                   </a>
+                  {'localAction' in callout && callout.localAction && (
+                    <a class="button ghost dark" href={routeHref(callout.localAction[1] as Page['slug'])}>
+                      {callout.localAction[0]}
+                    </a>
+                  )}
                 </div>
               )}
             </div>
@@ -1549,6 +1588,332 @@ function renderFaqSegments(
     </>
   )}
 
+  {page.kind === 'sustainability' && (
+    <>
+      <section class="content-section" id={sustainabilityHubData.approach.id}>
+        <div class="section-inner">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">ESG Strategy</p>
+              <h2>{sustainabilityHubData.approach.title}</h2>
+            </div>
+          </div>
+          <div class="sustainability-approach-intro">
+            {sustainabilityHubData.approach.intro.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </div>
+          <div class="sustainability-pillars-grid">
+            {sustainabilityHubData.approach.pillars.map((pillar) => (
+              <article class="sustainability-pillar-card" id={pillar.id}>
+                <h3>{pillar.name}</h3>
+                {pillar.paragraphs.map((paragraph) => (
+                  <p>{paragraph}</p>
+                ))}
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {sustainabilityHubData.callouts.map((callout, index) => (
+        <section
+          class:list={['content-section', 'split-feature', { tinted: index % 2 === 0 }]}
+          id={callout.id}
+        >
+          <div class="section-inner split-grid">
+            <div class="section-copy">
+              <h2>{callout.title}</h2>
+              {callout.paragraphs.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+              <div class="action-row">
+                <a class="button dark" href={routeHref(callout.slug as Page['slug'])}>
+                  {callout.action}
+                </a>
+              </div>
+            </div>
+            <div class="split-media">
+              <Media id={callout.image} alt={callout.imageAlt} sizes="(max-width: 900px) 100vw, 48vw" />
+            </div>
+          </div>
+        </section>
+      ))}
+
+      <section class="content-section" id={sustainabilityHubData.committeeCollage.id}>
+        <div class="section-inner sustainability-collage">
+          <div class="sustainability-collage-copy">
+            <p class="eyebrow">Board &amp; Executive Oversight</p>
+            <h2>{sustainabilityHubData.committeeCollage.title}</h2>
+            <p>{sustainabilityHubData.committeeCollage.caption}</p>
+            <div class="action-row">
+              <a class="button dark" href={sustainabilityHubData.committeeCollage.href}>
+                {sustainabilityHubData.committeeCollage.action}
+              </a>
+            </div>
+          </div>
+          <div class="sustainability-collage-grid">
+            {sustainabilityHubData.committeeCollage.images.map((img) => (
+              <div class="sustainability-collage-item">
+                <Media id={img.id} alt={img.alt} sizes="(max-width: 900px) 100vw, 45vw" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section tinted split-feature" id={sustainabilityHubData.reportBanner.id}>
+        <div class="section-inner split-grid">
+          <div class="section-copy">
+            <p class="eyebrow">Annual Disclosure</p>
+            <h2>{sustainabilityHubData.reportBanner.title}</h2>
+            <div class="action-row">
+              <a class="button dark" href={sustainabilityHubData.reportBanner.href}>
+                {sustainabilityHubData.reportBanner.action}
+              </a>
+              <a class="button ghost dark" href={routeHref(sustainabilityHubData.reportBanner.localSlug as Page['slug'])}>
+                {sustainabilityHubData.reportBanner.localAction}
+              </a>
+            </div>
+          </div>
+          <div class="split-media">
+            <Media
+              id={sustainabilityHubData.reportBanner.image}
+              alt={sustainabilityHubData.reportBanner.imageAlt}
+              sizes="(max-width: 900px) 100vw, 48vw"
+            />
+          </div>
+        </div>
+      </section>
+    </>
+  )}
+
+  {page.kind === 'sustainability-report' && (
+    <>
+      <section class="content-section split-feature" id={sustainabilityReportData.currentReport.id}>
+        <div class="section-inner split-grid">
+          <div class="section-copy">
+            <p class="eyebrow">{sustainabilityReportData.currentReport.eyebrow}</p>
+            <h2>{sustainabilityReportData.currentReport.title}</h2>
+            <div class="action-row">
+              <a class="button dark" href={sustainabilityReportData.currentReport.href}>
+                {sustainabilityReportData.currentReport.action}
+              </a>
+            </div>
+          </div>
+          <div class="split-media">
+            <Media
+              id={sustainabilityReportData.currentReport.image}
+              alt={sustainabilityReportData.currentReport.imageAlt}
+              sizes="(max-width: 900px) 100vw, 48vw"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section tinted" id={sustainabilityReportData.archiveSection.id}>
+        <div class="section-inner">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">2018 – 2024 Archive</p>
+              <h2>{sustainabilityReportData.archiveSection.title}</h2>
+            </div>
+          </div>
+          <div class="report-archive-grid" data-report-archive>
+            {sustainabilityReportData.archiveSection.reports.map((report) => (
+              <article class="report-archive-card" id={report.id}>
+                <a class="report-archive-cover" href={report.href}>
+                  <Media id={report.image} alt={report.imageAlt} sizes="(max-width: 640px) 100vw, (max-width: 960px) 50vw, 25vw" />
+                </a>
+                <div class="report-archive-body">
+                  <span class="eyebrow">{report.year}</span>
+                  <h3>
+                    <a href={report.href}>{report.label}</a>
+                  </h3>
+                  <a class="card-action" href={report.href}>
+                    <span>Download PDF</span>
+                    <em aria-hidden="true">↗</em>
+                  </a>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  )}
+
+  {page.kind === 'sustainability-environmental' && (
+    <>
+      {sustainabilityEnvironmentalData.sections.map((sec, index) => (
+        <section
+          class:list={['content-section', { tinted: index % 2 === 1 }]}
+          id={sec.id}
+        >
+          <div class="section-inner narrow">
+            <h2>{sec.title}</h2>
+            <div class="sustainability-text-stack">
+              {sec.paragraphs.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+            </div>
+            {sec.action && sec.href && (
+              <div class="action-row">
+                <a class="button dark" href={sec.href}>
+                  {sec.action}
+                </a>
+              </div>
+            )}
+          </div>
+        </section>
+      ))}
+
+      {sustainabilityEnvironmentalData.partnerCallouts.map((callout, index) => (
+        <section
+          class:list={['content-section', 'split-feature', { tinted: index % 2 === 0 }]}
+          id={callout.id}
+        >
+          <div class="section-inner split-grid">
+            <div class="section-copy">
+              <p class="eyebrow">Conservation Partnership</p>
+              <h2>{callout.title}</h2>
+              {callout.paragraphs.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+              <div class="action-row">
+                <a class="button dark" href={callout.href}>
+                  {callout.action}
+                </a>
+              </div>
+            </div>
+            <div class="split-media partner-logo-frame">
+              <Media id={callout.image} alt={callout.imageAlt} sizes="280px" />
+            </div>
+          </div>
+        </section>
+      ))}
+    </>
+  )}
+
+  {page.kind === 'social-responsibility' && (
+    <>
+      {socialResponsibilityData.callouts.map((callout, index) => (
+        <section
+          class:list={['content-section', 'split-feature', { tinted: index % 2 === 1 }]}
+          id={callout.id}
+        >
+          <div class="section-inner split-grid">
+            <div class="section-copy">
+              <h2>{callout.title}</h2>
+              {callout.paragraphs.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+              <div class="action-row">
+                <a class="button dark" href={callout.href}>
+                  {callout.action}
+                </a>
+                {'localSlug' in callout && callout.localSlug && (
+                  <a class="button ghost dark" href={routeHref('community')}>
+                    {callout.localAction}
+                  </a>
+                )}
+              </div>
+            </div>
+            <div class="split-media">
+              <Media id={callout.image} alt={callout.imageAlt} sizes="(max-width: 900px) 100vw, 48vw" />
+            </div>
+          </div>
+        </section>
+      ))}
+    </>
+  )}
+
+  {page.kind === 'governance' && (
+    <>
+      <section class="content-section" id={governanceData.boardSection.id}>
+        <div class="section-inner narrow">
+          <p class="eyebrow">Corporate Governance</p>
+          <h2>{governanceData.boardSection.title}</h2>
+          <div class="sustainability-text-stack">
+            <p>{governanceData.boardSection.intro}</p>
+            <p class="committee-lead">{governanceData.boardSection.committeeLead}</p>
+            <ul class="feature-list governance-committee-list">
+              {governanceData.boardSection.committees.map((committee) => (
+                <li>{committee}</li>
+              ))}
+            </ul>
+            {governanceData.boardSection.closing.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section tinted" id={governanceData.stakeholderSection.id}>
+        <div class="section-inner narrow">
+          <h2>{governanceData.stakeholderSection.title}</h2>
+          <div class="sustainability-text-stack">
+            {governanceData.stakeholderSection.paragraphs.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {governanceData.callouts.map((callout, index) => (
+        <section
+          class:list={['content-section', 'split-feature', { tinted: index % 2 === 1 }]}
+          id={callout.id}
+        >
+          <div class="section-inner split-grid">
+            <div class="section-copy">
+              <h2>{callout.title}</h2>
+              {callout.paragraphs.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+              <div class="action-row">
+                <a class="button dark" href={callout.href}>
+                  {callout.action}
+                </a>
+              </div>
+            </div>
+            <div class="split-media">
+              <Media id={callout.image} alt={callout.imageAlt} sizes="(max-width: 900px) 100vw, 48vw" />
+            </div>
+          </div>
+        </section>
+      ))}
+    </>
+  )}
+
+  {page.kind === 'supply-management' && (
+    <>
+      {supplyManagementData.callouts.map((callout, index) => (
+        <section
+          class:list={['content-section', 'split-feature', { tinted: index % 2 === 1 }]}
+          id={callout.id}
+        >
+          <div class="section-inner split-grid">
+            <div class="section-copy">
+              <h2>{callout.title}</h2>
+              {callout.paragraphs.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+              <div class="action-row">
+                <a class="button dark" href={callout.href}>
+                  {callout.action}
+                </a>
+              </div>
+            </div>
+            <div class="split-media">
+              <Media id={callout.image} alt={callout.imageAlt} sizes="(max-width: 900px) 100vw, 48vw" />
+            </div>
+          </div>
+        </section>
+      ))}
+    </>
+  )}
+
   {!isHome &&
     page.kind !== 'stories' &&
     page.kind !== 'category' &&
@@ -1561,7 +1926,13 @@ function renderFaqSegments(
     page.kind !== 'news-events' &&
     page.kind !== 'careers' &&
     page.kind !== 'companies' &&
-    page.kind !== 'faq' && (
+    page.kind !== 'faq' &&
+    page.kind !== 'sustainability' &&
+    page.kind !== 'sustainability-report' &&
+    page.kind !== 'sustainability-environmental' &&
+    page.kind !== 'social-responsibility' &&
+    page.kind !== 'governance' &&
+    page.kind !== 'supply-management' && (
       <div class:list={[{ 'timeline-sections': page.slug === 'history' }]}>
         {page.sections.map((section, index) => (
           <section
