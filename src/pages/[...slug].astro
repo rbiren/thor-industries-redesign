@@ -11,7 +11,20 @@ import {
   storyCategoryPages,
 } from '../data/stories.mjs';
 import { rvTypes, rvTypesClosingCallouts } from '../data/rv-types.mjs';
-import { companies, companyGroups, homeBrands } from '../data/companies.mjs';
+import {
+  companies,
+  companyGlobalOverview,
+  companyGroups,
+  companyStats,
+  homeBrands,
+} from '../data/companies.mjs';
+import {
+  careersData,
+  communityData,
+  historyData,
+  innovationData,
+  newsEventsData,
+} from '../data/corporate.mjs';
 import media from '../data/media.json';
 import { resolveHref, routeHref, siteUrl } from '../lib/urls';
 import { sourceHandoffs } from '../data/routes';
@@ -77,21 +90,41 @@ const activeCategoryData: StoryCategoryPageData | undefined =
 const towableRvTypes = rvTypes.filter((item) => item.eyebrow === 'Towable RVs');
 const motorizedRvTypes = rvTypes.filter((item) => item.eyebrow === 'Motorized RVs');
 
-function renderFaqSegments(paragraph: string, links?: Array<{ label: string; href: string }>) {
+function renderFaqSegments(
+  paragraph: string,
+  links?: Array<{ label: string; href: string } | [string, string]>,
+) {
+  let segments: Array<
+    { type: 'text'; value: string } | { type: 'link'; label: string; href: string }
+  > = [{ type: 'text', value: paragraph }];
   if (!links || links.length === 0) {
-    return [{ type: 'text' as const, value: paragraph }];
+    return segments;
   }
-  for (const link of links) {
-    const idx = paragraph.indexOf(link.label);
-    if (idx !== -1) {
-      return [
-        { type: 'text' as const, value: paragraph.slice(0, idx) },
-        { type: 'link' as const, label: link.label, href: resolveHref(link.href) },
-        { type: 'text' as const, value: paragraph.slice(idx + link.label.length) },
-      ];
+  for (const rawLink of links) {
+    const label = Array.isArray(rawLink) ? rawLink[0] : rawLink.label;
+    const href = Array.isArray(rawLink) ? rawLink[1] : rawLink.href;
+    const nextSegments: typeof segments = [];
+    for (const seg of segments) {
+      if (seg.type !== 'text') {
+        nextSegments.push(seg);
+        continue;
+      }
+      const idx = seg.value.indexOf(label);
+      if (idx === -1) {
+        nextSegments.push(seg);
+        continue;
+      }
+      if (idx > 0) {
+        nextSegments.push({ type: 'text', value: seg.value.slice(0, idx) });
+      }
+      nextSegments.push({ type: 'link', label, href: resolveHref(href) });
+      if (idx + label.length < seg.value.length) {
+        nextSegments.push({ type: 'text', value: seg.value.slice(idx + label.length) });
+      }
     }
+    segments = nextSegments;
   }
-  return [{ type: 'text' as const, value: paragraph }];
+  return segments;
 }
 ---
 <Site
@@ -145,7 +178,15 @@ function renderFaqSegments(paragraph: string, links?: Array<{ label: string; hre
     </div>
   </section>
 
-  {page.lead && page.kind !== 'rv-types' && (
+  {page.lead &&
+    page.lead.length > 0 &&
+    page.kind !== 'rv-types' &&
+    page.kind !== 'innovation' &&
+    page.kind !== 'history' &&
+    page.kind !== 'community' &&
+    page.kind !== 'news-events' &&
+    page.kind !== 'careers' &&
+    page.kind !== 'companies' && (
     <section class="lead-band">
       <div class="section-inner narrow">
         {page.lead.map((paragraph) => (
@@ -879,47 +920,556 @@ function renderFaqSegments(paragraph: string, links?: Array<{ label: string; hre
     </>
   )}
 
+  {page.kind === 'innovation' && (
+    <>
+      <section class="lead-band" id="innovation-overview">
+        <div class="section-inner narrow">
+          {innovationData.intro.paragraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+          <div class="action-row">
+            <a class="button dark" href={innovationData.intro.action[1]}>
+              {innovationData.intro.action[0]}
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {innovationData.callouts.map((callout, index) => (
+        <section
+          class:list={['content-section', 'split-feature', { tinted: index % 2 === 1 }]}
+          id={callout.id}
+        >
+          <div class="section-inner split-grid">
+            <div class="section-copy">
+              <h2>{callout.title}</h2>
+              {(callout.paragraphs ?? []).map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+              {callout.bullets && (
+                <ul class="feature-list">
+                  {callout.bullets.map((bullet) => (
+                    <li>{bullet}</li>
+                  ))}
+                </ul>
+              )}
+              {callout.action && (
+                <div class="action-row">
+                  <a class="button dark" href={callout.action[1]}>
+                    {callout.action[0]}
+                  </a>
+                </div>
+              )}
+            </div>
+            <div class="split-media">
+              <Media id={callout.image} alt={callout.imageAlt} sizes="(max-width: 900px) 100vw, 48vw" />
+            </div>
+          </div>
+        </section>
+      ))}
+
+      <section class="content-section tinted" id={innovationData.pillarsBanner.id}>
+        <div class="section-inner">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Four Pillars of Innovation</p>
+              <h2>{innovationData.pillarsBanner.title}</h2>
+            </div>
+          </div>
+          <div class="pillars-banner-media">
+            <Media
+              id={innovationData.pillarsBanner.image}
+              alt={innovationData.pillarsBanner.imageAlt}
+              sizes="100vw"
+            />
+          </div>
+          <div class="pillars-grid">
+            {innovationData.pillarsBanner.pillars.map((pillar) => (
+              <article class="pillar-card">
+                <h3>{pillar.name}</h3>
+                <p>{pillar.description}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section split-feature" id={innovationData.newsBanner.id}>
+        <div class="section-inner split-grid">
+          <div class="section-copy">
+            <p class="eyebrow">{innovationData.newsBanner.eyebrow}</p>
+            <h2>{innovationData.newsBanner.title}</h2>
+            <p>{innovationData.newsBanner.text}</p>
+            <div class="action-row">
+              <a class="button dark" href={innovationData.newsBanner.action[1]}>
+                {innovationData.newsBanner.action[0]}
+              </a>
+              <a class="button ghost dark" href={routeHref('news-events')}>
+                {innovationData.newsBanner.localNewsAction[0]}
+              </a>
+            </div>
+          </div>
+          <div class="split-media">
+            <Media
+              id={innovationData.newsBanner.image}
+              alt={innovationData.newsBanner.imageAlt}
+              sizes="(max-width: 900px) 100vw, 48vw"
+            />
+          </div>
+        </div>
+      </section>
+
+      {innovationData.moreCallouts.map((callout) => (
+        <section class="content-section tinted split-feature" id={callout.id}>
+          <div class="section-inner split-grid">
+            <div class="section-copy">
+              {callout.eyebrow && <p class="eyebrow">{callout.eyebrow}</p>}
+              <h2>{callout.title}</h2>
+              {callout.paragraphs.map((paragraph) => (
+                <p>{paragraph}</p>
+              ))}
+              {callout.action && (
+                <div class="action-row">
+                  <a class="button dark" href={callout.action[1]}>
+                    {callout.action[0]}
+                  </a>
+                </div>
+              )}
+            </div>
+            <div class="split-media">
+              <Media id={callout.image} alt={callout.imageAlt} sizes="(max-width: 900px) 100vw, 48vw" />
+            </div>
+          </div>
+        </section>
+      ))}
+
+      <section class="content-section split-feature" id={innovationData.spotlightCallout.id}>
+        <div class="section-inner split-grid">
+          <div class="section-copy">
+            <p class="eyebrow">Featured Project</p>
+            <h2>{innovationData.spotlightCallout.title}</h2>
+            {innovationData.spotlightCallout.paragraphs.map((paragraph) => (
+              <p>{paragraph}</p>
+            ))}
+            <div class="action-row">
+              <a class="button dark" href={innovationData.spotlightCallout.action[1]}>
+                {innovationData.spotlightCallout.action[0]}
+              </a>
+            </div>
+          </div>
+          <div class="split-media">
+            <Media
+              id={innovationData.spotlightCallout.image}
+              alt={innovationData.spotlightCallout.imageAlt}
+              sizes="(max-width: 900px) 100vw, 48vw"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section tinted split-feature" id={innovationData.labBanner.id}>
+        <div class="section-inner split-grid">
+          <div class="section-copy">
+            <p class="eyebrow">Careers in Innovation</p>
+            <h2>{innovationData.labBanner.title}</h2>
+            <p>{innovationData.labBanner.text}</p>
+            <div class="action-row">
+              <a class="button dark" href={innovationData.labBanner.action[1]}>
+                {innovationData.labBanner.action[0]}
+              </a>
+            </div>
+          </div>
+          <div class="split-media">
+            <Media
+              id={innovationData.labBanner.image}
+              alt={innovationData.labBanner.imageAlt}
+              sizes="(max-width: 900px) 100vw, 48vw"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section" id={innovationData.signup.id}>
+        <div class="section-inner narrow signup-callout">
+          <p class="eyebrow">Stay Connected</p>
+          <h2>{innovationData.signup.title}</h2>
+          <p>{innovationData.signup.text}</p>
+          <div class="action-row">
+            <a class="button dark" href={innovationData.signup.action[1]}>
+              {innovationData.signup.action[0]}
+            </a>
+          </div>
+          <p class="signup-disclaimer">{innovationData.signup.disclaimer}</p>
+        </div>
+      </section>
+    </>
+  )}
+
+  {page.kind === 'history' && (
+    <>
+      <section class="lead-band" id="history-overview">
+        <div class="section-inner narrow corporate-intro">
+          <div class="corporate-intro-mark">
+            <Media id={historyData.intro.logo} alt={historyData.intro.logoAlt} sizes="180px" />
+          </div>
+          {historyData.intro.paragraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+        </div>
+      </section>
+
+      <section class="content-section tinted" id="history-timeline">
+        <div class="section-inner">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">1980 – Present</p>
+              <h2>THOR Industries Milestone Timeline</h2>
+            </div>
+          </div>
+          <ol class="history-timeline" data-history-timeline>
+            {historyData.timeline.map((item) => (
+              <li class="history-milestone" id={`milestone-${item.year}-${item.title.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}>
+                <div class="milestone-marker">
+                  <span class="milestone-year">{item.year}</span>
+                </div>
+                <div class="milestone-card">
+                  <div class="milestone-media">
+                    <Media id={item.image} alt={item.imageAlt} sizes="(max-width: 720px) 100vw, 260px" />
+                  </div>
+                  <div class="milestone-copy">
+                    <p class="eyebrow">{item.year}</p>
+                    <h3>{item.title}</h3>
+                    <p>{item.text}</p>
+                  </div>
+                </div>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </section>
+    </>
+  )}
+
+  {page.kind === 'community' && (
+    <>
+      <section class="lead-band" id="community-overview">
+        <div class="section-inner narrow corporate-intro">
+          <div class="corporate-intro-mark">
+            <Media id={communityData.intro.logo} alt={communityData.intro.logoAlt} sizes="180px" />
+          </div>
+          {communityData.intro.paragraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+        </div>
+      </section>
+
+      {communityData.callouts.map((callout, index) => (
+        <section
+          class:list={['content-section', 'split-feature', { tinted: index % 2 === 1 }]}
+          id={callout.id}
+        >
+          <div class="section-inner split-grid">
+            <div class="section-copy">
+              <h2>{callout.title}</h2>
+              {callout.paragraphs.map((paragraph) => {
+                const segments = renderFaqSegments(paragraph, callout.links);
+                return (
+                  <p>
+                    {segments.map((seg) =>
+                      seg.type === 'link' ? <a href={seg.href}>{seg.label}</a> : seg.value,
+                    )}
+                  </p>
+                );
+              })}
+              {callout.action && (
+                <div class="action-row">
+                  <a class="button dark" href={callout.action[1]}>
+                    {callout.action[0]}
+                  </a>
+                </div>
+              )}
+            </div>
+            <div class="split-media">
+              <Media id={callout.image} alt={callout.imageAlt} sizes="(max-width: 900px) 100vw, 48vw" />
+            </div>
+          </div>
+        </section>
+      ))}
+    </>
+  )}
+
+  {page.kind === 'news-events' && (
+    <>
+      <section class="lead-band" id="news-overview">
+        <div class="section-inner narrow corporate-intro">
+          <div class="corporate-intro-mark">
+            <Media id={newsEventsData.intro.logo} alt={newsEventsData.intro.logoAlt} sizes="180px" />
+          </div>
+          {newsEventsData.intro.paragraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+        </div>
+      </section>
+
+      <section class="content-section tinted" id="news-feed">
+        <div class="section-inner">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Press Releases, Articles &amp; Announcements</p>
+              <h2>Latest News &amp; Events</h2>
+            </div>
+          </div>
+
+          <div class="news-archive-grid" data-news-grid>
+            {newsEventsData.items.map((item) => {
+              const hasModal = 'modalBody' in item && Array.isArray(item.modalBody) && item.modalBody.length > 0;
+              return (
+                <article class="news-archive-card" id={item.id} data-news-item>
+                  <a class="news-archive-media" href={item.href}>
+                    <Media id={item.image} alt={item.imageAlt} sizes="(max-width: 900px) 100vw, 33vw" />
+                  </a>
+                  <div class="news-archive-body">
+                    <div class="news-archive-meta">
+                      <span class="eyebrow">{item.date}</span>
+                      <span class="news-source-badge">{item.sourceType}</span>
+                    </div>
+                    <h3>
+                      <a href={item.href}>{item.title}</a>
+                    </h3>
+                    <p>{item.summary}</p>
+                    <div class="news-archive-actions">
+                      <a class="card-action" href={item.href}>
+                        <span>{item.action}</span>
+                        <em aria-hidden="true">↗</em>
+                      </a>
+                      {hasModal && (
+                        <button
+                          class="filter-chip news-preview-btn"
+                          type="button"
+                          data-news-open
+                          data-news-title={item.title}
+                          data-news-date={item.date}
+                          data-news-source={item.sourceType}
+                          data-news-href={item.href}
+                          data-news-paragraphs={JSON.stringify(item.modalBody)}
+                        >
+                          Preview Summary
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      <dialog class="news-dialog" id="news-preview-dialog" aria-labelledby="news-dialog-title">
+        <div class="news-dialog-inner">
+          <div class="news-dialog-head">
+            <div>
+              <p class="eyebrow" data-news-dialog-meta>THOR News</p>
+              <h2 id="news-dialog-title" data-news-dialog-title>Article Preview</h2>
+            </div>
+            <button class="icon-button dark" type="button" data-news-close aria-label="Close article preview">
+              Close
+            </button>
+          </div>
+          <div class="news-dialog-body" data-news-dialog-body></div>
+          <div class="news-dialog-foot">
+            <a class="button dark" href="https://www.thorindustries.com/news-events" data-news-dialog-link>
+              Read Full Article on THORIndustries.com
+            </a>
+          </div>
+        </div>
+      </dialog>
+    </>
+  )}
+
+  {page.kind === 'careers' && (
+    <>
+      <section class="lead-band" id="careers-overview">
+        <div class="section-inner narrow">
+          {careersData.intro.paragraphs.map((paragraph) => (
+            <p>{paragraph}</p>
+          ))}
+          <ul class="feature-list careers-culture-list">
+            {careersData.intro.bullets.map((bullet) => (
+              <li>{bullet}</li>
+            ))}
+          </ul>
+        </div>
+      </section>
+
+      <section class="content-section tinted split-feature" id={careersData.globalHqCallout.id}>
+        <div class="section-inner split-grid">
+          <div class="section-copy">
+            <p class="eyebrow">Corporate Headquarters</p>
+            <h2>{careersData.globalHqCallout.title}</h2>
+            <p>{careersData.globalHqCallout.text}</p>
+            <div class="action-row">
+              <a class="button dark" href={careersData.globalHqCallout.action[1]}>
+                {careersData.globalHqCallout.action[0]}
+              </a>
+            </div>
+          </div>
+          <div class="split-media">
+            <Media
+              id={careersData.globalHqCallout.image}
+              alt={careersData.globalHqCallout.imageAlt}
+              sizes="(max-width: 900px) 100vw, 48vw"
+            />
+          </div>
+        </div>
+      </section>
+
+      <section class="content-section" id="careers-family-of-companies">
+        <div class="section-inner">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">Operating Company Recruiting</p>
+              <h2>{careersData.familySection.title}</h2>
+            </div>
+          </div>
+          <div class="careers-family-intro">
+            <p>{careersData.familySection.intro}</p>
+            <p class="careers-transparency-note">
+              The{' '}
+              <a href={careersData.familySection.transparencyLink.href}>
+                {careersData.familySection.transparencyLink.label}
+              </a>{' '}
+              for group health plans requires disclosure of cost-sharing information in a machine-readable format.
+            </p>
+          </div>
+          <div class="careers-company-list">
+            {careersData.familySection.companies.map((company) => (
+              <article class="careers-company-card" id={`careers-${company.id}`}>
+                <div class="careers-company-logo">
+                  <Media id={company.logo} alt={company.logoAlt} sizes="220px" />
+                </div>
+                <div class="careers-company-copy">
+                  <h3>{company.name}</h3>
+                  <p>{company.text}</p>
+                  <div class="action-row">
+                    <a class="button dark" href={company.href}>
+                      {company.action}
+                    </a>
+                  </div>
+                </div>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+    </>
+  )}
+
   {page.kind === 'companies' && (
-    <div class="section-inner">
-      <nav class="company-nav" aria-label="Company categories">
+    <>
+      <div class="section-inner" data-company-directory>
+        <div class="company-directory-controls">
+          <nav class="company-nav" aria-label="Company categories">
+            {companyGroups.map((group) => {
+              const groupTitle = String(group);
+              return <a href={`#${groupTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}>{groupTitle}</a>;
+            })}
+          </nav>
+          <div class="company-tag-filters" role="group" aria-label="Filter companies by RV type">
+            <button class="filter-chip is-active" type="button" data-company-filter="all" aria-pressed="true">
+              All Companies
+            </button>
+            <button class="filter-chip" type="button" data-company-filter="TOWABLES" aria-pressed="false">
+              Towables
+            </button>
+            <button class="filter-chip" type="button" data-company-filter="MOTORIZED" aria-pressed="false">
+              Motorized
+            </button>
+          </div>
+        </div>
+
         {companyGroups.map((group) => {
           const groupTitle = String(group);
-          return <a href={`#${groupTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-')}`}>{groupTitle}</a>;
-        })}
-      </nav>
-      {companyGroups.map((group) => {
-        const groupTitle = String(group);
-        return (
-          <section class="company-section" id={groupTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-')}>
-            <div class="section-header">
-              <div>
-                <p class="eyebrow">THOR Family</p>
-                <h2>{groupTitle}</h2>
+          const groupCompanies = companies.filter((company) => company.group === groupTitle);
+          return (
+            <section
+              class="company-section"
+              id={groupTitle.toLowerCase().replace(/[^a-z0-9]+/g, '-')}
+              data-company-section
+            >
+              <div class="section-header">
+                <div>
+                  <p class="eyebrow">THOR Family</p>
+                  <h2>{groupTitle}</h2>
+                </div>
               </div>
-            </div>
-            <div class="company-grid">
-              {companies
-                .filter((company) => company.group === groupTitle)
-                .map((company) => (
-                  <a class="company-tile" href={resolveHref(company.href)}>
-                    {company.logo ? (
-                      <div class="company-logo">
-                        <Media id={`logo-${company.id}`} alt={company.name} sizes="180px" />
-                      </div>
-                    ) : (
-                      <strong>{company.name}</strong>
-                    )}
-                    <span>
-                      {company.name}
-                      <em aria-hidden="true">↗</em>
-                    </span>
-                  </a>
+              <div class="company-directory-grid">
+                {groupCompanies.map((company) => (
+                  <article
+                    class="company-profile-card"
+                    id={`company-${company.id}`}
+                    data-company-card
+                    data-company-tags={(company.tags || []).join(',')}
+                  >
+                    <div class="company-profile-head">
+                      <a class="company-logo" href={resolveHref(company.href)}>
+                        <Media id={company.logoId || `logo-${company.id}`} alt={company.name} sizes="180px" />
+                      </a>
+                      {company.tags && company.tags.length > 0 && (
+                        <div class="company-tag-list" aria-label={`${company.name} RV categories`}>
+                          {company.tags.map((tag: string) => (
+                            <span class="company-tag">{tag}</span>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                    <div class="company-profile-body">
+                      <h3>
+                        <a href={resolveHref(company.href)}>{company.name}</a>
+                      </h3>
+                      {company.description && <p>{company.description}</p>}
+                    </div>
+                    <div class="company-profile-foot">
+                      <a class="card-action" href={resolveHref(company.href)}>
+                        <span>Visit {company.name}</span>
+                        <em aria-hidden="true">↗</em>
+                      </a>
+                    </div>
+                  </article>
                 ))}
+              </div>
+            </section>
+          );
+        })}
+      </div>
+
+      <section class="content-section tinted" id="thor-by-the-numbers">
+        <div class="section-inner">
+          <div class="section-header">
+            <div>
+              <p class="eyebrow">By the Numbers</p>
+              <h2>Global Scale &amp; Heritage</h2>
             </div>
-          </section>
-        );
-      })}
-    </div>
+          </div>
+          <dl class="company-stats-grid" aria-label="THOR Industries by the numbers">
+            {companyStats.map((stat) => (
+              <div class="company-stat-card">
+                <dt>{stat.label}</dt>
+                <dd>{stat.value}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </section>
+
+      <section class="content-section" id="thor-global-footprint">
+        <div class="section-inner narrow signup-callout">
+          <p class="eyebrow">Global Footprint</p>
+          <h2>{companyGlobalOverview.title}</h2>
+          <p>{companyGlobalOverview.text}</p>
+        </div>
+      </section>
+    </>
   )}
 
   {page.kind === 'faq' && (
@@ -1005,6 +1555,11 @@ function renderFaqSegments(paragraph: string, links?: Array<{ label: string; hre
     page.kind !== 'rv-types' &&
     page.kind !== 'financing' &&
     page.kind !== 'towing' &&
+    page.kind !== 'innovation' &&
+    page.kind !== 'history' &&
+    page.kind !== 'community' &&
+    page.kind !== 'news-events' &&
+    page.kind !== 'careers' &&
     page.kind !== 'companies' &&
     page.kind !== 'faq' && (
       <div class:list={[{ 'timeline-sections': page.slug === 'history' }]}>

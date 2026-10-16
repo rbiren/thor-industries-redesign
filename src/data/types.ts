@@ -54,6 +54,19 @@ export interface Page {
   label: string;
   lead?: string[];
   sections: Section[];
-  kind?: 'home' | 'stories' | 'category' | 'rv-types' | 'financing' | 'towing' | 'companies' | 'faq';
+  kind?:
+    | 'home'
+    | 'stories'
+    | 'category'
+    | 'rv-types'
+    | 'financing'
+    | 'towing'
+    | 'companies'
+    | 'faq'
+    | 'innovation'
+    | 'history'
+    | 'community'
+    | 'news-events'
+    | 'careers';
   categoryKey?: 'learn' | 'recipes' | 'on-the-road' | 'travel' | 'video';
 }

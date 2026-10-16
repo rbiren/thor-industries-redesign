@@ -3,6 +3,7 @@ import Media from './Media.astro';
 import { navigation } from '../data/navigation';
 import { pages } from '../data/pages';
 import { companies } from '../data/companies.mjs';
+import { newsEventsData } from '../data/corporate.mjs';
 import { homeFeaturedStories, homeNewsEvents, stories } from '../data/stories.mjs';
 import { isBuiltRoute, isExternalHref, navItemHref, routeHref } from '../lib/urls';
 import type { NavGroup, NavItem } from '../data/types';
@@ -35,7 +36,7 @@ const rawSearchEntries = [
   ...companies.map((company) => ({
     title: company.name,
     category: company.group,
-    text: `${company.name} ${company.group} THOR family company`,
+    text: `${company.name} ${company.group} ${company.description || ''} THOR family company`,
     href: company.href,
     external: true,
   })),
@@ -43,6 +44,13 @@ const rawSearchEntries = [
     title: item.title,
     category: item.eyebrow || 'Stories & News',
     text: `${item.title} ${item.text || ''} ${item.eyebrow || ''}`,
+    href: item.href,
+    external: true,
+  })),
+  ...newsEventsData.items.map((item) => ({
+    title: item.title,
+    category: item.date,
+    text: `${item.title} ${item.summary} ${item.date} ${item.sourceType || ''}`,
     href: item.href,
     external: true,
   })),

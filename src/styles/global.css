@@ -1741,6 +1741,606 @@
     .search-field {
       flex-direction: column;
     }
+    .pillars-grid,
+    .news-archive-grid,
+    .company-directory-grid,
+    .company-stats-grid {
+      grid-template-columns: 1fr;
+    }
+    .milestone-card,
+    .careers-company-card {
+      grid-template-columns: 1fr;
+      padding: 20px;
+    }
+    .news-dialog {
+      width: calc(100% - 24px);
+      padding: 20px;
+    }
+  }
+
+  /* Corporate Pages: Innovation, History, Community, News & Events, Careers, THOR Companies */
+  .button.ghost.dark {
+    background: transparent;
+    color: var(--ink);
+    border-color: var(--ink);
+  }
+
+  .button.ghost.dark:hover {
+    background: var(--ink);
+    color: #ffffff;
+  }
+
+  .corporate-intro {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .corporate-intro-mark {
+    width: 140px;
+    margin-bottom: 4px;
+  }
+
+  .corporate-intro-mark img {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .pillars-banner-media {
+    margin-bottom: 32px;
+    border-radius: 4px;
+    overflow: hidden;
+    border: 1px solid var(--line);
+    background: #1a1c19;
+  }
+
+  .pillars-banner-media img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  .pillars-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .pillar-card {
+    padding: 24px;
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .pillar-card h3 {
+    font-size: 18px;
+  }
+
+  .pillar-card p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.65;
+  }
+
+  .signup-callout {
+    padding: 36px 40px;
+    background: var(--sand);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .signup-disclaimer {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.6;
+    margin-top: 4px;
+  }
+
+  /* History Milestone Timeline */
+  .history-timeline {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    position: relative;
+  }
+
+  .history-milestone {
+    display: grid;
+    grid-template-columns: 112px minmax(0, 1fr);
+    gap: 24px;
+    align-items: start;
+  }
+
+  .milestone-marker {
+    position: sticky;
+    top: calc(var(--header) + 20px);
+    padding-top: 8px;
+  }
+
+  .milestone-year {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 88px;
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: var(--forest);
+    color: #ffffff;
+    font-family: var(--display);
+    font-size: 14px;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+  }
+
+  .milestone-card {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 28px;
+    padding: 28px;
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    align-items: center;
+  }
+
+  .milestone-media {
+    width: 100%;
+    height: 168px;
+    border-radius: 4px;
+    overflow: hidden;
+    background: var(--sand);
+    border: 1px solid var(--line);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+  }
+
+  .milestone-media picture,
+  .milestone-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .milestone-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .milestone-copy h3 {
+    font-size: 22px;
+    letter-spacing: -0.01em;
+  }
+
+  .milestone-copy p {
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* Community inline links */
+  #community-involvement .section-copy a {
+    color: var(--ink);
+    font-weight: 700;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  #community-involvement .section-copy a:hover {
+    color: var(--blue);
+    border-color: var(--blue);
+  }
+
+  /* News & Events Archive Grid & Preview Dialog */
+  .news-archive-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 24px;
+  }
+
+  .news-archive-card {
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .news-archive-media {
+    display: block;
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    background: var(--sand);
+    border-bottom: 1px solid var(--line);
+  }
+
+  .news-archive-media picture,
+  .news-archive-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .news-archive-card:hover .news-archive-media img {
+    transform: scale(1.03);
+  }
+
+  .news-archive-body {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+  }
+
+  .news-archive-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .news-source-badge {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: var(--sand);
+    color: var(--ink);
+    border: 1px solid var(--line);
+  }
+
+  .news-archive-body h3 {
+    font-size: 19px;
+    line-height: 1.35;
+  }
+
+  .news-archive-body h3 a:hover {
+    color: var(--forest);
+  }
+
+  .news-archive-body p {
+    color: var(--muted);
+    font-size: 14px;
+    line-height: 1.65;
+    flex: 1;
+  }
+
+  .news-archive-actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    margin-top: auto;
+  }
+
+  .news-preview-btn {
+    cursor: pointer;
+  }
+
+  .news-dialog {
+    width: min(680px, calc(100% - 32px));
+    margin: auto;
+    padding: 32px;
+    border: 1px solid var(--line);
+    border-radius: 6px;
+    background: var(--paper);
+    color: var(--ink);
+    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28);
+  }
+
+  .news-dialog::backdrop {
+    background: rgba(16, 19, 16, 0.68);
+    backdrop-filter: blur(3px);
+  }
+
+  .news-dialog-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .news-dialog-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .news-dialog-head h2 {
+    font-size: 24px;
+    line-height: 1.25;
+    margin-top: 4px;
+  }
+
+  .news-dialog-body {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .news-dialog-foot {
+    padding-top: 16px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  /* Careers Operating Company List */
+  .careers-culture-list {
+    margin-top: 12px;
+  }
+
+  .careers-family-intro {
+    max-width: 78ch;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    margin-bottom: 36px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  .careers-transparency-note a {
+    color: var(--ink);
+    font-weight: 700;
+    border-bottom: 1px solid var(--ink);
+  }
+
+  .careers-company-list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .careers-company-card {
+    display: grid;
+    grid-template-columns: 240px minmax(0, 1fr);
+    gap: 32px;
+    padding: 28px 32px;
+    background: var(--sand);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    align-items: center;
+  }
+
+  .careers-company-logo {
+    height: 120px;
+    padding: 16px;
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .careers-company-logo picture,
+  .careers-company-logo img {
+    max-width: 180px;
+    max-height: 76px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .careers-company-copy {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .careers-company-copy h3 {
+    font-size: 22px;
+  }
+
+  .careers-company-copy p {
+    color: var(--muted);
+    line-height: 1.7;
+  }
+
+  /* THOR Companies Global Directory */
+  .company-directory-controls {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-top: 32px;
+  }
+
+  .company-directory-controls .company-nav {
+    padding-top: 0;
+  }
+
+  .company-tag-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .company-directory-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .company-profile-card {
+    padding: 24px;
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    transition: border-color 0.2s ease, transform 0.2s ease;
+  }
+
+  .company-profile-card:hover {
+    border-color: var(--forest);
+    transform: translateY(-2px);
+  }
+
+  .company-profile-head {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .company-profile-head .company-logo {
+    height: 92px;
+    padding: 14px;
+    background: var(--sand);
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .company-profile-head .company-logo picture,
+  .company-profile-head .company-logo img {
+    max-width: 170px;
+    max-height: 60px;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+  }
+
+  .company-tag-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .company-tag {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: var(--sand);
+    color: var(--forest);
+    border: 1px solid var(--line);
+  }
+
+  .company-profile-body {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex: 1;
+  }
+
+  .company-profile-body h3 {
+    font-size: 18px;
+  }
+
+  .company-profile-body p {
+    font-size: 14px;
+    color: var(--muted);
+    line-height: 1.65;
+  }
+
+  .company-profile-foot {
+    padding-top: 12px;
+    border-top: 1px solid var(--line);
+    margin-top: auto;
+  }
+
+  .company-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+    margin: 0;
+  }
+
+  .company-stat-card {
+    padding: 28px 24px;
+    background: #ffffff;
+    border: 1px solid var(--line);
+    border-radius: 4px;
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 8px;
+  }
+
+  .company-stat-card dt {
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .company-stat-card dd {
+    margin: 0;
+    font-family: var(--display);
+    font-size: clamp(32px, 4vw, 44px);
+    font-weight: 800;
+    color: var(--forest);
+    line-height: 1;
+  }
+
+  @media (max-width: 960px) {
+    .pillars-grid,
+    .news-archive-grid,
+    .company-directory-grid,
+    .company-stats-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .history-milestone {
+      grid-template-columns: 1fr;
+      gap: 12px;
+    }
+    .milestone-marker {
+      position: static;
+      padding-top: 0;
+    }
+  }
+
+  @media (max-width: 640px) {
+    .pillars-grid,
+    .news-archive-grid,
+    .company-directory-grid,
+    .company-stats-grid {
+      grid-template-columns: 1fr;
+    }
+    .milestone-card,
+    .careers-company-card {
+      grid-template-columns: 1fr;
+      padding: 20px;
+    }
+    .signup-callout {
+      padding: 24px 20px;
+    }
+    .news-dialog {
+      width: calc(100% - 24px);
+      padding: 20px;
+    }
   }
 
   @media (prefers-reduced-motion: reduce) {

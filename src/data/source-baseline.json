@@ -13,7 +13,8 @@
     "heading": "Who Is THOR?",
     "copy": "In 1980, we embarked on a journey to connect people with nature, and families with each other. Today, we continue that journey by leading a global family of companies that make it easier and more enjoyable for families of all types to create lasting outdoor memories. Together we can Go Everywhere; Stay Anywhere.",
     "actionLabel": "Explore Companies",
-    "actionHref": "https://www.thorindustries.com/thor-companies",
+    "actionHref": "/thor-industries-redesign/thor-companies/",
+    "sourceActionHref": "https://www.thorindustries.com/thor-companies",
     "videoTitle": "2025 THOR Industries Board Video",
     "youtubeId": "HlXl0gFApyQ",
     "youtubeEmbed": "https://www.youtube.com/embed/HlXl0gFApyQ",
@@ -24,7 +25,8 @@
     "heading": "Meet the Family of Companies",
     "copy": "Together, the THOR family of companies represents the world’s largest manufacturer of recreational vehicles. We offer a comprehensive range of RVs and travel tools to inspire and empower everyone to Go Everywhere. Stay Anywhere. We’ve chosen our family wisely so your choice is that much easier.",
     "actionLabel": "View Family of Companies",
-    "actionHref": "https://www.thorindustries.com/thor-companies",
+    "actionHref": "/thor-industries-redesign/thor-companies/",
+    "sourceActionHref": "https://www.thorindustries.com/thor-companies",
     "brands": [
       { "name": "Airstream", "href": "https://www.thorindustries.com/thor-companies/airstream" },
       { "name": "CrossRoads", "href": "https://www.thorindustries.com/thor-companies/crossroads-rv" },
@@ -93,7 +95,8 @@
     "heading": "News and Events",
     "subtitle": "What's New and Upcoming",
     "actionLabel": "View All News and Events",
-    "actionHref": "https://www.thorindustries.com/news-events",
+    "actionHref": "/thor-industries-redesign/news-events/",
+    "sourceActionHref": "https://www.thorindustries.com/news-events",
     "cards": [
       {
         "title": "THOR Industries Introduces World's First Range Extended Electric Class A Motorhome",

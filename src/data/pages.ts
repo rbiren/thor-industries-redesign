@@ -10,21 +10,16 @@ import {
 } from './stories.mjs';
 import { homeRvTypes, rvTypes } from './rv-types.mjs';
 import { questions } from './faq.mjs';
+import {
+  careersData,
+  communityData,
+  historyData,
+  innovationData,
+  newsEventsData,
+  thorCompaniesData,
+} from './corporate.mjs';
 import { SOURCE_ORIGIN, sourceHandoffs } from './routes.ts';
 import { isBuiltRoute, routeHref } from '../lib/urls.ts';
-
-const timeline: Array<[string, string]> = [
-  ['1980', 'Thor Industries founded by Wade F. B. Thompson and Peter B. Orthwein with the acquisition of Airstream.'],
-  ['1984', 'Thor goes public, then moves to the New York Stock Exchange in 1986 under ticker THO.'],
-  ['1991', 'Acquired Dutchmen Manufacturing, expanding towable RV reach.'],
-  ['2001', 'Acquired Keystone RV Company, one of North America’s leading towable manufacturers.'],
-  ['2004', 'Acquired CrossRoads RV and Damon Motor Coach.'],
-  ['2010', 'Acquired Heartland RV and Combined Damon and Four Winds into Thor Motor Coach.'],
-  ['2016', 'Acquired Jayco, including Entegra Coach, Highland Ridge RV and Starcraft RV.'],
-  ['2019', 'Completed acquisition of Erwin Hymer Group, establishing global RV leadership across North America and Europe.'],
-  ['2020', 'Acquired Tiffin Motorhomes and launched the eMobility and innovation strategy.'],
-  ['2021', 'Acquired Airxcel, strengthening RV component and aftermarket capabilities.'],
-];
 
 const source = (path = '') => `${SOURCE_ORIGIN}${path}`;
 const tools = {
@@ -52,8 +47,6 @@ const section = (
   cards?: Card[],
   subtitle?: string,
 ): Section => ({ title, subtitle, text, href, action, image, cards });
-
-const newsCards: Card[] = homeNewsEvents;
 
 const storyPages: Page[] = categories.map((category) => {
   const catData = storyCategoryPages[category.slug as keyof typeof storyCategoryPages];
@@ -283,150 +276,171 @@ export const pages: Page[] = [
   },
   {
     slug: 'innovation',
-    title: 'Leading Through Innovation',
-    label: 'About THOR',
-    description: 'Building the Future of RV Travel',
-    hero: 'innovation',
-    heroAlt: 'An electric RV concept parked in a modern natural setting.',
-    lead: [
-      'Every step of the way, THOR has led the RV industry through innovation. From category-defining products to advanced manufacturing and connected technologies, we invest in ideas that make RV travel easier, more sustainable, and more enjoyable.',
-    ],
+    title: innovationData.hero.title,
+    label: innovationData.hero.eyebrow,
+    description: innovationData.hero.subtitle,
+    hero: innovationData.hero.image,
+    heroAlt: innovationData.hero.imageAlt,
+    kind: 'innovation',
+    lead: innovationData.intro.paragraphs,
     sections: [
-      section(
-        'Building the Future of RV Travel',
-        ['Explore recent innovation announcements, connected vehicle breakthroughs, and electrification milestones from across the THOR family.'],
-        routeHref('news-events'),
-        'Explore News & Events',
-        undefined,
-        newsCards,
-      ),
+      ...innovationData.callouts.map((c) => ({
+        title: c.title,
+        text: c.paragraphs,
+        bullets: c.bullets,
+        image: c.image,
+        imageAlt: c.imageAlt,
+        href: c.action?.[1],
+        action: c.action?.[0],
+      })),
+      {
+        title: innovationData.pillarsBanner.title,
+        text: innovationData.pillarsBanner.pillars.map((p) => `${p.name}: ${p.description}`),
+      },
+      {
+        title: innovationData.newsBanner.title,
+        subtitle: innovationData.newsBanner.eyebrow,
+        text: [innovationData.newsBanner.text],
+        href: innovationData.newsBanner.action[1],
+        action: innovationData.newsBanner.action[0],
+      },
+      ...innovationData.moreCallouts.map((c) => ({
+        title: c.title,
+        subtitle: c.eyebrow,
+        text: c.paragraphs,
+        image: c.image,
+        imageAlt: c.imageAlt,
+        href: c.action?.[1],
+        action: c.action?.[0],
+      })),
+      {
+        title: innovationData.spotlightCallout.title,
+        text: innovationData.spotlightCallout.paragraphs,
+        image: innovationData.spotlightCallout.image,
+        imageAlt: innovationData.spotlightCallout.imageAlt,
+        href: innovationData.spotlightCallout.action[1],
+        action: innovationData.spotlightCallout.action[0],
+      },
+      {
+        title: innovationData.labBanner.title,
+        text: [innovationData.labBanner.text],
+        image: innovationData.labBanner.image,
+        imageAlt: innovationData.labBanner.imageAlt,
+        href: innovationData.labBanner.action[1],
+        action: innovationData.labBanner.action[0],
+      },
+      {
+        title: innovationData.signup.title,
+        text: [innovationData.signup.text, innovationData.signup.disclaimer],
+        href: innovationData.signup.action[1],
+        action: innovationData.signup.action[0],
+      },
     ],
   },
   {
     slug: 'history',
-    title: 'Our History',
-    label: 'About THOR',
-    description: 'More than forty years of growth, acquisitions, and outdoor leadership.',
-    hero: 'history',
-    heroAlt: 'An Airstream trailer on the road through open country.',
-    lead: [
-      'THOR Industries began in 1980 when Wade F. B. Thompson and Peter B. Orthwein acquired Airstream, combining the first two letters of their last names to create THOR.',
-    ],
-    sections: timeline.map(([year, text]) => ({
-      title: year,
-      text: [text],
+    title: historyData.hero.title,
+    label: historyData.hero.eyebrow,
+    description: historyData.hero.subtitle,
+    hero: historyData.hero.image,
+    heroAlt: historyData.hero.imageAlt,
+    kind: 'history',
+    lead: historyData.intro.paragraphs,
+    sections: historyData.timeline.map((item) => ({
+      title: `${item.year} ${item.title}`,
+      text: [item.text],
+      image: item.image,
+      imageAlt: item.imageAlt,
     })),
   },
   {
     slug: 'community',
-    title: 'Building Our Community',
-    label: 'About THOR',
-    description: 'We are committed to supporting the communities where our employees and consumers live and play.',
-    hero: 'community',
-    heroAlt: 'An aerial view of a community connected to the outdoors.',
-    lead: [
-      'We have a role to play in supporting the communities that build and use THOR products. We’ve focused on three areas where we can have the greatest impact. For young people in our hometown, we’ve developed an innovative and hands-on education program to introduce them to career opportunities in their own backyard in the recreational vehicle industry. We have also taken a strategic approach to our philanthropic efforts and created new partnerships that will have lasting benefits for all who enjoy the outdoors.',
-    ],
-    sections: [
-      section(
-        'LEAP Program',
-        [
-          'The LEAP program supports local school districts in providing applied learning and real-world experience for their students. The three curriculum levels, fifth grade, eighth grade and high school, provide students with a differentiated educational experience to meet their varying needs.',
-        ],
-        source('/leap'),
-        'Learn More',
-        'leap',
-      ),
-      section(
-        'Community Involvement',
-        [
-          'THOR Industries has long been a proud supporter of United Way and Habitat for Humanity. Both organizations offer many ways that we have positively impacted the communities where our employees and consumers live, work and play.',
-        ],
-        undefined,
-        undefined,
-        'habitat',
-      ),
-    ],
+    title: communityData.hero.title,
+    label: communityData.hero.eyebrow,
+    description: communityData.hero.subtitle,
+    hero: communityData.hero.image,
+    heroAlt: communityData.hero.imageAlt,
+    kind: 'community',
+    lead: communityData.intro.paragraphs,
+    sections: communityData.callouts.map((c) => ({
+      title: c.title,
+      text: c.paragraphs,
+      image: c.image,
+      imageAlt: c.imageAlt,
+      href: c.action?.[1],
+      action: c.action?.[0],
+      links: c.links,
+    })),
   },
   {
     slug: 'news-events',
-    title: 'News and Events',
-    label: 'About THOR',
-    description: 'Get the latest on RV news, innovation and sustainability from the THOR Family of Companies.',
-    hero: 'news',
-    heroAlt: 'An RV parked beside Rimrock Lake, surrounded by evergreen trees.',
+    title: newsEventsData.hero.title,
+    label: newsEventsData.hero.eyebrow,
+    description: newsEventsData.hero.subtitle,
+    hero: newsEventsData.hero.image,
+    heroAlt: newsEventsData.hero.imageAlt,
+    kind: 'news-events',
+    lead: newsEventsData.intro.paragraphs,
     sections: [
       {
         title: 'News and Events',
-        cards: newsCards,
-        href: source('/news-events'),
-        action: 'Explore THOR’s Full News Archive',
+        cards: newsEventsData.items.map((item) => ({
+          title: item.title,
+          text: item.summary,
+          href: item.href,
+          image: item.image,
+          imageAlt: item.imageAlt,
+          eyebrow: item.date,
+          action: item.action,
+        })),
       },
     ],
   },
   {
     slug: 'careers',
-    title: 'Careers',
-    label: 'About THOR',
-    description: 'A strong company builds strong careers.',
-    hero: 'careers',
-    heroAlt: 'A team member assembling an RV inside a THOR family factory.',
-    lead: [
-      'Collectively, the THOR Industries family of companies comprises the largest manufacturers of recreational vehicles. Our family of operating companies produce exceptional RVs and RV components. We make it possible for our customers to live their dreams, and we take that responsibility seriously. We’re always looking for dedicated people who feel the same! Please explore our information and companies below to learn more about our culture and benefits.',
-      'THOR Industries, Inc. recognizes the values and contribution of people with differences in experience, perspectives and capabilities. Diversity encompasses a variety of differences including, but not limited to: age, gender, experience, education, ethnicity, religious beliefs, cultural backgrounds, lifestyle, responsibilities, etc. At THOR we are committed to: Inspiring an inclusive culture which embraces individual differences:',
-    ],
+    title: careersData.hero.title,
+    label: careersData.hero.eyebrow,
+    description: careersData.hero.subtitle,
+    hero: careersData.hero.image,
+    heroAlt: careersData.hero.imageAlt,
+    kind: 'careers',
+    lead: careersData.intro.paragraphs,
     sections: [
       {
         title: 'An Inclusive Culture',
-        bullets: [
-          'Treating team members fairly and with respect',
-          'Establishing a workplace free from discrimination, harassment and bullying',
-          'Training team members to be aware of their rights and responsibilities in regards to fair treatment',
-          'Providing equal opportunities based on ability, performance and potential',
-        ],
+        bullets: careersData.intro.bullets,
       },
       section(
-        'THOR Industries Global Headquarters',
-        [
-          'Located in the heart of Elkhart County, we are advocates for family and the great outdoors. We are catalysts for people to connect with each other and we are champions for the exploration of the world around us.',
-        ],
-        source('/careers-global-headquarters'),
-        'Explore Careers',
+        careersData.globalHqCallout.title,
+        [careersData.globalHqCallout.text],
+        careersData.globalHqCallout.action[1],
+        careersData.globalHqCallout.action[0],
+        careersData.globalHqCallout.image,
       ),
       {
-        title: 'The THOR Family of Companies',
-        text: [
-          'Our companies make different products in different ways, but what they all have in common is a dedication to doing the right thing — by our customers and our team members — every single day. If you feel the same, we’d love to have you. Get a glimpse into the culture of our companies, and join the THOR team that’s right for you.',
-        ],
-        cards: [
-          card('Airstream', 'Driven by innovation, rooted in humility, and obsessive about quality, the Airstream team is committed to making customers’ outdoor adventure dreams come true. And they’re building on a long legacy of success with every rivet.', 'https://www.airstream.com/company/careers/?utm_source=thorindustries.com&utm_medium=referral', 'logo-airstream', 'Now Hiring'),
-          card('Jayco, Entegra Coach, Heartland RV, Open Range and DRV', 'Jayco started as a family business, and the feeling of family has only grown since then. Every single person is treated with respect and dignity at every turn, and it doesn’t count as a success unless everybody wins.', 'https://www.jaycofamily.com/careers/?utm_source=thorindustries.com&utm_medium=referral', 'logo-jayco', 'Now Hiring'),
-          card('Keystone', 'The driving goal at Keystone is to make it easy for customers to find an RV that feels like it was made for them, and for team members to build that RV in the best possible way. The team works hard, works fast, shares ideas, and feels lucky to be doing it.', 'https://www.keystonerv.com/pickme', 'logo-keystone', 'Now Hiring'),
-          card('KZ and Venture', 'KZ RV hangs their hat on quality at every step of the way. It’s a team who cares about what they do and who they do it for, a passion you can see everywhere—from the loyalty and career longevity to the can-do spirit and willingness to do anything it takes to get the job done right.', 'https://www.kz-rv.com/careers/?utm_source=thorindustries.com&utm_medium=referral', 'logo-kz', 'Now Hiring'),
-          card('Postle Aluminum', 'As the backbone of the RV business, Postle supplies the aluminum that goes into THOR Industries RVs and so much more. From extrusion to fabrication to painting, there’s a trade for everyone and countless opportunities to join a hardworking team that will only keep growing.', 'https://workforcenow.adp.com/mascsr/default/mdf/recruitment/recruitment.html?cid=a4c08bd3-eedf-419a-9fb6-5d2ac8a3bafa&ccId=19000101_000001&lang=en_US/?utm_source=thorindustries.com&utm_medium=referral', undefined, 'Now Hiring'),
-          card('Thor Motor Coach', 'What does it take to be the number one motorhome brand in North America? Four plants, six production lines, three campuses, and more than 1,000 hardworking employees who help Thor Motor Coach accomplish big goals every single day.', 'https://www.thormotorcoach.com/company/careers?utm_source=thorindustries.com&utm_medium=referral', 'logo-tmc', 'Now Hiring'),
-          card('Tiffin Motorhomes', 'Every Tiffin employee plays an integral part in our mission to manufacture the finest motorhomes on the road today. By working at Tiffin, you can be a part of this mission and bring your perspective, experience, ideas, and dedication to helping us further that mission.', 'https://tiffin.applicantstack.com/x/openings', 'logo-tiffin', 'Now Hiring'),
-        ],
+        title: careersData.familySection.title,
+        text: [careersData.familySection.intro, careersData.familySection.transparencyNote],
+        cards: careersData.familySection.companies.map((c) =>
+          card(c.name, c.text, c.href, c.logo, undefined, c.action, c.logoAlt),
+        ),
       },
       section(
         'Transparency in Coverage',
-        ['The Transparency in Coverage Rule for group health plans requires disclosure of cost-sharing information in a machine-readable format.'],
-        'https://www.anthem.com/machine-readable-file/search',
+        [careersData.familySection.transparencyNote],
+        careersData.familySection.transparencyLink.href,
         'View Disclosure',
       ),
     ],
   },
   {
     slug: 'thor-companies',
-    title: 'Meet the Family of Companies',
-    label: 'THOR Companies',
-    description: 'North American RV brands, supply companies, European RV brands, and outdoor service partners across the THOR family.',
-    hero: 'family',
-    heroAlt: 'A couple sitting at the entry steps of an Airstream travel trailer.',
+    title: thorCompaniesData.hero.title,
+    label: thorCompaniesData.hero.eyebrow,
+    description: thorCompaniesData.hero.text,
+    hero: thorCompaniesData.hero.image,
+    heroAlt: thorCompaniesData.hero.imageAlt,
     kind: 'companies',
-    lead: [
-      'What started with the acquisition of Airstream in 1980 has grown into a global family of companies, trusted by hundreds of thousands of people across the globe to get them where they want to go safely and in style.',
-    ],
+    lead: [],
     sections: [],
   },
   {

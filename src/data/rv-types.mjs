@@ -179,7 +179,7 @@ export const rvTypesClosingCallouts = [
     title: 'BROWSE BY COMPANY',
     text: 'Explore our family of industry-leading companies and find your dream RV.',
     action: 'EXPLORE RVS',
-    href: 'https://www.thorindustries.com/find-my-rv/brand',
+    href: '/thor-industries-redesign/thor-companies/',
     image: 'rv-types-companies',
     imageAlt: 'THOR family of companies RV lineup',
   },

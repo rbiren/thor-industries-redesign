@@ -2211,6 +2211,396 @@
     ],
     "sha256": "fe4b51bedcd80225fb115b814e7a056dfbc2cc1d5e60507f57c9d915de073fce"
   },
+  "innovation-mission": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/c0f28e0c-5676-47a0-8d45-9d42f6feaaba_Sullivan_20210318_1673+JPG.jpg?auto=compress,format&rect=768,0,2560,2560&w=1000&h=1000",
+    "format": "webp",
+    "width": 1000,
+    "height": 1000,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "e4243bb6f4d06ee329b2c13843b2416bc5960655fad8bca4468f6f18d4cb1a39"
+  },
+  "innovation-goals": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/d3b80f3e-a507-40dc-a896-efd9d3e66593_20211014_00589.jpg?auto=compress,format&rect=853,0,3413,3413&w=1000&h=1000",
+    "format": "webp",
+    "width": 1000,
+    "height": 1000,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "230ff8a66d74b344e9a8e87c2c4450510b2fb8096d5647ed683432525b4fd102"
+  },
+  "innovation-pillars": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/b005c614-c656-4249-bab3-ce1591132985_ELECTRIFICATION+%281920+%C3%97+860+px%29.jpg?auto=compress,format&rect=0,0,1920,860&w=1920&h=860",
+    "format": "webp",
+    "width": 1920,
+    "height": 860,
+    "widths": [
+      480,
+      960,
+      1600,
+      1920
+    ],
+    "sha256": "d0e2fae2c4b8b7ae473b1a14940537e2fd6912cae129697a9eaeda6161c786ca"
+  },
+  "innovation-sustainability": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/bef438b2-626d-4ff7-b593-ddf93451c53d_iStock-1010795918.jpg?auto=compress,format&rect=851,0,3417,3417&w=1000&h=1000",
+    "format": "webp",
+    "width": 1000,
+    "height": 793,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "ad9c1d63af71b04a40441b9e888d5df0d68956a62d216e12f908d98e58031d98"
+  },
+  "innovation-spotlight": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/da81731a-33d0-46e3-abe2-bf62c99df342_THOR+INNOVATION+913A8898.jpg?auto=compress,format&rect=1119,0,4480,4480&w=1000&h=1000",
+    "format": "webp",
+    "width": 1000,
+    "height": 807,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "c325a863bcffba70ee7f99292ec9098ac44e061ee2e6302963c06c406748e38e"
+  },
+  "innovation-lab-banner": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/aK3WQWGNHVfTOVRp_THORINNOVATION913A8957.jpg?auto=format%2Ccompress&rect=0%2C301%2C6720%2C3010&w=1920&h=860",
+    "format": "webp",
+    "width": 1290,
+    "height": 860,
+    "widths": [
+      480,
+      960,
+      1290
+    ],
+    "sha256": "5a1a725c1cb47d1f451bd77b877e60f7abb89f05cf5dd282eaf1d667c78ff613"
+  },
+  "history-1980-founders": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/50180dd2ef68ceb2771d1f4599e8d98060946464_wade_peter_02.jpg?auto=compress,format&w=1000",
+    "format": "webp",
+    "width": 1000,
+    "height": 899,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "e0786b5c840a1b7524655befcf507deae505d9d73a012d907e81626e113a95a9"
+  },
+  "history-1982-general-coach": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/625dc15a45357a4e2e1877e432780bf52cdd2267_history-logo-xparent-general-coach.png?auto=compress,format&w=1000",
+    "format": "webp",
+    "width": 1000,
+    "height": 1000,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "fbbdb38407aede4cac72597ccc28536a108d9aaea9e5f49080540d51a1092f08"
+  },
+  "history-1984-nyse": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/236647738e0b9f3f1993bcd20bf6bea37030d5db_1984_sm.jpg?auto=compress,format&w=1000",
+    "format": "webp",
+    "width": 1000,
+    "height": 703,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "ff78044918305f648e83dbdcd88b48cb00c3987a44bdceb9481307aa02fb2521"
+  },
+  "history-1988-eldorado": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/9896323a26511fcd829ae2ba2bb5010ffd4ec4f7_history-logo-xparent-eldorado-national.png?auto=compress,format&w=1000",
+    "format": "webp",
+    "width": 1000,
+    "height": 1000,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "da8f4c96b9a441dac736fffc064002a886ff4b6dd96ab248dfec6e22664fee32"
+  },
+  "history-1992-fourwinds": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/065e37ac63584a88eeecc5e07a16a75190196127_thor-motor-coach-four-winds-logo-black.png?auto=compress,format&w=1000",
+    "format": "webp",
+    "width": 1000,
+    "height": 1000,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "d49bf846504e7308f1eea6118c75d573e636d7adef5b42adcc3c558f0c392b7d"
+  },
+  "history-1995-komfort": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/1b715d88b41963f7c06f374b3513fd214d43f67e_history-logo-xparent-komfort.png?auto=compress,format&w=1000",
+    "format": "webp",
+    "width": 1000,
+    "height": 1000,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "366c24c25df97675713f28f28e0097fded37b7f13ffab1e6cae79f5aadf233e9"
+  },
+  "history-1998-champion": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/7e5230d17eb9d491c1495e643ec9df5b5fde7dfd_history-logo-xparent-champion-bus.png?auto=compress,format&w=1000",
+    "format": "webp",
+    "width": 1000,
+    "height": 1000,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "0b749a4ab065d3ecfc1af21f282174f2c770330fcff6b1035b7c87856564e3a7"
+  },
+  "history-2003-damon": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/41d042878a8c6e5449ecdc73d9316b98ce5bfca2_history-logo-xparent-damon.png?auto=compress,format&w=1000",
+    "format": "webp",
+    "width": 1000,
+    "height": 1000,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "77bb2e0745d20f35786607732291459b1ea0586b563ec0da86153205d1b8b8e1"
+  },
+  "history-2005-goshen": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/bec9de33e66cbe4835f542e2683c93c25bdb7ca3_history-logo-xparent-goshen-coach.png?auto=compress,format&w=1000",
+    "format": "webp",
+    "width": 1000,
+    "height": 1000,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "014456183d1eb6e2705ea388cc03cc3eae93d8be10475ebcf74b06c3edd6cd9a"
+  },
+  "history-2010-sjc": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/c63c1e45df53cc1b32be2be8e5d1b4bb65f22dfb_history-logo-xparent-sjc-industries.png?auto=compress,format&w=1000",
+    "format": "webp",
+    "width": 1000,
+    "height": 1000,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "5f1b14494ac82d29b7ce37e3197d12e9a3a37733778206f47391521dc647518a"
+  },
+  "history-2012-krystal": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/f82f983003cd749f0633caf72ab02defb496ba85_history-logo-xparent-krystal.png?auto=compress,format&w=1000",
+    "format": "webp",
+    "width": 1000,
+    "height": 1000,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "384d74a989acdb2fe23b5552bc656aa9dc5b85d1ffb9507ccb2bc94d696ed6c5"
+  },
+  "history-2013-bison": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/101a670e9298e5f1e3b8e83c5cdec1c760284a12_bison-logo-dark.png?auto=compress,format&w=1000",
+    "format": "webp",
+    "width": 1000,
+    "height": 1000,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "34680bd543333c5086b2a05185359561ea9d0889bfa78e6b0c48e68bd033067e"
+  },
+  "history-2013-livinlite": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/679333a2e1c28da38e372a077e7aee05025f3141_history-logo-xparent-livin-lite.png?auto=compress,format&w=1000",
+    "format": "webp",
+    "width": 1000,
+    "height": 1000,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "15f11b2a480f0a1d0d58b197d40a01450436dc36b549debcbdf6d1ab093857ad"
+  },
+  "history-2015-cruiser-drv": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/1876e48a-096b-43ba-ba87-34fda6b9975a_Untitled+design+%2860%29.png?auto=compress,format&w=1000",
+    "format": "webp",
+    "width": 1000,
+    "height": 833,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "169d5a89c65cc22cc8130f3df730eb861431961561b3cd8f041b5f3eeb2c0ed4"
+  },
+  "history-2015-postle": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/96eb367e6030565f6fe4d2ed0397bb43ece6505b_post-logo-dark.png?auto=compress,format&w=1000",
+    "format": "webp",
+    "width": 1000,
+    "height": 1000,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "fc5ba26a93098b963fd6d3368a3c3c91f56dc9cff7e13bebe9617a8ab232a76b"
+  },
+  "history-2019-ehg": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/0ddeacca4c436950c617e8fdf9a00593d25698f8_ehg_logo2018_1c-01-2.png?auto=compress,format&w=1000",
+    "format": "webp",
+    "width": 1000,
+    "height": 1000,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "3253df65cd4293d1adaa1d7fadb0ddd82ffe35b457046c60d680b44608e22faa"
+  },
+  "news-yahoo-q2": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/efd83540-abb3-4608-8bb7-c44495b535d7_Untitled+design+%2823%29.png?auto=compress,format&rect=0,180,1080,720&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "f79636fe29459abacb679905b47744493a296099c59cf4000d61ca5d53caa3d6"
+  },
+  "news-vision-vehicle": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/52800fac-157b-42da-80a2-776ee91d7b28_thor-vision-vehicle-concept-exterior-1642618589.jpeg?auto=compress,format&rect=0,0,980,653&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "bc49876260c8e390c0a6ff5db662e797b47fd477ccb8e2cab44d0528fa293c8a"
+  },
+  "news-yahoo-coalition": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/235602cc-b438-4c24-b131-313e94add83a_Screen+Shot+2021-06-07+at+2.00.37+PM.png?auto=compress,format&rect=0,59,364,243&w=600&h=400",
+    "format": "webp",
+    "width": 599,
+    "height": 400,
+    "widths": [
+      480,
+      599
+    ],
+    "sha256": "f14286406b8528f89ce075dcf1b676beb3156fb8be36d7f7b97fa1a54edefa2c"
+  },
+  "news-first-descents": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/5f017fbe-f79f-4f03-9f18-d54954933dd4_download.png?auto=compress,format&rect=49,0,230,153&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 399,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "c6703ae99c2b9fe203e079336a42b4a531774b9ef8e1f3b437d265a55cc60501"
+  },
+  "news-ap-tiffin": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/1e6b8e83-6e2f-4866-a488-449f8a9c9541_AP+logo+2012.png?auto=compress,format&rect=0,125,512,341&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "eea6d169637db161a9f85e9ee8c3ebfdcf7d5230af0476e70a68ed11e70b8ca4"
+  },
+  "news-forbes-midcap": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/356cd2a2-1cae-4f1b-ac46-1c74492f8e6e_maxomatic-forbes-risk-capital-mid16x9.jpg?auto=compress,format&rect=202,0,2160,1440&w=600&h=400",
+    "format": "webp",
+    "width": 600,
+    "height": 400,
+    "widths": [
+      480,
+      600
+    ],
+    "sha256": "e364e3f796ca80b5b6fbeb6dd9bcffe693c2ca60d4df617efee27995300799ef"
+  },
+  "careers-hero": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images%2F4fcad7e2-cc6c-4252-b6cf-603f98cccd6a_dsc_3831+%281%29.jpg?auto=compress,format&rect=0,250,3000,875&w=1920&h=560",
+    "format": "webp",
+    "width": 1920,
+    "height": 560,
+    "widths": [
+      480,
+      960,
+      1600,
+      1920
+    ],
+    "sha256": "24903a2b27c277c7801768764cfef031c0994c544729a4dc42a391b22d5a4587"
+  },
+  "careers-team": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/36351f67-c004-4ef5-b8e9-b46777989d0a_IMG_9630.jpg?auto=compress,format&rect=223,0,1601,1068&w=697&h=465",
+    "format": "webp",
+    "width": 697,
+    "height": 465,
+    "widths": [
+      480,
+      697
+    ],
+    "sha256": "c252633e911adc5b7eb2afa649cca935a9672db32e2935e90ed4f47bf9016f1b"
+  },
+  "companies-hero": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Z46s6ZbqstJ99p2E_DJI_20240627170933_0240_D.jpg?auto=format%2Ccompress&rect=270%2C517%2C4321%2C1935&w=1920&h=860",
+    "format": "webp",
+    "width": 1920,
+    "height": 860,
+    "widths": [
+      480,
+      960,
+      1600,
+      1920
+    ],
+    "sha256": "7c1c89fcc97e5e069d53b34b365796e5b77364ab935eca494fb38bb8d6b71d2c"
+  },
+  "logo-highland-ridge": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/aRJFo7pReVYa4UQx_OpenRange_Roamer_Logo-5-.png?auto=format,compress&rect=0,0,1080,1080&w=536&h=536",
+    "format": "webp",
+    "width": 480,
+    "height": 192,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "238e7773784f9c797186ed0683a6e1faa6691b4f3ee2f7da1998b40d59e64dc8"
+  },
+  "logo-hymer": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/atZpZfasX6ZgL1fd_Burstner_Logo_Color.png?auto=format,compress&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 87,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "f6575c443a376c81e2c94833cd2fc40cf8422ae8ad602ab4327cede4f38ff247"
+  },
   "logo-airstream": {
     "source": "https://thorindustries-prod.zaneray.com/cms/images/aJpXnaTt2nPbaL14_airstream-color-square.png?auto=compress,format&w=536",
     "format": "webp",

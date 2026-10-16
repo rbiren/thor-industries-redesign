@@ -14,7 +14,21 @@ import {
 } from '../src/data/routes.ts';
 import { footerGroups, footerLinks, navigation, socialLinks } from '../src/data/navigation.ts';
 import { builtPages, pages } from '../src/data/pages.ts';
-import { companies, companyGroups, homeBrands } from '../src/data/companies.mjs';
+import {
+  companies,
+  companyGlobalOverview,
+  companyGroups,
+  companyStats,
+  homeBrands,
+} from '../src/data/companies.mjs';
+import {
+  careersData,
+  communityData,
+  historyData,
+  innovationData,
+  newsEventsData,
+  thorCompaniesData,
+} from '../src/data/corporate.mjs';
 import { homeRvTypes, rvTypes, rvTypesClosingCallouts } from '../src/data/rv-types.mjs';
 import {
   categories,
@@ -67,6 +81,12 @@ const expectedBuiltSlugs = [
   'financing-your-rv',
   'towing-guide',
   'faq',
+  'innovation',
+  'history',
+  'community',
+  'news-events',
+  'careers',
+  'thor-companies',
 ];
 
 async function walkHtmlFiles(dir) {
@@ -120,19 +140,25 @@ test('Base-aware URL helpers prefix built routes and hand off unbuilt routes cle
   assert.equal(routeHref('financing-your-rv'), '/thor-industries-redesign/financing-your-rv/');
   assert.equal(routeHref('towing-guide'), '/thor-industries-redesign/towing-guide/');
   assert.equal(routeHref('faq'), '/thor-industries-redesign/faq/');
-  assert.equal(routeHref('thor-companies'), 'https://www.thorindustries.com/thor-companies');
+  assert.equal(routeHref('innovation'), '/thor-industries-redesign/innovation/');
+  assert.equal(routeHref('history'), '/thor-industries-redesign/history/');
+  assert.equal(routeHref('community'), '/thor-industries-redesign/community/');
+  assert.equal(routeHref('news-events'), '/thor-industries-redesign/news-events/');
+  assert.equal(routeHref('careers'), '/thor-industries-redesign/careers/');
+  assert.equal(routeHref('thor-companies'), '/thor-industries-redesign/thor-companies/');
   assert.equal(routeHref('sustainability-report'), 'https://www.thorindustries.com/sustainability-report');
   assert.equal(routeHref('supply-management'), 'https://www.thorindustries.com/supply-management');
   assert.equal(resolveHref('/stories/'), '/thor-industries-redesign/stories/');
   assert.equal(resolveHref('/rv-types/'), '/thor-industries-redesign/rv-types/');
-  assert.equal(resolveHref('/thor-companies/'), 'https://www.thorindustries.com/thor-companies');
+  assert.equal(resolveHref('/thor-companies/'), '/thor-industries-redesign/thor-companies/');
+  assert.equal(resolveHref('/news-events/'), '/thor-industries-redesign/news-events/');
   assert.equal(resolveHref('/'), '/thor-industries-redesign/');
   assert.equal(resolveHref(sourceHandoffs.investors), 'https://ir.thorindustries.com/ir-home/default.aspx');
   assert.equal(resolveHref(sourceHandoffs.rvFinder), 'https://www.thorindustries.com/find-my-rv');
   assert.equal(resolveHref(sourceHandoffs.tripCalculator), 'https://www.thorindustries.com/trip-calculator');
 });
 
-test('Navigation model exposes primary THOR destinations and routes built Stories/RV Education pages locally', () => {
+test('Navigation model exposes primary THOR destinations and routes built Stories/RV Education/Corporate pages locally', () => {
   const topLabels = navigation.map((group) => group.label);
   assert.deepEqual(topLabels, [
     'RV Finder',
@@ -169,7 +195,7 @@ test('Navigation model exposes primary THOR destinations and routes built Storie
   assert.equal(footerLinks.length, 4);
   assert.equal(socialLinks.length, 5);
   assert.equal(companyGroups.length, 4);
-  assert.ok(companies.length >= 45);
+  assert.equal(companies.length, 50);
   assert.equal(homeBrands.length, 12);
   assert.equal(homeRvTypes.length, 6);
   assert.equal(homeBuyingSeason.length, 2);
@@ -177,13 +203,18 @@ test('Navigation model exposes primary THOR destinations and routes built Storie
   assert.equal(homeNewsEvents.length, 9);
 });
 
-test('Static build outputs all 11 built routes plus 404.html and preserves VAL-HOME-001..005 against source baseline', async () => {
+test('Static build outputs all 17 built routes plus 404.html and preserves VAL-HOME-001..005 against source baseline', async () => {
   const htmlFiles = (await walkHtmlFiles('dist')).map((file) => path.relative('dist', file)).sort();
   assert.deepEqual(htmlFiles, [
     '404.html',
+    'careers/index.html',
+    'community/index.html',
     'faq/index.html',
     'financing-your-rv/index.html',
+    'history/index.html',
     'index.html',
+    'innovation/index.html',
+    'news-events/index.html',
     'rv-types/index.html',
     'stories/category/learn/index.html',
     'stories/category/on-the-road/index.html',
@@ -191,6 +222,7 @@ test('Static build outputs all 11 built routes plus 404.html and preserves VAL-H
     'stories/category/travel/index.html',
     'stories/category/video/index.html',
     'stories/index.html',
+    'thor-companies/index.html',
     'towing-guide/index.html',
   ]);
 
@@ -348,7 +380,7 @@ test('Homepage capture-derived regressions verify module/card associations again
   const expectedFamilyIntro =
     'Together, the THOR family of companies represents the world’s largest manufacturer of recreational vehicles. We offer a comprehensive range of RVs and travel tools to inspire and empower everyone to Go Everywhere. Stay Anywhere. We’ve chosen our family wisely so your choice is that much easier.';
   const expectedFamilyCta = 'View Family of Companies';
-  const expectedFamilyHref = 'https://www.thorindustries.com/thor-companies';
+  const expectedFamilyHref = '/thor-industries-redesign/thor-companies/';
 
   const familySection = extractSection(homeHtml, 'family-of-companies');
   assert.ok(familySection.includes('<h2>Meet the Family of Companies</h2>'));
@@ -799,6 +831,160 @@ test('RV Education routes (/rv-types/, /financing-your-rv/, /towing-guide/, /faq
     faqCards.map((c) => c.href),
     faqRelatedStories.map((s) => s.href),
   );
+});
+
+test('Corporate routes (/innovation/, /history/, /community/, /news-events/, /careers/) and /thor-companies/ satisfy VAL-CORP-001, VAL-CORP-002, and VAL-CORP-003', async () => {
+  // VAL-CORP-001: /innovation/, /history/, /community/
+  const innovationHtml = await readFile('dist/innovation/index.html', 'utf8');
+  assert.ok(innovationHtml.includes(`<h1>${innovationData.hero.title}</h1>`));
+  assert.ok(innovationHtml.includes(innovationData.hero.subtitle));
+  for (const para of innovationData.intro.paragraphs) {
+    assert.ok(
+      innovationHtml.includes(para) || innovationHtml.includes(para.replaceAll("'", '&#39;')),
+      `Missing innovation intro paragraph: ${para.slice(0, 40)}`,
+    );
+  }
+  for (const callout of innovationData.callouts) {
+    assert.ok(innovationHtml.includes(`<h2>${callout.title}</h2>`));
+    for (const para of callout.paragraphs ?? []) {
+      assert.ok(
+        innovationHtml.includes(para) || innovationHtml.includes(para.replaceAll("'", '&#39;')),
+      );
+    }
+    for (const bullet of callout.bullets ?? []) {
+      assert.ok(innovationHtml.includes(`<li>${bullet}</li>`));
+    }
+  }
+  assert.ok(innovationHtml.includes(innovationData.pillarsBanner.title));
+  for (const pillar of innovationData.pillarsBanner.pillars) {
+    assert.ok(innovationHtml.includes(`<h3>${pillar.name}</h3>`));
+    assert.ok(innovationHtml.includes(pillar.description));
+  }
+  assert.ok(innovationHtml.includes(innovationData.newsBanner.title));
+  assert.ok(innovationHtml.includes(`href="${innovationData.newsBanner.action[1]}"`));
+  assert.ok(innovationHtml.includes('href="/thor-industries-redesign/news-events/"'));
+  assert.ok(innovationHtml.includes(`href="${innovationData.moreCallouts[0].action[1]}"`));
+  assert.ok(innovationHtml.includes(`href="${innovationData.spotlightCallout.action[1]}"`));
+  assert.ok(innovationHtml.includes(`href="${innovationData.labBanner.action[1]}"`));
+  assert.ok(innovationHtml.includes(innovationData.signup.title));
+
+  const historyHtml = await readFile('dist/history/index.html', 'utf8');
+  assert.ok(historyHtml.includes(`<h1>${historyData.hero.title}</h1>`));
+  for (const para of historyData.intro.paragraphs) {
+    assert.ok(
+      historyHtml.includes(para) || historyHtml.includes(para.replaceAll("'", '&#39;')),
+      `Missing history intro paragraph: ${para.slice(0, 40)}`,
+    );
+  }
+  assert.equal(historyData.timeline.length, 27);
+  const milestoneMatches = [...historyHtml.matchAll(/<li\b[^>]*class="history-milestone"[^>]*>/g)];
+  assert.equal(milestoneMatches.length, 27, 'Expected 27 chronological milestones on /history/');
+  for (const item of historyData.timeline) {
+    assert.ok(historyHtml.includes(`<span class="milestone-year">${item.year}</span>`));
+    const escapedTitle = item.title.replaceAll('&', '&amp;').replaceAll("'", '&#39;');
+    assert.ok(
+      historyHtml.includes(`<h3>${item.title}</h3>`) ||
+        historyHtml.includes(`<h3>${escapedTitle}</h3>`),
+      `Missing history milestone title: ${item.title}`,
+    );
+    const snippet = item.text.slice(0, 36);
+    assert.ok(
+      historyHtml.includes(snippet) || historyHtml.includes(snippet.replaceAll("'", '&#39;')),
+      `Missing history milestone text for ${item.year} ${item.title}`,
+    );
+  }
+
+  const communityHtml = await readFile('dist/community/index.html', 'utf8');
+  assert.ok(communityHtml.includes(`<h1>${communityData.hero.title}</h1>`));
+  assert.ok(communityHtml.includes(communityData.hero.subtitle));
+  for (const para of communityData.intro.paragraphs) {
+    assert.ok(
+      communityHtml.includes(para) || communityHtml.includes(para.replaceAll("'", '&#39;')),
+    );
+  }
+  assert.ok(communityHtml.includes('<h2>LEAP PROGRAM</h2>'));
+  assert.ok(communityHtml.includes('href="https://www.thorindustries.com/leap"'));
+  assert.ok(communityHtml.includes('<h2>COMMUNITY INVOLVEMENT</h2>'));
+  assert.ok(communityHtml.includes('href="https://www.unitedway.org/"'));
+  assert.ok(communityHtml.includes('href="https://www.habitat.org/"'));
+
+  // VAL-CORP-002: /news-events/ and /careers/
+  const newsHtml = await readFile('dist/news-events/index.html', 'utf8');
+  assert.ok(newsHtml.includes(`<h1>${newsEventsData.hero.title}</h1>`));
+  assert.equal(newsEventsData.items.length, 15);
+  const newsCardMatches = [...newsHtml.matchAll(/<article\b[^>]*class="news-archive-card"[^>]*>/g)];
+  assert.equal(newsCardMatches.length, 15, 'Expected 15 news & events items on /news-events/');
+  for (const item of newsEventsData.items) {
+    assert.ok(newsHtml.includes(item.date), `Missing news date ${item.date}`);
+    assert.ok(
+      newsHtml.includes(item.title) || newsHtml.includes(item.title.replaceAll("'", '&#39;')),
+      `Missing news title ${item.title}`,
+    );
+    assert.ok(newsHtml.includes(`href="${item.href}"`), `Missing news href ${item.href}`);
+  }
+  assert.ok(newsHtml.includes('id="news-preview-dialog"'));
+  assert.ok(newsHtml.includes('data-news-open'));
+
+  const careersHtml = await readFile('dist/careers/index.html', 'utf8');
+  assert.ok(careersHtml.includes(`<h1>${careersData.hero.title}</h1>`));
+  assert.ok(careersHtml.includes(careersData.hero.subtitle));
+  for (const bullet of careersData.intro.bullets) {
+    assert.ok(careersHtml.includes(`<li>${bullet}</li>`));
+  }
+  assert.ok(careersHtml.includes(careersData.globalHqCallout.title));
+  assert.ok(careersHtml.includes(`href="${careersData.globalHqCallout.action[1]}"`));
+  assert.ok(careersHtml.includes(`href="${careersData.familySection.transparencyLink.href}"`));
+  assert.equal(careersData.familySection.companies.length, 7);
+  for (const company of careersData.familySection.companies) {
+    assert.ok(careersHtml.includes(`<h3>${company.name}</h3>`));
+    const escapedHref = company.href.replaceAll('&', '&amp;');
+    assert.ok(
+      careersHtml.includes(`href="${company.href}"`) || careersHtml.includes(`href="${escapedHref}"`),
+      `Missing recruiting link for ${company.name}: ${company.href}`,
+    );
+  }
+  const mainCareers = careersHtml.slice(careersHtml.indexOf('<main'), careersHtml.indexOf('</main>'));
+  assert.ok(
+    !/<(?:input|select|textarea)\b/i.test(mainCareers),
+    'Careers page <main> must not contain fake local job application form inputs',
+  );
+
+  // VAL-CORP-003: /thor-companies/
+  const companiesHtml = await readFile('dist/thor-companies/index.html', 'utf8');
+  assert.ok(companiesHtml.includes(`<h1>${thorCompaniesData.hero.title}</h1>`));
+  assert.deepEqual(companyGroups, [
+    'North American RV Manufacturers',
+    'Other North American Companies',
+    'European Caravan Manufacturers',
+    'Other European Companies',
+  ]);
+  for (const group of companyGroups) {
+    assert.ok(companiesHtml.includes(`<h2>${group}</h2>`), `Missing company group heading ${group}`);
+  }
+  const companyCardMatches = [...companiesHtml.matchAll(/<article\b[^>]*class="company-profile-card"[^>]*>/g)];
+  assert.equal(companyCardMatches.length, 50, 'Expected all 50 global companies on /thor-companies/');
+  for (const company of companies) {
+    const escapedName = company.name.replaceAll('&', '&amp;');
+    assert.ok(
+      companiesHtml.includes(company.name) || companiesHtml.includes(escapedName),
+      `Missing company ${company.name} on /thor-companies/`,
+    );
+    assert.ok(
+      companiesHtml.includes(`href="${company.href}"`),
+      `Missing specific brand profile/external URL for ${company.name}: ${company.href}`,
+    );
+    assert.ok(company.logoId, `Missing logoId for ${company.name}`);
+    assert.ok(company.description && company.description.length > 15, `Missing description for ${company.name}`);
+  }
+  assert.ok(companiesHtml.includes('data-company-filter="all"'));
+  assert.ok(companiesHtml.includes('data-company-filter="TOWABLES"'));
+  assert.ok(companiesHtml.includes('data-company-filter="MOTORIZED"'));
+  for (const stat of companyStats) {
+    const escapedValue = stat.value.replaceAll('+', '+');
+    assert.ok(companiesHtml.includes(`<dd>${escapedValue}</dd>`));
+    assert.ok(companiesHtml.includes(`<dt>${stat.label}</dt>`));
+  }
+  assert.ok(companiesHtml.includes(companyGlobalOverview.title));
 });
 
 test('404 is real static content and the deploy workflow uploads only built output', async () => {

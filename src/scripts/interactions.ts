@@ -88,12 +88,17 @@ const bindDialog = (
 const searchDialog = document.querySelector<HTMLDialogElement>('#site-search');
 const menuDialog = document.querySelector<HTMLDialogElement>('#mobile-menu');
 const videoDialog = document.querySelector<HTMLDialogElement>('#video-dialog');
+const newsDialog = document.querySelector<HTMLDialogElement>('#news-preview-dialog');
 const searchInput = document.querySelector<HTMLInputElement>('[data-search-input]');
 const searchResults = document.querySelector<HTMLElement>('[data-search-results]');
 const searchStatus = document.querySelector<HTMLElement>('[data-search-status]');
 const searchForm = document.querySelector<HTMLFormElement>('[data-search-form]');
 const searchScript = document.querySelector<HTMLScriptElement>('[data-search-index]');
 const videoContainer = document.querySelector<HTMLElement>('[data-video-container]');
+const newsDialogMeta = document.querySelector<HTMLElement>('[data-news-dialog-meta]');
+const newsDialogTitle = document.querySelector<HTMLElement>('[data-news-dialog-title]');
+const newsDialogBody = document.querySelector<HTMLElement>('[data-news-dialog-body]');
+const newsDialogLink = document.querySelector<HTMLAnchorElement>('[data-news-dialog-link]');
 const entries: SearchEntry[] = searchScript?.textContent ? JSON.parse(searchScript.textContent) : [];
 
 const renderResults = (query: string) => {
@@ -172,9 +177,49 @@ bindDialog(
   },
 );
 
+bindDialog(
+  newsDialog,
+  '[data-news-open]',
+  '[data-news-close]',
+  (trigger) => {
+    if (!trigger) return;
+    const title = trigger.getAttribute('data-news-title') || 'Article Preview';
+    const date = trigger.getAttribute('data-news-date') || '';
+    const source = trigger.getAttribute('data-news-source') || 'THOR News';
+    const href = trigger.getAttribute('data-news-href') || 'https://www.thorindustries.com/news-events';
+    const rawParagraphs = trigger.getAttribute('data-news-paragraphs') || '[]';
+    let paragraphs: string[] = [];
+    try {
+      paragraphs = JSON.parse(rawParagraphs);
+    } catch {
+      paragraphs = [];
+    }
+
+    if (newsDialogMeta) {
+      newsDialogMeta.textContent = [date, source].filter(Boolean).join(' · ');
+    }
+    if (newsDialogTitle) {
+      newsDialogTitle.textContent = title;
+    }
+    if (newsDialogBody) {
+      newsDialogBody.replaceChildren(
+        ...paragraphs.map((text) => {
+          const p = document.createElement('p');
+          p.textContent = text;
+          return p;
+        }),
+      );
+    }
+    if (newsDialogLink) {
+      newsDialogLink.href = href;
+    }
+    newsDialog?.querySelector<HTMLElement>('[data-news-close]')?.focus();
+  },
+);
+
 document.addEventListener('keydown', (event) => {
   if (event.key === 'Escape') {
-    const openDialog = [searchDialog, menuDialog, videoDialog].find((d) => d?.open);
+    const openDialog = [searchDialog, menuDialog, videoDialog, newsDialog].find((d) => d?.open);
     if (openDialog) {
       event.preventDefault();
       openDialog.close();
@@ -346,4 +391,46 @@ if (faqList) {
     });
   });
 }
+
+// THOR Companies directory tag filters
+const companyDirectory = document.querySelector<HTMLElement>('[data-company-directory]');
+if (companyDirectory) {
+  const filterBtns = Array.from(
+    companyDirectory.querySelectorAll<HTMLButtonElement>('[data-company-filter]'),
+  );
+  const companySections = Array.from(
+    companyDirectory.querySelectorAll<HTMLElement>('[data-company-section]'),
+  );
+
+  const applyCompanyFilter = (filterValue: string) => {
+    filterBtns.forEach((btn) => {
+      const active = btn.getAttribute('data-company-filter') === filterValue;
+      btn.classList.toggle('is-active', active);
+      btn.setAttribute('aria-pressed', String(active));
+    });
+
+    companySections.forEach((section) => {
+      const cards = Array.from(section.querySelectorAll<HTMLElement>('[data-company-card]'));
+      let visibleInSection = 0;
+      cards.forEach((card) => {
+        const tags = (card.getAttribute('data-company-tags') || '')
+          .split(',')
+          .map((t) => t.trim())
+          .filter(Boolean);
+        const matches = filterValue === 'all' || tags.includes(filterValue);
+        card.hidden = !matches;
+        if (matches) visibleInSection += 1;
+      });
+      section.hidden = visibleInSection === 0;
+    });
+  };
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const val = btn.getAttribute('data-company-filter') || 'all';
+      applyCompanyFilter(val);
+    });
+  });
+}
+
 
