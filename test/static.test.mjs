@@ -237,6 +237,175 @@ test('Homepage preview build outputs only / and /404.html and preserves VAL-HOME
   }
 });
 
+function extractSection(html, sectionId) {
+  const marker = `id="${sectionId}"`;
+  const idx = html.indexOf(marker);
+  assert.ok(idx !== -1, `Missing section #${sectionId}`);
+  const start = html.lastIndexOf('<section', idx);
+  const end = html.indexOf('</section>', idx);
+  assert.ok(start !== -1 && end !== -1, `Malformed section bounds for #${sectionId}`);
+  return html.slice(start, end + '</section>'.length);
+}
+
+function decodeHtmlEntities(str) {
+  return str
+    .replaceAll('&amp;', '&')
+    .replaceAll('&#38;', '&')
+    .replaceAll('&#39;', "'")
+    .replaceAll('&quot;', '"');
+}
+
+function parseContentCards(sectionHtml) {
+  const articles = [...sectionHtml.matchAll(/<article\b[^>]*class="[^"]*content-card[^"]*"[^>]*>([\s\S]*?)<\/article>/g)];
+  return articles.map((match) => {
+    const body = match[1];
+    const hrefMatch = body.match(/<a\b[^>]*class="card-link"[^>]*href="([^"]+)"/);
+    const eyebrowMatch = body.match(/<p\b[^>]*class="eyebrow"[^>]*>([\s\S]*?)<\/p>/);
+    const titleMatch = body.match(/<h3>([\s\S]*?)<\/h3>/);
+    const actionMatch = body.match(/<span\b[^>]*class="text-link"[^>]*>\s*([\s\S]*?)\s*<span\b/);
+    return {
+      href: hrefMatch ? hrefMatch[1].trim() : '',
+      eyebrow: eyebrowMatch ? decodeHtmlEntities(eyebrowMatch[1].trim()) : '',
+      title: titleMatch ? decodeHtmlEntities(titleMatch[1].trim()) : '',
+      action: actionMatch ? decodeHtmlEntities(actionMatch[1].trim()) : '',
+    };
+  });
+}
+
+test('Homepage capture-derived regressions verify module/card associations against retained raw source literals', async () => {
+  const homeHtml = await readFile('dist/index.html', 'utf8');
+  const baseline = JSON.parse(await readFile('src/data/source-baseline.json', 'utf8'));
+
+  // 1. Hero must not include the unsupported "Global Operating Brands" / "40+" statistic
+  const heroEnd = homeHtml.indexOf('</section>');
+  const heroHtml = homeHtml.slice(0, heroEnd + '</section>'.length);
+  assert.ok(heroHtml.includes('class="page-hero home-hero"'));
+  assert.ok(!heroHtml.includes('Global Operating Brands'), 'Hero must not include unsupported Global Operating Brands label');
+  assert.ok(!heroHtml.includes('40+'), 'Hero must not include unsupported 40+ statistic');
+  assert.ok(!homeHtml.includes('Global Operating Brands'));
+
+  // 2. Company & RV-type modules preserve exact captured copy and hub CTA labels within their section headers
+  const expectedFamilyIntro =
+    'Together, the THOR family of companies represents the world’s largest manufacturer of recreational vehicles. We offer a comprehensive range of RVs and travel tools to inspire and empower everyone to Go Everywhere. Stay Anywhere. We’ve chosen our family wisely so your choice is that much easier.';
+  const expectedFamilyCta = 'View Family of Companies';
+  const expectedFamilyHref = 'https://www.thorindustries.com/thor-companies';
+
+  const familySection = extractSection(homeHtml, 'family-of-companies');
+  assert.ok(familySection.includes('<h2>Meet the Family of Companies</h2>'));
+  assert.ok(familySection.includes(`<p>${expectedFamilyIntro}</p>`), 'Family of Companies section missing captured intro copy');
+  assert.ok(!familySection.includes('What started with the acquisition of Airstream'), 'Substituted family intro copy must be removed');
+  const familyHeaderCta = familySection.match(/<a\b[^>]*class="button dark"[^>]*href="([^"]+)"[^>]*>\s*([\s\S]*?)\s*<\/a>/);
+  assert.ok(familyHeaderCta, 'Missing Family of Companies hub CTA');
+  assert.equal(familyHeaderCta[1], expectedFamilyHref);
+  assert.equal(familyHeaderCta[2].trim(), expectedFamilyCta);
+
+  assert.equal(baseline.familyOfCompanies.copy, expectedFamilyIntro);
+  assert.equal(baseline.familyOfCompanies.actionLabel, expectedFamilyCta);
+  assert.equal(baseline.familyOfCompanies.actionHref, expectedFamilyHref);
+
+  const expectedRvTypesSubtitle = 'We’ll help you figure out what kind of RV is right for you.';
+  const expectedRvTypesCta = 'View All';
+  const expectedRvTypesHref = 'https://www.thorindustries.com/rv-types';
+
+  const rvTypesSection = extractSection(homeHtml, 'explore-rv-types');
+  assert.ok(rvTypesSection.includes('<h2>Explore RV Types</h2>'));
+  assert.ok(rvTypesSection.includes(`<p>${expectedRvTypesSubtitle}</p>`), 'Explore RV Types section missing captured subtitle');
+  assert.ok(!rvTypesSection.includes('Searching for your dream RV?'), 'Substituted RV types copy must be removed');
+  const rvTypesHeaderCta = rvTypesSection.match(/<a\b[^>]*class="button dark"[^>]*href="([^"]+)"[^>]*>\s*([\s\S]*?)\s*<\/a>/);
+  assert.ok(rvTypesHeaderCta, 'Missing Explore RV Types hub CTA');
+  assert.equal(rvTypesHeaderCta[1], expectedRvTypesHref);
+  assert.equal(rvTypesHeaderCta[2].trim(), expectedRvTypesCta);
+
+  assert.equal(baseline.rvTypes.copy, expectedRvTypesSubtitle);
+  assert.equal(baseline.rvTypes.actionLabel, expectedRvTypesCta);
+  assert.equal(baseline.rvTypes.actionHref, expectedRvTypesHref);
+
+  // 3. Featured Stories: all 9 card (title, href, action) tuples within #featured-stories match raw capture
+  const expectedFeaturedStories = [
+    {
+      title: 'Three Checklists To Help You Find Your Perfect RV',
+      href: 'https://www.thorindustries.com/stories/checklists-find-rv',
+      action: 'Read Full Story',
+    },
+    {
+      title: 'Trackside Service: Why Your Next RV Repair Might Be at the Racetrack',
+      href: 'https://www.thorindustries.com/stories/thor-complimentary-mobile-service',
+      action: 'Read Full Story',
+    },
+    {
+      title: 'Ready to buy an RV?',
+      href: 'https://www.thorindustries.com/stories/rv-dealer-conversation',
+      action: 'Read Full Story',
+    },
+    {
+      title: '12 Hidden Gems of the National Forest System',
+      href: 'https://www.thorindustries.com/stories/national-forest-hidden-gems',
+      action: 'Read Full Story',
+    },
+    {
+      title: 'A Tour of Bailey & Nicole Damberg’s KZ Durango Gold Fifth Wheel RV',
+      href: 'https://www.thorindustries.com/stories/welcome-to-my-rv-damberg',
+      action: 'Read Full Story',
+    },
+    {
+      title: 'Your Guide to Alternative RV Campsites',
+      href: 'https://www.thorindustries.com/stories/alternative-campsites-guide',
+      action: 'Watch Now',
+    },
+    {
+      title: 'The Magic of the International Balloon Fiesta',
+      href: 'https://www.thorindustries.com/stories/rv-tips-international-balloon-fiesta',
+      action: 'Watch Now',
+    },
+    {
+      title: 'My Van Life',
+      href: 'https://www.thorindustries.com/stories/van-life-kalen-thorien',
+      action: 'Watch Now',
+    },
+    {
+      title: 'Must-Have Items for RVing Families',
+      href: 'https://www.thorindustries.com/stories/must-have-items-for-rv-families',
+      action: 'Read Full Story',
+    },
+  ];
+
+  const featuredSection = extractSection(homeHtml, 'featured-stories');
+  const renderedFeaturedCards = parseContentCards(featuredSection).map(({ title, href, action }) => ({
+    title,
+    href,
+    action,
+  }));
+  assert.deepEqual(renderedFeaturedCards, expectedFeaturedStories);
+  assert.deepEqual(baseline.featuredStories.cards, expectedFeaturedStories);
+
+  // 4. News and Events: Travel + Leisure card within #news-and-events preserves exact captured URL
+  const expectedElectricRvUrl =
+    'https://www.travelandleisure.com/trip-ideas/green-travel/electric-rvs-unveiled-winnebago-thor-industries';
+  const newsSection = extractSection(homeHtml, 'news-and-events');
+  const renderedNewsCards = parseContentCards(newsSection);
+  const electricRvCard = renderedNewsCards.find(
+    (card) => card.title === 'These New Electric RVs Could Change How We Road Trip',
+  );
+  assert.ok(electricRvCard, 'Missing Travel + Leisure electric RV card in #news-and-events');
+  assert.equal(electricRvCard.eyebrow, 'January 20, 2022');
+  assert.equal(electricRvCard.href, expectedElectricRvUrl);
+  assert.equal(electricRvCard.action, 'Read More');
+  assert.ok(!homeHtml.includes('thor-industries-electric-rv-concepts'));
+
+  const baselineElectricRv = baseline.newsAndEvents.cards.find(
+    (card) => card.title === 'These New Electric RVs Could Change How We Road Trip',
+  );
+  assert.ok(baselineElectricRv);
+  assert.equal(baselineElectricRv.href, expectedElectricRvUrl);
+
+  // 5. Hero image loads eagerly while below-fold section images default to lazy loading
+  assert.ok(heroHtml.includes('loading="eager"'));
+  assert.ok(featuredSection.includes('loading="lazy"'));
+  assert.ok(!featuredSection.includes('loading="eager"'));
+  assert.ok(newsSection.includes('loading="lazy"'));
+  assert.ok(!newsSection.includes('loading="eager"'));
+});
+
 test('All local media derivatives are valid WebP assets with positive dimensions', async () => {
   const media = JSON.parse(await readFile('src/data/media.json', 'utf8'));
   const ids = Object.keys(media);

@@ -1,6 +1,6 @@
 {
   "capturedFrom": "https://www.thorindustries.com/",
-  "capturedAt": "2026-04-17",
+  "capturedAt": "2026-10-16",
   "hero": {
     "heading": "FIND YOUR RV",
     "copy": "Explore hundreds of RV models, narrow down your options, and find the perfect RV.",
@@ -21,8 +21,8 @@
   },
   "familyOfCompanies": {
     "heading": "Meet the Family of Companies",
-    "copy": "What started with the acquisition of Airstream in 1980 has grown into a global family of companies, trusted by hundreds of thousands of people across the globe to get them where they want to go safely and in style.",
-    "actionLabel": "View All",
+    "copy": "Together, the THOR family of companies represents the world’s largest manufacturer of recreational vehicles. We offer a comprehensive range of RVs and travel tools to inspire and empower everyone to Go Everywhere. Stay Anywhere. We’ve chosen our family wisely so your choice is that much easier.",
+    "actionLabel": "View Family of Companies",
     "actionHref": "https://www.thorindustries.com/thor-companies",
     "brands": [
       { "name": "Airstream", "href": "https://www.thorindustries.com/thor-companies/airstream" },
@@ -41,8 +41,8 @@
   },
   "rvTypes": {
     "heading": "Explore RV Types",
-    "copy": "Searching for your dream RV? Get to know the different types of RVs so you can choose the best option for your needs, wants, and travel style.",
-    "actionLabel": "Learn More",
+    "copy": "We’ll help you figure out what kind of RV is right for you.",
+    "actionLabel": "View All",
     "actionHref": "https://www.thorindustries.com/rv-types",
     "cards": [
       { "title": "Travel Trailer", "href": "https://www.thorindustries.com/rv-types/travel-trailer", "action": "Learn More" },
@@ -75,15 +75,15 @@
     "actionLabel": "View All",
     "actionHref": "https://www.thorindustries.com/stories",
     "cards": [
-      { "title": "Three Checklists To Help You Find Your Perfect RV", "href": "https://www.thorindustries.com/stories/checklists-find-rv", "action": "Read More" },
-      { "title": "Trackside Service: Why Your Next RV Repair Might Be at the Racetrack", "href": "https://www.thorindustries.com/stories/thor-complimentary-mobile-service", "action": "Read More" },
-      { "title": "Ready to buy an RV?", "href": "https://www.thorindustries.com/stories/rv-dealer-conversation", "action": "Read More" },
-      { "title": "12 Hidden Gems of the National Forest System", "href": "https://www.thorindustries.com/stories/national-forest-hidden-gems", "action": "Read More" },
-      { "title": "A Tour of Bailey & Nicole Damberg’s KZ Durango Gold Fifth Wheel RV", "href": "https://www.thorindustries.com/stories/welcome-to-my-rv-damberg", "action": "Read More" },
+      { "title": "Three Checklists To Help You Find Your Perfect RV", "href": "https://www.thorindustries.com/stories/checklists-find-rv", "action": "Read Full Story" },
+      { "title": "Trackside Service: Why Your Next RV Repair Might Be at the Racetrack", "href": "https://www.thorindustries.com/stories/thor-complimentary-mobile-service", "action": "Read Full Story" },
+      { "title": "Ready to buy an RV?", "href": "https://www.thorindustries.com/stories/rv-dealer-conversation", "action": "Read Full Story" },
+      { "title": "12 Hidden Gems of the National Forest System", "href": "https://www.thorindustries.com/stories/national-forest-hidden-gems", "action": "Read Full Story" },
+      { "title": "A Tour of Bailey & Nicole Damberg’s KZ Durango Gold Fifth Wheel RV", "href": "https://www.thorindustries.com/stories/welcome-to-my-rv-damberg", "action": "Read Full Story" },
       { "title": "Your Guide to Alternative RV Campsites", "href": "https://www.thorindustries.com/stories/alternative-campsites-guide", "action": "Watch Now" },
-      { "title": "The Magic of the International Balloon Fiesta", "href": "https://www.thorindustries.com/stories/rv-tips-international-balloon-fiesta", "action": "Read More" },
+      { "title": "The Magic of the International Balloon Fiesta", "href": "https://www.thorindustries.com/stories/rv-tips-international-balloon-fiesta", "action": "Watch Now" },
       { "title": "My Van Life", "href": "https://www.thorindustries.com/stories/van-life-kalen-thorien", "action": "Watch Now" },
-      { "title": "Must-Have Items for RVing Families", "href": "https://www.thorindustries.com/stories/must-have-items-for-rv-families", "action": "Read More" }
+      { "title": "Must-Have Items for RVing Families", "href": "https://www.thorindustries.com/stories/must-have-items-for-rv-families", "action": "Read Full Story" }
     ]
   },
   "newsAndEvents": {
@@ -110,7 +110,7 @@
       {
         "title": "These New Electric RVs Could Change How We Road Trip",
         "date": "January 20, 2022",
-        "href": "https://www.travelandleisure.com/trip-ideas/road-trips/thor-industries-electric-rv-concepts"
+        "href": "https://www.travelandleisure.com/trip-ideas/green-travel/electric-rvs-unveiled-winnebago-thor-industries"
       },
       {
         "title": "Where the Magic Happens",

@@ -72,7 +72,7 @@ export const homeFeaturedStories = [
     href: 'https://www.thorindustries.com/stories/checklists-find-rv',
     image: 'checklists',
     imageAlt: 'Christina and Ben McMillan sit around a fire while boondocking in a desert.',
-    action: 'Read More',
+    action: 'Read Full Story',
   },
   {
     eyebrow: 'On The Road',
@@ -81,7 +81,7 @@ export const homeFeaturedStories = [
     href: 'https://www.thorindustries.com/stories/thor-complimentary-mobile-service',
     image: 'story-trackside',
     imageAlt: "A THOR mobile RV repair technician shaking Bailey Damberg's hand in front of their RV.",
-    action: 'Read More',
+    action: 'Read Full Story',
   },
   {
     eyebrow: 'Learn',
@@ -90,7 +90,7 @@ export const homeFeaturedStories = [
     href: 'https://www.thorindustries.com/stories/rv-dealer-conversation',
     image: 'story-ready-to-buy',
     imageAlt: "Renee Tilby's Keystone Montana driving through the desert.",
-    action: 'Read More',
+    action: 'Read Full Story',
   },
   {
     eyebrow: 'Travel',
@@ -99,7 +99,7 @@ export const homeFeaturedStories = [
     href: 'https://www.thorindustries.com/stories/national-forest-hidden-gems',
     image: 'forest',
     imageAlt: 'Jayco Starcraft Super Lite driving through a National Forest.',
-    action: 'Read More',
+    action: 'Read Full Story',
   },
   {
     eyebrow: 'Learn',
@@ -108,7 +108,7 @@ export const homeFeaturedStories = [
     href: 'https://www.thorindustries.com/stories/welcome-to-my-rv-damberg',
     image: 'story-damberg-tour',
     imageAlt: "Bailey and Nicole Damberg's KZ Durango Gold fifth wheel being towed by a truck.",
-    action: 'Read More',
+    action: 'Read Full Story',
   },
   {
     eyebrow: 'Learn',
@@ -126,7 +126,7 @@ export const homeFeaturedStories = [
     href: 'https://www.thorindustries.com/stories/rv-tips-international-balloon-fiesta',
     image: 'story-balloon-fiesta',
     imageAlt: 'A sky full of colorful hot air balloons at the Albuquerque Balloon Fiesta.',
-    action: 'Read More',
+    action: 'Watch Now',
   },
   {
     eyebrow: 'On The Road',
@@ -144,7 +144,7 @@ export const homeFeaturedStories = [
     href: 'https://www.thorindustries.com/stories/must-have-items-for-rv-families',
     image: 'story-must-have',
     imageAlt: 'The Renee Tilby family posed in front of their Jayco Jay Flight Travel Trailer in the desert.',
-    action: 'Read More',
+    action: 'Read Full Story',
   },
 ];
 
@@ -180,7 +180,7 @@ export const homeNewsEvents = [
     title: 'These New Electric RVs Could Change How We Road Trip',
     eyebrow: 'January 20, 2022',
     text: 'Two companies are bringing the RV industry into the future.',
-    href: 'https://www.travelandleisure.com/trip-ideas/road-trips/thor-industries-electric-rv-concepts',
+    href: 'https://www.travelandleisure.com/trip-ideas/green-travel/electric-rvs-unveiled-winnebago-thor-industries',
     image: 'news-estream',
     imageAlt: 'THOR E-Stream being towed by a Tesla.',
     action: 'Read More',

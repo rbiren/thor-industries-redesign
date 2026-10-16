@@ -85,18 +85,18 @@ export const pages: Page[] = [
       section(
         'Meet the Family of Companies',
         [
-          'What started with the acquisition of Airstream in 1980 has grown into a global family of companies, trusted by hundreds of thousands of people across the globe to get them where they want to go safely and in style.',
+          'Together, the THOR family of companies represents the world’s largest manufacturer of recreational vehicles. We offer a comprehensive range of RVs and travel tools to inspire and empower everyone to Go Everywhere. Stay Anywhere. We’ve chosen our family wisely so your choice is that much easier.',
         ],
         routeHref('thor-companies'),
-        'View All',
+        'View Family of Companies',
       ),
       section(
         'Explore RV Types',
         [
-          'Searching for your dream RV? Get to know the different types of RVs so you can choose the best option for your needs, wants, and travel style.',
+          'We’ll help you figure out what kind of RV is right for you.',
         ],
         routeHref('rv-types'),
-        'Learn More',
+        'View All',
         undefined,
         homeRvTypes,
       ),
