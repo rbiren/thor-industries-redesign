@@ -1,0 +1,81 @@
+---
+import Site from '../layouts/Site.astro';
+import Media from '../components/Media.astro';
+import CardGrid from '../components/CardGrid.astro';
+import { pages, tools, finderCopy } from '../data/pages';
+import { categories } from '../data/stories.mjs';
+import { companies, companyGroups } from '../data/companies.mjs';
+import type { Page } from '../data/types';
+import { routeUrl, sectionId, siteUrl } from '../lib/urls';
+export function getStaticPaths() {
+  return pages.map(page => ({ params: { slug: page.slug || undefined }, props: { page } }));
+}
+interface Props { page: Page }
+const { page } = Astro.props;
+const home = page.kind === 'home';
+const editorial = page.kind === 'stories' || page.kind === 'category';
+const sourceUrl = `https://www.thorindustries.com/${page.slug}`;
+---
+<Site title={page.title} description={page.description} image={page.hero}>
+  <main id="main" tabindex="-1">
+    <section class:list={['hero', { 'hero-home': home }]} aria-labelledby="page-title">
+      <picture>
+        {home && <source media="(max-width: 600px)" srcset={siteUrl('media/hero-mobile-480.webp') + ' 480w, ' + siteUrl('media/hero-mobile-828.webp') + ' 828w'} sizes="100vw" />}
+        <Media id={page.hero} alt={page.heroAlt} class="hero-image" sizes="100vw" eager />
+      </picture>
+      <div class="hero-shade"></div>
+      <div class="hero-heading">
+        <p class="eyebrow">{page.label}</p>
+        <h1 id="page-title">{page.title}</h1>
+        <p>{page.description}</p>
+      </div>
+      <div class="hero-actions">
+        {home ? <><a class="button button-blue" href={tools.finder}>Find Your RV <span aria-hidden="true">↗</span></a><a class="button button-light" href={routeUrl('rv-types')}>Explore RV Types</a></> : <a class="button button-light" href="#page-content">Explore {page.kind === 'category' ? 'Stories' : page.title === 'Frequently Asked Questions' ? 'the Answers' : 'More'} <span aria-hidden="true">↓</span></a>}
+      </div>
+    </section>
+    <div id="page-content" class:list={['page-body', { 'home-body': home }]}>
+      {editorial && <nav class="category-nav" aria-label="Story categories"><a href={routeUrl('stories')} aria-current={page.slug === 'stories' ? 'page' : undefined}>All Stories</a>{categories.map(category => <a href={routeUrl(`stories/category/${category.slug}`)} aria-current={page.slug.endsWith(category.slug) ? 'page' : undefined}>{category.title}</a>)}</nav>}
+      {!home && <div class="page-meta container"><a href={siteUrl('/')}>Home</a><span aria-hidden="true">/</span><span>{page.title}</span><a class="source-link" href={sourceUrl}>Original THOR page ↗</a></div>}
+      {page.lead && <div class="lead-copy container"><p class="eyebrow">{page.label}</p>{page.lead.map(text => <p>{text}</p>)}</div>}
+      {!home && !editorial && page.sections.length > 3 && <nav class="section-nav container" aria-label="On this page"><p class="eyebrow">On this page</p><div>{page.sections.map((section, i) => <a href={`#${sectionId(section.title, i)}`}>{section.title}</a>)}</div></nav>}
+      {page.kind === 'companies' && <div class="container company-directory">
+        <nav class="company-nav" aria-label="Company groups">{companyGroups.map((group, index) => <a href={`#company-group-${index}`}>{group}</a>)}</nav>
+        {companyGroups.map((group, index) => <section id={`company-group-${index}`} class="company-section">
+          <h2>{group}</h2><div class="company-grid">
+            {companies.filter(company => company.group === group).map(company => <a href={company.href} class="company-tile">
+              <div class="company-logo">{company.logo ? <Media id={`logo-${company.id}`} alt="" sizes="(max-width: 600px) 130px, 180px" /> : <span class="word-logo">{company.name}</span>}</div>
+              <span>{company.name}<span aria-hidden="true">↗</span></span>
+            </a>)}
+          </div>
+        </section>)}
+      </div>}
+      <div class:list={{ 'faq-sections': page.kind === 'faq', 'timeline-sections': page.slug === 'history' }}>
+        {page.sections.map((section, index) => section.accordion ? (
+          <details class="faq-item container" id={sectionId(section.title, index)}>
+            <summary><h2>{section.title}</h2><span aria-hidden="true">+</span></summary>
+            <div class="faq-answer">{section.text?.map(text => <p>{text}</p>)}</div>
+          </details>
+        ) : (
+          <section id={sectionId(section.title, index)} class:list={['content-section', { 'with-image': section.image, 'has-cards': section.cards, 'text-section': !section.image && !section.cards }]}>
+            <div class="container section-inner">
+              {section.image && <div class:list={['section-image', { 'rv-product': page.slug === 'rv-types' }]}><Media id={section.image} alt={section.title} /></div>}
+              <div class="section-copy">
+                <h2>{section.title}</h2>
+                {section.text?.map(text => <p>{text}</p>)}
+                {section.bullets && <ul class="feature-list">{section.bullets.map(text => <li>{text}</li>)}</ul>}
+                {section.href && <a class="text-link" href={siteUrl(section.href)}>{section.action || 'Learn More'}<span aria-hidden="true">{section.href.startsWith('http') ? '↗' : '→'}</span></a>}
+              </div>
+              {section.cards && <CardGrid cards={section.cards} />}
+              {home && index === 0 && <a class="video-link" href="https://www.youtube.com/watch?v=HlXl0gFApyQ"><span class="play-icon" aria-hidden="true">▶</span><span>2025 THOR Industries Board Video <span aria-hidden="true">↗</span></span></a>}
+              {home && index === 1 && <div class="home-logos">{companies.filter(c => c.group === companyGroups[0]).slice(0, 6).map(company => <a href={company.href} aria-label={`Visit ${company.name}`}><Media id={`logo-${company.id}`} alt={company.name} sizes="160px" /></a>)}</div>}
+            </div>
+          </section>
+        ))}
+      </div>
+      <section class="finder-panel">
+        <Media id="forest" alt="A Jayco Starcraft Super Lite traveling through a national forest." sizes="100vw" />
+        <div class="finder-shade"></div><div class="finder-copy"><h2>Find Your Perfect RV</h2><p>{finderCopy}</p><a class="button button-light" href={tools.finder}>Explore the RV Finder <span aria-hidden="true">↗</span></a></div>
+      </section>
+    </div>
+  </main>
+</Site>

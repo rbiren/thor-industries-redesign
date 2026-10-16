@@ -1,0 +1,19 @@
+---
+import metadata from '../data/media.json';
+import { siteUrl } from '../lib/urls';
+interface Props {
+  id: string;
+  alt: string;
+  class?: string;
+  sizes?: string;
+  eager?: boolean;
+}
+const { id, alt, class: className, sizes = '(max-width: 700px) 100vw, 50vw', eager = false } = Astro.props;
+const media = metadata[id as keyof typeof metadata];
+if (!media) throw new Error(`Unknown local media: ${id}`);
+const src = siteUrl(`media/${id}-${media.widths.at(-1)}.webp`);
+const srcset = media.widths.map(width => `${siteUrl(`media/${id}-${width}.webp`)} ${width}w`).join(', ');
+---
+<img src={src} srcset={srcset} sizes={sizes} alt={alt} class={className}
+  width={media.width} height={media.height} loading={eager ? 'eager' : 'lazy'}
+  fetchpriority={eager ? 'high' : 'auto'} decoding="async" />

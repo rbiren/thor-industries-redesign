@@ -1,35 +1,90 @@
-# THOR Industries homepage concept
+# THOR Industries — static redesign
 
-A responsive, single-page redesign concept using public THOR Industries website
-content and original generated RV photography. The visual direction uses
-cinematic full-bleed imagery, restrained typography, generous spacing, and
-simple navigation. It is not affiliated with THOR Industries or Tesla.
+A 23-page, independently published THOR redesign with authorized original THOR
+copy, photography and logos. Minimalist, image-led layouts; accessible navigation,
+local search, and responsive local images. No CMS, backend, database, analytics,
+or lead-collection forms. This is not the official THOR Industries website and is
+not affiliated with Tesla.
 
-## Run locally
+Live: https://rbiren.github.io/thor-industries-redesign/
 
-This is a dependency-free static site. From this directory, run:
+## Development
+
+Use Node 24 (minimum 22.22.0), and npm 9.6.5 or newer.
 
 ```sh
-python3 -m http.server 4173
+npm ci
+npm run dev
 ```
 
-Then open <http://localhost:4173>.
+Open http://localhost:4321/thor-industries-redesign/. For a production preview:
 
-## Deploy to GitHub Pages
+```sh
+npm run check
+npm run build
+npm test
+npm run preview
+```
 
-The site has no build step. The workflow in
-`.github/workflows/pages.yml` publishes the repository root to GitHub Pages
-when changes are pushed to `main`. Enable GitHub Pages with **GitHub Actions**
-as the build and deployment source in the repository settings.
+Tests use Node's built-in test runner and native TypeScript support. They inspect
+the built output, so build before testing. No browser dependency is installed.
+Use agent-browser or a real browser for responsive, keyboard and visual checks.
 
-GitHub Pages for a private repository depends on the account or organization
-plan. The repository should remain private unless its owner explicitly chooses
-to make it public.
+## Scope and content
 
-## Content and assets
+- Home, Stories, five story categories, RV Types, Financing Your RV, Towing
+  Guide, FAQ, Innovation, History, Community, News & Events, Careers, THOR
+  Companies and six Sustainability pages: exactly 23 content routes.
+- Data lives in `src/data/pages.ts`, with shared story, company, FAQ and RV-type
+  datasets. Layouts and components live in `src/layouts` and `src/components`.
+- Story/category grids feature finite selections of actual THOR stories and link
+  to the originals and full source collections. This is not an article archive
+  migration. Company profiles, RV-type detail pages, news details, jobs, PDFs,
+  the global locations map and newsletter subscription remain source-hosted.
+- RV Finder, Trip Calculator, the finance calculator and Investors are explicit
+  original-site handoffs. No nonfunctional replica controls are presented.
+- Local search indexes the title, description and body of all 23 migrated pages,
+  including the complete company directory and FAQ, into `search-index.json`.
+  Searches run in the browser and are not sent to a search provider.
+- Source copy was captured from the corresponding pages at
+  https://www.thorindustries.com/ in October 2026. News dates, source pricing
+  references and FY2025 report labels are preserved, not silently modernized.
+  Consult the linked original manufacturer/dealer for current product details.
+- The site owner confirmed permission to reuse THOR copy, photographs and marks,
+  including modification and public publication. This is not a reusable asset
+  license for third parties. All trademarks and media remain their owners'.
 
-- Company, brand, RV-type, sustainability, and news references are based on
-  publicly visible THOR Industries website content.
-- Photography in `assets/` was generated for this concept and contains no
-  THOR or Tesla logos.
-- Links to brand and corporate pages lead to their public websites.
+## Media
+
+`src/data/media-sources.mjs` and `src/data/companies.mjs` contain the finite source
+asset URLs. Authorized originals are stored in `src/assets/originals/`; optimized
+WebP variants are in `public/media/`. `src/data/media.json` records source URLs,
+checksums, decoded format and derivative dimensions. The homepage has a separate,
+subject-safe mobile hero crop from THOR's source.
+
+To regenerate assets (not required for a normal build):
+
+```sh
+npm run media
+```
+
+This uses local originals where present. Missing originals are downloaded only
+from the explicit authorized inventory, not by crawling the source website.
+It never imports source scripts, tracking code or forms. Normal builds and
+deployment need no access to the source CDN.
+
+## GitHub Pages
+
+`astro.config.mjs` sets `site: https://rbiren.github.io`, the project base
+`/thor-industries-redesign/`, static output, directory routes and trailing slashes.
+All internal navigation and image URLs use the project base. Nested URLs map to
+real `index.html` files and can be refreshed directly; there is no SPA fallback.
+
+`.github/workflows/pages.yml` installs locked dependencies, checks types, builds,
+runs tests and publishes **dist/** to GitHub Pages on pushes to `main`.
+Pages must use **GitHub Actions** as its deployment source. Do not publish the
+repository root, node_modules or original media directory as the website.
+
+Package versions are pinned; in particular, @astrojs/check 0.9.10 supports
+TypeScript 5/6, so this project pins TypeScript 6.0.3 rather than the incompatible
+TypeScript 7 registry latest observed during implementation.

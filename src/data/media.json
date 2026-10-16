@@ -1,0 +1,1285 @@
+{
+  "hero": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/aTnRtXNYClf9oCGX_06102025-3330.jpg?auto=format%2Ccompress&rect=0%2C30%2C4000%2C2250&w=1920&h=1080",
+    "format": "webp",
+    "width": 1920,
+    "height": 1080,
+    "widths": [
+      480,
+      960,
+      1600,
+      1920
+    ],
+    "sha256": "6b1bc9e04a298583df17e548b0efd223e7c3183e7ecb1ac4d92dc4a3b765b9b8"
+  },
+  "hero-mobile": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/aTnRtXNYClf9oCGX_06102025-3330.jpg?auto=format%2Ccompress&rect=1711%2C0%2C1379%2C2664&w=828&h=1600",
+    "format": "webp",
+    "width": 828,
+    "height": 1600,
+    "widths": [
+      480,
+      828
+    ],
+    "sha256": "0822dcdb460bd4eac6c251ef4b0599c279f8ca5d2ce2815078b7e81a047b476e"
+  },
+  "thor-logo": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/d59e9c40-6ffd-4e3e-8a6b-133807be8a04_Thor_Tertiary_Logo_4C.png?auto=compress,format&w=1440",
+    "format": "webp",
+    "width": 480,
+    "height": 199,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "85d624173e42e79a6ed82a4cd6c8f2a4192ed3e724d35c4a2f8ad30d44ef8203"
+  },
+  "family": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/61f150d3-fe9e-4e43-a555-55486f547647__CEM6366+%281%29.jpg?auto=compress,format&w=1400",
+    "format": "webp",
+    "width": 1400,
+    "height": 933,
+    "widths": [
+      480,
+      960,
+      1400
+    ],
+    "sha256": "3f1db4b277ea95a4412af1f9c8c318733995fed5760b14431b9b85a61650a833"
+  },
+  "rv-types": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/41eee6c9-080c-42c5-92fd-9a429924e905_20220612_01997.jpg?auto=compress,format&rect=284,0,4551,3413&w=1600&h=1200",
+    "format": "webp",
+    "width": 1600,
+    "height": 1200,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "sha256": "db3bc88b648d5e93afac6b5e6e10d4494a4eca7e3c74e81f5b1ebfc5dc7084d6"
+  },
+  "finance": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/82b1ac9b-e928-440f-b959-0abc29d480d8_DDL_0213+%281%29.jpg?auto=compress,format&w=1600",
+    "format": "webp",
+    "width": 1600,
+    "height": 1067,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "sha256": "1c1c7f7649a5895d370424e9cccbec18aaadedf150730f8904bc8317a63b838f"
+  },
+  "towing": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/2ff19047-2960-464d-98d8-8fadcd21e497__CEM4090.jpg?auto=compress,format&w=1600",
+    "format": "webp",
+    "width": 1600,
+    "height": 1067,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "sha256": "97fe25e47deae5975246195e60b17d349b797e429884e9ca017ec599c2761719"
+  },
+  "faq": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/96184c01-5556-43fa-a3f2-e0d1a5c480bd_DJI_0069+%282%29.jpg?auto=compress,format&w=1600",
+    "format": "webp",
+    "width": 1600,
+    "height": 897,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "sha256": "aa7a15d2111bd024f569fc2d8d0287e4c3c081639692cc92979fce4131e373ac"
+  },
+  "innovation": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/8885bed9-9acd-4348-b144-d3fc0b655d45_20130131_03076.jpg?auto=compress,format&w=1600",
+    "format": "webp",
+    "width": 1600,
+    "height": 1199,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "sha256": "6626427ea8a8ee14c7071d4ece1a63770f548c6494a7bac1e803a97518da10bf"
+  },
+  "history": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/e27e40bb2a6c1871cabbecf92961e11a53b5229b_17-clipper-36-buick.jpg?auto=compress,format&w=1600",
+    "format": "webp",
+    "width": 1600,
+    "height": 1200,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "sha256": "bb07b6690fd46fc0bb4594825b38920cf24d19de1e51281623089bfe1e0436ea"
+  },
+  "community": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/d4fcc61da8078408a8e484c0991978a23b618fc3_dji_0005.jpg?auto=compress,format&w=1600",
+    "format": "webp",
+    "width": 1600,
+    "height": 1200,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "sha256": "43c03777536b6ccd4d81fcd27f42caf09905dd4c580a929a3e5333cc431331a0"
+  },
+  "leap": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/929f28ff0908187f84e606a23bc4320bbc0076c4_leap14.jpg?auto=compress,format&w=1600",
+    "format": "webp",
+    "width": 1600,
+    "height": 781,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "sha256": "827b2bd7baac032d63f047d610f9d1a12c04ceecb33e6a367d211513f859716a"
+  },
+  "habitat": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/f084ca5495243fab6ec5d3237771b547d0afeb0f_thorhabitat4-edit.jpg?auto=compress,format&w=1600",
+    "format": "webp",
+    "width": 1600,
+    "height": 781,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "sha256": "594ef99c2b56162e371eeea7a4dfe0ea94676e4055b53b18f729dd823a03a5f8"
+  },
+  "news": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/84eddbbc80bfe7592b5bdc893294b0a87a207c2c_cem_3063.jpg?auto=compress,format&w=1600",
+    "format": "webp",
+    "width": 1600,
+    "height": 1200,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "sha256": "f40c54010956513a345ceebc860ab905303351c720054928f5833fed3cba64ac"
+  },
+  "careers": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/8bfcb0c3727705a52460926d14614fdffd6a1f3d_dsc_3831-1.jpg?auto=compress,format&w=1600",
+    "format": "webp",
+    "width": 1600,
+    "height": 1200,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "sha256": "4a82da140c8555486a3cce14c716cbaf4a4dac57223b3161e13342b75d3dc90b"
+  },
+  "sustainability": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/08e84e41-74b5-41d9-905d-dadc40a355d1__K8I2478_highland_openrange_fifthwheel_michigan_norv_landscape_water_lake_shore_walk_dog_older_couple.jpg?auto=compress,format&w=1600",
+    "format": "webp",
+    "width": 1600,
+    "height": 1067,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "sha256": "2af0c9674e5f7e5cbf17979a49b18ddca3f9b226dfa0ef608ef5b1ad345bcfd0"
+  },
+  "report": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/f478a552-ba86-48e2-8417-5e8a5a5677d2_20211015_02563+%281%29.jpg?auto=compress,format&w=1600",
+    "format": "webp",
+    "width": 1600,
+    "height": 1067,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "sha256": "4d49ee092847bb6162fac14927ff6bb98aa385e75ea2ba4e5b42fe516863731e"
+  },
+  "environmental": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/1ebe5dd0-a407-42cc-8f73-b28ae853e60e__MCW1038_cloudy_clouds_islands_log_wood_poles_beach_water_moss_algae_rocks_evergreen_green_trees_pacific_north_west.jpg?auto=compress,format&w=1600",
+    "format": "webp",
+    "width": 1600,
+    "height": 1067,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "sha256": "a2d1d7f2f2e056e052946dd271ddbbda8f896973f0d0245e18c0ba5dd67fd197"
+  },
+  "social": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/6db23119-d4d6-442b-a908-162a5b232860_Roadtrippers-ThomasFamily-95.jpg?auto=compress,format&w=1600",
+    "format": "webp",
+    "width": 1600,
+    "height": 1067,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "sha256": "47b1aa52e3667628f044fb6abd403ceda4bd6b345f45af252c32f1e8d9d364f5"
+  },
+  "governance": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/2a800b18-a9dc-49b4-b855-3ee4c0493e65__D1I8956.jpg?auto=compress,format&w=1600",
+    "format": "webp",
+    "width": 1600,
+    "height": 1067,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "sha256": "5ae9cba37d332656c3e429e6fa0d19e0ebd02af51a2107bb24ab2644c8953338"
+  },
+  "supply": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/uJOT5c07U_xtp-_v_20260615_01274.jpg?auto=compress,format&w=1600",
+    "format": "webp",
+    "width": 1600,
+    "height": 1067,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "sha256": "aceb20cb455090f485ca5b0019eb80fae1326af1c857529554ab93255d8a1ef8"
+  },
+  "forest": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/6f51a280-8d0f-4663-8e1b-834720553c34_DJI_0099.jpg?auto=compress,format&rect=0,0,5120,3413&w=1600&h=1067",
+    "format": "webp",
+    "width": 1600,
+    "height": 1067,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "sha256": "4c3fbb4073deb52d464d5480a14f7e9c1905eb113afe5311dc7289f2543b2b43"
+  },
+  "checklists": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/b58aeaa9-dcb5-40ca-86bd-2699d3167f04_IMG_0439.jpg?auto=compress,format&rect=0,240,4032,2688&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "1a1cc436d89b66b60d2350d7c040a9b34dbe05bc3f9bc7c8cd94c3a975bee9cf"
+  },
+  "embark": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/aNBZe55xUNkB07wU_Untitleddesign.png?auto=format,compress&rect=200,0,2160,1440&w=1200&h=800",
+    "format": "webp",
+    "width": 1200,
+    "height": 800,
+    "widths": [
+      480,
+      960,
+      1200
+    ],
+    "sha256": "47b0af1c826bc02beb5b3ba7001bab7b817dbf14e243f5cf453bca808259e838"
+  },
+  "hybrid": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/aIDdoVGsbswqTLJm_2024_09_23_thorindustries_openhouse_3113.jpg?auto=format%2Ccompress&rect=0%2C0%2C2000%2C1333&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "f7fc9ad232212882814d6faf4b31f9917d8fc6784f94ff6b2ec78ce17da6e91b"
+  },
+  "lab": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Z8DXDZ7c43Q3gVez_image002.jpg?auto=format%2Ccompress&rect=335%2C80%2C1053%2C702&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "5e02d23a201272c1cb57052336af9c9cadd387c905ece18b0fa3447eb3908ac0"
+  },
+  "airstream": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Z7Xkf57c43Q3f-El__CEM3203.jpg?auto=format,compress&rect=0,0,8256,5504&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "88952c848542ab96e4b9fe5aca36252dc7ec544054031e120eb3c7af9f5b57af"
+  },
+  "travel-trailer": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/3e639af4-7839-4442-a45c-713ce4ca0afa_Travel+Trailer+-+NO+BG.png?auto=compress,format&rect=0,0,3934,1680&w=1400&h=598",
+    "format": "webp",
+    "width": 1400,
+    "height": 598,
+    "widths": [
+      480,
+      960,
+      1400
+    ],
+    "sha256": "9b4233e95ab82e10424f44d6214a4c7085c403639b1ea810a29f90308b2c09ae"
+  },
+  "fifth-wheel": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/1a0266d7-2df4-445c-a022-5b5ab0ec409e_Fifth+Wheel+-+NO+BG.png?auto=compress,format&rect=0,0,3934,1680&w=1400&h=598",
+    "format": "webp",
+    "width": 1400,
+    "height": 598,
+    "widths": [
+      480,
+      960,
+      1400
+    ],
+    "sha256": "506a047f360214d2c150da00c45a45f4aec481bfd7d2604fe2e92e31b97a10ce"
+  },
+  "lightweight": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/92038eb2-ac52-491b-8bb2-6bb8b5fe13d9_Lightweight+Trailer+-+NO+BG.png?auto=compress,format&rect=0,0,3934,1680&w=1400&h=598",
+    "format": "webp",
+    "width": 1400,
+    "height": 598,
+    "widths": [
+      480,
+      960,
+      1400
+    ],
+    "sha256": "4cec7a91dd3f66b503a25b2bc64ee195f7a93c034a22c63ce572e445f0e70868"
+  },
+  "toy-hauler": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/efdeb371-474c-4ea9-841a-da30c108bf51_Toy+Hauler+-+NO+BG+copy.png?auto=compress,format&rect=0,0,3934,1680&w=1400&h=598",
+    "format": "webp",
+    "width": 1400,
+    "height": 598,
+    "widths": [
+      480,
+      960,
+      1400
+    ],
+    "sha256": "a0345cf56666c813b4f11cbb74516c67cb05ffbbb9bdcac1194d2ba6578cb2cd"
+  },
+  "class-a": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/b9808043-301a-4149-b325-3f995e5f2db9_Class+A+-+NO+BG.png?auto=compress,format&rect=0,0,3934,1680&w=1400&h=598",
+    "format": "webp",
+    "width": 1400,
+    "height": 598,
+    "widths": [
+      480,
+      960,
+      1400
+    ],
+    "sha256": "f2ee878cab1eb631f09447d4e874bf3f3f50c745376faf855f66fb112a99e48d"
+  },
+  "class-b": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/61c62a89-750e-44d6-b261-d31a42f2740e_Class+B+Van+-+NO+BG.png?auto=compress,format&rect=0,0,3934,1680&w=1400&h=598",
+    "format": "webp",
+    "width": 1400,
+    "height": 598,
+    "widths": [
+      480,
+      960,
+      1400
+    ],
+    "sha256": "fb15aab2fa0cd842afa4aca9a618d27fcffabd1e70881ae61e7dd8ef855355e4"
+  },
+  "class-c": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/c657a863-cb78-440b-a60b-f1346c5ebade_Class+C+-+NO+BG.png?auto=compress,format&rect=0,0,3934,1680&w=1400&h=598",
+    "format": "webp",
+    "width": 1400,
+    "height": 598,
+    "widths": [
+      480,
+      960,
+      1400
+    ],
+    "sha256": "e746912badbe1ddc71e981b934c21cbce3668ddb19928fe3b8bd5e7be0cfebd6"
+  },
+  "story-care": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Z9xyDTiBA97Givb7_24_06_23_THOR_NFF_MA_-18_COMPRESSED.jpg?auto=format%2Ccompress&rect=0%2C0%2C4884%2C3256&w=1200&h=800",
+    "format": "webp",
+    "width": 1200,
+    "height": 800,
+    "widths": [
+      480,
+      960,
+      1200
+    ],
+    "sha256": "efb016c59801e4a4e70fa06569ac85bdb75bc306eb96e1edebce9349977ac123"
+  },
+  "story-camping": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/ZwljrIF3NbkBXV2K_20240610_00286.jpg?auto=format%2Ccompress&rect=0%2C2565%2C5312%2C3541&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "3bd30069b2cfc5cfc9b39561c8d3d8107736709cd5a51aaf87c2e4346c495aa8"
+  },
+  "story-king": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/ZkTWZyol0Zci9LBX_Photo7.jpg?auto=format%2Ccompress&rect=0%2C168%2C4032%2C2688&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "1884ff84bbb2b5c7c7557b5a409e77f577e44cf4dc1316d7ebb501e2d22a0f0c"
+  },
+  "story-public": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/dd56f3ed-8334-45ba-95f0-4b73fe853bd3_qIiXLBSI.jpeg?auto=compress,format&rect=0,875,3000,2000&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "5d3a4e75af399afec2198ddea3ecc6ee8dde1bb2019c58de07af8d2e2c05a0dc"
+  },
+  "story-alternative": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Zj0ZJ0MTzAJOCqxZ_May-AlternativeRVCampsites5.jpg?auto=compress,format&rect=0,0,4855,3237&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "59381f713a4bea83738b1b37e8a2d248c1c5fbca52c5bdeac33b9d8b65d97ff2"
+  },
+  "story-booking": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/ad2de64c-cb89-4b9e-8419-ff4ebc2a7ac6_20220612_02462+%281%29.jpg?auto=compress,format&rect=0,2,5114,3409&w=1200&h=800",
+    "format": "webp",
+    "width": 1200,
+    "height": 800,
+    "widths": [
+      480,
+      960,
+      1200
+    ],
+    "sha256": "54756d9aa1ff6030867d30b4ccae1dee425c157397affb93f4f3a3cabdf6aca0"
+  },
+  "story-beach": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/01aec074-af31-4da7-8b93-814532c42ff2_image7.jpg?auto=compress,format&rect=155,0,1688,1125&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 666,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "b1088b44225913d8096f6ff43b10f0a80e2efb314688dfa959dc4cc94ab64562"
+  },
+  "story-packing": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/999f002c-7b5e-4fe1-b5f3-a425e2718cf7_image10.jpg?auto=compress,format&rect=0,0,1999,1333&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "ce1e536403efc96bb78333ffaed6c8bcb24a7cfcf969783ad4ff8f7cfb7860e5"
+  },
+  "story-explorer": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/aMWlNmGNHVfTPNtL_e4024598-8fa9-4ab3-8a87-9ef7e8b11329_Campfire_THOR.jpg?auto=format,compress&rect=60,0,1800,1200&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "5d9904b299c0ac0ea1344434b7f1b0848fc221790b24534f558423c7531c66e5"
+  },
+  "recipe-shakshuka": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/31eb045ec89a0f9b74de7a1754ae3090d6500ed4_thor-industries_tow_kp-3300.jpg?auto=compress,format&w=1600",
+    "format": "webp",
+    "width": 1600,
+    "height": 1067,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "sha256": "7d809edab5bc443bb52a37d1802854ab55f6560d47152926dae8a2fb8d88fbd8"
+  },
+  "recipe-ribs": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/da4d61150f20e12a51466f8cf68124397d7d22ea__d1i1920.jpg?auto=compress,format&w=1600",
+    "format": "webp",
+    "width": 1600,
+    "height": 1067,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "sha256": "66a34d680429912384213df2164c80993b573eec0314b3fe77a3ca7fdb4d94c3"
+  },
+  "recipe-lobster": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/6245fcd3-1d98-43da-8098-57f46950907c_ThorReeditsFinal-51.jpg?auto=compress,format&rect=44,0,2912,1941&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "a890413055282d15ffb3e6e0af36927eaf7200b7638034d56a723eed229a9384"
+  },
+  "recipe-cookies": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/9cd0ddc7a5fad48496612f8eb3c868469254bc14_a_cem_5628.jpg?auto=compress,format&w=1600",
+    "format": "webp",
+    "width": 1600,
+    "height": 1067,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "sha256": "fb00314c574198da9a96c67aa9ca698acf41dd98a184f1dae20a70b734bf1d19"
+  },
+  "recipe-pizza": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/af58cd57e2136aae33abd66800960a6d9f50022e_cem_9041.jpg?auto=compress,format&w=1600",
+    "format": "webp",
+    "width": 1600,
+    "height": 1067,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "sha256": "eccbc6f09ffe5819063faaacea4d663af7c79963f921737e89d4a37ebee290f9"
+  },
+  "recipe-chia": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/8a698d397a82ce0b8fe7993640e46a0acaafcdea_fl2a3845.jpg?auto=compress,format&w=1600",
+    "format": "webp",
+    "width": 1600,
+    "height": 1067,
+    "widths": [
+      480,
+      960,
+      1600
+    ],
+    "sha256": "6f02ed6ce2ddd60a7e8cb577012090a20ef7ddf6320157c11ef7ef03a710ff5f"
+  },
+  "road-colorado": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Z8ctnBsAHJWomG02_BlueMesaSitePhoto.jpg?auto=format%2Ccompress&rect=566%2C0%2C3378%2C2252&w=1200&h=800",
+    "format": "webp",
+    "width": 1200,
+    "height": 800,
+    "widths": [
+      480,
+      960,
+      1200
+    ],
+    "sha256": "f51d859b4b612fdfd771e16adc70fa95a566abb9a3f2a78ed0a104530aef7930"
+  },
+  "road-beach": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/ZpaM3B5LeNNTxNNB_JulyBeachRvCampingphotonumber5.jpg?auto=format%2Ccompress&rect=0%2C168%2C4032%2C2688&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "bb1b8f7d5ed9592268b38a3d0fc12dbee5f1d38ef22bae14a361978b9b939981"
+  },
+  "road-starter": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/ZkTWZCol0Zci9LBV_Photo5.jpg?auto=format%2Ccompress&rect=0%2C168%2C4032%2C2688&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "df5db0638de38fc1fe2df5f8b70a4fdcf7e79fcb074913e58d210235acbf9222"
+  },
+  "road-forest": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/ZwWJrYF3NbkBXCom_RoadsideBridgerTetonBorder.jpg?auto=format%2Ccompress&rect=0%2C0%2C3402%2C2268&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "4681957094df342f733ad5a7d17a2bd8b031db9e5b3b86885821a15f6ec07631"
+  },
+  "road-trip": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/46711e9f-aed5-49b6-aa17-b6009c71bae5_cutler_4.jpg?auto=compress,format&rect=0,131,1600,1067&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "6f761cdbeb4572b05f50b204def7178612ae3f8df58a66ff88e419f117dc4c16"
+  },
+  "travel-race": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Z5vTLpbqstJ9-D27_7.jpg?auto=format%2Ccompress&rect=309%2C0%2C3338%2C2225&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "b7098fc61060c55d55669f9c92d9b48ee2632f5e117a01fc766e996ef0652a59"
+  },
+  "travel-harvest": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Z7csXZ7c43Q3gBAg_photo6.jpg?auto=format%2Ccompress&rect=0%2C168%2C4032%2C2688&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "50b448801a79c88783ae1d229a97f65830eefde2ee19e0eee2c085dff7ba85fe"
+  },
+  "travel-playground": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Zz4uN68jQArT1F1v_Aug-TTSanJuans-NFFPlayground-MTBTrail.jpg?auto=format%2Ccompress&rect=0%2C0%2C4032%2C2688&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "4b48d54b7c35555da6b59c7423c7db7457769d8146f63de05c7acb8463279a2f"
+  },
+  "travel-canada": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/541e10d3-7211-4c62-935e-968930e47280_DJI_0445blf_4.jpg?auto=compress,format&rect=0,281,5472,3078&w=1200&h=675",
+    "format": "webp",
+    "width": 1200,
+    "height": 675,
+    "widths": [
+      480,
+      960,
+      1200
+    ],
+    "sha256": "82bfb1406d05c13775262225b4909d665a49e3922206a5b1a69e09aaa387a0e4"
+  },
+  "video-nff": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Ztic_rzzk9ZrW_uZ_24_06_23_THOR_NFF_MA_2063.jpg?auto=format%2Ccompress&w=1200&h=800",
+    "format": "webp",
+    "width": 1200,
+    "height": 800,
+    "widths": [
+      480,
+      960,
+      1200
+    ],
+    "sha256": "472fa4411a456eb0db1ee53a54d3bf61620e9362749554550434c2f0961b27d3"
+  },
+  "video-homey": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Zur_E7VsGrYSvkDr_September-5RVHomeyProjectsPhoto6.jpg?auto=format%2Ccompress&rect=0%2C1%2C2048%2C1365&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "bf0c94c48f8b0158e76de6c29d1b7f7d4d4f67d5370c2acebab5077dee6ecb96"
+  },
+  "video-stars": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Zk-Ttyol0Zci9Z36_June-NFFGilaNationalForestGuide-Photo10.jpg?auto=format%2Ccompress&rect=0%2C0%2C8192%2C5461&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "7631d3906e99fdd2bafbf0883100cbf8dea71e11ccb5205a0261e24d868cc77c"
+  },
+  "video-boondock": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Zu3RMLVsGrYSvo6k_ForestView_Lahr.jpg?auto=format%2Ccompress&rect=0%2C167%2C4019%2C2679&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "a26830701fcf81bf7d674befdeb9b53d5f923bc8cc0d3a21030ae5db8c053c12"
+  },
+  "video-keys": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/3d25f5bd-f589-423b-85eb-d8adc14702b3_23_07_28_THOR_Adrienne_IF_4E6A6429.jpg?auto=compress,format&rect=5,0,8187,5458&w=1000&h=667",
+    "format": "webp",
+    "width": 1000,
+    "height": 667,
+    "widths": [
+      480,
+      960,
+      1000
+    ],
+    "sha256": "cd2578561a7ec49eb81c22607aaab64f7e27b169dc81ecd4ff77f00abee40cce"
+  },
+  "logo-airstream": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/aJpXnaTt2nPbaL14_airstream-color-square.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 56,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "4c2ceec858588f6e4ecf75a4f033ee30b49e27b5ce534f9d957296653d610548"
+  },
+  "logo-drv": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/753743dc-36e4-4601-98de-06a6cda06b2b_drv-logo-dark.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 384,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "e36a8f6c872285f8b015f0f02b606e463b9b661facd9b81c0c91d0fbd8cd2128"
+  },
+  "logo-entegra": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/aKytbGGNHVfTOSrD_Entegra_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 261,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "eb0ec6340ac6877f40832bcc39d3e2122737eeadd88a86cceee13c4ec806deaa"
+  },
+  "logo-heartland": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/415acbc1-6871-49f9-b398-5a813786b72c_HeartlandBlack.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 98,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "8fd85c379e0cbb2c21bc6fdffd0444ee84ed03f8826381663d487f5caebdf3b2"
+  },
+  "logo-jayco": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/aOlMeZ5xUNkB11dF_Jayco_Logo_2025_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 314,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "f01ff0bb5bec63508cca5a42d78f4ed5c740d1424a4386a548ee799cadfc064b"
+  },
+  "logo-keystone": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/aKytcGGNHVfTOSrH_Keystone_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 294,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "274a545e0abb9af6f952063f9bbc3f0d320d77379eb3bb79e1db8c56a79c40f8"
+  },
+  "logo-kz": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/aKytcWGNHVfTOSrI_KZ_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 362,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "3b4584bfba1a1066aa7dd89d58c21dffdab33314b740e43e577095f7e877ece4"
+  },
+  "logo-open-range": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/aRI6WbpReVYa4UM__OpenRange_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 180,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "563622ab813fa3c769390eb9103ff3953e40f2c5929808d24e0fbae3aafc3bc1"
+  },
+  "logo-tmc": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/aKytdGGNHVfTOSrN_TMC_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 151,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "02af6275d404cccbefd4eea401dbdad757f51e3ded9e1ee760d8f3286fda7c7a"
+  },
+  "logo-tiffin": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/aKytc2GNHVfTOSrL_Tiffin_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 299,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "7c944415c413b1dd355d3d3a10e3cde7363b93507a3769ee9b9308b81ce99b4d"
+  },
+  "logo-venture": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/aKytdWGNHVfTOSrO_Venture_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 515,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "162737d46ceb6c4086cf0f9650b0d72e3b864b3f9d70b29ed0ebb12273098efa"
+  },
+  "logo-airxcel": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/adVtaOzlhpBNhbQi_Airxcel_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 111,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "a809fc0fab6b894da8e1426cd7bd38804e26c276bf86ca6cb35671b78317dc8a"
+  },
+  "logo-aqua-hot": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/adVtaezlhpBNhbQj_AquaHot_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 95,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "31d8c48c6ad57168e99dca864e595d799e4d4711c679d499fe1022fd9ab49099"
+  },
+  "logo-cv-doors": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/97ll6DbZB011vfBQ_CVDoors_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 136,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "2ef7d64101641850fa3ec91c7d71cd8fcf8f8bf774b8f762a407f53dabfa155c"
+  },
+  "logo-cv-glass": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/g7UB2bvYxpAWTjvY_CVTemperedGlass_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 138,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "6d9d93b67eebf74fb02b97fd80096b1fa3bfde3a3d101badc0c83d0a52f7782a"
+  },
+  "logo-cv-windows": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/v-hMXUvIurbWGHiI_CVWindows_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 138,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "222d9e6570f44bfc1b40c3acfd7901859d2804e5ce357f0f3ec8417e0fdd0ab9"
+  },
+  "logo-coleman": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/adVta-zlhpBNhbQl_ColemanMach_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 100,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "4c499f2299f752e52776ce6e23e7f3e26d2ea11b1ad6d848ce38fb3ef5fcf945"
+  },
+  "logo-dicor": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/adVtbezlhpBNhbQn_Dicor_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 132,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "315e8d6a8c6f19649a035fa68700034ea66f199e2643a625035e55224962f285"
+  },
+  "logo-forma": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/h72D6trH8o4KRrtM_Forma_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 114,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "2cf63339c5c83b97e5cc3108cb34ed46b2a20e417ebe8bf7a6e5014ae1662ef1"
+  },
+  "logo-invision": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/O00VHyJsvVJOPsad_InVision_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 170,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "810040a37259c128af8c69c17e2e086948a003ecdd9941540c34196a83633d2e"
+  },
+  "logo-maxxair": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/adVtbuzlhpBNhbQo_MaxxAir_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 103,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "af49b6e5e7fe01cde8242d8b94e4eeacaf2c5bd4410c0eca7f327a4b74810bd3"
+  },
+  "logo-mcd": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/adVtb-zlhpBNhbQp_MCD_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 221,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "1ab6296b97d9bd01bec1e430871dced7162f9293149aa279fe445a9d2452f9b3"
+  },
+  "logo-solace": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/cVRX161enXMu-XkK_Solace_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 103,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "4a46503dda486de810c1f58c7af05a6c2058180a7eb170dfa52c19304b8e0816"
+  },
+  "logo-suburban": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/adVtcezlhpBNhbQr_Suburban_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 100,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "55276aa81f6b3e35eb1e8a1d5f740eaad9c9c7ac6b2aeaa6d223956f9b2fcfb0"
+  },
+  "logo-synergy": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Dmkr7UUdAkdkAu16_SynergyDesign_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 325,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "7e6e34ce9d81f76d308ce3d7c678e893019a03dde76ddb7dba8da27edb089ed1"
+  },
+  "logo-united-shade": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/adVtcuzlhpBNhbQs_UnitedShade_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 146,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "38d269f5a2d33524d5ccd1c8f8bc521456c24dc59bc76625e005b4a63b55988f"
+  },
+  "logo-velarium": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/p2pyEQcsUjMtKxf3_Velarium_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 92,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "e5d5cb72f7792cbf52a48c261617b398443efafb0c009ab27d322b147ffdd6b8"
+  },
+  "logo-vixen": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/adVtc-zlhpBNhbQu_Vixen_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 113,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "c8d3d0da094e686be784849fb2bbd6c3f41077b720ea2cba742777ad657354d6"
+  },
+  "logo-buccaneer": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/GppxK-aJPYPUSiCj_Buccaneer_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 100,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "50685b97033824e3deec3b09f91d472b2ecaeb7626d6f8b15134176266d58b24"
+  },
+  "logo-burstner": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/G2-lypR4HeA1dwnJ_Burstner_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 264,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "6952511f6f248409bec90fc162570a747d99716b4d62bfabda8db457f59909e5"
+  },
+  "logo-carado": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/vJTGktLVynWkkgoV_Carado_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 191,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "01cb05a570a2d502c2af454ceb40eff09327ce4d4751b3221bd8bde23bc353c7"
+  },
+  "logo-corigon": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/M2xBlSsx4eBh869o_Corigon_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 72,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "aaa255cd458ed296b8eec17321469b7c54d5cd568eba2d1d0f2cdb9f381cb152"
+  },
+  "logo-crosscamp": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/CCYhGRq27cQ0YC6k_Crosscamp_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 172,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "f3d206f51a9e9ee078b7b17bfc34054ecc16ae2d0c8c251e18aee92fdba6a9c0"
+  },
+  "logo-dethleffs": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/V05GMNlhvflGF12g_Dethleffs_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 80,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "60489b4fa08c7546b8d6b79c73fbd2171c77c2399914e2b85ff21876bc435b7f"
+  },
+  "logo-elddis": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/Qnrimy5LQkEDhiYo_Elddis_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 116,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "0b59cf373b10bdf1eddc8ba33cf55824537c47a30ee6742495befb3502fda25e"
+  },
+  "logo-eriba": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/MlZVw-cQu8am_vls_Eriba_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 156,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "4fda1216343aed318d3e326cd400797f05a3aeefef36565a3aa36feb968bab4b"
+  },
+  "logo-etrusco": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/f4ZSEVrRyAOybNk3_Etrusco_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 339,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "786e9a0f03bcba11c3e50917688c831d7c75345e56b5f88fc17d45ccae66ef55"
+  },
+  "logo-freeontour": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/MJ81d6oXepfSZ-lC_FreeOnTour_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 112,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "b4581c25f729db1700e6a1eb2dfd1af6f924ba550f0ee2d13241baa25b7842a6"
+  },
+  "logo-laika": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/ZDQOA8gA5BwzLeMB_Laika_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 215,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "ffac33e15e3cd067d1f32629cd786d2771c747336c03f8ddbb4948d2f0fab7a7"
+  },
+  "logo-lmc": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/LPJJL_hjKJi3esn8_LMC_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 165,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "65c8d24021abb12c63960d0c9f6e1608af7e8b74968223946005ba4f9253a097"
+  },
+  "logo-niesmann": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/6upo-z8c3xjjHX4J_NieshmanBischoff_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 118,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "a1e83f9b2f7fc39a5bcece541eac98baca353c808bde058b7499db3aa4c5c336"
+  },
+  "logo-sunlight": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/D5xX84XXf1l-9Hni_Sunlight_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 100,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "5270a79afda36275f5db7eda0b8af760fac4d2df84c3e502ab464830158e1083"
+  },
+  "logo-xplore": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/HRTUiJebl6BfEwKo_Xplore_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 60,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "46c89895eff6d2f3b7d2fe71029516af181151dcf91c72e203ce3c65d3746fcf"
+  },
+  "logo-can": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/6fVqBnpkENbtrAdd_Can_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 263,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "f5f5b52c341175fd54558e66c512a1e21aac5a2ff40de9dfc44ab8dc9a5bb5cd"
+  },
+  "logo-goldschmitt": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/0JDyZWQ6ARv0KnjD_Goldschmitt_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 109,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "7e2a90bea48a1e5527d34e20caf106d83e6dbfceab4a1c881b3d9a603e03a852"
+  },
+  "logo-mcrent": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/McPUTYjgZ0NvbwXl_McRent_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 80,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "82e26d16e8e6f9363759eaa37e045dfad96504d8f58539b7e08f24c93580226a"
+  },
+  "logo-movera": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/qj9I72mGCCqXx812_Movera_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 83,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "5df94c5de85bf717f297125f3f6c5285b73836d9b63e203216f6dbe2d626a9bc"
+  },
+  "logo-rent-easy": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/H3-yWUMLvxsboFhi_RentEasy_Logo_Color.png?auto=compress,format&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 210,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "cdb91ba68ce2e79da4d9e1929d8ccd4144a8ae94b5d46f1b503cdd971bc72104"
+  }
+}

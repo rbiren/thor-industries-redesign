@@ -1,0 +1,55 @@
+---
+import { navigation } from '../data/navigation';
+import { siteUrl } from '../lib/urls';
+import Media from './Media.astro';
+const current = Astro.url.pathname;
+---
+<a class="skip-link" href="#main">Skip to main content</a>
+<header class="site-header">
+  <a class="brand" href={siteUrl('/')} aria-label="THOR Industries home">
+    <Media id="thor-logo" alt="THOR Industries" sizes="132px" eager />
+  </a>
+  <nav class="desktop-nav" aria-label="Main navigation">
+    {navigation.map(item => item.links ? (
+      <details class="nav-group">
+        <summary>{item.title}<span class="chevron" aria-hidden="true"></span></summary>
+        <div class="nav-panel">
+          <div class="nav-panel-inner">
+            <p class="nav-panel-title">{item.title}</p>
+            <div class="nav-panel-links">
+              {item.links.map(link => <a href={siteUrl(link.href)} aria-current={current === siteUrl(link.href) ? 'page' : undefined}>{link.title}<span aria-hidden="true">↗</span></a>)}
+            </div>
+          </div>
+        </div>
+      </details>
+    ) : <a href={siteUrl(item.href)} aria-current={current === siteUrl(item.href) ? 'page' : undefined}>{item.title}</a>)}
+  </nav>
+  <div class="header-actions">
+    <button class="icon-button" data-search-open aria-label="Search this site" hidden>
+      <svg width="21" height="21" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" stroke-width="1.6"/><path d="m16 16 5 5" stroke="currentColor" stroke-width="1.6"/></svg>
+    </button>
+    <button class="menu-button" data-menu-open hidden>Menu <span aria-hidden="true">☰</span></button>
+  </div>
+</header>
+<dialog id="mobile-menu" class="menu-dialog" aria-labelledby="menu-title">
+  <div class="dialog-bar"><h2 id="menu-title">Explore THOR</h2><button class="icon-button" data-menu-close aria-label="Close menu">✕</button></div>
+  <nav aria-label="Mobile navigation">
+    {navigation.map(item => item.links ? (
+      <details class="mobile-group">
+        <summary>{item.title}<span aria-hidden="true">+</span></summary>
+        {item.links.map(link => <a href={siteUrl(link.href)} aria-current={current === siteUrl(link.href) ? 'page' : undefined}>{link.title}</a>)}
+      </details>
+    ) : <a class="mobile-direct" href={siteUrl(item.href)} aria-current={current === siteUrl(item.href) ? 'page' : undefined}>{item.title}<span aria-hidden="true">↗</span></a>)}
+  </nav>
+  <button class="button button-dark" data-search-open>Search this site</button>
+</dialog>
+<dialog id="site-search" class="search-dialog" aria-labelledby="search-title" data-index-url={siteUrl('search-index.json')}>
+  <div class="dialog-bar"><h2 id="search-title">What are you looking for?</h2><button class="icon-button" data-search-close aria-label="Close search">✕</button></div>
+  <form role="search" id="search-form">
+    <label for="search-query">Search the 23 pages on this site</label>
+    <div class="search-field"><input id="search-query" name="q" type="search" placeholder="Try RV types, careers, sustainability…" autocomplete="off" maxlength="160" /><button type="submit" class="button button-dark">Search</button></div>
+  </form>
+  <p id="search-status" role="status" aria-live="polite">Search stays in your browser.</p>
+  <ul id="search-results" class="search-results"></ul>
+</dialog>
+<noscript><nav class="no-js-nav" aria-label="All pages">{navigation.flatMap(item => item.links ?? [item]).map(link => <a href={siteUrl(link.href!)}>{link.title}</a>)}</nav></noscript>

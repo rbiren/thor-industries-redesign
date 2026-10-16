@@ -1,0 +1,44 @@
+export const rvTypes = [
+  {
+    title: 'Travel Trailers', image: 'travel-trailer', eyebrow: 'Towable RVs',
+    text: "Travel trailers are the most popular type of non-motorized RV. No doubt you've seen one pulled down the highway hitched to a car or pickup. Travel trailers come in all sizes including tiny jelly bean-shaped models with a chuckwagon kitchen in the rear to a full blown house-on-wheels with multiple slide outs and residential-sized appliances.",
+    href: 'https://www.thorindustries.com/rv-types/travel-trailer',
+    features: ['Travel trailers can have multiple slideouts to create wide living spaces with enough room for a features like designated bedroom, kitchen island, dinette, or additional seating.', 'Underbelly "pass-through" storage, accessible doors and exterior pantry space open up a world of options to bring whatever you need to level up your adventures.', 'Power tongue jacks make hitching and unhitching your tow vehicle a breeze. Plus, once you unhitch at your campsite, you have your vehicle to explore past your campsite.', 'Easy to set up and take down, many travel trailers come equipped with stabilizing jacks and power awnings.'],
+  },
+  {
+    title: 'Fifth Wheels', image: 'fifth-wheel', eyebrow: 'Towable RVs',
+    text: 'This camping trailer affectionately nicknamed a “Fiver” is a favorite of many, especially those taking extended trips or traveling extensively in their RV. The prominent overhang resting above the tow truck bed is frequently employed as a bedroom suite, or, more recently, a living room or even a kitchen.',
+    href: 'https://www.thorindustries.com/rv-types/fifth-wheel-shop',
+    features: ['Multiple slide outs extend space and offer a variety of layouts with large living spaces, bunkhouse models and models with dedicated office/hobby space.', 'Many fifth-wheels come equipped with solar, large capacity tanks, generators and water filtration systems to Go Everywhere, Stay Anywhere.', 'Stable towing due to the fifth wheel hitch centering the weight of the RV directly over the rear axle of the truck.', 'Offers full-sized appliances like refrigerators, ovens and even washers and dryers make for all the comforts of home.'],
+  },
+  {
+    title: 'Lightweight RVs', image: 'lightweight', eyebrow: 'Towable RVs',
+    text: 'Lightweight RVs can be towed with light-duty trucks and SUVs. Made from lighter materials and shaped more aerodynamically, lightweights are designed to keep towing weight down, sometimes reducing it by thousands of pounds. All without losing the features that make you feel at home, or the durability you demand.',
+    href: 'https://www.thorindustries.com/rv-types/lightweight-camper',
+    features: ['Because of their smaller size and lighter weight, a lot of different vehicles can tow a lightweight travel trailer, including SUVs.', 'Smaller size allows you to camp in virtually any campground or park, including most National Parks.', 'Easy to set up and take down, many lightweight travel trailers come equipped with stabilizing jacks and power awnings.', 'Stay comfortable day and night with a climate controlled environment that keeps your family and furry travel companions safe.'],
+  },
+  {
+    title: 'Toy Haulers', image: 'toy-hauler', eyebrow: 'Towable RVs',
+    text: 'Many people think of toy haulers as the wild-child of the RV world. Sometimes that’s true. While the toy hauler originated as a mobile man-cave complete with diamond plate walls, this popular RV type has evolved into much more. Today you might want to think of toy haulers as open-concept living spaces with multi-purpose utility.',
+    href: 'https://www.thorindustries.com/rv-types/toy-hauler',
+    features: ['Wide-open “garage” in the rear or side for transporting ATVs, motorcycles, kayaks and other toys or can be repurposed as incremental living space such as an office, hobby room, workshop, or guest bedroom.', 'Unequaled amount of storage for large, bulky items, often with the addition of the “pass-thru” area in the basement.', 'Take advantage of all the comforts of home. Often available with full-sized appliances like refrigerators, ovens and even washers and dryers.', 'Many toy haulers come equipped with a rear or side ramp door that doubles as a patio deck complete with side railings and overhead awning.'],
+  },
+  {
+    title: 'Class A', image: 'class-a', eyebrow: 'Motorized RVs',
+    text: 'Built with the same framing and construction as commercial trucks and buses, Class A motorhomes are some of the largest vehicles on the road. What does that mean for your next adventure? Lots of room to stretch out and get comfortable. From spacious sleeping and lounging areas to full kitchens to upscale bathrooms, Class A vehicles take features and amenities to a higher level.',
+    href: 'https://www.thorindustries.com/rv-types/motorhome-class-a',
+    features: ['Multiple slide-outs to increase living and storage space for open concept living.', 'Higher towing capacity for hauling a cargo trailer, vehicle or large “toy” such as a boat.', 'Nearly unlimited luxuries, many with home-like features, such as a washer and dryer, multiple bathrooms, an induction cooktop, and a residential-size refrigerator.', 'Options available in both gas and diesel depending on your preference.'],
+  },
+  {
+    title: 'Class B', image: 'class-b', eyebrow: 'Motorized RVs',
+    text: 'Class B motorhomes are small, streamlined and ready to roll. Nimble and more fuel efficient than Class C motorhomes, Class B motorhomes offer living space best suited for small groups. Most Class B motorhomes do not offer slide outs yet still offer luxurious amenities like galley kitchens, beds and a restroom.',
+    href: 'https://www.thorindustries.com/rv-types/motorhome-class-b',
+    features: ['Easy to drive and maneuver whether you’re traveling cross-country or through cities.', 'Can be used as your daily driver as well as an off-roading adventure vehicle with options like 4x4, all-wheel drive and lifted tires.', 'Throughout the interior you’ll find durable, easy to clean flooring and surfaces that will stand up to your adventures.', 'Many camper vans come prepped with gear to mount your favorite recreational items such as bikes and kayaks.'],
+  },
+  {
+    title: 'Class C', image: 'class-c', eyebrow: 'Motorized RVs',
+    text: 'Class C motorhomes offer outdoor experiences for larger families at a lower price point than Class A Motorcoaches. Recognizable by their raised sleeping or storage areas which extend over the cab of the RV, Class C Motorhomes offer more living space than Class B Motorhomes but are smaller in size and can offer better gas mileage than Class A Motorhomes.',
+    href: 'https://www.thorindustries.com/rv-types/class-c-motorhome',
+    features: ['Multiple slide outs extend space and offer a variety of layouts.', 'The raised area extending over the cab of the RV is unique to Class C RVs and can be used for extra sleeping or storage space.', 'Frequently shorter in length and height, making them more maneuverable for getting in and out of tight places.', 'Features like stabilizing jacks, tire pressure monitoring systems, built in safety systems and an onboard generator can make setting up camp a breeze.'],
+  },
+];

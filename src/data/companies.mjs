@@ -1,0 +1,66 @@
+const cdn = 'https://thorindustries-prod.zaneray.com/cms/images/';
+const local = 'https://www.thorindustries.com/thor-companies/';
+const ehg = 'https://www.erwinhymergroup.com/en/brands-products/';
+const groups = [
+  ['North American RV Manufacturers', [
+    ['airstream', 'Airstream', local + 'airstream', 'aJpXnaTt2nPbaL14_airstream-color-square.png'],
+    ['drv', 'DRV Luxury Suites', 'https://www.drvsuites.com/', '753743dc-36e4-4601-98de-06a6cda06b2b_drv-logo-dark.png'],
+    ['entegra', 'Entegra Coach', local + 'entegra-coach', 'aKytbGGNHVfTOSrD_Entegra_Logo_Color.png'],
+    ['heartland', 'Heartland RV', local + 'heartland-rv', '415acbc1-6871-49f9-b398-5a813786b72c_HeartlandBlack.png'],
+    ['jayco', 'Jayco RV', local + 'jayco', 'aOlMeZ5xUNkB11dF_Jayco_Logo_2025_Color.png'],
+    ['keystone', 'Keystone RV Company', local + 'keystone-rv', 'aKytcGGNHVfTOSrH_Keystone_Logo_Color.png'],
+    ['kz', 'KZ', local + 'kz-rv', 'aKytcWGNHVfTOSrI_KZ_Logo_Color.png'],
+    ['open-range', 'Open Range', local + 'open-range', 'aRI6WbpReVYa4UM__OpenRange_Logo_Color.png'],
+    ['tmc', 'Thor Motor Coach', local + 'thor-motor-coach', 'aKytdGGNHVfTOSrN_TMC_Logo_Color.png'],
+    ['tiffin', 'Tiffin Motorhomes', local + 'tiffin-motorhomes', 'aKytc2GNHVfTOSrL_Tiffin_Logo_Color.png'],
+    ['venture', 'Venture RV', local + 'venture-rv', 'aKytdWGNHVfTOSrO_Venture_Logo_Color.png'],
+  ]],
+  ['Other North American Companies', [
+    ['airxcel', 'Airxcel', local + 'airxcel', 'adVtaOzlhpBNhbQi_Airxcel_Logo_Color.png'],
+    ['aqua-hot', 'Aqua-Hot', 'http://www.aquahot.com/', 'adVtaezlhpBNhbQj_AquaHot_Logo_Color.png'],
+    ['cv-doors', 'Cleer Vision Doors', 'https://cleervision.com/doors/', '97ll6DbZB011vfBQ_CVDoors_Logo_Color.png'],
+    ['cv-glass', 'Cleer Vision Tempered Glass', 'https://www.cleervision.com/glass/', 'g7UB2bvYxpAWTjvY_CVTemperedGlass_Logo_Color.png'],
+    ['cv-windows', 'Cleer Vision Windows', 'https://www.cleervision.com/windows/', 'v-hMXUvIurbWGHiI_CVWindows_Logo_Color.png'],
+    ['coleman', 'Coleman-Mach', 'https://coleman-mach.com/', 'adVta-zlhpBNhbQl_ColemanMach_Logo_Color.png'],
+    ['dicor', 'Dicor Products', 'https://dicorproducts.com/', 'adVtbezlhpBNhbQn_Dicor_Logo_Color.png'],
+    ['forma', 'Forma', 'https://campaigns.airxcel.com/forma', 'h72D6trH8o4KRrtM_Forma_Logo_Color.png'],
+    ['invision', 'InVision', 'https://invisionrvproducts.com/', 'O00VHyJsvVJOPsad_InVision_Logo_Color.png'],
+    ['maxxair', 'MaxxAir', 'https://www.maxxair.com/', 'adVtbuzlhpBNhbQo_MaxxAir_Logo_Color.png'],
+    ['mcd', 'MCD', 'http://mcdinnovations.com/', 'adVtb-zlhpBNhbQp_MCD_Logo_Color.png'],
+    ['solace', 'Solace', 'https://solacervinteriors.com/', 'cVRX161enXMu-XkK_Solace_Logo_Color.png'],
+    ['suburban', 'Suburban', 'https://suburbanrv.com/', 'adVtcezlhpBNhbQr_Suburban_Logo_Color.png'],
+    ['synergy', 'Synergy', 'https://campaigns.airxcel.com/synergy-designs', 'Dmkr7UUdAkdkAu16_SynergyDesign_Logo_Color.png'],
+    ['united-shade', 'United Shade', 'https://unitedshade.com/', 'adVtcuzlhpBNhbQs_UnitedShade_Logo_Color.png'],
+    ['velarium', 'Velarium', 'https://velariumawnings.com/', 'p2pyEQcsUjMtKxf3_Velarium_Logo_Color.png'],
+    ['vixen', 'Vixen Composites', 'https://vixencomposites.com/', 'adVtc-zlhpBNhbQu_Vixen_Logo_Color.png'],
+  ]],
+  ['European Caravan Manufacturers', [
+    ['buccaneer', 'Buccaneer', ehg + 'buccaneer', 'GppxK-aJPYPUSiCj_Buccaneer_Logo_Color.png'],
+    ['burstner', 'Bürstner', ehg + 'buerstner', 'G2-lypR4HeA1dwnJ_Burstner_Logo_Color.png'],
+    ['carado', 'Carado', ehg + 'carado', 'vJTGktLVynWkkgoV_Carado_Logo_Color.png'],
+    ['corigon', 'Corigon', 'https://www.corigon.com/de/en', 'M2xBlSsx4eBh869o_Corigon_Logo_Color.png'],
+    ['crosscamp', 'Crosscamp', ehg + 'crosscamp', 'CCYhGRq27cQ0YC6k_Crosscamp_Logo_Color.png'],
+    ['dethleffs', 'Dethleffs', ehg + 'dethleffs', 'V05GMNlhvflGF12g_Dethleffs_Logo_Color.png'],
+    ['elddis', 'Elddis', ehg + 'elddis', 'Qnrimy5LQkEDhiYo_Elddis_Logo_Color.png'],
+    ['eriba', 'Eriba', ehg + 'eriba', 'MlZVw-cQu8am_vls_Eriba_Logo_Color.png'],
+    ['etrusco', 'Etrusco', ehg + 'etrusco', 'f4ZSEVrRyAOybNk3_Etrusco_Logo_Color.png'],
+    ['freeontour', 'Free On Tour', ehg + 'freeontour', 'MJ81d6oXepfSZ-lC_FreeOnTour_Logo_Color.png'],
+    ['hymer', 'Hymer', ehg + 'hymer', null],
+    ['laika', 'Laika', ehg + 'laika', 'ZDQOA8gA5BwzLeMB_Laika_Logo_Color.png'],
+    ['lmc', 'LMC', ehg + 'lmc', 'LPJJL_hjKJi3esn8_LMC_Logo_Color.png'],
+    ['niesmann', 'Niesmann + Bischoff', ehg + 'niesmann-bischoff', '6upo-z8c3xjjHX4J_NieshmanBischoff_Logo_Color.png'],
+    ['sunlight', 'Sunlight', ehg + 'sunlight', 'D5xX84XXf1l-9Hni_Sunlight_Logo_Color.png'],
+    ['xplore', 'Xplore', ehg + 'xplore', 'HRTUiJebl6BfEwKo_Xplore_Logo_Color.png'],
+  ]],
+  ['Other European Companies', [
+    ['can', 'CAN', 'https://www.cansrl.eu/', '6fVqBnpkENbtrAdd_Can_Logo_Color.png'],
+    ['goldschmitt', 'Goldschmitt', ehg + 'goldschmitt', '0JDyZWQ6ARv0KnjD_Goldschmitt_Logo_Color.png'],
+    ['mcrent', 'McRent', ehg + 'mcrent', 'McPUTYjgZ0NvbwXl_McRent_Logo_Color.png'],
+    ['movera', 'Movera', ehg + 'movera', 'qj9I72mGCCqXx812_Movera_Logo_Color.png'],
+    ['rent-easy', 'rent easy', ehg + 'rent-easy', 'H3-yWUMLvxsboFhi_RentEasy_Logo_Color.png'],
+  ]],
+];
+export const companies = groups.flatMap(([group, rows]) => rows.map(([id, name, href, file]) => ({
+  id, name, href, group, logo: file ? cdn + file + '?auto=compress,format&w=536' : null,
+})));
+export const companyGroups = groups.map(([name]) => name);
