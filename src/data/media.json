@@ -34,6 +34,16 @@
     ],
     "sha256": "85d624173e42e79a6ed82a4cd6c8f2a4192ed3e724d35c4a2f8ad30d44ef8203"
   },
+  "board-video-poster": {
+    "source": "https://i.ytimg.com/vi/HlXl0gFApyQ/hqdefault.jpg",
+    "format": "webp",
+    "width": 480,
+    "height": 360,
+    "widths": [
+      480
+    ],
+    "sha256": "093f177871cfca68176786565413dfd0af29583f68d81406a80cd2858c9e1034"
+  },
   "family": {
     "source": "https://thorindustries-prod.zaneray.com/cms/images/61f150d3-fe9e-4e43-a555-55486f547647__CEM6366+%281%29.jpg?auto=compress,format&w=1400",
     "format": "webp",

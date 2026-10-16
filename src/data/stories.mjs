@@ -131,7 +131,7 @@ export const homeFeaturedStories = [
   {
     eyebrow: 'On The Road',
     title: 'My Van Life',
-    text: "Thrill-seeker Kalen Thorien feels most at home when she's exploring off the grid in an RV. With a Class B campervan, she wakes up to new views and adventures, anywhere in the world, no questions asked, all the time — and she wouldn't want it any other way. Find out why van living is her ideal travel method, and get inspired for your own road trip.",
+    text: "Thrill-seeker Kalen Thorien feels most at home when she's exploring off the grid in an RV. With a a Class B campervan, she wakes up to new views and adventures, anywhere in the world, no questions asked, all the time — and she wouldn't want it any other way. Find out why van living is her ideal travel method, and get inspired for your own road trip.",
     href: 'https://www.thorindustries.com/stories/van-life-kalen-thorien',
     image: 'story-van-life',
     imageAlt: "Kalen Thorien in the driver's seat looking out the window of a Thor Motor Coach camper van.",
@@ -170,7 +170,7 @@ export const homeNewsEvents = [
   {
     title: 'World’s First Hybrid Class A Motorhome',
     eyebrow: 'Hybrid',
-    text: 'Explore how THOR Industries and Harbinger collaborated to develop the world’s first hybrid Class A motorhome.',
+    text: '',
     href: 'https://www.thorindustries.com/worlds-first-hybrid-class-a-motorhome',
     image: 'news-hybrid-chassis',
     imageAlt: 'Harbinger Electric Chassis at a campsite near trees and a river.',

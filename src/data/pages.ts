@@ -80,7 +80,7 @@ export const pages: Page[] = [
         ],
         routeHref('thor-companies'),
         'Explore Companies',
-        'family',
+        'board-video-poster',
       ),
       section(
         'Meet the Family of Companies',

@@ -32,7 +32,7 @@ for (const [id, url] of Object.entries(all)) {
   }
   const variant = await sharp(`public/media/${id}-${widths.at(-1)}.webp`).metadata();
   metadata[id] = {
-    source: url, format: info.format, width: variant.width, height: variant.height,
+    source: url, format: variant.format, width: variant.width, height: variant.height,
     widths, sha256: createHash('sha256').update(bytes).digest('hex'),
   };
   console.log(`${id}: ${info.width}×${info.height} ${info.format}`);

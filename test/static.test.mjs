@@ -262,11 +262,13 @@ function parseContentCards(sectionHtml) {
     const hrefMatch = body.match(/<a\b[^>]*class="card-link"[^>]*href="([^"]+)"/);
     const eyebrowMatch = body.match(/<p\b[^>]*class="eyebrow"[^>]*>([\s\S]*?)<\/p>/);
     const titleMatch = body.match(/<h3>([\s\S]*?)<\/h3>/);
+    const textMatch = body.match(/<\/h3>\s*<p>([\s\S]*?)<\/p>/);
     const actionMatch = body.match(/<span\b[^>]*class="text-link"[^>]*>\s*([\s\S]*?)\s*<span\b/);
     return {
       href: hrefMatch ? hrefMatch[1].trim() : '',
       eyebrow: eyebrowMatch ? decodeHtmlEntities(eyebrowMatch[1].trim()) : '',
       title: titleMatch ? decodeHtmlEntities(titleMatch[1].trim()) : '',
+      text: textMatch ? decodeHtmlEntities(textMatch[1].trim()) : '',
       action: actionMatch ? decodeHtmlEntities(actionMatch[1].trim()) : '',
     };
   });
@@ -370,13 +372,23 @@ test('Homepage capture-derived regressions verify module/card associations again
   ];
 
   const featuredSection = extractSection(homeHtml, 'featured-stories');
-  const renderedFeaturedCards = parseContentCards(featuredSection).map(({ title, href, action }) => ({
+  const parsedFeaturedCards = parseContentCards(featuredSection);
+  const renderedFeaturedCards = parsedFeaturedCards.map(({ title, href, action }) => ({
     title,
     href,
     action,
   }));
   assert.deepEqual(renderedFeaturedCards, expectedFeaturedStories);
   assert.deepEqual(baseline.featuredStories.cards, expectedFeaturedStories);
+
+  // 3b. My Van Life preserves the exact captured wording "With a a Class B campervan" (Nuxt:1017, DOM:961/1796)
+  const expectedMyVanLifeSummary =
+    "Thrill-seeker Kalen Thorien feels most at home when she's exploring off the grid in an RV. With a a Class B campervan, she wakes up to new views and adventures, anywhere in the world, no questions asked, all the time — and she wouldn't want it any other way. Find out why van living is her ideal travel method, and get inspired for your own road trip.";
+  const myVanLifeCard = parsedFeaturedCards.find((card) => card.title === 'My Van Life');
+  assert.ok(myVanLifeCard, 'Missing My Van Life card in #featured-stories');
+  assert.equal(myVanLifeCard.text, expectedMyVanLifeSummary);
+  assert.ok(myVanLifeCard.text.includes('With a a Class B campervan'));
+  assert.ok(!featuredSection.includes('With a Class B campervan'));
 
   // 4. News and Events: Travel + Leisure card within #news-and-events preserves exact captured URL
   const expectedElectricRvUrl =
@@ -398,7 +410,53 @@ test('Homepage capture-derived regressions verify module/card associations again
   assert.ok(baselineElectricRv);
   assert.equal(baselineElectricRv.href, expectedElectricRvUrl);
 
-  // 5. Hero image loads eagerly while below-fold section images default to lazy loading
+  // 4b. Hybrid news card has no uncaptured summary in #news-and-events (Nuxt:1075-1081, DOM:994-996/1902-1905)
+  const hybridNewsCard = renderedNewsCards.find(
+    (card) => card.title === 'World’s First Hybrid Class A Motorhome',
+  );
+  assert.ok(hybridNewsCard, 'Missing World’s First Hybrid Class A Motorhome card in #news-and-events');
+  assert.equal(hybridNewsCard.eyebrow, 'Hybrid');
+  assert.equal(hybridNewsCard.href, 'https://www.thorindustries.com/worlds-first-hybrid-class-a-motorhome');
+  assert.equal(hybridNewsCard.action, 'Learn More');
+  assert.equal(hybridNewsCard.text, '', 'Hybrid news card must not include an invented summary paragraph');
+  assert.ok(
+    !homeHtml.includes(
+      'Explore how THOR Industries and Harbinger collaborated to develop the world’s first hybrid Class A motorhome.',
+    ),
+    'Invented hybrid news summary must be absent from rendered homepage',
+  );
+
+  // 5. Who Is THOR? uses dedicated local YouTube poster (https://i.ytimg.com/vi/HlXl0gFApyQ/hqdefault.jpg, Nuxt:44-58)
+  // while leaving family image intact for legitimate Airstream/company uses (Nuxt:65-72)
+  const media = JSON.parse(await readFile('src/data/media.json', 'utf8'));
+  const expectedBoardPosterSource = 'https://i.ytimg.com/vi/HlXl0gFApyQ/hqdefault.jpg';
+  assert.ok(media['board-video-poster'], 'Missing dedicated board-video-poster key in src/data/media.json');
+  assert.equal(media['board-video-poster'].source, expectedBoardPosterSource);
+  assert.ok(
+    media.family.source.includes('61f150d3-fe9e-4e43-a555-55486f547647__CEM6366+%281%29.jpg'),
+    'Existing family asset source URL must remain the Airstream photograph',
+  );
+
+  const whoIsThorSection = extractSection(homeHtml, 'who-is-thor');
+  assert.ok(
+    whoIsThorSection.includes('/thor-industries-redesign/media/board-video-poster-480.webp'),
+    'Who Is THOR section must render local board-video-poster WebP asset',
+  );
+  assert.ok(
+    !whoIsThorSection.includes('/thor-industries-redesign/media/family-'),
+    'Who Is THOR section must not render the unrelated family/Airstream photo',
+  );
+  const whoPosterImg = whoIsThorSection.match(/<img\b[^>]*>/);
+  assert.ok(whoPosterImg, 'Missing video poster <img> in #who-is-thor');
+  const whoPosterAlt = whoPosterImg[0].match(/\balt="([^"]*)"/);
+  assert.ok(whoPosterAlt && whoPosterAlt[1].includes('2025 THOR Industries Board Video'));
+  assert.ok(!whoPosterAlt[1].includes('Airstream'), 'Video poster alt text must not describe the Airstream photo');
+  assert.ok(
+    familySection.includes('/thor-industries-redesign/media/family-'),
+    'Family of Companies section must retain the legitimate family/Airstream image',
+  );
+
+  // 6. Hero image loads eagerly while below-fold section images default to lazy loading
   assert.ok(heroHtml.includes('loading="eager"'));
   assert.ok(featuredSection.includes('loading="lazy"'));
   assert.ok(!featuredSection.includes('loading="eager"'));
@@ -411,7 +469,11 @@ test('All local media derivatives are valid WebP assets with positive dimensions
   const ids = Object.keys(media);
   assert.ok(ids.length >= 100);
   for (const [id, asset] of Object.entries(media)) {
-    assert.ok(asset.source.startsWith('https://thorindustries-prod.zaneray.com/'), `${id} source is not THOR CDN`);
+    assert.ok(
+      asset.source.startsWith('https://thorindustries-prod.zaneray.com/') ||
+        asset.source === 'https://i.ytimg.com/vi/HlXl0gFApyQ/hqdefault.jpg',
+      `${id} source is not an authorized THOR/YouTube capture source`,
+    );
     assert.equal(asset.format, 'webp');
     assert.ok(asset.width > 0 && asset.height > 0);
     assert.ok(Array.isArray(asset.widths) && asset.widths.length > 0);

@@ -6,6 +6,7 @@ export const sources = {
   hero: photo('aTnRtXNYClf9oCGX_06102025-3330.jpg', 'auto=format%2Ccompress&rect=0%2C30%2C4000%2C2250&w=1920&h=1080'),
   'hero-mobile': photo('aTnRtXNYClf9oCGX_06102025-3330.jpg', 'auto=format%2Ccompress&rect=1711%2C0%2C1379%2C2664&w=828&h=1600'),
   'thor-logo': photo('d59e9c40-6ffd-4e3e-8a6b-133807be8a04_Thor_Tertiary_Logo_4C.png', 'auto=compress,format&w=1440'),
+  'board-video-poster': 'https://i.ytimg.com/vi/HlXl0gFApyQ/hqdefault.jpg',
   family: photo('61f150d3-fe9e-4e43-a555-55486f547647__CEM6366+%281%29.jpg', 'auto=compress,format&w=1400'),
   'rv-types': photo('41eee6c9-080c-42c5-92fd-9a429924e905_20220612_01997.jpg', 'auto=compress,format&rect=284,0,4551,3413&w=1600&h=1200'),
   finance: photo('82b1ac9b-e928-440f-b959-0abc29d480d8_DDL_0213+%281%29.jpg'),
