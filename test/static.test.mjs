@@ -1381,13 +1381,95 @@ test('cross-page journeys, handoffs, and no-JS static rendering work across all 
   }
 });
 
-test('404 is real static content and the deploy workflow uploads only built output', async () => {
+test('404 is real static content and release workflow/config/README satisfy VAL-RELEASE-001', async () => {
   const html = await readFile('dist/404.html', 'utf8');
   assert.ok(html.includes('noindex'));
   assert.ok(html.includes('Page not found'));
-  const workflow = await readFile('.github/workflows/pages.yml', 'utf8');
-  for (const command of ['npm ci', 'npm run check', 'npm run build', 'npm test', 'path: dist']) {
-    assert.ok(workflow.includes(command));
+  assert.ok(!existsSync('dist/thor-industries-redesign'), 'dist must not contain doubly nested project base folder');
+
+  // 1. Pinned dependencies, Node 24 engine, and scripts in package.json and package-lock.json
+  const pkg = JSON.parse(await readFile('package.json', 'utf8'));
+  const lock = JSON.parse(await readFile('package-lock.json', 'utf8'));
+  const rootLock = lock.packages?.[''];
+  assert.ok(rootLock, 'package-lock.json missing root package entry');
+
+  assert.equal(pkg.engines?.node, '>=24.0.0');
+  assert.equal(rootLock.engines?.node, '>=24.0.0');
+  assert.deepEqual(pkg.dependencies, { astro: '7.4.0', sharp: '0.35.5' });
+  assert.deepEqual(pkg.devDependencies, { '@astrojs/check': '0.9.10', typescript: '6.0.3' });
+  assert.deepEqual(rootLock.dependencies, pkg.dependencies);
+  assert.deepEqual(rootLock.devDependencies, pkg.devDependencies);
+  assert.equal(lock.packages['node_modules/astro']?.version, '7.4.0');
+  assert.equal(lock.packages['node_modules/sharp']?.version, '0.35.5');
+  assert.equal(lock.packages['node_modules/@astrojs/check']?.version, '0.9.10');
+  assert.equal(lock.packages['node_modules/typescript']?.version, '6.0.3');
+
+  assert.equal(pkg.scripts?.check, 'astro check');
+  assert.equal(pkg.scripts?.build, 'astro build');
+  assert.equal(pkg.scripts?.test, 'node --test --test-concurrency=2');
+  assert.equal(pkg.scripts?.dev, 'astro dev --ignore-lock');
+  assert.equal(pkg.scripts?.preview, 'astro preview --ignore-lock');
+
+  // 2. Astro config invariants
+  const astroConfig = await readFile('astro.config.mjs', 'utf8');
+  for (const snippet of [
+    "site: 'https://rbiren.github.io'",
+    "base: '/thor-industries-redesign/'",
+    "output: 'static'",
+    "trailingSlash: 'always'",
+    "build: { format: 'directory' }",
+    "server: { host: '127.0.0.1' }",
+  ]) {
+    assert.ok(astroConfig.includes(snippet), `astro.config.mjs missing ${snippet}`);
   }
+
+  // 3. GitHub Pages workflow order and artifact path
+  const workflow = await readFile('.github/workflows/pages.yml', 'utf8');
+  assert.ok(workflow.includes("node-version: '24'"));
+  assert.ok(workflow.includes('name: github-pages'));
+  assert.ok(workflow.includes('pages: write'));
+  assert.ok(workflow.includes('id-token: write'));
   assert.ok(!workflow.includes('path: .'));
+  assert.ok(!workflow.includes('thor-industries-redesign/dist'));
+
+  const orderedSteps = ['npm ci', 'npm run check', 'npm run build', 'npm test', 'path: dist'];
+  let prevIdx = -1;
+  for (const step of orderedSteps) {
+    const idx = workflow.indexOf(step);
+    assert.ok(idx > prevIdx, `Workflow step "${step}" missing or out of order`);
+    prevIdx = idx;
+  }
+
+  // 4. README documents toolchain, commands, loopback ports 4173/4174, C23 routes, external handoffs, and Pages deployment
+  const readme = await readFile('README.md', 'utf8');
+  for (const requiredText of [
+    'Node 24.21.0',
+    'npm 11.19.0',
+    '7.4.0',
+    '0.35.5',
+    '0.9.10',
+    '6.0.3',
+    'npm ci',
+    'npm run check',
+    'npm run build',
+    'npm test',
+    'npm run dev -- --host 127.0.0.1 --port 4173',
+    'npm run preview -- --host 127.0.0.1 --port 4174',
+    'http://127.0.0.1:4173/thor-industries-redesign/',
+    'http://127.0.0.1:4174/thor-industries-redesign/',
+    'https://rbiren.github.io/thor-industries-redesign/',
+    'https://www.thorindustries.com/find-my-rv',
+    'https://www.thorindustries.com/trip-calculator',
+    'https://www.thorindustries.com/financing-your-rv',
+    'https://ir.thorindustries.com/ir-home/default.aspx',
+    'path: dist',
+  ]) {
+    assert.ok(readme.includes(requiredText), `README.md missing required delivery documentation: ${requiredText}`);
+  }
+  assert.ok(!readme.includes('localhost:4321'), 'README.md must not document default Astro port 4321');
+
+  for (const slug of expectedSlugs) {
+    const routePath = slug ? `/${slug}/` : '/';
+    assert.ok(readme.includes(`\`${routePath}\``), `README.md missing canonical C23 route ${routePath}`);
+  }
 });
