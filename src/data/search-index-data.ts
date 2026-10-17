@@ -232,8 +232,6 @@ function getPageExtras(page: Page): { headings: string[]; body: string[] } {
       innovationData.hero.title,
       innovationData.hero.subtitle,
       ...innovationData.callouts.map((c) => c.title),
-      innovationData.pillarsBanner.title,
-      ...innovationData.pillarsBanner.pillars.map((p) => p.name),
       innovationData.newsBanner.title,
       ...innovationData.moreCallouts.map((c) => c.title),
       innovationData.spotlightCallout.title,
@@ -250,11 +248,7 @@ function getPageExtras(page: Page): { headings: string[]; body: string[] } {
         ...(c.paragraphs ?? []),
         ...(c.bullets ?? []),
       ]),
-      innovationData.pillarsBanner.title,
-      innovationData.pillarsBanner.imageAlt ?? '',
-      ...innovationData.pillarsBanner.pillars.flatMap((p) => [p.name, p.description]),
       innovationData.newsBanner.title,
-      innovationData.newsBanner.text,
       innovationData.newsBanner.imageAlt ?? '',
       ...innovationData.moreCallouts.flatMap((c) => [c.title, ...c.paragraphs]),
       innovationData.spotlightCallout.title,
@@ -301,10 +295,8 @@ function getPageExtras(page: Page): { headings: string[]; body: string[] } {
       ...newsEventsData.items.flatMap((item) => [
         item.date,
         item.title,
-        item.articleTitle ?? '',
         item.summary,
         item.sourceType ?? '',
-        ...(item.modalBody ?? []),
       ]),
     );
   } else if (page.slug === 'careers') {
@@ -325,6 +317,7 @@ function getPageExtras(page: Page): { headings: string[]; body: string[] } {
       careersData.familySection.title,
       careersData.familySection.intro,
       ...careersData.familySection.companies.flatMap((c) => [c.name, c.text]),
+      careersData.familySection.transparencyNote,
     );
   } else if (page.slug === 'thor-companies') {
     headings.push(

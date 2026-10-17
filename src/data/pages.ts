@@ -300,13 +300,10 @@ export const pages: Page[] = [
         action: c.action?.[0],
       })),
       {
-        title: innovationData.pillarsBanner.title,
-        text: innovationData.pillarsBanner.pillars.map((p) => `${p.name}: ${p.description}`),
-      },
-      {
         title: innovationData.newsBanner.title,
         subtitle: innovationData.newsBanner.eyebrow,
-        text: [innovationData.newsBanner.text],
+        image: innovationData.newsBanner.image,
+        imageAlt: innovationData.newsBanner.imageAlt,
         href: innovationData.newsBanner.action[1],
         action: innovationData.newsBanner.action[0],
       },

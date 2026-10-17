@@ -719,9 +719,13 @@ test('Stories hub and five category pages satisfy VAL-STORY-001, VAL-STORY-002, 
         }
       }
     }
-    if (catData.hasLoadMore) {
-      assert.ok(listingSection.includes('LOAD MORE STORIES'));
-    }
+    // The complete finite captured listing renders in full; no dead initial-limit/Load More control
+    assert.ok(
+      !listingSection.includes('LOAD MORE STORIES'),
+      `${catData.slug} must not render a dead LOAD MORE control over a complete listing`,
+    );
+    assert.ok(!listingSection.includes('data-load-more-stories'));
+    assert.ok(!catHtml.includes('data-initial-limit'));
   }
 
   // Travel category region selector and featured guides
@@ -882,11 +886,39 @@ test('Corporate routes (/innovation/, /history/, /community/, /news-events/, /ca
       assert.ok(innovationHtml.includes(`<li>${bullet}</li>`));
     }
   }
-  assert.ok(innovationHtml.includes(innovationData.pillarsBanner.title));
-  for (const pillar of innovationData.pillarsBanner.pillars) {
-    assert.ok(innovationHtml.includes(`<h3>${pillar.name}</h3>`));
-    assert.ok(innovationHtml.includes(pillar.description));
-  }
+  // Capture-anchored (innovation capture body slice 5): the source banner is image-only, so no
+  // invented pillar heading/cards/prose may remain and the retained banner keeps its source alt.
+  assert.ok(!innovationHtml.includes('Four Key Pillars of Innovation'));
+  assert.ok(!innovationHtml.includes('pillar-card'));
+  assert.ok(!innovationHtml.includes('Developing hybrid, electric, and range-extended propulsion'));
+  assert.ok(
+    innovationHtml.includes(
+      'alt="innovation banner with electrification, connected vehicle, owner experience, manufacturing icons"',
+    ),
+    'Innovation pillars banner must keep the captured source alt text',
+  );
+  // Capture-anchored per-section image associations and alt texts (innovation capture body slices 1-3, 7)
+  assert.ok(innovationHtml.includes('alt="Solar panels and Starlink atop a Tiffin Class A Motorhome"'));
+  const buildingSection = extractSection(innovationHtml, 'building-for-the-future');
+  assert.ok(
+    buildingSection.includes('/media/embark-'),
+    'BUILDING FOR THE FUTURE must use the captured Embark photo association',
+  );
+  assert.ok(buildingSection.includes('alt="Embark Range Extended Electric Class A RV"'));
+  assert.ok(innovationHtml.includes('alt="family on back patio of toy hauler rV"'));
+  assert.ok(innovationHtml.includes('alt="A man with fishing equipment outside a Jayco Terrain"'));
+  const innovationNewsSection = extractSection(innovationHtml, 'thor-innovation-news');
+  assert.ok(innovationNewsSection.includes('THOR INNOVATION NEWS'));
+  assert.ok(innovationNewsSection.includes('Catch a Glimpse of Tomorrow, Today'));
+  assert.ok(
+    innovationNewsSection.includes('/media/news-estream-'),
+    'THOR INNOVATION NEWS must use the captured E-Stream/Tesla photo association',
+  );
+  assert.ok(innovationNewsSection.includes('alt="THOR E-Stream being towed by a Tesla"'));
+  assert.ok(
+    !innovationNewsSection.includes('Explore the latest breakthroughs'),
+    'unsupported Innovation News summary must be removed',
+  );
   assert.ok(innovationHtml.includes(innovationData.newsBanner.title));
   assert.ok(innovationHtml.includes(`href="${innovationData.newsBanner.action[1]}"`));
   assert.ok(innovationHtml.includes('href="/thor-industries-redesign/news-events/"'));
@@ -934,23 +966,101 @@ test('Corporate routes (/innovation/, /history/, /community/, /news-events/, /ca
   assert.ok(communityHtml.includes('<h2>COMMUNITY INVOLVEMENT</h2>'));
   assert.ok(communityHtml.includes('href="https://www.unitedway.org/"'));
   assert.ok(communityHtml.includes('href="https://www.habitat.org/"'));
+  // Capture-anchored truthful alts: drone hero uses the source alt, LEAP shows the captured scene
+  assert.ok(communityHtml.includes('alt="Building Our Community"'));
+  assert.ok(
+    communityHtml.includes(
+      'alt="Instructor speaking to a group of students standing outside the open door of an RV"',
+    ),
+  );
+  assert.ok(!communityHtml.includes('Volunteers and children planting seedlings'));
+  assert.ok(!communityHtml.includes('Students exploring nature outdoors'));
 
   // VAL-CORP-002: /news-events/ and /careers/
   const newsHtml = await readFile('dist/news-events/index.html', 'utf8');
   assert.ok(newsHtml.includes(`<h1>${newsEventsData.hero.title}</h1>`));
-  assert.equal(newsEventsData.items.length, 15);
+  assert.equal(newsEventsData.items.length, 48);
   const newsCardMatches = [...newsHtml.matchAll(/<article\b[^>]*class="news-archive-card"[^>]*>/g)];
-  assert.equal(newsCardMatches.length, 15, 'Expected 15 news & events items on /news-events/');
+  assert.equal(newsCardMatches.length, 48, 'Expected all 48 captured news & events items on /news-events/');
+  const escapeHtmlText = (value) =>
+    value
+      .replaceAll('&', '&amp;')
+      .replaceAll('"', '&quot;')
+      .replaceAll("'", '&#39;')
+      .replaceAll('<', '&lt;')
+      .replaceAll('>', '&gt;');
   for (const item of newsEventsData.items) {
     assert.ok(newsHtml.includes(item.date), `Missing news date ${item.date}`);
     assert.ok(
-      newsHtml.includes(item.title) || newsHtml.includes(item.title.replaceAll("'", '&#39;')),
+      newsHtml.includes(item.title) || newsHtml.includes(escapeHtmlText(item.title)),
       `Missing news title ${item.title}`,
     );
     assert.ok(newsHtml.includes(`href="${item.href}"`), `Missing news href ${item.href}`);
   }
-  assert.ok(newsHtml.includes('id="news-preview-dialog"'));
-  assert.ok(newsHtml.includes('data-news-open'));
+  // Capture-anchored finite listing boundaries and ordering (retained capture literals, September 22,
+  // 2025 through February 1, 2019, with no captured Next/Load More control)
+  const capturedNewsLiterals = [
+    ['September 22, 2025', "THOR Industries Introduces World's First Range Extended Electric Class A Motorhome", 'https://ir.thorindustries.com/investor-resources/press-releases/press-release-details/2025/THOR-Industries-Introduces-Worlds-First-Range-Extended-Electric-Class-A-Motorhome/default.aspx'],
+    ['July 16, 2025', 'THOR &amp; Harbinger Win 2025 Fast Company Award for Hybrid RV', 'https://www.thorindustries.com/news-events/thor-industries-harbinger-world-changing-ideas-award'],
+    ['August 1, 2020', 'Pandemic fuels local RV activity to all-time highs', 'https://www.postregister.com/news/local/pandemic-fuels-local-rv-activity-to-all-time-highs/article_652015dd-9eb3-5e47-989a-f53a750e5f9d.html'],
+    ['June 8, 2020', 'Martin: &quot;Last Few Months Have Been A Rollercoaster&quot;', 'https://rvbusiness.com/martin-last-few-months-have-been-a-roller-coaster/'],
+    ['May 7, 2020', 'Coronavirus has led to rise in &quot;RV Lifestyle&quot;: THOR Industries CEO', 'http://video.foxbusiness.com/v/6154997572001'],
+    ['October 23, 2019', 'THOR Industries Launches New Sustainability Website', 'https://www.thorindustries.com/news-events/thor-industries-launches-new-sustainability-website'],
+    ['February 1, 2019', 'Thor Announces Closing of Erwin Hymer Group Acquisition', 'https://www.thorindustries.com/news-events/newshymer'],
+  ];
+  for (const [date, title, href] of capturedNewsLiterals) {
+    assert.ok(newsHtml.includes(date), `Missing captured news date literal ${date}`);
+    assert.ok(
+      newsHtml.includes(title) || newsHtml.includes(title.replaceAll('&quot;', '"').replaceAll('&amp;', '&')),
+      `Missing captured news title literal ${title}`,
+    );
+    assert.ok(newsHtml.includes(`href="${href}"`), `Missing captured news destination ${href}`);
+  }
+  // Captured order is preserved: each boundary card appears after the previous one
+  const orderProbe = [
+    "THOR Industries Introduces World's First Range Extended Electric Class A Motorhome",
+    'Pandemic fuels local RV activity to all-time highs',
+    'When Work From Home Means Working From an RV',
+    'Airstream’s new Astrovan II is ready to move the first Boeing commercial crew astronauts',
+    'Coming Soon: Control and Monitor Your Keystone RV from the Road',
+    'Thor Announces Closing of Erwin Hymer Group Acquisition',
+  ].map((title) => {
+    const idx = newsHtml.indexOf(title);
+    assert.ok(idx !== -1, `Missing ordering probe title: ${title}`);
+    return idx;
+  });
+  for (let i = 1; i < orderProbe.length; i += 1) {
+    assert.ok(orderProbe[i] > orderProbe[i - 1], 'News cards must preserve the captured listing order');
+  }
+  // The seven former modal items are ordinary direct anchors to their exact stable source pages
+  const formerModalAnchors = [
+    'https://www.thorindustries.com/news-events/thor-industries-harbinger-world-changing-ideas-award',
+    'https://www.thorindustries.com/news-events/where-the-magic-happens',
+    'https://www.thorindustries.com/news-events/blog-global-connected-vehicle-platform',
+    'https://www.thorindustries.com/news-events/blog-ev-charging',
+    'https://www.thorindustries.com/news-events/blog-airstream-carplay',
+    'https://www.thorindustries.com/news-events/blog-lessons-from-the-tunnel',
+    'https://www.thorindustries.com/news-events/blog-electrifying-the-road-to-adventure',
+  ];
+  for (const url of formerModalAnchors) {
+    assert.ok(newsHtml.includes(`href="${url}"`), `Missing direct source anchor ${url}`);
+  }
+  // No fabricated modal text or obsolete news-dialog wiring remains in rendered HTML
+  assert.ok(!newsHtml.includes('news-preview-dialog'));
+  assert.ok(!newsHtml.includes('data-news-open'));
+  assert.ok(!newsHtml.includes('Preview Summary'));
+  const fabricatedModalCopy = [
+    'jointly developed hybrid Class A motorhome platform has been named a winner',
+    'battery pack validation and solar integration',
+    'over-the-air diagnostics, and proactive service support',
+    'pull-through, eRV-compatible charging station concept',
+    'essential RV telemetry such as battery state of charge',
+    'full-scale wind tunnel and computational fluid dynamics testing',
+    'advocate for reliable, pull-through EV charging infrastructure',
+  ];
+  for (const snippet of fabricatedModalCopy) {
+    assert.ok(!newsHtml.includes(snippet), `Fabricated news modal copy remains: ${snippet.slice(0, 50)}`);
+  }
 
   const careersHtml = await readFile('dist/careers/index.html', 'utf8');
   assert.ok(careersHtml.includes(`<h1>${careersData.hero.title}</h1>`));
@@ -960,7 +1070,19 @@ test('Corporate routes (/innovation/, /history/, /community/, /news-events/, /ca
   }
   assert.ok(careersHtml.includes(careersData.globalHqCallout.title));
   assert.ok(careersHtml.includes(`href="${careersData.globalHqCallout.action[1]}"`));
-  assert.ok(careersHtml.includes(`href="${careersData.familySection.transparencyLink.href}"`));
+  // Capture-anchored: full Transparency in Coverage sentence with the terminal "here" linked
+  assert.ok(
+    careersHtml.includes(
+      'The Transparency in Coverage Rule for group health plans requires disclosure of cost-sharing information in a machine-readable format. Please find this information',
+    ),
+    'Careers must render the complete captured transparency sentence',
+  );
+  assert.ok(
+    careersHtml.includes(
+      '<a href="https://www.anthem.com/machine-readable-file/search">here</a>',
+    ),
+    'Careers transparency note must link the terminal "here" to the Anthem machine-readable file search',
+  );
   assert.equal(careersData.familySection.companies.length, 7);
   for (const company of careersData.familySection.companies) {
     assert.ok(careersHtml.includes(`<h3>${company.name}</h3>`));
@@ -1057,6 +1179,11 @@ test('Sustainability routes (/sustainability/, /sustainability-report/, /sustain
   }
   assert.ok(hubHtml.includes(`<h2>${sustainabilityHubData.committeeCollage.title}</h2>`));
   assert.ok(hubHtml.includes(`href="${sustainabilityHubData.committeeCollage.href}"`));
+  // Capture-anchored: the source caption's verbatim wording, including its retained typo
+  assert.ok(
+    hubHtml.includes('The Sustainability Committee the supports on-going commitment'),
+    'Sustainability committee caption must preserve the captured source wording',
+  );
   assert.ok(hubHtml.includes(`<h2>${sustainabilityHubData.reportBanner.title}</h2>`));
   assert.ok(hubHtml.includes(`href="${sustainabilityHubData.reportBanner.href}"`));
   assert.ok(hubHtml.includes(`href="${siteUrl('/sustainability-report/')}"`));
@@ -1271,6 +1398,20 @@ test('search index covers all 23 built pages and matches titles, headings, and b
     assert.ok(rec.url.startsWith(`${BASE_PATH}/`), `non-local search record URL: ${rec.url}`);
   }
 
+  // Search index must contain only source-backed content: no fabricated Innovation pillar prose,
+  // no ghost-written news modal copy, and no unsupported Innovation News summary
+  const fabricatedIndexCopy = [
+    'Four Key Pillars of Innovation',
+    'Developing hybrid, electric, and range-extended propulsion',
+    'Explore the latest breakthroughs, connected vehicle milestones',
+    'jointly developed hybrid Class A motorhome platform has been named a winner',
+    'battery pack validation and solar integration',
+    'advocate for reliable, pull-through EV charging infrastructure',
+  ];
+  for (const snippet of fabricatedIndexCopy) {
+    assert.ok(!rawIndex.includes(snippet), `Search index contains fabricated copy: ${snippet.slice(0, 50)}`);
+  }
+
   // VAL-SEARCH-001: Title and body phrase queries across all route groups
   const queries = [
     { query: 'Towing Guide', expectedUrl: '/thor-industries-redesign/towing-guide/' },
@@ -1280,8 +1421,10 @@ test('search index covers all 23 built pages and matches titles, headings, and b
     { query: 'Frequently Asked Questions', expectedUrl: '/thor-industries-redesign/faq/' },
     { query: 'Regional Trip Guides', expectedUrl: '/thor-industries-redesign/stories/category/travel/' },
     { query: 'Campfire Dutch Oven', expectedUrl: '/thor-industries-redesign/stories/category/recipes/' },
-    { query: 'Four Key Pillars of Innovation', expectedUrl: '/thor-industries-redesign/innovation/' },
-    { query: 'Harbinger Hybrid Class A', expectedUrl: '/thor-industries-redesign/innovation/' },
+    { query: 'Global Innovation Team Goals', expectedUrl: '/thor-industries-redesign/innovation/' },
+    { query: 'Catch a Glimpse of Tomorrow', expectedUrl: '/thor-industries-redesign/innovation/' },
+    { query: 'Pandemic fuels local RV activity', expectedUrl: '/thor-industries-redesign/news-events/' },
+    { query: 'Transparency in Coverage Rule', expectedUrl: '/thor-industries-redesign/careers/' },
     { query: 'Wade Thompson Peter Orthwein', expectedUrl: '/thor-industries-redesign/history/' },
     { query: 'Habitat for Humanity', expectedUrl: '/thor-industries-redesign/community/' },
     { query: 'Fast Company 2025 World Changing Ideas Award', expectedUrl: '/thor-industries-redesign/news-events/' },

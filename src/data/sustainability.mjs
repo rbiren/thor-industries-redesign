@@ -105,7 +105,7 @@ export const sustainabilityHubData = {
     id: 'sustainability-committee',
     title: 'Sustainability Committee',
     caption:
-      'The Sustainability Committee supports on-going commitment to environmental, health, and safety, corporate social responsibility, corporate governance, sustainability, and other public policy initiatives.',
+      'The Sustainability Committee the supports on-going commitment to environmental, health, and safety, corporate social responsibility, corporate governance, sustainability, and other public policy initiatives.',
     action: 'Download the Charter',
     href: 'https://thorindustries-prod.zaneray.com/cms/media%2F24ddea17-6803-4f14-95f8-e630652797e6_sustainability+committee++-final+draft+10-10-19.pdf',
     images: [

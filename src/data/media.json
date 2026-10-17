@@ -2542,6 +2542,420 @@
     ],
     "sha256": "e364e3f796ca80b5b6fbeb6dd9bcffe693c2ca60d4df617efee27995300799ef"
   },
+  "news-postregister-rv": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/0795df42-22b5-4978-b057-f5cc079aa55d_slack-imgs-5.jpg?auto=compress,format&rect=0,177,945,276&w=1920&h=560",
+    "format": "webp",
+    "width": 1917,
+    "height": 560,
+    "widths": [
+      480,
+      960,
+      1600,
+      1917
+    ],
+    "sha256": "ab845ca463b6c170cd676699dad9ef4cd3763e6a59cf245f41276699cfe1f9d1"
+  },
+  "news-cheddar-buyers": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/da707e65-9317-431d-9bd8-fa20f5f3120a_slack-imgs-6.jpg?auto=compress,format&rect=0,163,1200,350&w=1920&h=560",
+    "format": "webp",
+    "width": 1920,
+    "height": 560,
+    "widths": [
+      480,
+      960,
+      1600,
+      1920
+    ],
+    "sha256": "9048efcb5e3e983d2a5e06e229f847578ad0f306bfc0332b794ffe4630e57344"
+  },
+  "news-bloomberg-sales": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/6fbedb6c-39fa-447e-9c9a-2cb5ed291694_Screen+Shot+2020-07-15+at+11.43.13+AM.png?auto=compress,format&rect=0,303,2588,755&w=1920&h=560",
+    "format": "webp",
+    "width": 1920,
+    "height": 560,
+    "widths": [
+      480,
+      960,
+      1600,
+      1920
+    ],
+    "sha256": "c33ea4c37f372dd23b8fa3e3b56988669c38b3b5caff92afc437c7a37dcb9d6f"
+  },
+  "news-foxbusiness-rentals": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/a60e26d8-0d1e-4190-b658-fb35810d565c_slack-imgs-1.jpg?auto=compress,format&rect=0,87,640,187&w=1920&h=560",
+    "format": "webp",
+    "width": 1917,
+    "height": 560,
+    "widths": [
+      480,
+      960,
+      1600,
+      1917
+    ],
+    "sha256": "57f18bda1e21200f52b347272ae977428223050157349c14a17f7d7ba9ad8f27"
+  },
+  "news-qz-cabin-fever": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/26cbd8fc-b6c3-46b7-ae65-513b82d745bd_slack-imgs-2.jpg?auto=compress,format&rect=0,189,1400,408&w=1920&h=560",
+    "format": "webp",
+    "width": 1920,
+    "height": 560,
+    "widths": [
+      480,
+      960,
+      1600,
+      1920
+    ],
+    "sha256": "73f932cc13e79c4b3d452c6765c9e6dbc068ff50f2909fc613125a082a493633"
+  },
+  "news-cnn-travel-rebound": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/d514c430-297d-4524-8596-29a86e8c5037_slack-imgs-3.jpg?auto=compress,format&rect=0,149,1100,321&w=1920&h=560",
+    "format": "webp",
+    "width": 1919,
+    "height": 560,
+    "widths": [
+      480,
+      960,
+      1600,
+      1919
+    ],
+    "sha256": "f6e1f76d38051f1349e4b4c39dcaa4efc8a997da97290c34eb86c41d56f3cae5"
+  },
+  "news-usatoday-rvs-covid": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/6c6d8945-8950-4486-9eac-32f3ee348399_slack-imgs-5.jpg?auto=compress,format&rect=0,273,2014,587&w=1920&h=560",
+    "format": "webp",
+    "width": 1920,
+    "height": 560,
+    "widths": [
+      480,
+      960,
+      1600,
+      1920
+    ],
+    "sha256": "7b4b7c4ffd511edd258d663f768bbdfac139593300d8629b8f8850689dccdcf1"
+  },
+  "news-yahoo-rv-demand": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/7e3080c6-81d3-4d16-8a87-b73efb602b2c_slack-imgs-2.jpg?auto=compress,format&rect=0,586,3000,875&w=1920&h=560",
+    "format": "webp",
+    "width": 1920,
+    "height": 560,
+    "widths": [
+      480,
+      960,
+      1600,
+      1920
+    ],
+    "sha256": "92eaec2d81325d90971c45d6c3ed95057dffb3ecddd599a7a1e36b97a965f326"
+  },
+  "news-cnbc-thor-ceo": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/311afbb4-18e4-4d78-b385-c969d6e029d7_slack-imgs-4.jpg?auto=compress,format&rect=0,260,1920,560&w=1920&h=560",
+    "format": "webp",
+    "width": 1920,
+    "height": 560,
+    "widths": [
+      480,
+      960,
+      1600,
+      1920
+    ],
+    "sha256": "bb4156b9e370ad6d679e6c73cbbde958a3b724502f3dff7d3a1d57f9a9dc5058"
+  },
+  "news-rvbusiness-martin": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/704d7d76-0c97-4041-836d-6bdd1b2982b9_slack-imgs-3.jpg?auto=compress,format&rect=0,140,300,88&w=1920&h=560",
+    "format": "webp",
+    "width": 1909,
+    "height": 560,
+    "widths": [
+      480,
+      960,
+      1600,
+      1909
+    ],
+    "sha256": "602091b27a6fcc525fabd5d8c9dda74b549b17d51869d4f78f60c979062b7d1b"
+  },
+  "news-yahoo-wfh-essential": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/d15dfa05-5436-4c75-8d6c-e9938efca5c6_slack-imgs-1.jpg?auto=compress,format&rect=0,120,889,259&w=1920&h=560",
+    "format": "webp",
+    "width": 1920,
+    "height": 559,
+    "widths": [
+      480,
+      960,
+      1600,
+      1920
+    ],
+    "sha256": "c48a2729e78814905c3e0850a4e051bab9a760d7bd0b033f05a205e53ec5759a"
+  },
+  "news-wsj-work-from-rv": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/186cbcac-549b-4970-8ef8-e0dc14429958_slack-imgs.jpg?auto=compress,format&rect=0,133,1280,373&w=1920&h=560",
+    "format": "webp",
+    "width": 1920,
+    "height": 560,
+    "widths": [
+      480,
+      960,
+      1600,
+      1920
+    ],
+    "sha256": "4a3d03aab7e6afc9df575d035385689601c04471e3404e36220684fa5b3f6cd9"
+  },
+  "news-forbes-rv-trip": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/8ef9b596-99c5-400f-a950-032097dfa31f_960x0.jpg?auto=compress,format&rect=0,143,960,280&w=1920&h=560",
+    "format": "webp",
+    "width": 1920,
+    "height": 560,
+    "widths": [
+      480,
+      960,
+      1600,
+      1920
+    ],
+    "sha256": "f6d474279183b400dacf5e5d64855e0c16c4e38d0f2f3b658bed98e9c84cbffd"
+  },
+  "news-cheddar-covid-campers": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/4175a1d1-8386-403c-9a05-7b5bdaf526b4_download-2.png?auto=compress,format&rect=0,47,284,83&w=1920&h=560",
+    "format": "webp",
+    "width": 1916,
+    "height": 560,
+    "widths": [
+      480,
+      960,
+      1600,
+      1916
+    ],
+    "sha256": "b84fa8a18d70ff2dbb044a42584fe38b1ed02f0c2409da241738aee1f19252c5"
+  },
+  "news-iib-covid-trends": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/6624632f-d7e2-490c-98d5-8e721de7440c_Screen+Shot+2020-07-13+at+8.38.40+AM.png?auto=compress,format&rect=0,260,1918,559&w=1920&h=560",
+    "format": "webp",
+    "width": 1920,
+    "height": 560,
+    "widths": [
+      480,
+      960,
+      1600,
+      1920
+    ],
+    "sha256": "54e5118847d14e9449235dd04cf13081244e673999df112b20818d73cc3637f6"
+  },
+  "news-outdoorwire-mobile-society": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/7cf2ae21-d57f-4b5d-99d3-942b2ee4cc0e_0f3e7e2f-3697-40c1-9c08-ea97d296736b_600x450.jpg?auto=compress,format&rect=0,138,600,175&w=1920&h=560",
+    "format": "webp",
+    "width": 1920,
+    "height": 560,
+    "widths": [
+      480,
+      960,
+      1600,
+      1920
+    ],
+    "sha256": "a4d905d4b4ec84ce5384b8115950646b65964d751a10d3bddb5e9932f102eaa3"
+  },
+  "news-bloomberg-covid-campers": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/af390f7e-bd7d-4308-ac1f-77c65b2ade71_1800x-1.jpg?auto=compress,format&rect=0,338,1800,525&w=1920&h=560",
+    "format": "webp",
+    "width": 1920,
+    "height": 560,
+    "widths": [
+      480,
+      960,
+      1600,
+      1920
+    ],
+    "sha256": "1e01016cf4942032508c182e82c9f73dd429d91c216b767d7f722b1808bbe232"
+  },
+  "news-rv-atlas-survey": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/b6c05893-af3c-4060-a761-f02d6989b1ae_Screen+Shot+2020-07-13+at+8.32.00+AM.png?auto=compress,format&rect=0,221,630,184&w=1920&h=560",
+    "format": "webp",
+    "width": 1917,
+    "height": 560,
+    "widths": [
+      480,
+      960,
+      1600,
+      1917
+    ],
+    "sha256": "daa23daea9fbef3ea8a1482cae01afa893b207226cdbfd0b13618f1662526f55"
+  },
+  "news-foxbusiness-rv-lifestyle": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/8077953f-443c-4162-b5f5-95ab80c47b4c_download.png?auto=compress,format&rect=0,40,300,88&w=1920&h=560",
+    "format": "webp",
+    "width": 1909,
+    "height": 560,
+    "widths": [
+      480,
+      960,
+      1600,
+      1909
+    ],
+    "sha256": "bd9f1a628ecf57064f01e10ea334508d82c041dbab64c39aa979d3969ec8798e"
+  },
+  "news-astrovan": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images%2Fa42542c3-84ee-4faf-ae5e-e5edd02a7c6e_astrovan-ii-10.jpg?auto=compress,format&rect=0,261,1390,405&w=1920&h=560",
+    "format": "webp",
+    "width": 1920,
+    "height": 559,
+    "widths": [
+      480,
+      960,
+      1600,
+      1920
+    ],
+    "sha256": "1cffabe3efcef34a5fb2b9ffab6250c3655aca7eb6bd123c634a90bdf92dd458"
+  },
+  "news-sustainability-website": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/de0a7e47bef825ab868b1ae9101fbfc07f13e889__d1i80242.jpg?auto=compress,format",
+    "format": "webp",
+    "width": 1920,
+    "height": 560,
+    "widths": [
+      480,
+      960,
+      1600,
+      1920
+    ],
+    "sha256": "e777f57551cdf0e8078ad7c66de0ae1cafcd386e366a8d2dee71e9dfdf8561f7"
+  },
+  "news-nff-partnership": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/c870763ba171bdefd9cc170a4c54c734a6fa8daf_cem_4959.jpg?auto=compress,format",
+    "format": "webp",
+    "width": 1920,
+    "height": 560,
+    "widths": [
+      480,
+      960,
+      1600,
+      1920
+    ],
+    "sha256": "8930e4d4a0c941c71316ac9b98d87112ffc38f33882f5b8f7ad60f0dda19ffa9"
+  },
+  "news-andy-graves": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images%2Fd3ca5d8a-973a-4108-a738-d5b26f9af1e1__mcw4286.jpg?auto=compress,format&rect=0,375,2000,583&w=1920&h=560",
+    "format": "webp",
+    "width": 1920,
+    "height": 560,
+    "widths": [
+      480,
+      960,
+      1600,
+      1920
+    ],
+    "sha256": "7ef1ee6f237b4f1a24ed851bd5bc1c3954f00028231867ef52fee9450a2f643a"
+  },
+  "news-curbed-millennial": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/1864afa7-a2a6-4665-a9a6-9cdb383258b0_zenvanz1.0+%281%29.webp?auto=compress,format&rect=0,341,1820,531&w=1920&h=560",
+    "format": "webp",
+    "width": 1919,
+    "height": 560,
+    "widths": [
+      480,
+      960,
+      1600,
+      1919
+    ],
+    "sha256": "1e9f0a99e8df2ff56bb23acb2cec0eedf966c8fd116fd5144b6c93a1ea390733"
+  },
+  "news-togo-roadlink": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images%2Fc53a3650-e0ec-4365-9423-6924a0e406a9_togo-roadlink-c2-att-360yr-unlimited-data.png?auto=compress,format&rect=0,70,600,175&w=1920&h=560",
+    "format": "webp",
+    "width": 1920,
+    "height": 560,
+    "widths": [
+      480,
+      960,
+      1600,
+      1920
+    ],
+    "sha256": "665f6211e3bd51e0a8e0856b73734625bf5659f17d1d161dc8809b60a6145ee5"
+  },
+  "news-mighway": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/b9432c985e0f3ef44490b6b93fd1b4b14a9cc0a8_mighway_logo_black.png?auto=compress,format",
+    "format": "webp",
+    "width": 1920,
+    "height": 560,
+    "widths": [
+      480,
+      960,
+      1600,
+      1920
+    ],
+    "sha256": "be627a793258045ce37f889ad4d9714221cb1e84cd4f4515d8436458727844f9"
+  },
+  "news-entegra-reatta": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images%2F75ec0c16-a6f6-4910-91ba-5db502e00f96_entegra-logo-dark.png?auto=compress,format&rect=0,190,536,156&w=1920&h=560",
+    "format": "webp",
+    "width": 1920,
+    "height": 559,
+    "widths": [
+      480,
+      960,
+      1600,
+      1920
+    ],
+    "sha256": "8bedf5472d3ce4beb72b36747a791b5f8975c70e7f475531b865f41f6318655a"
+  },
+  "news-airstream-logo": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/4579097738690d1c6341953a8c76adedabf65379_airstream-logo-dark.png?auto=compress,format",
+    "format": "webp",
+    "width": 480,
+    "height": 56,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "74629b9bf2f7d7880e4677bb552e8506ab583bdfa094b694ef1078ca9c98e31d"
+  },
+  "news-tmc-magnitude": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/ef8db8fc22f765c16d1671c2dc615b5b9bb247de_magnitude-brand-page.jpg?auto=compress,format",
+    "format": "webp",
+    "width": 1920,
+    "height": 560,
+    "widths": [
+      480,
+      960,
+      1600,
+      1920
+    ],
+    "sha256": "58ff31f73cb64ce7699835d3f43afa1a07ea0a10085363e83626ba708841fbbb"
+  },
+  "news-tmc-togo": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/e30fdebe92e109998ba9ff8ee7bd7e9de7727445_thor-motor-coach-logo-black-tagline.png?auto=compress,format",
+    "format": "webp",
+    "width": 1920,
+    "height": 560,
+    "widths": [
+      480,
+      960,
+      1600,
+      1920
+    ],
+    "sha256": "f09ed64421a4c5190cdfb9725304660c5679eddf41bcdc0c0222f85979a6dd91"
+  },
+  "news-keystone-gm": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/367d80d62a12bd888e7f6e7ff23cd996f4ab9361_2020-chevrolet-silverado-2500hd-highcountry-026.jpg?auto=compress,format",
+    "format": "webp",
+    "width": 1920,
+    "height": 560,
+    "widths": [
+      480,
+      960,
+      1600,
+      1920
+    ],
+    "sha256": "ad52b5d7b15f8c9ffd20a4d8c059815ebffd0fe594101fd58e864f1f7fd28bfe"
+  },
+  "news-hymer-closing": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/4264a32d28d0a43243abee148ae1dee0b632bdeb_sunlight_headerbild.jpg?auto=compress,format",
+    "format": "webp",
+    "width": 1920,
+    "height": 560,
+    "widths": [
+      480,
+      960,
+      1600,
+      1920
+    ],
+    "sha256": "1ee68dde0e4aaebe8a610ba3d1f8936c27897294cb958e49a5110213cadb56c0"
+  },
   "careers-hero": {
     "source": "https://thorindustries-prod.zaneray.com/cms/images%2F4fcad7e2-cc6c-4252-b6cf-603f98cccd6a_dsc_3831+%281%29.jpg?auto=compress,format&rect=0,250,3000,875&w=1920&h=560",
     "format": "webp",
@@ -2589,17 +3003,6 @@
       480
     ],
     "sha256": "238e7773784f9c797186ed0683a6e1faa6691b4f3ee2f7da1998b40d59e64dc8"
-  },
-  "logo-hymer": {
-    "source": "https://thorindustries-prod.zaneray.com/cms/images/aKytbWGNHVfTOSrD_Hymer_Logo_Color.png?auto=format,compress&w=536",
-    "format": "webp",
-    "width": 480,
-    "height": 87,
-    "widths": [
-      240,
-      480
-    ],
-    "sha256": "f6575c443a376c81e2c94833cd2fc40cf8422ae8ad602ab4327cede4f38ff247"
   },
   "sustainability-environmental-callout": {
     "source": "https://thorindustries-prod.zaneray.com/cms/images/fac663e7-5672-40bc-b284-cf1220a6c1cf__MCW5394_mother_child_son_picnic_table_lake_trees_water_lakeview_waterfront_dense_evergreen_woods_bluesky_sunny_sunlight_pacific_north_west.jpg?auto=compress,format&rect=0,739,8256,4032&w=860&h=420",
@@ -3308,6 +3711,17 @@
       480
     ],
     "sha256": "b4581c25f729db1700e6a1eb2dfd1af6f924ba550f0ee2d13241baa25b7842a6"
+  },
+  "logo-hymer": {
+    "source": "https://thorindustries-prod.zaneray.com/cms/images/aKytbWGNHVfTOSrD_Hymer_Logo_Color.png?auto=format,compress&w=536",
+    "format": "webp",
+    "width": 480,
+    "height": 87,
+    "widths": [
+      240,
+      480
+    ],
+    "sha256": "f6575c443a376c81e2c94833cd2fc40cf8422ae8ad602ab4327cede4f38ff247"
   },
   "logo-laika": {
     "source": "https://thorindustries-prod.zaneray.com/cms/images/aKytcmGNHVfTOSrJ_Laika_Logo_Color.png?auto=format,compress&w=536",

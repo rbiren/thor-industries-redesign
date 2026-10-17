@@ -1297,12 +1297,6 @@
     color: var(--muted);
   }
 
-  .load-more-row {
-    margin-top: 40px;
-    display: flex;
-    justify-content: center;
-  }
-
   .travel-regions-grid {
     display: grid;
     grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -1792,7 +1786,6 @@
     .search-field {
       flex-direction: column;
     }
-    .pillars-grid,
     .news-archive-grid,
     .company-directory-grid,
     .company-stats-grid {
@@ -1801,10 +1794,6 @@
     .milestone-card,
     .careers-company-card {
       grid-template-columns: 1fr;
-      padding: 20px;
-    }
-    .news-dialog {
-      width: calc(100% - 24px);
       padding: 20px;
     }
   }
@@ -1850,32 +1839,6 @@
     width: 100%;
     height: auto;
     display: block;
-  }
-
-  .pillars-grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    gap: 20px;
-  }
-
-  .pillar-card {
-    padding: 24px;
-    background: #ffffff;
-    border: 1px solid var(--line);
-    border-radius: 4px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-
-  .pillar-card h3 {
-    font-size: 18px;
-  }
-
-  .pillar-card p {
-    color: var(--muted);
-    font-size: 14px;
-    line-height: 1.65;
   }
 
   .signup-callout {
@@ -2082,62 +2045,6 @@
     padding-top: 12px;
     border-top: 1px solid var(--line);
     margin-top: auto;
-  }
-
-  .news-preview-btn {
-    cursor: pointer;
-  }
-
-  .news-dialog {
-    width: min(680px, calc(100% - 32px));
-    margin: auto;
-    padding: 32px;
-    border: 1px solid var(--line);
-    border-radius: 6px;
-    background: var(--paper);
-    color: var(--ink);
-    box-shadow: 0 24px 64px rgba(0, 0, 0, 0.28);
-  }
-
-  .news-dialog::backdrop {
-    background: rgba(16, 19, 16, 0.68);
-    backdrop-filter: blur(3px);
-  }
-
-  .news-dialog-inner {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-  .news-dialog-head {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 16px;
-    padding-bottom: 16px;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .news-dialog-head h2 {
-    font-size: 24px;
-    line-height: 1.25;
-    margin-top: 4px;
-  }
-
-  .news-dialog-body {
-    display: flex;
-    flex-direction: column;
-    gap: 14px;
-    color: var(--muted);
-    line-height: 1.7;
-  }
-
-  .news-dialog-foot {
-    padding-top: 16px;
-    border-top: 1px solid var(--line);
-    display: flex;
-    justify-content: flex-end;
   }
 
   /* Careers Operating Company List */
@@ -2533,7 +2440,6 @@
   }
 
   @media (max-width: 960px) {
-    .pillars-grid,
     .news-archive-grid,
     .company-directory-grid,
     .company-stats-grid,
@@ -2555,7 +2461,6 @@
   }
 
   @media (max-width: 640px) {
-    .pillars-grid,
     .news-archive-grid,
     .company-directory-grid,
     .company-stats-grid,
@@ -2572,10 +2477,6 @@
     .sustainability-pillar-card,
     .partner-logo-frame {
       padding: 24px 20px;
-    }
-    .news-dialog {
-      width: calc(100% - 24px);
-      padding: 20px;
     }
   }
 

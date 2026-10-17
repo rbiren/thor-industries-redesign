@@ -586,12 +586,7 @@ function renderFaqSegments(
         </>
       )}
 
-      <section
-        class="content-section"
-        id="category-stories"
-        data-story-listing
-        data-initial-limit={activeCategoryData.hasLoadMore ? '19' : undefined}
-      >
+      <section class="content-section" id="category-stories" data-story-listing>
         <div class="section-inner">
           <div class="section-header">
             <div>
@@ -627,14 +622,6 @@ function renderFaqSegments(
           )}
 
           <CardGrid cards={activeCategoryData.stories as Card[]} />
-
-          {activeCategoryData.hasLoadMore && (
-            <div class="load-more-row" data-load-more-wrap>
-              <button class="button dark" type="button" data-load-more-stories>
-                {activeCategoryData.loadMoreLabel}
-              </button>
-            </div>
-          )}
         </div>
       </section>
 
@@ -1004,26 +991,12 @@ function renderFaqSegments(
 
       <section class="content-section tinted" id={innovationData.pillarsBanner.id}>
         <div class="section-inner">
-          <div class="section-header">
-            <div>
-              <p class="eyebrow">Four Pillars of Innovation</p>
-              <h2>{innovationData.pillarsBanner.title}</h2>
-            </div>
-          </div>
           <div class="pillars-banner-media">
             <Media
               id={innovationData.pillarsBanner.image}
               alt={innovationData.pillarsBanner.imageAlt}
               sizes="100vw"
             />
-          </div>
-          <div class="pillars-grid">
-            {innovationData.pillarsBanner.pillars.map((pillar) => (
-              <article class="pillar-card">
-                <h3>{pillar.name}</h3>
-                <p>{pillar.description}</p>
-              </article>
-            ))}
           </div>
         </div>
       </section>
@@ -1033,7 +1006,6 @@ function renderFaqSegments(
           <div class="section-copy">
             <p class="eyebrow">{innovationData.newsBanner.eyebrow}</p>
             <h2>{innovationData.newsBanner.title}</h2>
-            <p>{innovationData.newsBanner.text}</p>
             <div class="action-row">
               <a class="button dark" href={innovationData.newsBanner.action[1]}>
                 {innovationData.newsBanner.action[0]}
@@ -1260,69 +1232,32 @@ function renderFaqSegments(
           </div>
 
           <div class="news-archive-grid" data-news-grid>
-            {newsEventsData.items.map((item) => {
-              const hasModal = 'modalBody' in item && Array.isArray(item.modalBody) && item.modalBody.length > 0;
-              return (
-                <article class="news-archive-card" id={item.id} data-news-item>
-                  <a class="news-archive-media" href={item.href}>
-                    <Media id={item.image} alt={item.imageAlt} sizes="(max-width: 900px) 100vw, 33vw" />
-                  </a>
-                  <div class="news-archive-body">
-                    <div class="news-archive-meta">
-                      <span class="eyebrow">{item.date}</span>
-                      <span class="news-source-badge">{item.sourceType}</span>
-                    </div>
-                    <h3>
-                      <a href={item.href}>{item.title}</a>
-                    </h3>
-                    <p>{item.summary}</p>
-                    <div class="news-archive-actions">
-                      <a class="card-action" href={item.href}>
-                        <span>{item.action}</span>
-                        <em aria-hidden="true">↗</em>
-                      </a>
-                      {hasModal && (
-                        <button
-                          class="filter-chip news-preview-btn"
-                          type="button"
-                          data-news-open
-                          data-news-title={item.title}
-                          data-news-date={item.date}
-                          data-news-source={item.sourceType}
-                          data-news-href={item.href}
-                          data-news-paragraphs={JSON.stringify(item.modalBody)}
-                        >
-                          Preview Summary
-                        </button>
-                      )}
-                    </div>
+            {newsEventsData.items.map((item) => (
+              <article class="news-archive-card" id={item.id} data-news-item>
+                <a class="news-archive-media" href={item.href}>
+                  <Media id={item.image} alt={item.imageAlt} sizes="(max-width: 900px) 100vw, 33vw" />
+                </a>
+                <div class="news-archive-body">
+                  <div class="news-archive-meta">
+                    <span class="eyebrow">{item.date}</span>
+                    <span class="news-source-badge">{item.sourceType}</span>
                   </div>
-                </article>
-              );
-            })}
+                  <h3>
+                    <a href={item.href}>{item.title}</a>
+                  </h3>
+                  <p>{item.summary}</p>
+                  <div class="news-archive-actions">
+                    <a class="card-action" href={item.href}>
+                      <span>{item.action}</span>
+                      <em aria-hidden="true">↗</em>
+                    </a>
+                  </div>
+                </div>
+              </article>
+            ))}
           </div>
         </div>
       </section>
-
-      <dialog class="news-dialog" id="news-preview-dialog" aria-labelledby="news-dialog-title">
-        <div class="news-dialog-inner">
-          <div class="news-dialog-head">
-            <div>
-              <p class="eyebrow" data-news-dialog-meta>THOR News</p>
-              <h2 id="news-dialog-title" data-news-dialog-title>Article Preview</h2>
-            </div>
-            <button class="icon-button dark" type="button" data-news-close aria-label="Close article preview">
-              Close
-            </button>
-          </div>
-          <div class="news-dialog-body" data-news-dialog-body></div>
-          <div class="news-dialog-foot">
-            <a class="button dark" href={newsEventsData.items[0].href} data-news-dialog-link>
-              Read Full Article on THORIndustries.com
-            </a>
-          </div>
-        </div>
-      </dialog>
     </>
   )}
 
@@ -1374,11 +1309,11 @@ function renderFaqSegments(
           <div class="careers-family-intro">
             <p>{careersData.familySection.intro}</p>
             <p class="careers-transparency-note">
-              The{' '}
+              {careersData.familySection.transparencyNote.replace(/\s*here\.$/, '')}{' '}
               <a href={careersData.familySection.transparencyLink.href}>
                 {careersData.familySection.transparencyLink.label}
-              </a>{' '}
-              for group health plans requires disclosure of cost-sharing information in a machine-readable format.
+              </a>
+              .
             </p>
           </div>
           <div class="careers-company-list">

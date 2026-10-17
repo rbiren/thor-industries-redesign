@@ -40,8 +40,7 @@ document.addEventListener('click', (event) => {
 const searchDialog = document.querySelector<HTMLDialogElement>('#site-search');
 const menuDialog = document.querySelector<HTMLDialogElement>('#mobile-menu');
 const videoDialog = document.querySelector<HTMLDialogElement>('#video-dialog');
-const newsDialog = document.querySelector<HTMLDialogElement>('#news-preview-dialog');
-const allDialogs = [searchDialog, menuDialog, videoDialog, newsDialog];
+const allDialogs = [searchDialog, menuDialog, videoDialog];
 
 const syncScrollLock = () => {
   const anyOpen = allDialogs.some((d) => Boolean(d?.open));
@@ -122,10 +121,6 @@ const searchNoResultsText = document.querySelector<HTMLElement>('[data-search-no
 const searchForm = document.querySelector<HTMLFormElement>('[data-search-form]');
 const searchScript = document.querySelector<HTMLScriptElement>('[data-search-index]');
 const videoContainer = document.querySelector<HTMLElement>('[data-video-container]');
-const newsDialogMeta = document.querySelector<HTMLElement>('[data-news-dialog-meta]');
-const newsDialogTitle = document.querySelector<HTMLElement>('[data-news-dialog-title]');
-const newsDialogBody = document.querySelector<HTMLElement>('[data-news-dialog-body]');
-const newsDialogLink = document.querySelector<HTMLAnchorElement>('[data-news-dialog-link]');
 
 let records: SearchRecord[] = [];
 if (searchScript?.textContent) {
@@ -244,48 +239,6 @@ bindDialog(
   },
   () => {
     videoContainer?.replaceChildren();
-  },
-);
-
-bindDialog(
-  newsDialog,
-  '[data-news-open]',
-  '[data-news-close]',
-  (trigger) => {
-    if (!trigger) return;
-    const title = trigger.getAttribute('data-news-title') || 'Article Preview';
-    const date = trigger.getAttribute('data-news-date') || '';
-    const source = trigger.getAttribute('data-news-source') || 'THOR News';
-    const href =
-      trigger.getAttribute('data-news-href') ||
-      'https://www.thorindustries.com/news-events/thor-industries-harbinger-world-changing-ideas-award';
-    const rawParagraphs = trigger.getAttribute('data-news-paragraphs') || '[]';
-    let paragraphs: string[] = [];
-    try {
-      paragraphs = JSON.parse(rawParagraphs);
-    } catch {
-      paragraphs = [];
-    }
-
-    if (newsDialogMeta) {
-      newsDialogMeta.textContent = [date, source].filter(Boolean).join(' · ');
-    }
-    if (newsDialogTitle) {
-      newsDialogTitle.textContent = title;
-    }
-    if (newsDialogBody) {
-      newsDialogBody.replaceChildren(
-        ...paragraphs.map((text) => {
-          const p = document.createElement('p');
-          p.textContent = text;
-          return p;
-        }),
-      );
-    }
-    if (newsDialogLink) {
-      newsDialogLink.href = href;
-    }
-    newsDialog?.querySelector<HTMLElement>('[data-news-close]')?.focus();
   },
 );
 
@@ -444,23 +397,6 @@ if (travelRegionsSection) {
     guidesSection?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   });
 }
-
-// Load More Stories buttons
-const loadMoreButtons = Array.from(
-  document.querySelectorAll<HTMLButtonElement>('[data-load-more-stories]'),
-);
-loadMoreButtons.forEach((btn) => {
-  btn.addEventListener('click', () => {
-    const section = btn.closest('.content-section');
-    if (section) {
-      section
-        .querySelectorAll<HTMLElement>('[data-story-card]')
-        .forEach((card) => (card.hidden = false));
-    }
-    btn.textContent = 'ALL STORIES LOADED';
-    btn.disabled = true;
-  });
-});
 
 // FAQ Expand All / Collapse All controls
 const faqList = document.querySelector<HTMLElement>('[data-faq-list], .faq-list');

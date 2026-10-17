@@ -655,8 +655,6 @@ export const storyCategoryPages = {
         options: ["Tips and How To's", 'Firsts', 'Guides', 'For Beginners'],
       },
     ],
-    hasLoadMore: true,
-    loadMoreLabel: 'LOAD MORE STORIES',
     stories: [
       makeStory({
         uid: 'booking-rv-campsites',
@@ -904,7 +902,6 @@ export const storyCategoryPages = {
         options: ['Breakfast', 'Lunch', 'Dinner', 'Dessert', 'Small Bites'],
       },
     ],
-    hasLoadMore: false,
     stories: [
       makeStory({
         uid: 'recipe-swiss-chard-pesto-shakshuka',
@@ -1108,8 +1105,6 @@ export const storyCategoryPages = {
         options: ['Testimonials', 'Inspiring Adventurers'],
       },
     ],
-    hasLoadMore: true,
-    loadMoreLabel: 'LOAD MORE STORIES',
     stories: [
       makeStory({
         uid: 'family-campgrounds-colorado',
@@ -1384,8 +1379,6 @@ export const storyCategoryPages = {
       }),
     ],
     filterGroups: [],
-    hasLoadMore: true,
-    loadMoreLabel: 'LOAD MORE STORIES',
     stories: [
       makeStory({
         uid: 'rving-natures-playground',
@@ -1638,8 +1631,6 @@ export const storyCategoryPages = {
         options: ['Family Fun', 'Inspiring Adventurers', 'Why I RV', 'Learn'],
       },
     ],
-    hasLoadMore: true,
-    loadMoreLabel: 'LOAD MORE STORIES',
     stories: [
       makeStory({
         uid: 'nff',
