@@ -13,9 +13,9 @@ import { isExternalHref, navItemHref, routeHref } from '../lib/urls';
       <ul class="social-list" aria-label="THOR social channels">
         {socialLinks.map((link) => (
           <li>
-            <a href={link.href}>
-              <span>{link.label}</span>
-              <span aria-hidden="true">↗</span>
+            <a href={link.href} aria-label={link.label} data-external="true">
+              <span class="sr-only">Follow Thor Industries on </span>
+              <span>{link.shortLabel}</span>
             </a>
           </li>
         ))}
@@ -32,9 +32,8 @@ import { isExternalHref, navItemHref, routeHref } from '../lib/urls';
               const external = isExternalHref(href);
               return (
                 <li>
-                  <a href={href}>
+                  <a href={href} data-external={external ? 'true' : undefined}>
                     <span>{item.label}</span>
-                    {external && <span aria-hidden="true">↗</span>}
                   </a>
                 </li>
               );
@@ -45,16 +44,24 @@ import { isExternalHref, navItemHref, routeHref } from '../lib/urls';
     </div>
 
     <div class="footer-bar">
-      <p>©2026 THOR Industries, Inc. All Rights Reserved.</p>
+      <div class="footer-meta">
+        <p>©2026 THOR Industries, Inc. All Rights Reserved.</p>
+        <p class="footer-context">
+          Static editorial redesign preview; interactive tools, investor portals, and corporate policies hand off to official THOR Industries systems.
+        </p>
+      </div>
       <ul class="footer-legal" aria-label="Legal and contact links">
-        {footerLinks.map((link) => (
-          <li>
-            <a href={link.href}>
-              <span>{link.label}</span>
-              <span aria-hidden="true">↗</span>
-            </a>
-          </li>
-        ))}
+        {footerLinks.map((link) => {
+          const href = navItemHref(link);
+          const external = isExternalHref(href);
+          return (
+            <li>
+              <a href={href} data-external={external ? 'true' : undefined}>
+                <span>{link.label}</span>
+              </a>
+            </li>
+          );
+        })}
       </ul>
     </div>
   </div>

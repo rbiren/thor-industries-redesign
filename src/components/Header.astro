@@ -1,11 +1,8 @@
 ---
 import Media from './Media.astro';
 import { navigation } from '../data/navigation';
-import { pages } from '../data/pages';
-import { companies } from '../data/companies.mjs';
-import { newsEventsData } from '../data/corporate.mjs';
-import { homeFeaturedStories, homeNewsEvents, stories } from '../data/stories.mjs';
-import { isBuiltRoute, isExternalHref, navItemHref, routeHref } from '../lib/urls';
+import { searchRecords } from '../data/search-index-data';
+import { isBuiltRoute, isExternalHref, navItemHref, routeHref, siteUrl } from '../lib/urls';
 import type { NavGroup, NavItem } from '../data/types';
 
 interface Props {
@@ -20,48 +17,6 @@ const isItemActive = (item: NavItem | NavGroup) =>
   Boolean(item.slug && isBuiltRoute(item.slug) && norm(`/${item.slug}/`) === active);
 const isGroupActive = (group: NavGroup) =>
   isItemActive(group) || Boolean(group.items?.some((item) => isItemActive(item)));
-
-const rawSearchEntries = [
-  ...pages.map((page) => ({
-    title: page.title,
-    category: page.label,
-    text: [
-      page.description,
-      ...(page.lead ?? []),
-      ...page.sections.flatMap((s) => [s.title, ...(s.text ?? [])]),
-    ].join(' '),
-    href: routeHref(page.slug),
-    external: !isBuiltRoute(page.slug),
-  })),
-  ...companies.map((company) => ({
-    title: company.name,
-    category: company.group,
-    text: `${company.name} ${company.group} ${company.description || ''} THOR family company`,
-    href: company.href,
-    external: true,
-  })),
-  ...[...homeFeaturedStories, ...stories, ...homeNewsEvents].map((item) => ({
-    title: item.title,
-    category: item.eyebrow || 'Stories & News',
-    text: `${item.title} ${item.text || ''} ${item.eyebrow || ''}`,
-    href: item.href,
-    external: true,
-  })),
-  ...newsEventsData.items.map((item) => ({
-    title: item.title,
-    category: item.date,
-    text: `${item.title} ${item.summary} ${item.date} ${item.sourceType || ''}`,
-    href: item.href,
-    external: true,
-  })),
-];
-
-const seenHrefs = new Set<string>();
-const searchEntries = rawSearchEntries.filter((entry) => {
-  if (seenHrefs.has(entry.href)) return false;
-  seenHrefs.add(entry.href);
-  return true;
-});
 ---
 <header class="site-header" data-header>
   <div class="header-inner">
@@ -143,7 +98,13 @@ const searchEntries = rawSearchEntries.filter((entry) => {
     </div>
   </div>
 
-  <dialog class="search-dialog" id="site-search" aria-label="Search THOR Industries">
+  <dialog
+    class="search-dialog"
+    id="site-search"
+    aria-label="Search THOR Industries"
+    data-search-dialog
+    data-search-index-url={siteUrl('search-index.json')}
+  >
     <div class="dialog-shell">
       <div class="dialog-bar">
         <p class="eyebrow">Site Search</p>
@@ -151,26 +112,42 @@ const searchEntries = rawSearchEntries.filter((entry) => {
           Close
         </button>
       </div>
-      <form class="search-form" role="search" data-search-form>
-        <label class="sr-only" for="thor-search-input">Search THOR pages, companies, and stories</label>
+      <form class="search-form" role="search" data-search-form novalidate>
+        <label class="sr-only" for="thor-search-input">Search THOR Industries pages</label>
         <div class="search-field">
           <input
             id="thor-search-input"
             type="search"
             name="q"
-            placeholder="Search RV types, Airstream, towing, sustainability, stories..."
+            placeholder="Search RV types, THOR companies, towing, sustainability, stories..."
             autocomplete="off"
             data-search-input
           />
+          <button
+            class="icon-button search-clear"
+            type="button"
+            data-search-clear
+            aria-label="Clear search"
+          >
+            Clear
+          </button>
           <button class="button" type="submit">Search</button>
         </div>
       </form>
       <p class="search-status" data-search-status aria-live="polite">
-        Search across all 23 THOR sections, family companies, and featured stories.
+        Enter a keyword or phrase to search all 23 THOR Industries pages.
       </p>
-      <div class="search-results" data-search-results></div>
+      <div class="search-empty" data-search-empty>
+        <p>
+          Search by page title, RV type, THOR family company, story category, innovation, or sustainability topic.
+        </p>
+      </div>
+      <div class="search-no-results" data-search-no-results hidden>
+        <p data-search-no-results-text>No matching pages found.</p>
+      </div>
+      <div class="search-results" data-search-results role="region" aria-label="Search results"></div>
     </div>
-    <script type="application/json" is:inline data-search-index set:html={JSON.stringify(searchEntries)} />
+    <script type="application/json" is:inline data-search-index set:html={JSON.stringify(searchRecords)} />
   </dialog>
 
   <dialog class="menu-dialog" id="mobile-menu" aria-label="Site navigation">

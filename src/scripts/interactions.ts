@@ -1,14 +1,9 @@
-type SearchEntry = {
-  title: string;
-  category: string;
-  text: string;
-  href: string;
-  external?: boolean;
-};
+import { search, type SearchRecord } from './search';
 
 const dropdowns = Array.from(document.querySelectorAll<HTMLDetailsElement>('[data-nav-dropdown]'));
 dropdowns.forEach((dropdown) => {
   const summary = dropdown.querySelector<HTMLElement>('summary');
+  summary?.setAttribute('aria-expanded', String(dropdown.open));
   dropdown.addEventListener('toggle', () => {
     summary?.setAttribute('aria-expanded', String(dropdown.open));
     if (dropdown.open) {
@@ -42,6 +37,20 @@ document.addEventListener('click', (event) => {
   });
 });
 
+const searchDialog = document.querySelector<HTMLDialogElement>('#site-search');
+const menuDialog = document.querySelector<HTMLDialogElement>('#mobile-menu');
+const videoDialog = document.querySelector<HTMLDialogElement>('#video-dialog');
+const newsDialog = document.querySelector<HTMLDialogElement>('#news-preview-dialog');
+const allDialogs = [searchDialog, menuDialog, videoDialog, newsDialog];
+
+const syncScrollLock = () => {
+  const anyOpen = allDialogs.some((d) => Boolean(d?.open));
+  document.documentElement.style.overflow = anyOpen ? 'hidden' : '';
+  document.body.style.overflow = anyOpen ? 'hidden' : '';
+};
+
+const dialogClosers = new Map<HTMLDialogElement, () => void>();
+
 const bindDialog = (
   dialog: HTMLDialogElement | null,
   openSelector: string,
@@ -57,6 +66,16 @@ const bindDialog = (
     triggers.forEach((btn) => btn.setAttribute('aria-expanded', String(expanded)));
   };
 
+  const finalizeClose = () => {
+    if (dialog.open) dialog.close();
+    setExpanded(false);
+    syncScrollLock();
+    onClose?.();
+    lastTrigger?.focus();
+  };
+
+  dialogClosers.set(dialog, finalizeClose);
+
   triggers.forEach((button) => {
     button.addEventListener('click', () => {
       lastTrigger = button;
@@ -66,32 +85,40 @@ const bindDialog = (
       });
       if (!dialog.open) dialog.showModal();
       setExpanded(true);
+      syncScrollLock();
       onOpen?.(button);
     });
   });
 
   dialog.querySelectorAll<HTMLElement>(closeSelector).forEach((button) => {
-    button.addEventListener('click', () => dialog.close());
+    button.addEventListener('click', () => {
+      finalizeClose();
+    });
   });
 
   dialog.addEventListener('click', (event) => {
-    if (event.target === dialog) dialog.close();
+    if (event.target === dialog) {
+      finalizeClose();
+    }
+  });
+
+  dialog.addEventListener('cancel', (event) => {
+    event.preventDefault();
+    finalizeClose();
   });
 
   dialog.addEventListener('close', () => {
-    setExpanded(false);
-    onClose?.();
-    lastTrigger?.focus();
+    finalizeClose();
   });
 };
 
-const searchDialog = document.querySelector<HTMLDialogElement>('#site-search');
-const menuDialog = document.querySelector<HTMLDialogElement>('#mobile-menu');
-const videoDialog = document.querySelector<HTMLDialogElement>('#video-dialog');
-const newsDialog = document.querySelector<HTMLDialogElement>('#news-preview-dialog');
 const searchInput = document.querySelector<HTMLInputElement>('[data-search-input]');
+const searchClearBtn = document.querySelector<HTMLButtonElement>('[data-search-clear]');
 const searchResults = document.querySelector<HTMLElement>('[data-search-results]');
 const searchStatus = document.querySelector<HTMLElement>('[data-search-status]');
+const searchEmpty = document.querySelector<HTMLElement>('[data-search-empty]');
+const searchNoResults = document.querySelector<HTMLElement>('[data-search-no-results]');
+const searchNoResultsText = document.querySelector<HTMLElement>('[data-search-no-results-text]');
 const searchForm = document.querySelector<HTMLFormElement>('[data-search-form]');
 const searchScript = document.querySelector<HTMLScriptElement>('[data-search-index]');
 const videoContainer = document.querySelector<HTMLElement>('[data-video-container]');
@@ -99,52 +126,95 @@ const newsDialogMeta = document.querySelector<HTMLElement>('[data-news-dialog-me
 const newsDialogTitle = document.querySelector<HTMLElement>('[data-news-dialog-title]');
 const newsDialogBody = document.querySelector<HTMLElement>('[data-news-dialog-body]');
 const newsDialogLink = document.querySelector<HTMLAnchorElement>('[data-news-dialog-link]');
-const entries: SearchEntry[] = searchScript?.textContent ? JSON.parse(searchScript.textContent) : [];
 
-const renderResults = (query: string) => {
+let records: SearchRecord[] = [];
+if (searchScript?.textContent) {
+  try {
+    records = JSON.parse(searchScript.textContent) as SearchRecord[];
+  } catch {
+    records = [];
+  }
+}
+
+let indexFetchPromise: Promise<void> | null = null;
+const ensureSearchIndexLoaded = () => {
+  if (indexFetchPromise) return indexFetchPromise;
+  const url = searchDialog?.getAttribute('data-search-index-url');
+  if (!url) return Promise.resolve();
+  indexFetchPromise = fetch(url)
+    .then((res) => (res.ok ? res.json() : null))
+    .then((data) => {
+      if (Array.isArray(data) && data.length > 0) {
+        records = data as SearchRecord[];
+        if (searchDialog?.open) {
+          renderResults(searchInput?.value ?? '');
+        }
+      }
+    })
+    .catch(() => {
+      // Fallback to inline search index already parsed in `records`
+    });
+  return indexFetchPromise;
+};
+
+const renderResults = (rawQuery: string) => {
   if (!searchResults || !searchStatus) return;
-  const terms = query.toLowerCase().trim().split(/\s+/).filter(Boolean);
-  const matches = terms.length
-    ? entries
-        .map((entry) => {
-          const hay = `${entry.title} ${entry.category} ${entry.text}`.toLowerCase();
-          const score = terms.reduce(
-            (sum, term) =>
-              sum +
-              (entry.title.toLowerCase().includes(term) ? 4 : 0) +
-              (hay.includes(term) ? 1 : -10),
-            0,
-          );
-          return { entry, score };
-        })
-        .filter((item) => item.score > 0)
-        .sort((a, b) => b.score - a.score)
-        .slice(0, 10)
-        .map((item) => item.entry)
-    : entries.slice(0, 8);
+  const trimmed = rawQuery.trim();
 
-  searchStatus.textContent = terms.length
-    ? `${matches.length} result${matches.length === 1 ? '' : 's'} for "${query.trim()}"`
-    : 'Popular destinations across THOR Industries';
+  if (!trimmed) {
+    searchResults.replaceChildren();
+    if (searchEmpty) searchEmpty.hidden = false;
+    if (searchNoResults) searchNoResults.hidden = true;
+    searchStatus.textContent = 'Enter a keyword or phrase to search all 23 THOR Industries pages.';
+    return;
+  }
+
+  const matches = search(records, trimmed);
+
+  if (searchEmpty) searchEmpty.hidden = true;
+
+  if (matches.length === 0) {
+    searchResults.replaceChildren();
+    if (searchNoResults) searchNoResults.hidden = false;
+    if (searchNoResultsText) {
+      searchNoResultsText.textContent = `No matching pages found for "${trimmed}". Try searching for RV types, THOR companies, stories, innovation, or sustainability.`;
+    }
+    searchStatus.textContent = `0 results for "${trimmed}"`;
+    return;
+  }
+
+  if (searchNoResults) searchNoResults.hidden = true;
+  searchStatus.textContent = `${matches.length} ${matches.length === 1 ? 'result' : 'results'} for "${trimmed}"`;
 
   searchResults.replaceChildren(
-    ...matches.map((item) => {
+    ...matches.map((record) => {
       const link = document.createElement('a');
       link.className = 'search-result';
-      link.href = item.href;
+      link.href = record.url;
+
       const meta = document.createElement('span');
       meta.className = 'eyebrow';
-      meta.textContent = item.category;
+      meta.textContent = record.group ? `${record.group} · ${record.label}` : record.label;
+
       const title = document.createElement('strong');
-      title.textContent = item.title + (item.external ? ' ↗' : '');
-      link.append(meta, title);
+      title.textContent = record.title;
+
+      const desc = document.createElement('span');
+      desc.className = 'search-result-desc';
+      desc.textContent = record.description;
+
+      link.append(meta, title, desc);
       return link;
     }),
   );
 };
 
 bindDialog(searchDialog, '[data-search-open]', '[data-search-close]', () => {
-  renderResults(searchInput?.value ?? '');
+  void ensureSearchIndexLoaded();
+  if (searchInput) {
+    searchInput.value = '';
+  }
+  renderResults('');
   searchInput?.focus();
 });
 
@@ -186,7 +256,9 @@ bindDialog(
     const title = trigger.getAttribute('data-news-title') || 'Article Preview';
     const date = trigger.getAttribute('data-news-date') || '';
     const source = trigger.getAttribute('data-news-source') || 'THOR News';
-    const href = trigger.getAttribute('data-news-href') || 'https://www.thorindustries.com/news-events';
+    const href =
+      trigger.getAttribute('data-news-href') ||
+      'https://www.thorindustries.com/news-events/thor-industries-harbinger-world-changing-ideas-award';
     const rawParagraphs = trigger.getAttribute('data-news-paragraphs') || '[]';
     let paragraphs: string[] = [];
     try {
@@ -217,26 +289,44 @@ bindDialog(
   },
 );
 
-document.addEventListener('keydown', (event) => {
-  if (event.key === 'Escape') {
-    const openDialog = [searchDialog, menuDialog, videoDialog, newsDialog].find((d) => d?.open);
-    if (openDialog) {
-      event.preventDefault();
-      openDialog.close();
-      return;
+document.addEventListener(
+  'keydown',
+  (event) => {
+    if (event.key === 'Escape') {
+      const openDialog = allDialogs.find((d) => d?.open);
+      if (openDialog) {
+        event.preventDefault();
+        event.stopPropagation();
+        const closer = dialogClosers.get(openDialog);
+        if (closer) {
+          closer();
+        } else {
+          openDialog.close();
+          syncScrollLock();
+        }
+        return;
+      }
+      const openDropdown = dropdowns.find((dropdown) => dropdown.open);
+      if (openDropdown) {
+        event.preventDefault();
+        openDropdown.open = false;
+        const summary = openDropdown.querySelector<HTMLElement>('summary');
+        summary?.setAttribute('aria-expanded', 'false');
+        summary?.focus();
+      }
     }
-    const openDropdown = dropdowns.find((dropdown) => dropdown.open);
-    if (openDropdown) {
-      event.preventDefault();
-      openDropdown.open = false;
-      const summary = openDropdown.querySelector<HTMLElement>('summary');
-      summary?.setAttribute('aria-expanded', 'false');
-      summary?.focus();
-    }
-  }
-});
+  },
+  true,
+);
 
 searchInput?.addEventListener('input', () => renderResults(searchInput.value));
+searchClearBtn?.addEventListener('click', () => {
+  if (searchInput) {
+    searchInput.value = '';
+    renderResults('');
+    searchInput.focus();
+  }
+});
 searchForm?.addEventListener('submit', (event) => {
   event.preventDefault();
   renderResults(searchInput?.value ?? '');

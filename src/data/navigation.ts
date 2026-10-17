@@ -1,4 +1,4 @@
-import type { NavGroup } from './types.ts';
+import type { NavGroup, NavItem } from './types.ts';
 import { sourceHandoffs } from './routes.ts';
 
 export const navigation: NavGroup[] = [
@@ -21,7 +21,6 @@ export const navigation: NavGroup[] = [
   },
   {
     label: 'RV Basics',
-    slug: 'rv-types',
     items: [
       { label: 'Find Your RV', href: sourceHandoffs.rvFinder, external: true },
       { label: 'RV Types', slug: 'rv-types' },
@@ -33,7 +32,6 @@ export const navigation: NavGroup[] = [
   },
   {
     label: 'About THOR',
-    slug: 'innovation',
     items: [
       { label: 'Innovation', slug: 'innovation' },
       { label: 'History', slug: 'history' },
@@ -66,16 +64,21 @@ export const navigation: NavGroup[] = [
   },
 ];
 
+export const footerExploreLinks: NavItem[] = [
+  { label: 'Explore Companies', slug: 'thor-companies' },
+  { label: 'Explore Careers', slug: 'careers' },
+  { label: 'Explore Sustainability', slug: 'sustainability' },
+  { label: 'Explore Innovation', slug: 'innovation' },
+];
+
 export const footerGroups: NavGroup[] = [
   {
     label: 'Explore',
     items: [
-      { label: 'THOR Companies', slug: 'thor-companies' },
-      { label: 'RV Finder', href: sourceHandoffs.rvFinder, external: true },
+      ...footerExploreLinks,
       { label: 'Stories', slug: 'stories' },
+      { label: 'RV Finder', href: sourceHandoffs.rvFinder, external: true },
       { label: 'Investors', href: sourceHandoffs.investors, external: true },
-      { label: 'Sustainability', slug: 'sustainability' },
-      { label: 'Contact Us', href: sourceHandoffs.contact, external: true },
     ],
   },
   {
@@ -113,17 +116,40 @@ export const footerGroups: NavGroup[] = [
   },
 ];
 
-export const footerLinks = [
-  { label: 'Contact Us', href: sourceHandoffs.contact },
-  { label: 'Terms & Conditions', href: sourceHandoffs.terms },
-  { label: 'Privacy Policy', href: sourceHandoffs.privacy },
-  { label: 'Cookie Policy', href: sourceHandoffs.cookies },
+export const footerLinks: NavItem[] = [
+  { label: 'Contact Us', href: sourceHandoffs.contact, external: true },
+  { label: 'Careers', slug: 'careers' },
+  { label: 'Terms and Conditions', href: sourceHandoffs.terms, external: true },
+  { label: 'Privacy Policy', href: sourceHandoffs.privacy, external: true },
+  { label: 'Legal', href: sourceHandoffs.legal, external: true },
+  { label: 'Cookie Policy', href: sourceHandoffs.cookies, external: true },
+  { label: 'Accessibility', href: sourceHandoffs.accessibility, external: true },
 ];
 
 export const socialLinks = [
-  { label: 'Instagram', href: sourceHandoffs.instagram },
-  { label: 'Facebook', href: sourceHandoffs.facebook },
-  { label: 'YouTube', href: sourceHandoffs.youtube },
-  { label: 'TikTok', href: sourceHandoffs.tiktok },
-  { label: 'Pinterest', href: sourceHandoffs.pinterest },
+  {
+    label: 'Follow Thor Industries on Facebook',
+    shortLabel: 'Facebook',
+    href: sourceHandoffs.facebook,
+  },
+  {
+    label: 'Follow Thor Industries on Instagram',
+    shortLabel: 'Instagram',
+    href: sourceHandoffs.instagram,
+  },
+  {
+    label: 'Follow Thor Industries on Pinterest',
+    shortLabel: 'Pinterest',
+    href: sourceHandoffs.pinterest,
+  },
+  {
+    label: 'Follow Thor Industries on Linkedin',
+    shortLabel: 'Linkedin',
+    href: sourceHandoffs.linkedin,
+  },
+  {
+    label: 'Follow Thor Industries on Youtube',
+    shortLabel: 'Youtube',
+    href: sourceHandoffs.youtube,
+  },
 ];

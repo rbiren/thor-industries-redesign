@@ -50,6 +50,8 @@ import {
   travelRegions,
 } from '../src/data/stories.mjs';
 import { questions } from '../src/data/faq.mjs';
+import { searchRecords } from '../src/data/search-index-data.ts';
+import { normalize, search } from '../src/scripts/search.ts';
 import { assetUrl, isExternalHref, navItemHref, resolveHref, routeHref, siteUrl } from '../src/lib/urls.ts';
 
 const expectedSlugs = [
@@ -211,7 +213,7 @@ test('Navigation model exposes primary THOR destinations and routes built Storie
     }
   }
 
-  assert.equal(footerLinks.length, 4);
+  assert.equal(footerLinks.length, 7);
   assert.equal(socialLinks.length, 5);
   assert.equal(companyGroups.length, 4);
   assert.equal(companies.length, 50);
@@ -1134,6 +1136,248 @@ test('Sustainability routes (/sustainability/, /sustainability-report/, /sustain
     assert.ok(supplyHtml.includes(`<h2>${callout.title}</h2>`));
     assert.ok(supplyHtml.includes(`href="${callout.href}"`));
     assert.ok(supplyHtml.includes(`/thor-industries-redesign/media/${callout.image}-`));
+  }
+});
+
+test('navigation, footer, and handoffs match captured THOR information architecture (VAL-NAV-001..004)', async () => {
+  // VAL-NAV-001: Top-level navigation order and non-page dropdown parents
+  assert.deepEqual(
+    navigation.map((group) => group.label),
+    [
+      'RV Finder',
+      'Stories',
+      'RV Basics',
+      'About THOR',
+      'THOR Companies',
+      'Sustainability',
+      'Investors',
+    ],
+  );
+
+  const rvBasicsGroup = navigation.find((g) => g.label === 'RV Basics');
+  const aboutThorGroup = navigation.find((g) => g.label === 'About THOR');
+  assert.ok(rvBasicsGroup && aboutThorGroup);
+  assert.equal(rvBasicsGroup.slug, undefined);
+  assert.equal(aboutThorGroup.slug, undefined);
+  assert.equal(rvBasicsGroup.href, undefined);
+  assert.equal(aboutThorGroup.href, undefined);
+
+  // VAL-NAV-004: Captured footer explore links, 5 social channels, and 7 utility/legal links
+  const exploreGroup = footerGroups.find((g) => g.label === 'Explore');
+  assert.ok(exploreGroup?.items);
+  assert.deepEqual(
+    exploreGroup.items.slice(0, 4).map((item) => ({
+      label: item.label,
+      href: navItemHref(item),
+    })),
+    [
+      { label: 'Explore Companies', href: '/thor-industries-redesign/thor-companies/' },
+      { label: 'Explore Careers', href: '/thor-industries-redesign/careers/' },
+      { label: 'Explore Sustainability', href: '/thor-industries-redesign/sustainability/' },
+      { label: 'Explore Innovation', href: '/thor-industries-redesign/innovation/' },
+    ],
+  );
+
+  assert.deepEqual(
+    socialLinks.map((s) => ({ label: s.label, href: s.href })),
+    [
+      {
+        label: 'Follow Thor Industries on Facebook',
+        href: 'https://www.facebook.com/ThorIndustries/?fref=ts&utm_source=thorindustries.com&utm_medium=referral',
+      },
+      {
+        label: 'Follow Thor Industries on Instagram',
+        href: 'https://www.instagram.com/thorindustries/?hl=en&utm_source=thorindustries.com&utm_medium=referral',
+      },
+      {
+        label: 'Follow Thor Industries on Pinterest',
+        href: 'https://www.pinterest.com/thorindustries/',
+      },
+      {
+        label: 'Follow Thor Industries on Linkedin',
+        href: 'https://www.linkedin.com/company/thor-industries',
+      },
+      {
+        label: 'Follow Thor Industries on Youtube',
+        href: 'https://www.youtube.com/thorindustries',
+      },
+    ],
+  );
+
+  assert.deepEqual(
+    footerLinks.map((link) => ({ label: link.label, href: navItemHref(link) })),
+    [
+      { label: 'Contact Us', href: 'https://www.thorindustries.com/contact-us' },
+      { label: 'Careers', href: '/thor-industries-redesign/careers/' },
+      {
+        label: 'Terms and Conditions',
+        href: 'https://www.thorindustries.com/terms-and-conditions',
+      },
+      { label: 'Privacy Policy', href: 'https://www.thorindustries.com/privacy-policy' },
+      { label: 'Legal', href: 'https://www.thorindustries.com/legal' },
+      { label: 'Cookie Policy', href: 'https://www.thorindustries.com/cookie-policy' },
+      { label: 'Accessibility', href: 'https://www.thorindustries.com/accessibility' },
+    ],
+  );
+
+  // Verify header & footer markup across all 23 built pages
+  for (const slug of expectedSlugs) {
+    const file = slug ? path.join('dist', slug, 'index.html') : path.join('dist', 'index.html');
+    const html = await readFile(file, 'utf8');
+    assert.ok(html.includes('aria-label="Primary navigation"'), `missing desktop nav on ${file}`);
+    assert.ok(html.includes('aria-label="Mobile navigation"'), `missing mobile nav on ${file}`);
+    assert.ok(html.includes('aria-label="Footer navigation"'), `missing footer nav on ${file}`);
+    assert.ok(html.includes('data-search-open'), `missing search open trigger on ${file}`);
+    assert.ok(html.includes('data-menu-open'), `missing mobile menu trigger on ${file}`);
+    assert.ok(html.includes('Static editorial redesign preview'), `missing redesign context on ${file}`);
+    assert.ok(!html.includes('tiktok.com'), `unexpected TikTok link on ${file}`);
+  }
+});
+
+test('search index covers all 23 built pages and matches titles, headings, and body phrases (VAL-SEARCH-001..003)', async () => {
+  // VAL-SEARCH-001: dist/search-index.json exists, parses, and has exactly 23 C23 records
+  const rawIndex = await readFile('dist/search-index.json', 'utf8');
+  const parsedIndex = JSON.parse(rawIndex);
+  assert.equal(parsedIndex.length, 23);
+  assert.equal(searchRecords.length, 23);
+
+  const indexUrls = parsedIndex.map((rec) => rec.url);
+  assert.equal(new Set(indexUrls).size, 23);
+  const expectedUrls = expectedSlugs.map((slug) =>
+    slug ? `${BASE_PATH}/${slug}/` : `${BASE_PATH}/`,
+  );
+  assert.deepEqual(new Set(indexUrls), new Set(expectedUrls));
+
+  for (const record of parsedIndex) {
+    assert.ok(record.title && record.title.length > 0);
+    assert.ok(record.label && record.label.length > 0);
+    assert.ok(record.group && record.group.length > 0);
+    assert.ok(record.description && record.description.length > 0);
+    assert.ok(Array.isArray(record.headings) && record.headings.length > 0);
+    assert.ok(record.body && record.body.length > 40);
+    assert.ok(record.url.startsWith(`${BASE_PATH}/`) && record.url.endsWith('/'));
+    assert.ok(!record.url.startsWith('http'));
+  }
+
+  // Inline search index in Header matches the 23 C23 records with no external entries
+  const homeHtml = await readFile('dist/index.html', 'utf8');
+  const inlineMatch = homeHtml.match(
+    /<script type="application\/json"[^>]*data-search-index[^>]*>([\s\S]*?)<\/script>/,
+  );
+  assert.ok(inlineMatch, 'missing inline data-search-index script');
+  const inlineRecords = JSON.parse(inlineMatch[1]);
+  assert.equal(inlineRecords.length, 23);
+  for (const rec of inlineRecords) {
+    assert.ok(rec.url.startsWith(`${BASE_PATH}/`), `non-local search record URL: ${rec.url}`);
+  }
+
+  // VAL-SEARCH-001: Title and body phrase queries across all route groups
+  const queries = [
+    { query: 'Towing Guide', expectedUrl: '/thor-industries-redesign/towing-guide/' },
+    { query: 'Trailer Life Magazine', expectedUrl: '/thor-industries-redesign/towing-guide/' },
+    { query: 'Trade-in Value Collateral', expectedUrl: '/thor-industries-redesign/financing-your-rv/' },
+    { query: 'Fifth Wheel Toy Hauler', expectedUrl: '/thor-industries-redesign/rv-types/' },
+    { query: 'Frequently Asked Questions', expectedUrl: '/thor-industries-redesign/faq/' },
+    { query: 'Regional Trip Guides', expectedUrl: '/thor-industries-redesign/stories/category/travel/' },
+    { query: 'Campfire Dutch Oven', expectedUrl: '/thor-industries-redesign/stories/category/recipes/' },
+    { query: 'Four Key Pillars of Innovation', expectedUrl: '/thor-industries-redesign/innovation/' },
+    { query: 'Harbinger Hybrid Class A', expectedUrl: '/thor-industries-redesign/innovation/' },
+    { query: 'Wade Thompson Peter Orthwein', expectedUrl: '/thor-industries-redesign/history/' },
+    { query: 'Habitat for Humanity', expectedUrl: '/thor-industries-redesign/community/' },
+    { query: 'Fast Company 2025 World Changing Ideas Award', expectedUrl: '/thor-industries-redesign/news-events/' },
+    { query: 'Global Headquarters Elkhart', expectedUrl: '/thor-industries-redesign/careers/' },
+    { query: 'Erwin Hymer Group', expectedUrl: '/thor-industries-redesign/thor-companies/' },
+    { query: 'Business Ambition for 1.5', expectedUrl: '/thor-industries-redesign/sustainability/' },
+    { query: 'FY2025 Sustainability Report', expectedUrl: '/thor-industries-redesign/sustainability-report/' },
+    { query: 'Carbon and Climate Disclosure Report', expectedUrl: '/thor-industries-redesign/sustainability-report/' },
+    { query: '67,000 tons of carbon', expectedUrl: '/thor-industries-redesign/sustainability-environmental/' },
+    { query: 'LEAP Program', expectedUrl: '/thor-industries-redesign/community/' },
+    { query: 'Occupational Health and Safety', expectedUrl: '/thor-industries-redesign/social-responsibility/' },
+    { query: 'Nominating and Corporate Governance Committee', expectedUrl: '/thor-industries-redesign/governance/' },
+    { query: 'Conflict Minerals Policy', expectedUrl: '/thor-industries-redesign/supply-management/' },
+  ];
+
+  for (const { query, expectedUrl } of queries) {
+    const results = search(parsedIndex, query);
+    assert.ok(results.length > 0, `expected search results for "${query}"`);
+    assert.ok(
+      results.some((r) => r.url === expectedUrl),
+      `expected "${query}" to match ${expectedUrl}, got ${results.map((r) => r.url).join(', ')}`,
+    );
+  }
+
+  // VAL-SEARCH-002 & VAL-SEARCH-003: Empty, whitespace, punctuation, unmatched, and XSS-like queries
+  assert.deepEqual(search(parsedIndex, ''), []);
+  assert.deepEqual(search(parsedIndex, '    '), []);
+  assert.deepEqual(search(parsedIndex, '??? !!!'), []);
+  assert.deepEqual(search(parsedIndex, 'zzzznonexistentquery98765'), []);
+  assert.deepEqual(search(parsedIndex, '<img src=x onerror=alert(1)>'), []);
+  assert.ok(normalize('THOR’s Café & Résumé').includes('thors cafe resume'));
+
+  // Search dialog controls exist in rendered HTML
+  assert.ok(homeHtml.includes('data-search-input'));
+  assert.ok(homeHtml.includes('data-search-clear'));
+  assert.ok(homeHtml.includes('data-search-close'));
+  assert.ok(homeHtml.includes('data-search-empty'));
+  assert.ok(homeHtml.includes('data-search-no-results'));
+  assert.ok(homeHtml.includes('data-search-index-url="/thor-industries-redesign/search-index.json"'));
+});
+
+test('cross-page journeys, handoffs, and no-JS static rendering work across all 23 pages (VAL-CROSS-001..003)', async () => {
+  const c23SlugSet = new Set(expectedSlugs.filter(Boolean));
+
+  for (const slug of expectedSlugs) {
+    const file = slug ? path.join('dist', slug, 'index.html') : path.join('dist', 'index.html');
+    const html = await readFile(file, 'utf8');
+
+    // VAL-CROSS-003: Main landmark, skip link, non-empty H1, and static body content without JS
+    assert.ok(html.includes('<a class="skip-link" href="#main-content">Skip to main content</a>'));
+    assert.ok(html.includes('<main id="main-content">'));
+    const h1Match = html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/);
+    assert.ok(h1Match && h1Match[1].replace(/<[^>]+>/g, '').trim().length > 0, `empty H1 in ${file}`);
+
+    // No runtime dependency on THOR/Prismic image CDNs in rendered media src/srcset/style attributes
+    const mediaAttrs = [
+      ...html.matchAll(/\b(?:src|srcset|style)="([^"]*)"/g),
+    ].map((m) => m[1]);
+    for (const attr of mediaAttrs) {
+      assert.ok(!attr.includes('thorindustries-prod.zaneray.com'), `external Zaneray CDN media in ${file}: ${attr}`);
+      assert.ok(!attr.includes('images.prismic.io'), `external Prismic CDN media in ${file}: ${attr}`);
+    }
+
+    // Inspect all href attributes in the page
+    const hrefs = [...html.matchAll(/\bhref="([^"]*)"/g)].map((m) => m[1]);
+    assert.ok(hrefs.length > 20, `expected >20 links in ${file}`);
+
+    for (const href of hrefs) {
+      assert.ok(href.length > 0, `empty href="" in ${file}`);
+      assert.notEqual(href, '#', `dead "#" link in ${file}`);
+      assert.ok(!href.startsWith('javascript:'), `javascript: href in ${file}`);
+      assert.ok(!href.includes('localhost') && !href.includes('127.0.0.1'), `localhost href in ${file}`);
+
+      if (href.startsWith('https://www.thorindustries.com/')) {
+        const pathPart = href
+          .replace('https://www.thorindustries.com/', '')
+          .split('#')[0]
+          .split('?')[0]
+          .replace(/\/$/, '');
+
+        // Intentional source handoffs on specific C23 pages:
+        // - /financing-your-rv calculator handoff on financing-your-rv
+        // - /innovation video/newsletter handoffs on innovation
+        const isIntentionalFinancingCalculator =
+          slug === 'financing-your-rv' && pathPart === 'financing-your-rv';
+        const isIntentionalInnovationHandoff =
+          slug === 'innovation' && pathPart === 'innovation';
+
+        if (!isIntentionalFinancingCalculator && !isIntentionalInnovationHandoff) {
+          assert.ok(
+            !c23SlugSet.has(pathPart),
+            `link to migrated C23 slug "${pathPart}" in ${file} points to external ${href} instead of local ${BASE_PATH}/${pathPart}/`,
+          );
+        }
+      }
+    }
   }
 });
 
