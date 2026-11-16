@@ -1538,11 +1538,11 @@ test('404 is real static content and release workflow/config/README satisfy VAL-
 
   assert.equal(pkg.engines?.node, '>=24.0.0');
   assert.equal(rootLock.engines?.node, '>=24.0.0');
-  assert.deepEqual(pkg.dependencies, { astro: '7.4.0', sharp: '0.35.5' });
+  assert.deepEqual(pkg.dependencies, { astro: '7.4.12', sharp: '0.35.5' });
   assert.deepEqual(pkg.devDependencies, { '@astrojs/check': '0.9.10', typescript: '6.0.3' });
   assert.deepEqual(rootLock.dependencies, pkg.dependencies);
   assert.deepEqual(rootLock.devDependencies, pkg.devDependencies);
-  assert.equal(lock.packages['node_modules/astro']?.version, '7.4.0');
+  assert.equal(lock.packages['node_modules/astro']?.version, '7.4.12');
   assert.equal(lock.packages['node_modules/sharp']?.version, '0.35.5');
   assert.equal(lock.packages['node_modules/@astrojs/check']?.version, '0.9.10');
   assert.equal(lock.packages['node_modules/typescript']?.version, '6.0.3');
@@ -1588,7 +1588,7 @@ test('404 is real static content and release workflow/config/README satisfy VAL-
   for (const requiredText of [
     'Node 24.21.0',
     'npm 11.19.0',
-    '7.4.0',
+    '7.4.12',
     '0.35.5',
     '0.9.10',
     '6.0.3',

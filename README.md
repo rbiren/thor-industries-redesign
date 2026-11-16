@@ -12,7 +12,7 @@ Use **Node 24** (`>=24.0.0`; verified baseline **Node 24.21.0** and **npm 11.19.
 
 `package.json` and the committed `package-lock.json` pin the verified toolchain:
 
-- `astro`: `7.4.0`
+- `astro`: `7.4.12`
 - `sharp`: `0.35.5`
 - `@astrojs/check`: `0.9.10`
 - `typescript`: `6.0.3` (pinned because `@astrojs/check@0.9.10` supports TypeScript 5/6 rather than TypeScript 7)
