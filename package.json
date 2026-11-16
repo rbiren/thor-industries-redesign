@@ -12,6 +12,6 @@
     "test": "node --test --test-concurrency=2",
     "media": "node scripts/media.mjs"
   },
-  "dependencies": { "astro": "7.4.0", "sharp": "0.35.5" },
+  "dependencies": { "astro": "7.4.12", "sharp": "0.35.5" },
   "devDependencies": { "@astrojs/check": "0.9.10", "typescript": "6.0.3" }
 }
